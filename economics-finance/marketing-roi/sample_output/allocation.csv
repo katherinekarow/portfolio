@@ -1,0 +1,5 @@
+channel,label,min,max,naive_spend,optimal_spend,optimal_share,naive_gp_true,optimal_gp_true,optimal_gp_model,marginal_roi_naive,marginal_roi_optimal,bound_status,true_optimal_spend
+paid_social,Paid social,42500.0,212500.0,106250.0,152000.0,0.3576,214954.0,273952.0,278484.0,1.55,1.057,interior,148500.0
+influencer,Influencer,42500.0,255000.0,255000.0,139500.0,0.3282,285065.0,187626.0,193532.0,0.666,1.056,interior,139000.0
+display,Programmatic display,21250.0,127500.0,42500.0,57250.0,0.1347,54361.0,72746.0,77568.0,1.268,1.053,interior,60250.0
+search,Search,21250.0,127500.0,21250.0,76250.0,0.1794,75288.0,185736.0,188514.0,3.307,1.058,interior,77250.0

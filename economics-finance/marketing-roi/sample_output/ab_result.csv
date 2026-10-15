@@ -1,0 +1,2 @@
+test,n_per_arm,true_rel_lift,rate_a,rate_b,abs_lift,rel_lift,ci_low,ci_high,z,p_value
+AI vs studio creative (paid social),36693,0.12,0.019949,0.023138,0.003189,0.159836,0.001088,0.005289,2.974741,0.002932

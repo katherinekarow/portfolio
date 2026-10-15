@@ -1,0 +1,5 @@
+test,metric,baseline_rate,target_rel_lift,n_per_arm,weekly_traffic_per_arm,weeks_needed,mde_rel_at_4_weeks,alpha,power
+AI vs studio creative (paid social),site visit -> store-locator click,0.02,0.15,36693,12000,4,0.1306,0.05,0.8
+Influencer promo-code landing page,visit -> code redemption,0.045,0.1,34897,3000,12,0.1733,0.05,0.8
+Search ad copy (heritage vs cocktail),click -> recipe page engagement,0.06,0.08,39861,5000,8,0.1138,0.05,0.8
+Display frequency cap 3 vs 6,impression -> site visit,0.008,0.2,53486,20000,3,0.1621,0.05,0.8

@@ -1,0 +1,43 @@
+# All money in US dollars. The data is synthetic; "truth" is what generates the history.
+seed: 7
+budget:
+  total: 500000            # 18-month programme budget
+  weeks: 78                # 18 months of planned spend
+  fixed:                   # enablement lines: not on a response curve, paid regardless
+    ai_creative_tools: {amount: 30000, timing: upfront}        # annual licences, paid up front
+    training:          {amount: 20000, timing: upfront}
+    analytics:         {amount: 25000, timing: upfront_then_monthly}
+  naive_split: {paid_social: 0.25, influencer: 0.60, display: 0.10, search: 0.05}
+channels:                  # truth: lambda = weekly carry-over, K = half-saturation (adstocked $/wk), s = Hill shape, beta = max weekly revenue
+  paid_social: {label: Paid social,  lam: 0.45, K: 2600, s: 1.5, beta: 10400, min_share: 0.10, max_share: 0.50}
+  influencer:  {label: Influencer,   lam: 0.65, K: 9000, s: 1.2, beta: 13000, min_share: 0.10, max_share: 0.60}
+  display:     {label: Programmatic display, lam: 0.30, K: 1200, s: 1.6, beta: 3800, min_share: 0.05, max_share: 0.30}
+  search:      {label: Search,       lam: 0.15, K: 700,  s: 1.3, beta: 6600, min_share: 0.05, max_share: 0.30}
+history:
+  weeks: 156
+  baseline: 42000          # weekly brand revenue without these channels
+  season_amp: 0.12         # +/- share of baseline, annual cycle
+  noise_sd: 600
+  spend_scale: 2.5         # history spends up to ~2x the planned weekly level, so saturation is visible
+finance:
+  gross_margin: 0.55       # incremental revenue -> incremental gross profit
+  annual_discount: 0.10
+  horizon_months: 24       # 18 months of spend + 6 months of carry-over tail
+  mc_draws: 5000
+  transfer_sd: 0.20        # lognormal sd: test markets may respond differently from the national history
+ab:
+  alpha: 0.05
+  power: 0.80
+  tests:
+    - {test: AI vs studio creative (paid social), metric: site visit -> store-locator click, baseline: 0.020, target_rel_lift: 0.15, weekly_traffic_per_arm: 12000}
+    - {test: Influencer promo-code landing page,   metric: visit -> code redemption,         baseline: 0.045, target_rel_lift: 0.10, weekly_traffic_per_arm: 3000}
+    - {test: Search ad copy (heritage vs cocktail), metric: click -> recipe page engagement,  baseline: 0.060, target_rel_lift: 0.08, weekly_traffic_per_arm: 5000}
+    - {test: Display frequency cap 3 vs 6,          metric: impression -> site visit,         baseline: 0.008, target_rel_lift: 0.20, weekly_traffic_per_arm: 20000}
+  analysis_true_rel_lift: 0.12   # synthetic result for test 1
+  peeking: {looks: [1, 2, 3, 5, 10, 20], sims: 4000, n_per_arm: 8000, baseline: 0.02}
+kpi:
+  markets: {Market A: 1.20, Market B: 1.00, Market C: 0.70}   # true responsiveness vs national history
+  days: 90
+  exceed_ratio: 1.15       # observed ROI / planned ROI
+  below_ratio: 0.85
+  shock_sd: 0.15

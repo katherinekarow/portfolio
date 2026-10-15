@@ -1,0 +1,18 @@
+# Pipeline settings — change behaviour here, not in code.
+data:
+  historical_sessions: 240
+  future_sessions: 24
+  seed: 19
+targets:
+  percentile: 60          # target pace = 60th percentile of historical fill rate
+  volatility_z: 1.0       # width of the low/high projection band
+outreach:
+  strategy: baseline      # baseline | milestones
+  min_gap_units: 25
+  min_gap_pct: 0.01
+  min_history: 20
+quality:
+  max_change_pct: 0.05    # validation gate: block publish if projections move > 5%
+output:
+  folder: outputs
+  history_db: outputs/history.sqlite

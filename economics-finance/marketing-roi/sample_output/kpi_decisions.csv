@@ -1,0 +1,13 @@
+market,channel,spend_90d,planned_roi,observed_roi,ratio_to_plan,status,action
+Market A,paid_social,8444.0,1.742,2.063,1.185,exceed,scale: move budget in (+20%) and widen to the next market
+Market B,paid_social,8444.0,1.742,1.44,0.827,below,"pivot: cut to the channel minimum, test a new format or audience"
+Market C,paid_social,8444.0,1.742,1.102,0.633,below,"pivot: cut to the channel minimum, test a new format or audience"
+Market A,influencer,7750.0,1.22,1.15,0.943,meet,"optimise: keep budget, iterate creative and targeting via A/B tests"
+Market B,influencer,7750.0,1.22,1.182,0.969,meet,"optimise: keep budget, iterate creative and targeting via A/B tests"
+Market C,influencer,7750.0,1.22,1.0,0.819,below,"pivot: cut to the channel minimum, test a new format or audience"
+Market A,display,3181.0,1.319,1.915,1.452,exceed,scale: move budget in (+20%) and widen to the next market
+Market B,display,3181.0,1.319,0.97,0.735,below,"pivot: cut to the channel minimum, test a new format or audience"
+Market C,display,3181.0,1.319,0.872,0.661,below,"pivot: cut to the channel minimum, test a new format or audience"
+Market A,search,4236.0,2.459,2.634,1.071,meet,"optimise: keep budget, iterate creative and targeting via A/B tests"
+Market B,search,4236.0,2.459,2.64,1.074,meet,"optimise: keep budget, iterate creative and targeting via A/B tests"
+Market C,search,4236.0,2.459,1.534,0.624,below,"pivot: cut to the channel minimum, test a new format or audience"

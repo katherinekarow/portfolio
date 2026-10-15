@@ -1,0 +1,25 @@
+clinic,type,sessions,limit_true,regret_true,limit_raw,regret_raw,limit_shrunk,regret_shrunk,limit_shrunk_no_dispersion,regret_shrunk_no_dispersion
+Clinic A,new patient,260,23,0.0,23,0.0,23,0.0,23,0.0
+Clinic B,new patient,220,23,0.0,23,0.0,23,0.0,23,0.0
+Clinic C,new patient,180,23,0.0,23,0.0,23,0.0,23,0.0
+Clinic D,new patient,150,22,0.0,22,0.0,22,0.0,22,0.0
+Clinic E,new patient,120,24,0.0,24,0.0,23,776.46,24,0.0
+Clinic F,new patient,96,22,0.0,21,417.67,21,417.67,22,0.0
+Clinic G,new patient,72,23,0.0,23,0.0,23,0.0,24,306.66
+Clinic H,new patient,48,25,0.0,25,0.0,25,0.0,25,0.0
+Clinic I,new patient,30,24,0.0,23,250.19,23,250.19,24,0.0
+Clinic J,new patient,18,23,0.0,24,179.44,24,179.44,24,179.44
+Clinic K,new patient,10,23,0.0,23,0.0,23,0.0,24,36.98
+Clinic L,new patient,5,24,0.0,23,60.03,23,60.03,24,0.0
+Clinic A,follow-up,260,21,0.0,21,0.0,21,0.0,21,0.0
+Clinic B,follow-up,220,21,0.0,21,0.0,21,0.0,22,6644.69
+Clinic C,follow-up,180,21,0.0,21,0.0,21,0.0,22,6376.81
+Clinic D,follow-up,150,21,0.0,21,0.0,21,0.0,21,0.0
+Clinic E,follow-up,120,21,0.0,21,0.0,21,0.0,21,0.0
+Clinic F,follow-up,96,22,0.0,22,0.0,22,0.0,22,0.0
+Clinic G,follow-up,72,21,0.0,21,0.0,21,0.0,21,0.0
+Clinic H,follow-up,48,22,0.0,22,0.0,22,0.0,22,0.0
+Clinic I,follow-up,30,21,0.0,21,0.0,21,0.0,21,0.0
+Clinic J,follow-up,18,22,0.0,22,0.0,22,0.0,22,0.0
+Clinic K,follow-up,10,20,0.0,20,0.0,20,0.0,21,96.04
+Clinic L,follow-up,5,21,0.0,21,0.0,21,0.0,21,0.0
