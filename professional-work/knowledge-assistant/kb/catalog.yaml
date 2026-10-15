@@ -1,0 +1,271 @@
+# Catalog of warehouse views the assistant knows about (invented, mirrors the planning model in
+# ../capacity-planning). Layers flow raw -> stg -> core -> mart -> rpt.
+# Every view must document its grain, every column, and its upstream sources; build.py enforces this.
+
+views:
+  - name: raw.appointments_feed
+    layer: raw
+    grain: one row per appointment event as received from the scheduling system
+    description: Unmodified appointment and cancellation events, loaded every night. Never query directly for reporting.
+    owner: data engineering
+    refresh: nightly 02:00
+    upstream: []
+    columns:
+      event_id: unique id of the event
+      appointment_id: appointment id (one appointment can have many events)
+      session_code: session identifier as typed in the source system (may have spaces / lower case)
+      event_type: NEW, MODIFY or CANCEL
+      units: number of units (appointment slots) affected
+      event_ts: event timestamp in UTC
+
+  - name: raw.session_master
+    layer: raw
+    grain: one row per scheduled session
+    description: Schedule and capacity per session, maintained by the scheduling team.
+    owner: data engineering
+    refresh: nightly 02:00
+    upstream: []
+    columns:
+      session_code: session identifier
+      session_date: date of session
+      region: service region
+      season: flu-season or off-season
+      length_class: one-day or multi-day
+      capacity: appointment slots
+
+  - name: stg.appointments_clean
+    layer: stg
+    grain: one row per appointment event, cleaned
+    description: Appointment events with trimmed and upper-cased session ids, duplicates removed and invalid unit counts rejected with a reason code.
+    owner: analytics engineering
+    refresh: nightly 03:00
+    upstream: [raw.appointments_feed]
+    columns:
+      event_id: unique id of the event
+      appointment_id: appointment id
+      session_id: standardized session identifier
+      event_type: NEW, MODIFY or CANCEL
+      units: units affected (always > 0)
+      event_date: event date in local time
+    sample_query: |
+      SELECT session_id, event_type, SUM(units) AS units
+      FROM stg.appointments_clean
+      WHERE event_date >= CURRENT_DATE - 7
+      GROUP BY session_id, event_type;
+
+  - name: stg.rejected_rows
+    layer: stg
+    grain: one row per rejected input row
+    description: Rows that failed staging checks, with a reason code (MISSING_SESSION, INVALID_UNITS, DUPLICATE_EVENT) so they can be fixed at source.
+    owner: analytics engineering
+    refresh: nightly 03:00
+    upstream: [raw.appointments_feed]
+    columns:
+      source_table: table the row came from
+      source_key: key of the rejected row
+      reason_code: why the row was rejected
+      rejected_at: when the check ran
+
+  - name: core.sessions
+    layer: core
+    grain: one row per session
+    description: Conformed session dimension with segment assignment (region x season x length) and whether the session is still open for sale.
+    owner: analytics engineering
+    refresh: nightly 03:30
+    upstream: [raw.session_master]
+    columns:
+      session_id: standardized session identifier
+      session_date: date of session
+      segment: demand segment used for benchmarks
+      capacity: appointment slots
+      is_open: true while the session is still taking appointments
+      days_out_today: days to session as of today
+    sample_query: |
+      SELECT segment, COUNT(*) AS sessions, SUM(capacity) AS capacity
+      FROM core.sessions
+      WHERE is_open
+      GROUP BY segment;
+
+  - name: core.appointments_daily
+    layer: core
+    grain: one row per session and days to session (days_out)
+    description: Cumulative gross and net appointments for every session at every days_out from 365 to 0. The foundation of every fill curve.
+    owner: analytics engineering
+    refresh: nightly 04:00
+    upstream: [stg.appointments_clean, core.sessions]
+    columns:
+      session_id: session identifier
+      days_out: days to session
+      gross_appointments: cumulative appointments including those that later cancel
+      net_appointments: cumulative appointments net of cancellations
+    sample_query: |
+      SELECT days_out, gross_appointments, net_appointments
+      FROM core.appointments_daily
+      WHERE session_id = 'S0250'
+      ORDER BY days_out DESC;
+
+  - name: mart.segment_curves
+    layer: mart
+    grain: one row per segment and days_out
+    description: Benchmarks from completed sessions - target fill rate (60th percentile, never decreasing), median share of final appointments, volatility and cancellation survival.
+    owner: operations analytics
+    refresh: nightly 04:30
+    upstream: [core.appointments_daily, core.sessions]
+    columns:
+      segment: demand segment
+      days_out: days to session
+      target_fill: target fill rate at this days_out
+      median_fill: median historical fill rate
+      median_share: median share of final appointments already booked
+      share_std: standard deviation of share of final (volatility)
+      survival: median net / gross ratio
+      n_sessions: number of past sessions supporting the benchmark
+    sample_query: |
+      SELECT days_out, target_fill, median_share
+      FROM mart.segment_curves
+      WHERE segment = 'local / flu season / one-day' AND days_out IN (180, 90, 30, 0);
+
+  - name: mart.session_plan
+    layer: mart
+    grain: one row per open session
+    description: Today's position, credibility-weighted projection with a low/high band, and the gap decomposition (pace gap today, gap to target, gap to full) with a status of on pace, watch or behind.
+    owner: operations analytics
+    refresh: nightly 05:00
+    upstream: [mart.segment_curves, core.appointments_daily, core.sessions]
+    columns:
+      session_id: session identifier
+      segment: demand segment
+      capacity: appointment slots
+      days_out_today: days to session today
+      net_appointments: net appointments today
+      projected_final: projected net appointments at session
+      projected_low: low end of the projection band
+      projected_high: high end of the projection band
+      target_today: target appointments for today
+      target_final: target appointments at session
+      pace_gap_today: target today minus appointments today
+      gap_to_target: target at session minus projection (never negative)
+      gap_to_full: capacity minus projection
+      status: on pace, watch or behind
+    sample_query: |
+      SELECT session_id, status, gap_to_target
+      FROM mart.session_plan
+      WHERE status = 'behind'
+      ORDER BY gap_to_target DESC;
+
+  - name: mart.glide_path
+    layer: mart
+    grain: one row per open session and remaining days_out
+    description: Daily path from today's appointments to the final target, shaped like appointments normally arrive (residual-demand allocation).
+    owner: operations analytics
+    refresh: nightly 05:00
+    upstream: [mart.session_plan, mart.segment_curves]
+    columns:
+      session_id: session identifier
+      days_out: days to session
+      glide_path: appointments needed by this days_out to land on target
+
+  - name: mart.outreach_plan
+    layer: mart
+    grain: one row per eligible session, strategy and days_out
+    description: Extra appointments that must come from outreach campaigns, allocated over the remaining window by strategy (baseline or milestones). Only sessions that pass the eligibility rules get a plan.
+    owner: operations analytics
+    refresh: nightly 05:15
+    upstream: [mart.session_plan, mart.segment_curves]
+    columns:
+      session_id: session identifier
+      strategy: baseline or milestones
+      days_out: days to session
+      outreach_units: extra appointments planned for this days_out
+    sample_query: |
+      SELECT strategy, SUM(outreach_units) AS units
+      FROM mart.outreach_plan
+      GROUP BY strategy;
+
+  - name: mart.cancellation_profile
+    layer: mart
+    grain: one row per segment and days_out
+    description: Expected cancellation rate by segment and days_out, used to translate gross targets into net.
+    owner: operations analytics
+    refresh: nightly 04:30
+    upstream: [mart.segment_curves]
+    columns:
+      segment: demand segment
+      days_out: days to session
+      survival: share of gross appointments expected to show up
+      cancel_rate: 1 - survival
+
+  - name: mart.plan_history
+    layer: mart
+    grain: one row per session per snapshot
+    description: Snapshot of the session plan taken before every overwrite (snapshot-first), so past projections can be compared with what actually happened.
+    owner: operations analytics
+    refresh: every pipeline run
+    upstream: [mart.session_plan]
+    columns:
+      session_id: session identifier
+      projected_final: projection at snapshot time
+      status: status at snapshot time
+      history_added_at: when the snapshot was taken
+      content_hash: fingerprint used to skip identical same-day snapshots
+
+  - name: rpt.pace_dashboard
+    layer: rpt
+    grain: one row per open session
+    description: Reporting view behind the pace dashboard - plan, status and segment totals with friendly column names.
+    owner: operations analytics
+    refresh: nightly 05:30
+    upstream: [mart.session_plan, mart.cancellation_profile]
+    columns:
+      session_id: session identifier
+      segment: demand segment
+      status: on pace, watch or behind
+      booked_pct: net appointments / capacity
+      projected_pct: projected final / capacity
+      gap_to_target: units short of target
+      expected_cancel_pct: expected cancellation rate today
+
+  - name: rpt.outreach_tracker
+    layer: rpt
+    grain: one row per session and week
+    description: Weekly outreach targets for outreach and partner teams, rolled up from the daily outreach plan.
+    owner: operations analytics
+    refresh: nightly 05:30
+    upstream: [mart.outreach_plan, core.sessions]
+    columns:
+      session_id: session identifier
+      week_start: first day of the week
+      strategy: baseline or milestones
+      units: extra appointments targeted that week
+
+  - name: rpt.forecast_accuracy
+    layer: rpt
+    grain: one row per completed session and snapshot lead time
+    description: How close past projections were to the final outcome, by lead time - used to check the model and tune the credibility weighting.
+    owner: operations analytics
+    refresh: weekly
+    upstream: [mart.plan_history, core.appointments_daily]
+    columns:
+      session_id: session identifier
+      lead_days: days before session the projection was made
+      projected_final: projection made at that lead time
+      actual_final: final net appointments
+      abs_pct_error: absolute percentage error
+    sample_query: |
+      SELECT lead_days, AVG(abs_pct_error) AS mape
+      FROM rpt.forecast_accuracy
+      GROUP BY lead_days
+      ORDER BY lead_days DESC;
+
+  - name: rpt.data_quality
+    layer: rpt
+    grain: one row per check per run
+    description: Results of every data-quality check (row counts, nulls, reconciliation of control totals) so failures are visible to report users, not only engineers.
+    owner: analytics engineering
+    refresh: every pipeline run
+    upstream: [stg.rejected_rows, mart.session_plan, mart.outreach_plan]
+    columns:
+      check_name: name of the check
+      passed: true when the check passed
+      detail: what was measured
+      run_at: when the check ran

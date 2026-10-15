@@ -1,0 +1,15 @@
+# Legacy report inventory (invented). Reports with a file in legacy/ are scored from their SQL;
+# the rest carry a manual effort estimate until their SQL is extracted.
+reports:
+  - {name: appointment_activity,      owner: operations analytics, criticality: high,   frequency: daily,   users: 25, days_since_last_view: 1}
+  - {name: capacity_position,     owner: scheduling team,    criticality: high,   frequency: daily,   users: 18, days_since_last_view: 1}
+  - {name: top_sessions,        owner: operations analytics, criticality: medium, frequency: weekly,  users: 9,  days_since_last_view: 4}
+  - {name: recent_cancellations,  owner: patient services,      criticality: medium, frequency: daily,   users: 6,  days_since_last_view: 2}
+  - {name: referrer_hierarchy,       owner: partner relations,         criticality: medium, frequency: monthly, users: 4,  days_since_last_view: 20}
+  - {name: run_stamp,             owner: operations analytics, criticality: low,    frequency: daily,   users: 30, days_since_last_view: 1}
+  - {name: same_week_openings, owner: scheduling team,    criticality: high,   frequency: daily,   users: 14, days_since_last_view: 1,   effort_estimate: 6}
+  - {name: cancellation_rates,    owner: forecasting,       criticality: high,   frequency: weekly,  users: 11, days_since_last_view: 6,   effort_estimate: 3}
+  - {name: specialty_mix,          owner: finance,           criticality: medium, frequency: weekly,  users: 7,  days_since_last_view: 9,   effort_estimate: 2}
+  - {name: group_screenings,        owner: partner relations,         criticality: medium, frequency: weekly,  users: 5,  days_since_last_view: 15,  effort_estimate: 5}
+  - {name: charge_audit_2019,       owner: finance,           criticality: low,    frequency: monthly, users: 1,  days_since_last_view: 410, effort_estimate: 4}
+  - {name: legacy_referral_payouts,  owner: finance,           criticality: low,    frequency: monthly, users: 2,  days_since_last_view: 160, effort_estimate: 7}

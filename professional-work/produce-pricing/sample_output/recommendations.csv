@@ -1,0 +1,97 @@
+lot_id,segment,tier,current_price,forecast_units,capacity,unit_cost,elasticity,method,price_raw,reason,recommended_price,guardrail_conflict,units_now,units_new,revenue_now,revenue_new,revenue_impact,contribution_impact,price_change_pct
+L000,retail-east,standard,810.73,118.2,134,315.0,1.647,cell estimate,801.8624420401853,elastic optimum,802.0,False,118.2,120.3,95828.29,96480.6,652.31,-9.19,-0.0108
+L000,retail-east,select,996.82,163.5,210,350.0,1.451,cell estimate,1126.0532150776053,elastic optimum,1126.0,False,163.5,137.0,162980.07,154262.0,-8718.07,556.93,0.1296
+L000,retail-east,premium,1506.3,183.4,212,525.0,0.81,cell estimate,1732.245,inelastic: raise to guardrail,1732.0,False,183.4,163.8,276255.42,283701.6,7446.18,17736.18,0.1498
+L000,retail-east,organic,2735.68,18.1,24,910.0,1.014,cell estimate,3146.0319999999997,elastic optimum (capped at +15%),3146.0,False,18.1,15.7,49515.81,49392.2,-123.61,2060.39,0.15
+L001,retail-west,standard,973.97,74.0,96,315.0,1.87,cell estimate,847.4159664828309,capacity binds: no lower than sell-out price + ladder fix,832.0,False,74.0,96.0,72073.78,79872.0,7798.22,868.22,-0.1458
+L001,retail-west,select,918.3,104.7,117,350.0,1.747,cell estimate,861.7315677397379,capacity binds: no lower than sell-out price + ladder fix,873.0,False,104.7,114.4,96146.01,99871.2,3725.19,330.19,-0.0493
+L001,retail-west,premium,1435.97,90.0,113,525.0,1.179,shrunk to grade pool,1651.3654999999999,elastic optimum (capped at +15%),1651.0,False,90.0,76.3,129237.3,125971.3,-3266.0,3926.5,0.1497
+L001,retail-west,organic,2643.1,13.4,13,910.0,0.702,cell estimate,3039.5649999999996,inelastic: raise to guardrail,3040.0,False,13.0,12.1,34360.3,36784.0,2423.7,3242.7,0.1502
+L002,wholesale-east,standard,917.56,94.3,92,315.0,1.898,cell estimate,929.5752666580087,capacity binds: no lower than sell-out price,930.0,False,92.0,91.9,84415.52,85467.0,1051.48,1082.98,0.0136
+L002,wholesale-east,select,1007.45,82.6,108,350.0,1.343,cell estimate,1158.5674999999999,elastic optimum (capped at +15%),1159.0,False,82.6,68.4,83215.37,79275.6,-3939.77,1030.23,0.1504
+L002,wholesale-east,premium,1355.09,149.5,147,525.0,1.201,cell estimate,1558.3534999999997,elastic optimum (capped at +15%),1558.0,False,147.0,126.4,199198.23,196931.2,-2267.03,8547.97,0.1497
+L002,wholesale-east,organic,2510.9,16.7,12,910.0,0.459,cell estimate,2887.535,capacity binds: no lower than sell-out price (capped at +15%),2888.0,False,12.0,12.0,30130.8,34656.0,4525.2,4525.2,0.1502
+L003,wholesale-west,standard,954.07,141.1,134,315.0,2.057,shrunk to grade pool,978.3194436578138,capacity binds: no lower than sell-out price,978.0,False,134.0,134.0,127845.38,131052.0,3206.62,3206.62,0.0251
+L003,wholesale-west,select,1029.62,86.2,75,350.0,1.948,cell estimate,1105.8767954221735,capacity binds: no lower than sell-out price,1106.0,False,75.0,75.0,77221.5,82950.0,5728.5,5728.5,0.0742
+L003,wholesale-west,premium,1448.3,87.0,116,525.0,1.318,cell estimate,1665.5449999999998,elastic optimum (capped at +15%),1666.0,False,87.0,72.3,126002.1,120451.8,-5550.3,2167.2,0.1503
+L003,wholesale-west,organic,2576.12,13.7,12,910.0,0.698,shrunk to grade pool,2962.5379999999996,capacity binds: no lower than sell-out price (capped at +15%),2963.0,False,12.0,12.0,30913.44,35556.0,4642.56,4642.56,0.1502
+L004,retail-east,standard,911.72,70.1,61,315.0,1.647,cell estimate,992.0351153061491,capacity binds: no lower than sell-out price,992.0,False,61.0,61.0,55614.92,60512.0,4897.08,4897.08,0.0881
+L004,retail-east,select,1004.8,183.1,229,350.0,1.451,cell estimate,1126.0532150776053,elastic optimum,1126.0,False,183.1,155.2,183978.88,174755.2,-9223.68,541.32,0.1206
+L004,retail-east,premium,1422.25,154.0,174,525.0,0.81,cell estimate,1635.5874999999999,inelastic: raise to guardrail,1636.0,False,154.0,137.5,219026.5,224950.0,5923.5,14586.0,0.1503
+L004,retail-east,organic,2417.72,16.3,21,910.0,1.014,cell estimate,2780.3779999999997,elastic optimum (capped at +15%),2780.0,False,16.3,14.1,39408.84,39198.0,-210.84,1791.16,0.1498
+L005,retail-west,standard,845.89,93.4,96,315.0,1.87,cell estimate,833.5606975538519,capacity binds: no lower than sell-out price + ladder fix,814.0,False,93.4,96.0,79006.13,78144.0,-862.13,-1681.13,-0.0377
+L005,retail-west,select,966.71,142.0,181,350.0,1.747,cell estimate,841.3366454793922,capacity binds: no lower than sell-out price + ladder fix,855.0,False,142.0,176.0,137272.82,150480.0,13207.18,1307.18,-0.1156
+L005,retail-west,premium,1569.95,102.2,109,525.0,1.179,shrunk to grade pool,1805.4424999999999,elastic optimum (capped at +15%),1805.0,False,102.2,86.7,160448.89,156493.5,-3955.39,4182.11,0.1497
+L005,retail-west,organic,2852.74,13.0,15,910.0,0.702,cell estimate,3280.6509999999994,inelastic: raise to guardrail,3281.0,False,13.0,11.8,37085.62,38715.8,1630.18,2722.18,0.1501
+L006,wholesale-east,standard,894.45,128.3,97,315.0,1.898,cell estimate,1028.6175,capacity binds: no lower than sell-out price (capped at +15%) + ladder fix,1019.0,False,97.0,97.0,86761.65,98843.0,12081.35,12081.35,0.1392
+L006,wholesale-east,select,921.36,122.4,127,350.0,1.343,cell estimate,1059.5639999999999,elastic optimum (capped at +15%) + ladder fix,1070.0,True,122.4,100.1,112774.46,107107.0,-5667.46,2137.54,0.1613
+L006,wholesale-east,premium,1440.74,117.2,126,525.0,1.201,cell estimate,1656.8509999999999,elastic optimum (capped at +15%),1657.0,False,117.2,99.1,168854.73,164208.7,-4646.03,4856.47,0.1501
+L006,wholesale-east,organic,2702.56,21.3,28,910.0,0.459,cell estimate,3107.9439999999995,inelastic: raise to guardrail,3108.0,False,21.3,20.0,57564.53,62160.0,4595.47,5778.47,0.15
+L007,wholesale-west,standard,983.93,154.5,118,315.0,2.057,shrunk to grade pool,1121.6716585234988,capacity binds: no lower than sell-out price + ladder fix,1086.0,False,118.0,118.0,116103.74,128148.0,12044.26,12044.26,0.1037
+L007,wholesale-west,select,970.35,173.8,134,350.0,1.948,cell estimate,1108.9408355275307,capacity binds: no lower than sell-out price + ladder fix,1141.0,True,134.0,126.8,130026.9,144678.8,14651.9,17171.9,0.1759
+L007,wholesale-west,premium,1493.29,96.9,73,525.0,1.318,cell estimate,1717.2834999999998,elastic optimum (capped at +15%),1717.0,False,73.0,73.0,109010.17,125341.0,16330.83,16330.83,0.1498
+L007,wholesale-west,organic,2735.95,13.0,14,910.0,0.698,shrunk to grade pool,3146.3424999999997,inelastic: raise to guardrail,3146.0,False,13.0,11.8,35567.35,37122.8,1555.45,2647.45,0.1499
+L008,retail-east,standard,925.75,184.6,196,315.0,1.647,cell estimate,892.6735015489738,capacity binds: no lower than sell-out price,893.0,False,184.6,195.9,170893.45,174938.7,4045.25,485.75,-0.0354
+L008,retail-east,select,939.83,169.8,140,350.0,1.451,cell estimate,1080.8045,elastic optimum (capped at +15%),1081.0,False,140.0,138.6,131576.2,149826.6,18250.4,18740.4,0.1502
+L008,retail-east,premium,1527.65,50.1,45,525.0,0.81,cell estimate,1756.7975,inelastic: raise to guardrail,1757.0,False,45.0,44.7,68744.25,78537.9,9793.65,9951.15,0.1501
+L008,retail-east,organic,2494.66,25.7,22,910.0,1.014,cell estimate,2868.8589999999995,elastic optimum (capped at +15%),2869.0,False,22.0,22.0,54882.52,63118.0,8235.48,8235.48,0.1501
+L009,retail-west,standard,881.9,118.4,129,315.0,1.87,cell estimate,842.3759698364156,capacity binds: no lower than sell-out price + ladder fix,827.0,False,118.4,129.0,104416.96,106683.0,2266.04,-1072.96,-0.0623
+L009,retail-west,select,978.82,158.9,201,350.0,1.747,cell estimate,855.6097505445856,capacity binds: no lower than sell-out price + ladder fix,868.0,False,158.9,196.0,155534.5,170128.0,14593.5,1608.5,-0.1132
+L009,retail-west,premium,1546.93,132.1,108,525.0,1.179,shrunk to grade pool,1778.9695,elastic optimum (capped at +15%),1779.0,False,108.0,108.0,167068.44,192132.0,25063.56,25063.56,0.15
+L009,retail-west,organic,2467.46,22.2,27,910.0,0.702,cell estimate,2837.5789999999997,inelastic: raise to guardrail,2838.0,False,22.2,20.1,54777.61,57043.8,2266.19,4177.19,0.1502
+L010,wholesale-east,standard,925.15,100.7,110,315.0,1.898,cell estimate,883.0793134380476,capacity binds: no lower than sell-out price,883.0,False,100.7,110.0,93162.6,97130.0,3967.4,1037.9,-0.0456
+L010,wholesale-east,select,990.36,100.4,97,350.0,1.343,cell estimate,1138.914,elastic optimum (capped at +15%),1139.0,False,97.0,83.2,96064.92,94764.8,-1300.12,3529.88,0.1501
+L010,wholesale-east,premium,1638.44,90.4,70,525.0,1.201,cell estimate,1884.206,elastic optimum (capped at +15%),1884.0,False,70.0,70.0,114690.8,131880.0,17189.2,17189.2,0.1499
+L010,wholesale-east,organic,2801.79,18.0,16,910.0,0.459,cell estimate,3222.0584999999996,capacity binds: no lower than sell-out price (capped at +15%),3222.0,False,16.0,16.0,44828.64,51552.0,6723.36,6723.36,0.15
+L011,wholesale-west,standard,854.09,130.9,106,315.0,2.057,shrunk to grade pool,946.3481333247819,capacity binds: no lower than sell-out price,946.0,False,106.0,106.0,90533.54,100276.0,9742.46,9742.46,0.1076
+L011,wholesale-west,select,1084.61,95.9,88,350.0,1.948,cell estimate,1133.5479486656088,capacity binds: no lower than sell-out price,1134.0,False,88.0,87.9,95445.68,99678.6,4232.92,4267.92,0.0455
+L011,wholesale-west,premium,1599.31,153.0,132,525.0,1.318,cell estimate,1839.2064999999998,elastic optimum (capped at +15%),1839.0,False,132.0,127.3,211108.92,234104.7,22995.78,25463.28,0.1499
+L011,wholesale-west,organic,2474.6,17.0,16,910.0,0.698,shrunk to grade pool,2845.7899999999995,inelastic: raise to guardrail,2846.0,False,16.0,15.4,39593.6,43828.4,4234.8,4780.8,0.1501
+L012,retail-east,standard,906.75,132.6,106,315.0,1.647,cell estimate,1038.787757787245,capacity binds: no lower than sell-out price,1039.0,False,106.0,106.0,96115.5,110134.0,14018.5,14018.5,0.1459
+L012,retail-east,select,1032.57,121.2,113,350.0,1.451,cell estimate,1126.0532150776053,elastic optimum,1126.0,False,113.0,106.9,116680.41,120369.4,3688.99,5823.99,0.0905
+L012,retail-east,premium,1350.17,108.4,122,525.0,0.81,cell estimate,1552.6955,inelastic: raise to guardrail,1553.0,False,108.4,96.8,146358.43,150330.4,3971.97,10061.97,0.1502
+L012,retail-east,organic,2789.31,25.3,26,910.0,1.014,cell estimate,3207.7065,elastic optimum (capped at +15%),3208.0,False,25.3,22.0,70569.54,70576.0,6.46,3009.46,0.1501
+L013,retail-west,standard,883.7,128.3,101,315.0,1.87,cell estimate,1004.313214888392,capacity binds: no lower than sell-out price + ladder fix,964.0,False,101.0,101.0,89253.7,97364.0,8110.3,8110.3,0.0909
+L013,retail-west,select,950.74,90.9,90,350.0,1.747,cell estimate,956.1705493929389,capacity binds: no lower than sell-out price + ladder fix,1013.0,False,90.0,81.4,85566.6,82458.2,-3108.4,-98.4,0.0655
+L013,retail-west,premium,1458.03,112.6,110,525.0,1.179,shrunk to grade pool,1676.7344999999998,elastic optimum (capped at +15%),1677.0,False,110.0,95.5,160383.3,160153.5,-229.8,7382.7,0.1502
+L013,retail-west,organic,2828.11,17.5,13,910.0,0.702,cell estimate,3252.3264999999997,capacity binds: no lower than sell-out price (capped at +15%),3252.0,False,13.0,13.0,36765.43,42276.0,5510.57,5510.57,0.1499
+L014,wholesale-east,standard,812.75,138.8,178,315.0,1.898,cell estimate,712.9168630238505,capacity binds: no lower than sell-out price,713.0,False,138.8,178.0,112809.7,126914.0,14104.3,1756.3,-0.1227
+L014,wholesale-east,select,1019.03,103.0,87,350.0,1.343,cell estimate,1171.8845,elastic optimum (capped at +15%),1172.0,False,87.0,85.4,88655.61,100088.8,11433.19,11993.19,0.1501
+L014,wholesale-east,premium,1649.28,98.2,109,525.0,1.201,cell estimate,1896.6719999999998,elastic optimum (capped at +15%),1897.0,False,98.2,83.0,161959.3,157451.0,-4508.3,3471.7,0.1502
+L014,wholesale-east,organic,2505.77,17.5,16,910.0,0.459,cell estimate,2881.6355,capacity binds: no lower than sell-out price (capped at +15%),2882.0,False,16.0,16.0,40092.32,46112.0,6019.68,6019.68,0.1501
+L015,wholesale-west,standard,969.28,125.9,158,315.0,2.057,shrunk to grade pool,867.9608238841046,capacity binds: no lower than sell-out price,868.0,False,125.9,158.0,122032.35,137144.0,15111.65,5000.15,-0.1045
+L015,wholesale-west,select,917.11,100.0,80,350.0,1.948,cell estimate,1028.4185357676174,capacity binds: no lower than sell-out price,1028.0,False,80.0,80.0,73368.8,82240.0,8871.2,8871.2,0.1209
+L015,wholesale-west,premium,1446.48,130.7,161,525.0,1.318,cell estimate,1663.452,elastic optimum (capped at +15%),1663.0,False,130.7,108.8,189054.94,180934.4,-8120.54,3376.96,0.1497
+L015,wholesale-west,organic,2670.18,25.2,29,910.0,0.698,shrunk to grade pool,3070.7069999999994,inelastic: raise to guardrail,3071.0,False,25.2,22.9,67288.54,70325.9,3037.36,5130.36,0.1501
+L016,retail-east,standard,857.53,85.2,95,315.0,1.647,cell estimate,802.6757598765797,capacity binds: no lower than sell-out price,803.0,False,85.2,94.9,73061.56,76204.7,3143.14,87.64,-0.0636
+L016,retail-east,select,951.74,87.5,88,350.0,1.451,cell estimate,1094.501,elastic optimum (capped at +15%),1095.0,False,87.5,71.4,83277.25,78183.0,-5094.25,540.75,0.1505
+L016,retail-east,premium,1516.93,97.2,94,525.0,0.81,cell estimate,1744.4695,inelastic: raise to guardrail,1744.0,False,94.0,86.8,142591.42,151379.2,8787.78,12567.78,0.1497
+L016,retail-east,organic,2350.83,26.1,23,910.0,1.014,cell estimate,2703.4545,elastic optimum (capped at +15%),2703.0,False,23.0,22.7,54069.09,61358.1,7289.01,7562.01,0.1498
+L017,retail-west,standard,916.07,73.5,56,315.0,1.87,cell estimate,1053.4805,capacity binds: no lower than sell-out price (capped at +15%) + ladder fix,886.0,False,56.0,56.0,51299.92,49616.0,-1683.92,-1683.92,-0.0328
+L017,retail-west,select,928.11,98.7,128,350.0,1.747,cell estimate,818.5408299866131,elastic optimum + ladder fix,931.0,False,98.7,98.2,91604.46,91424.2,-180.26,-5.26,0.0031
+L017,retail-west,premium,1571.63,60.9,59,525.0,1.179,shrunk to grade pool,1807.3745,elastic optimum (capped at +15%),1807.0,False,59.0,51.7,92726.17,93421.9,695.73,4528.23,0.1498
+L017,retail-west,organic,2849.01,26.6,32,910.0,0.702,cell estimate,3276.3615,inelastic: raise to guardrail,3276.0,False,26.6,24.1,75783.67,78951.6,3167.93,5442.93,0.1499
+L018,wholesale-east,standard,887.2,105.2,96,315.0,1.898,cell estimate,931.0258447620147,capacity binds: no lower than sell-out price,931.0,False,96.0,96.0,85171.2,89376.0,4204.8,4204.8,0.0494
+L018,wholesale-east,select,917.19,70.0,55,350.0,1.343,cell estimate,1054.7685,elastic optimum (capped at +15%),1055.0,False,55.0,55.0,50445.45,58025.0,7579.55,7579.55,0.1503
+L018,wholesale-east,premium,1446.17,148.4,141,525.0,1.201,cell estimate,1663.0955,elastic optimum (capped at +15%),1663.0,False,141.0,125.5,203909.97,208706.5,4796.53,12934.03,0.1499
+L018,wholesale-east,organic,2630.48,18.4,22,910.0,0.459,cell estimate,3025.0519999999997,inelastic: raise to guardrail,3025.0,False,18.4,17.3,48400.83,52332.5,3931.67,4932.67,0.15
+L019,wholesale-west,standard,893.39,132.3,147,315.0,2.057,shrunk to grade pool,848.7823061420758,capacity binds: no lower than sell-out price,849.0,False,132.3,146.9,118195.5,124718.1,6522.6,1923.6,-0.0497
+L019,wholesale-west,select,1089.69,67.0,69,350.0,1.948,cell estimate,1073.3597922270208,capacity binds: no lower than sell-out price,1073.0,False,67.0,69.0,73009.23,74037.0,1027.77,327.77,-0.0153
+L019,wholesale-west,premium,1475.76,112.1,120,525.0,1.318,cell estimate,1697.1239999999998,elastic optimum (capped at +15%),1697.0,False,112.1,93.2,165432.7,158160.4,-7272.3,2650.2,0.1499
+L019,wholesale-west,organic,2340.41,20.3,16,910.0,0.698,shrunk to grade pool,2691.4714999999997,capacity binds: no lower than sell-out price (capped at +15%),2691.0,False,16.0,16.0,37446.56,43056.0,5609.44,5609.44,0.1498
+L020,retail-east,standard,944.74,166.5,141,315.0,1.647,cell estimate,1045.0729905351666,capacity binds: no lower than sell-out price,1045.0,False,141.0,141.0,133208.34,147345.0,14136.66,14136.66,0.1061
+L020,retail-east,select,1043.51,140.9,137,350.0,1.451,cell estimate,1126.0532150776053,elastic optimum,1126.0,False,137.0,126.2,142960.87,142101.2,-859.67,2920.33,0.0791
+L020,retail-east,premium,1570.91,79.7,92,525.0,0.81,cell estimate,1806.5465,inelastic: raise to guardrail,1807.0,False,79.7,71.2,125201.53,128658.4,3456.87,7919.37,0.1503
+L020,retail-east,organic,2608.87,31.1,38,910.0,1.014,cell estimate,3000.2004999999995,elastic optimum (capped at +15%),3000.0,False,31.1,27.0,81135.86,81000.0,-135.86,3595.14,0.1499
+L021,retail-west,standard,851.45,83.4,76,315.0,1.87,cell estimate,894.8247845999084,capacity binds: no lower than sell-out price,895.0,False,76.0,76.0,64710.2,68020.0,3309.8,3309.8,0.0511
+L021,retail-west,select,1011.38,87.4,75,350.0,1.747,cell estimate,1103.9542921170319,capacity binds: no lower than sell-out price,1104.0,False,75.0,75.0,75853.5,82800.0,6946.5,6946.5,0.0916
+L021,retail-west,premium,1542.35,77.4,60,525.0,1.179,shrunk to grade pool,1773.7024999999996,elastic optimum (capped at +15%),1774.0,False,60.0,60.0,92541.0,106440.0,13899.0,13899.0,0.1502
+L021,retail-west,organic,2599.74,20.8,20,910.0,0.702,cell estimate,2989.7009999999996,inelastic: raise to guardrail,2990.0,False,20.0,18.9,51994.8,56511.0,4516.2,5517.2,0.1501
+L022,wholesale-east,standard,895.81,109.9,125,315.0,1.898,cell estimate,837.0614859439476,capacity binds: no lower than sell-out price,837.0,False,109.9,125.0,98449.52,104625.0,6175.48,1418.98,-0.0657
+L022,wholesale-east,select,1058.93,110.4,126,350.0,1.343,cell estimate,1217.7694999999999,elastic optimum (capped at +15%),1218.0,False,110.4,91.5,116905.87,111447.0,-5458.87,1156.13,0.1502
+L022,wholesale-east,premium,1423.75,151.1,203,525.0,1.201,cell estimate,1637.3124999999998,elastic optimum (capped at +15%),1637.0,False,151.1,127.8,215128.62,209208.6,-5920.02,6312.48,0.1498
+L022,wholesale-east,organic,2475.69,22.7,25,910.0,0.459,cell estimate,2847.0434999999998,inelastic: raise to guardrail,2847.0,False,22.7,21.3,56198.16,60641.1,4442.94,5716.94,0.15
+L023,wholesale-west,standard,937.9,141.5,147,315.0,2.057,shrunk to grade pool,920.673285536459,capacity binds: no lower than sell-out price + ladder fix,888.0,False,141.5,147.0,132712.85,130536.0,-2176.85,-3909.35,-0.0532
+L023,wholesale-west,select,973.74,142.0,166,350.0,1.948,cell estimate,898.7273269286491,capacity binds: no lower than sell-out price + ladder fix,932.0,False,142.0,154.7,138271.08,144180.4,5909.32,1464.32,-0.0429
+L023,wholesale-west,premium,1553.94,111.2,105,525.0,1.318,cell estimate,1787.031,elastic optimum (capped at +15%),1787.0,False,105.0,92.5,163163.7,165297.5,2133.8,8696.3,0.15
+L023,wholesale-west,organic,2773.78,26.4,22,910.0,0.698,shrunk to grade pool,3189.847,capacity binds: no lower than sell-out price (capped at +15%),3190.0,False,22.0,22.0,61023.16,70180.0,9156.84,9156.84,0.1501

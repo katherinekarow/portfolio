@@ -1,0 +1,98 @@
+# Business glossary for the clinic network's planning data. `aliases` are also used as search synonyms.
+terms:
+  - term: Days out
+    aliases: [days_out, days to session, lead time]
+    definition: Number of days between today and the session date. Every fill curve is indexed by days out, from 365 down to 0.
+    example: A session on 1 July viewed on 1 June is 30 days out.
+
+  - term: Fill rate
+    aliases: [utilization, occupancy, slot utilization]
+    definition: Appointments divided by the session's appointment slots (capacity).
+    formula: fill_rate = net_appointments / capacity
+    example: 2,400 kept appointments in a 3,000-slot session is a fill rate of 80%.
+
+  - term: Fill curve
+    aliases: [pace curve, fill pace]
+    definition: Cumulative appointments plotted against days out. Comparing a session's curve with similar past sessions shows whether it is ahead or behind.
+
+  - term: Segment
+    aliases: [cluster, demand segment]
+    definition: Group of sessions with similar booking behaviour (reach x season x length, for example local / flu season / one-day). Benchmarks are built per segment.
+
+  - term: Target curve
+    aliases: [target pace, target fill rate, strategic target]
+    definition: The pace a session should be at for each day out, taken from the 60th percentile of similar past sessions. Targets never go down as the session gets closer - a running maximum stops a noisy day from lowering the bar.
+    formula: target_fill(days_out) = running max of P60(fill rate of past sessions at days_out)
+
+  - term: Glide path
+    aliases: [tactical target, path to target]
+    definition: Day-by-day route from today's appointments to the final target, shaped like appointments normally arrive rather than a straight line. Unlike the target curve, it starts from where the session actually is today.
+    formula: glide(days_out) = net_today + (target_final - net_today) * progress(days_out)
+
+  - term: Share of final
+    aliases: [distribution, normalized curve, percent of final]
+    definition: Share of a session's final appointments already booked at a given day out (a 0 to 1 curve).
+    formula: share_of_final(days_out) = net_appointments(days_out) / net_appointments(0)
+
+  - term: Pickup projection
+    aliases: [projection, forecast, projected final]
+    definition: Estimate of final appointments from today's appointments and the typical share of final at today's day out, blended with the segment's typical final fill rate early in the window (credibility weighting).
+    formula: projected_final = w * net_today / median_share + (1 - w) * median_final_fill * capacity
+
+  - term: Credibility weight
+    aliases: [credibility, blending weight]
+    definition: How much the projection trusts the session's own pickup versus history. It grows from 0 to 1 as the typical share of final reaches 30%.
+    formula: w = min(median_share / 0.30, 1)
+
+  - term: Gap to target
+    aliases: [shortfall, appointments short]
+    definition: Target appointments at the session minus projected final appointments, never negative. This is the amount that must come from outreach.
+
+  - term: Gap to full
+    aliases: [unused slots, empty slots]
+    definition: Capacity minus projected final appointments.
+
+  - term: Pace gap today
+    aliases: [behind pace, pace gap]
+    definition: Target appointments for today minus appointments today. Positive means behind.
+
+  - term: Outreach units
+    aliases: [outreach, extra appointments, incremental demand]
+    definition: Extra appointments that must come from outreach (reminder campaigns, waitlist calls, partner referrals) to close the gap to target, allocated over the remaining weeks.
+
+  - term: Baseline strategy
+    aliases: [baseline allocation]
+    definition: Spreads the gap in proportion to how appointments normally arrive. Stable and low risk.
+
+  - term: Milestones strategy
+    aliases: [front-loaded allocation, milestones]
+    definition: Front-loads the gap using checkpoints - 50% of the gap closed after 25% of the remaining time and 80% after 50%. Faster, but with more execution risk.
+
+  - term: Gross appointments
+    aliases: [gross]
+    definition: Appointments including those that will later cancel.
+
+  - term: Net appointments
+    aliases: [net, kept appointments]
+    definition: Appointments after cancellations - who is expected to actually show up.
+
+  - term: Survival rate
+    aliases: [net to gross, cancellation rate, cancel rate, show-up rate]
+    definition: Median share of gross appointments that remain on the day of the session, by segment and day out. One minus survival is the expected cancellation rate.
+    formula: survival(days_out) = median(net_appointments / gross_appointments)
+
+  - term: Snapshot-first
+    aliases: [history snapshot, snapshot]
+    definition: Copy the current table into history before a pipeline overwrites it, so every past version can be compared. Identical same-day snapshots are replaced, not duplicated.
+
+  - term: Validation gate
+    aliases: [publish gate, gate]
+    definition: A check that blocks publishing when projections move more than a set threshold (5%) since the last run, so a bad input can't silently change every report.
+
+  - term: Control totals
+    aliases: [reconciliation, reconcile]
+    definition: Checks that totals add up across steps - published rows plus rejects equal the input rows, and outreach plans add up exactly to each session's gap.
+
+  - term: Reason code
+    aliases: [reject reason, rejects]
+    definition: A short label saying why a row was set aside (for example MISSING_SESSION or INVALID_UNITS), so it can be fixed at the source instead of silently dropped.

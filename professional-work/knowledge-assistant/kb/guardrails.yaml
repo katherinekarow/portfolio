@@ -1,0 +1,17 @@
+# What the assistant must refuse or redirect, checked BEFORE any search runs.
+# Patterns are case-insensitive regular expressions matched against the question.
+block:
+  - id: credentials
+    patterns: ['\bpassword', '\bapi[ _-]?key', '\btoken\b', '\bsecret\b', '\bcredential', 'connection string']
+    reply: I can't help with credentials or secrets. Ask the platform team for access through the normal request process.
+  - id: patient_data
+    patterns: ['\bpatient(s)?\b.*\b(name|email|phone|address|diagnos|record|mrn)', '\b(email|phone|home address|diagnos\w*)\b.*\b(patient|person)', '\bpii\b', '\bphi\b', '\bmrn\b', 'date of birth', 'medical record']
+    reply: Patient-level data is out of scope - the planning views hold only aggregated appointment counts. Patient records are only available through the governed clinical systems, with approval.
+  - id: write_actions
+    patterns: ['\b(drop|delete|truncate|update|insert|alter)\b\s+(table|view|from|into)?']
+    reply: I only answer questions and suggest read-only queries. Changes to tables go through the pipeline and code review.
+redirect:
+  - id: clinical_decision
+    patterns: ['should we (cancel|add|close|open) (the |a |this )?session', 'which patients should', 'should (we|i) (overbook|double.?book)']
+    reply: Decisions about adding, cancelling or overbooking sessions belong to clinic operations leadership. I can show the pace, projection and gap for a session to inform that conversation.
+min_score: 3.0          # below this BM25 score the assistant says it doesn't know instead of guessing

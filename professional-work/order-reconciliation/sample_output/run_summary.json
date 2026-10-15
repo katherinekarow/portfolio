@@ -1,0 +1,41 @@
+{
+  "run_date": "2026-03-02",
+  "internal_cutoff": "2026-02-27",
+  "warnings": [
+    "internal file for 2026-03-02 not available; using 2026-02-27 as the latest cut-off"
+  ],
+  "vendor_duplicates_removed": 15,
+  "vendor_rejects": {
+    "UNMAPPED_GRADE": 1,
+    "UNPARSEABLE_AMOUNT": 1,
+    "UNKNOWN_CURRENCY": 1
+  },
+  "upload_rejects": {
+    "MIN_ABOVE_MAX": 2,
+    "MISSING_LOT": 2
+  },
+  "classes": {
+    "MATCHED": 686,
+    "NO_CHARGE_EXPECTED": 656,
+    "IN_TRANSIT": 96,
+    "PRICE_MISMATCH": 29,
+    "MISSING_INTERNAL": 22,
+    "CANCELLED_BUT_CHARGED": 8,
+    "MISSING_VENDOR": 6
+  },
+  "revenue_at_risk_usd": 18624.78,
+  "rows_reconciled": true,
+  "money_reconciled": true,
+  "pending_bids": 387,
+  "accepted_baseline": 312,
+  "accepted_optimized": 178,
+  "lift_baseline_usd": -15062.4,
+  "lift_optimized_usd": 35858.14,
+  "excel": "sample_output/substitution_recon_20260302.xlsx",
+  "figures": [
+    "figures/exceptions_by_class.png",
+    "figures/weekly_trend.png",
+    "figures/optimizer_vs_baseline.png",
+    "figures/floors_vs_grid.png"
+  ]
+}

@@ -1,0 +1,7 @@
+check,failing_rows,passed
+thin cells are never used unshrunk,0,True
+elasticities are positive and plausible (0.2 - 4),0,True
+price moves stay within guardrails (or are flagged),0,True
+grade ladder: each tier costs more than the one below,0,True
+never sell more than capacity,0,True
+revenue impact = demand at new price x new price - current revenue,0,True
