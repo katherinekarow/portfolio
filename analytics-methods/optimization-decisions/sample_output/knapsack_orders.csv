@@ -1,0 +1,13 @@
+order,pallets,margin,margin_per_pallet,in_dp_optimum,in_greedy
+order 01,6,651.0,108.5,True,True
+order 02,7,507.0,72.43,False,False
+order 03,7,707.0,101.0,False,True
+order 04,5,261.0,52.2,False,False
+order 05,12,551.0,45.92,False,False
+order 06,6,672.0,112.0,True,True
+order 07,9,480.0,53.33,False,False
+order 08,6,732.0,122.0,True,True
+order 09,6,603.0,100.5,True,False
+order 10,12,1270.0,105.83,True,True
+order 11,4,194.0,48.5,True,False
+order 12,8,502.0,62.75,False,False

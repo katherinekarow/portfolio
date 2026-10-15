@@ -1,0 +1,4 @@
+scaling,capacity_share_of_sq_distance,nearest_neighbour_same_segment,kmeans_ari_vs_truth
+raw units,0.9898,0.4623,-0.0019
+"min-max [0,1]",0.2913,0.9897,0.6728
+z-score,0.1896,0.9897,0.9908

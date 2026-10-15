@@ -1,0 +1,59 @@
+{
+  "lp_plan": [
+    30.0,
+    70.0
+  ],
+  "lp_profit": 44000.0,
+  "shadow_prices": {
+    "land (acres)": 200.0,
+    "labour (hours)": 100.0,
+    "water (acre-ft)": 0.0
+  },
+  "simplex_pivots": 3,
+  "transport_cost": 2260.0,
+  "northwest_corner_cost": 2580.0,
+  "storage_dp": 4122.0,
+  "storage_greedy": 4032.0,
+  "knapsack_greedy_optimal_share": 0.27,
+  "knapsack_gap_median_pct": 1.1087245000000001,
+  "knapsack_gap_p90_pct": 4.205743000000001,
+  "knapsack_gap_max_pct": 9.8346,
+  "greedy_trap": [
+    220.0,
+    160.0
+  ],
+  "staffing": {
+    "lp_cost": 3005.0,
+    "round_down_feasible": false,
+    "round_down_short_blocks": 4,
+    "round_up_cost": 3530.0,
+    "integer_cost": 3040.0,
+    "nodes": 3
+  },
+  "assignment_hungarian": 6722.0,
+  "assignment_greedy": 6687.0,
+  "price_optimum": 6.0,
+  "golden_section": 6.000000041988141,
+  "golden_steps": 45,
+  "newton_steps_to_1e-8": 5,
+  "gradient_steps_to_1e-3": 22,
+  "budget_lambda": 1.9259259259259258,
+  "budget_return": 415.5068,
+  "even_split_return": 356.19110000000006,
+  "offer_ev": {
+    "fixed contract": 50.0,
+    "price-indexed": 52.5,
+    "spot market": 56.5
+  },
+  "evpi": 10.5,
+  "evsi": 4.625,
+  "tree_ev": 59.125,
+  "tree_policy": {
+    "start": "buy forecast",
+    "buy forecast > forecast weak > ": "fixed contract",
+    "buy forecast > forecast strong > ": "spot market"
+  },
+  "newsvendor_q": 42,
+  "critical_ratio": 0.6363636363636364,
+  "newsvendor_sim_best": 42
+}

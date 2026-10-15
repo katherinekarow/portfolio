@@ -1,0 +1,4 @@
+pair,a,b,euclidean,manhattan,cosine,mahalanobis
+same segment (steady),S003,S013,0.5528,1.2647,0.1025,2.4454
+steady vs under-filled,S003,S001,2.9722,6.0665,1.3709,3.4929
+early vs late rush,S010,S002,5.4705,12.7829,1.6509,3.0761

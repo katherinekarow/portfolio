@@ -1,0 +1,13 @@
+farm,market,cost_per_tonne,tonnes,reduced_cost
+North farm,City market,8,0.0,2.0
+North farm,Wholesale hub,6,70.0,0.0
+North farm,Grocer chain,10,50.0,0.0
+North farm,Port packer,9,0.0,7.0
+Valley farm,City market,9,70.0,0.0
+Valley farm,Wholesale hub,12,0.0,3.0
+Valley farm,Grocer chain,13,10.0,0.0
+Valley farm,Port packer,7,0.0,2.0
+Ridge farm,City market,14,0.0,5.0
+Ridge farm,Wholesale hub,9,20.0,0.0
+Ridge farm,Grocer chain,16,0.0,3.0
+Ridge farm,Port packer,5,80.0,0.0

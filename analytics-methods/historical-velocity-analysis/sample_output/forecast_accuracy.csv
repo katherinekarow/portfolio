@@ -1,0 +1,7 @@
+method,MAPE_%,WAPE_%,bias_%,MASE
+naive,55.069,62.433,-61.474,6.2
+seasonal naive (7),15.085,11.378,-0.758,1.124
+same weekday last year,16.412,15.436,-13.296,1.526
+SES,47.198,32.38,-4.255,3.211
+Holt-Winters add.,14.179,10.024,-0.307,0.991
+Holt-Winters mult.,13.516,9.594,0.171,0.948

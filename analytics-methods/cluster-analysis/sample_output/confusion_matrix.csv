@@ -1,0 +1,5 @@
+true segment,cluster 0,cluster 1,cluster 2,cluster 3
+early planners,73,0,0,0
+steady,0,0,73,0
+late rush,0,0,0,73
+"under-filled, erratic",0,72,1,0

@@ -1,0 +1,5 @@
+cluster,share_90,share_60,share_30,share_7,fill_rate,cancel_rate,volatility,sessions,bootstrap_jaccard,mean_capacity,top_service_line_share,matches_true_segment
+0,0.6801,0.843,0.9397,0.9903,0.9616,0.0986,0.3204,72,1.0,219.5833,0.5972,early planners
+1,0.2663,0.5559,0.8318,0.9852,0.5167,0.218,0.3719,68,0.9969,227.1029,0.5294,"under-filled, erratic"
+2,0.2663,0.5208,0.7733,0.9501,0.8307,0.0592,0.2698,72,0.997,228.0278,0.5694,steady
+3,0.0176,0.1331,0.4384,0.8435,0.7972,0.0253,0.2494,72,1.0,214.4444,0.4861,late rush

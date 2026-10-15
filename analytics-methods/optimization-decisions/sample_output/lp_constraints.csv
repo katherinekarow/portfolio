@@ -1,0 +1,4 @@
+constraint,available,used,slack,shadow_price,rhs_range_low,rhs_range_high
+land (acres),100.0,100.0,0.0,200.0,80.0,111.428571
+labour (hours),240.0,240.0,0.0,100.0,160.0,300.0
+water (acre-ft),270.0,230.0,40.0,0.0,230.0,inf

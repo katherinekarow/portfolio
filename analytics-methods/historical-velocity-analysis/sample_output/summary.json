@@ -1,0 +1,118 @@
+{
+  "history": "2023-01-02 to 2025-12-28 (1092 days)",
+  "orders_by_year": {
+    "2023": 69646,
+    "2024": 73836,
+    "2025": 83845
+  },
+  "yoy_variance_weekday": 0.08960128566437102,
+  "yoy_variance_calendar": 1.2937448279417354,
+  "yoy_roll28_before_shift": 0.06601889428266712,
+  "yoy_roll28_after_shift": 0.18714606323232946,
+  "velocity_P50_at_7_14_28": [
+    0.6855832396283363,
+    0.503246890153911,
+    0.1701063829787234
+  ],
+  "current_target": {
+    "date": "2026-01-20",
+    "days_out": 23,
+    "orders_so_far": 87,
+    "pace_vs_history": 1.0419161676646707,
+    "projection": 327.708725292303,
+    "low": 298.6026468689477,
+    "high": 371.11379470506273,
+    "low80": 285.1561133190525,
+    "high80": 395.96861128725425,
+    "actual": 396
+  },
+  "projection_backtest": [
+    {
+      "days_out": 7,
+      "mean_error": -0.0089,
+      "median_error": -0.0056,
+      "mean_abs_error": 0.0914,
+      "coverage_50": 0.5,
+      "coverage_80": 0.7747,
+      "n": 364
+    },
+    {
+      "days_out": 14,
+      "mean_error": -0.0063,
+      "median_error": -0.0009,
+      "mean_abs_error": 0.1088,
+      "coverage_50": 0.5027,
+      "coverage_80": 0.794,
+      "n": 364
+    },
+    {
+      "days_out": 28,
+      "mean_error": 0.0032,
+      "median_error": -0.0093,
+      "mean_abs_error": 0.1601,
+      "coverage_50": 0.4973,
+      "coverage_80": 0.7582,
+      "n": 364
+    }
+  ],
+  "forecast_accuracy": [
+    {
+      "method": "naive",
+      "MAPE_%": 55.069,
+      "WAPE_%": 62.433,
+      "bias_%": -61.474,
+      "MASE": 6.2
+    },
+    {
+      "method": "seasonal naive (7)",
+      "MAPE_%": 15.085,
+      "WAPE_%": 11.378,
+      "bias_%": -0.758,
+      "MASE": 1.124
+    },
+    {
+      "method": "same weekday last year",
+      "MAPE_%": 16.412,
+      "WAPE_%": 15.436,
+      "bias_%": -13.296,
+      "MASE": 1.526
+    },
+    {
+      "method": "SES",
+      "MAPE_%": 47.198,
+      "WAPE_%": 32.38,
+      "bias_%": -4.255,
+      "MASE": 3.211
+    },
+    {
+      "method": "Holt-Winters add.",
+      "MAPE_%": 14.179,
+      "WAPE_%": 10.024,
+      "bias_%": -0.307,
+      "MASE": 0.991
+    },
+    {
+      "method": "Holt-Winters mult.",
+      "MAPE_%": 13.516,
+      "WAPE_%": 9.594,
+      "bias_%": 0.171,
+      "MASE": 0.948
+    }
+  ],
+  "cusum_alarm": "2025-04-21",
+  "cusum_delay_days": 7,
+  "shift_date": "2025-04-14",
+  "anomalies": 27,
+  "anomalies_holidays": 16,
+  "holidays_in_history": 17,
+  "weekday_indices": {
+    "Mon": 1.31,
+    "Tue": 1.265,
+    "Wed": 1.201,
+    "Thu": 1.128,
+    "Fri": 1.058,
+    "Sat": 0.656,
+    "Sun": 0.382
+  },
+  "cancel_rate": 0.06984537453405729
+}

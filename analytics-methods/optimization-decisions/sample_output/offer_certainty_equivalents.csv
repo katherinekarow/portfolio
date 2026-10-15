@@ -1,0 +1,6 @@
+risk_tolerance,fixed contract,price-indexed,spot market,preferred
+10.0,50.0,40.718,26.8558,fixed contract
+25.0,50.0,46.7843,38.7253,fixed contract
+50.0,50.0,49.5159,46.4431,fixed contract
+100.0,50.0,50.9849,51.2172,spot market
+inf,50.0,52.5,56.5,spot market

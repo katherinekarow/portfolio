@@ -1,0 +1,7 @@
+shift,cost,lp_relaxation,rounded_down,rounded_up,branch_and_bound
+"early (08-16, break 12-14)",300.0,0.0,0.0,0.0,0.0
+"late (12-20, break 16-18)",300.0,2.5,2.0,3.0,3.0
+mid (10-18),320.0,4.5,4.0,5.0,4.0
+morning half (08-12),170.0,2.5,2.0,3.0,2.0
+evening half (16-20),170.0,0.0,0.0,0.0,0.0
+split (08-10 + 16-20),260.0,1.5,1.0,2.0,2.0

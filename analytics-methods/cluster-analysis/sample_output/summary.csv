@@ -1,0 +1,12 @@
+metric,value
+sessions,300
+k,4
+picks_after_screen,"{""elbow"": 3, ""silhouette"": 4, ""gap"": 4}"
+picks_all_rows,"{""elbow"": 3, ""silhouette"": 7, ""gap"": 5}"
+screened_before_k,12
+ari,"{""kmeans_vs_truth"": 0.991, ""ward_vs_truth"": 0.947, ""kmeans_vs_ward"": 0.956, ""service_line_vs_truth"": 0.157}"
+bootstrap_jaccard,"[1.0, 0.997, 0.997, 1.0]"
+pca_explained_2,"[0.588, 0.267]"
+flagged_outliers,16
+planted_outliers_caught,8/8
+kmeans_iterations,4
