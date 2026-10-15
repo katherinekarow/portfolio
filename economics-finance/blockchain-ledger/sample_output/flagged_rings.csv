@@ -1,0 +1,2 @@
+ring,rounds,first_seq,last_seq,amount_in,amount_back
+Hazel -> Ivy -> Juniper -> Hazel,3,2313,2321,480000.0,472373.55

@@ -1,0 +1,21 @@
+system,metric,value,unit
+sqlite (CRUD),throughput,119811.15,tx/s
+ledger permissioned,throughput,95030.62,tx/s
+ledger PoW 8 bits,throughput,86611.31,tx/s
+ledger PoW 12 bits,throughput,11944.02,tx/s
+sqlite (CRUD),storage,58.61,bytes/tx
+ledger permissioned,storage,192.21,bytes/tx
+ledger permissioned + off-chain docs,storage,394.38,bytes/tx
+sqlite (CRUD),history rows kept,3825.0,rows
+ledger permissioned,history rows kept,4193.0,rows
+sqlite (CRUD),deleted rows (unrecoverable),178.0,rows
+ledger PoW 8 bits,hashes per block,271.48,hashes
+ledger PoW 12 bits,hashes per block,4030.52,hashes
+ledger,balance lookup | full chain scan (no index),407.42,us (median)
+ledger,balance lookup | off-chain index (materialised),0.13,us (median)
+sqlite,balance lookup | primary key,1.84,us (median)
+ledger,payments A->B | full chain scan (no index),239.82,us (median)
+ledger,payments A->B | off-chain index (materialised),0.46,us (median)
+sqlite,payments A->B | no index (table scan),237.19,us (median)
+sqlite,payments A->B | with index,41.84,us (median)
+ledger,build off-chain index | one replay of the chain,3200.0,us (median)

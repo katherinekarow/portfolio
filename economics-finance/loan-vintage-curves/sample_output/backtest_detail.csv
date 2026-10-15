@@ -1,0 +1,1457 @@
+segment,vintage,cut_mob,method,projected,actual,ape,in_band
+Auto B,0,3,chain ladder,2.87241,2.9747,0.03439,True
+Auto B,0,3,credibility blend,2.91906,2.9747,0.0187,True
+Auto B,0,3,reference only,2.95832,2.9747,0.00551,True
+Auto B,0,3,naive (no further defaults),0.25888,2.9747,0.91297,True
+Auto B,0,6,chain ladder,2.69155,2.9747,0.09519,True
+Auto B,0,6,credibility blend,2.96535,2.9747,0.00314,True
+Auto B,0,6,reference only,2.97751,2.9747,0.00094,True
+Auto B,0,6,naive (no further defaults),0.65692,2.9747,0.77916,True
+Auto B,0,9,chain ladder,2.44757,2.9747,0.17721,False
+Auto B,0,9,credibility blend,2.60602,2.9747,0.12394,False
+Auto B,0,9,reference only,2.73644,2.9747,0.0801,False
+Auto B,0,9,naive (no further defaults),1.05275,2.9747,0.6461,False
+Auto B,0,12,chain ladder,2.47418,2.9747,0.16826,False
+Auto B,0,12,credibility blend,2.60468,2.9747,0.12439,False
+Auto B,0,12,reference only,2.70187,2.9747,0.09172,False
+Auto B,0,12,naive (no further defaults),1.45144,2.9747,0.51207,False
+Auto B,0,18,chain ladder,3.01559,2.9747,0.01375,True
+Auto B,0,18,credibility blend,2.97054,2.9747,0.0014,True
+Auto B,0,18,reference only,2.97277,2.9747,0.00065,True
+Auto B,0,18,naive (no further defaults),2.44131,2.9747,0.17931,True
+Auto B,0,24,chain ladder,2.86765,2.9747,0.03599,False
+Auto B,0,24,credibility blend,2.8756,2.9747,0.03331,False
+Auto B,0,24,reference only,2.88001,2.9747,0.03183,False
+Auto B,0,24,naive (no further defaults),2.69039,2.9747,0.09557,False
+Auto B,0,30,chain ladder,2.94078,2.9747,0.0114,True
+Auto B,0,30,credibility blend,2.9536,2.9747,0.00709,True
+Auto B,0,30,reference only,2.95397,2.9747,0.00697,True
+Auto B,0,30,naive (no further defaults),2.90436,2.9747,0.02365,True
+Auto B,1,3,chain ladder,3.09615,2.99456,0.03392,True
+Auto B,1,3,credibility blend,2.98013,2.99456,0.00482,True
+Auto B,1,3,reference only,2.97763,2.99456,0.00566,True
+Auto B,1,3,naive (no further defaults),0.27838,2.99456,0.90704,True
+Auto B,1,6,chain ladder,2.79801,2.99456,0.06564,True
+Auto B,1,6,credibility blend,3.03325,2.99456,0.01292,True
+Auto B,1,6,reference only,3.00487,2.99456,0.00344,True
+Auto B,1,6,naive (no further defaults),0.68179,2.99456,0.77232,True
+Auto B,1,9,chain ladder,2.77448,2.99456,0.0735,True
+Auto B,1,9,credibility blend,2.80167,2.99456,0.06442,True
+Auto B,1,9,reference only,2.86358,2.99456,0.04374,True
+Auto B,1,9,naive (no further defaults),1.18983,2.99456,0.60267,True
+Auto B,1,12,chain ladder,2.76923,2.99456,0.07525,True
+Auto B,1,12,credibility blend,2.81937,2.99456,0.0585,True
+Auto B,1,12,reference only,2.86059,2.99456,0.04474,True
+Auto B,1,12,naive (no further defaults),1.6201,2.99456,0.45899,True
+Auto B,1,18,chain ladder,3.00351,2.99456,0.00299,True
+Auto B,1,18,credibility blend,2.9441,2.99456,0.01685,True
+Auto B,1,18,reference only,2.94758,2.99456,0.01569,True
+Auto B,1,18,naive (no further defaults),2.43114,2.99456,0.18815,True
+Auto B,1,24,chain ladder,2.97827,2.99456,0.00544,True
+Auto B,1,24,credibility blend,2.98607,2.99456,0.00284,True
+Auto B,1,24,reference only,2.98564,2.99456,0.00298,True
+Auto B,1,24,naive (no further defaults),2.79032,2.99456,0.06821,True
+Auto B,1,30,chain ladder,2.99991,2.99456,0.00179,True
+Auto B,1,30,credibility blend,3.02925,2.99456,0.01158,True
+Auto B,1,30,reference only,3.02848,2.99456,0.01133,True
+Auto B,1,30,naive (no further defaults),2.96065,2.99456,0.01133,True
+Auto B,2,3,chain ladder,1.88201,3.1634,0.40507,True
+Auto B,2,3,credibility blend,2.67443,3.1634,0.15457,True
+Auto B,2,3,reference only,2.8605,3.1634,0.09575,True
+Auto B,2,3,naive (no further defaults),0.171,3.1634,0.94595,True
+Auto B,2,6,chain ladder,2.66489,3.1634,0.15759,True
+Auto B,2,6,credibility blend,2.93153,3.1634,0.0733,True
+Auto B,2,6,reference only,2.95864,3.1634,0.06473,True
+Auto B,2,6,naive (no further defaults),0.65097,3.1634,0.79422,True
+Auto B,2,9,chain ladder,3.0756,3.1634,0.02775,True
+Auto B,2,9,credibility blend,3.08857,3.1634,0.02365,True
+Auto B,2,9,reference only,3.04817,3.1634,0.03642,True
+Auto B,2,9,naive (no further defaults),1.31687,3.1634,0.58372,True
+Auto B,2,12,chain ladder,3.16209,3.1634,0.00041,True
+Auto B,2,12,credibility blend,3.21748,3.1634,0.01709,True
+Auto B,2,12,reference only,3.14948,3.1634,0.0044,True
+Auto B,2,12,naive (no further defaults),1.84528,3.1634,0.41668,True
+Auto B,2,18,chain ladder,3.11626,3.1634,0.0149,True
+Auto B,2,18,credibility blend,3.07557,3.1634,0.02776,True
+Auto B,2,18,reference only,3.06452,3.1634,0.03126,True
+Auto B,2,18,naive (no further defaults),2.52372,3.1634,0.20221,True
+Auto B,2,24,chain ladder,3.22718,3.1634,0.02016,True
+Auto B,2,24,credibility blend,3.23283,3.1634,0.02195,True
+Auto B,2,24,reference only,3.22159,3.1634,0.01839,True
+Auto B,2,24,naive (no further defaults),3.01924,3.1634,0.04557,True
+Auto B,2,30,chain ladder,3.18581,3.1634,0.00708,False
+Auto B,2,30,credibility blend,3.21414,3.1634,0.01604,False
+Auto B,2,30,reference only,3.21066,3.1634,0.01494,False
+Auto B,2,30,naive (no further defaults),3.14283,3.1634,0.0065,False
+Auto B,3,3,chain ladder,1.13664,2.08412,0.45462,False
+Auto B,3,3,credibility blend,2.62257,2.08412,0.25836,False
+Auto B,3,3,reference only,2.8023,2.08412,0.3446,False
+Auto B,3,3,naive (no further defaults),0.10286,2.08412,0.95064,False
+Auto B,3,6,chain ladder,2.24152,2.08412,0.07552,False
+Auto B,3,6,credibility blend,2.78724,2.08412,0.33738,False
+Auto B,3,6,reference only,2.86151,2.08412,0.37301,False
+Auto B,3,6,naive (no further defaults),0.5439,2.08412,0.73902,False
+Auto B,3,9,chain ladder,2.4276,2.08412,0.16481,False
+Auto B,3,9,credibility blend,2.59744,2.08412,0.2463,False
+Auto B,3,9,reference only,2.71841,2.08412,0.30435,False
+Auto B,3,9,naive (no further defaults),1.03473,2.08412,0.50352,False
+Auto B,3,12,chain ladder,2.41728,2.08412,0.15986,False
+Auto B,3,12,credibility blend,2.55527,2.08412,0.22607,False
+Auto B,3,12,reference only,2.65617,2.08412,0.27448,False
+Auto B,3,12,naive (no further defaults),1.40574,2.08412,0.3255,False
+Auto B,3,18,chain ladder,2.07978,2.08412,0.00208,True
+Auto B,3,18,credibility blend,2.11942,2.08412,0.01694,True
+Auto B,3,18,reference only,2.21001,2.08412,0.06041,True
+Auto B,3,18,naive (no further defaults),1.68364,2.08412,0.19216,True
+Auto B,3,24,chain ladder,2.05713,2.08412,0.01295,True
+Auto B,3,24,credibility blend,2.08315,2.08412,0.00047,True
+Auto B,3,24,reference only,2.11722,2.08412,0.01589,True
+Auto B,3,24,naive (no further defaults),1.92761,2.08412,0.0751,True
+Auto B,3,30,chain ladder,2.09581,2.08412,0.00561,True
+Auto B,3,30,credibility blend,2.10899,2.08412,0.01193,True
+Auto B,3,30,reference only,2.11764,2.08412,0.01608,True
+Auto B,3,30,naive (no further defaults),2.06802,2.08412,0.00772,True
+Auto B,4,3,chain ladder,2.25694,3.12947,0.27881,True
+Auto B,4,3,credibility blend,2.75148,3.12947,0.12078,True
+Auto B,4,3,reference only,2.894,3.12947,0.07524,True
+Auto B,4,3,naive (no further defaults),0.20449,3.12947,0.93466,True
+Auto B,4,6,chain ladder,2.41398,3.12947,0.22863,True
+Auto B,4,6,credibility blend,2.8044,3.12947,0.10387,True
+Auto B,4,6,reference only,2.89861,3.12947,0.07377,True
+Auto B,4,6,naive (no further defaults),0.59093,3.12947,0.81117,True
+Auto B,4,9,chain ladder,2.75451,3.12947,0.11981,False
+Auto B,4,9,credibility blend,2.77869,3.12947,0.11209,False
+Auto B,4,9,reference only,2.85691,3.12947,0.08709,False
+Auto B,4,9,naive (no further defaults),1.18316,3.12947,0.62193,False
+Auto B,4,12,chain ladder,3.03028,3.12947,0.03169,True
+Auto B,4,12,credibility blend,3.11479,3.12947,0.00469,True
+Auto B,4,12,reference only,3.07497,3.12947,0.01741,True
+Auto B,4,12,naive (no further defaults),1.77077,3.12947,0.43416,True
+Auto B,4,18,chain ladder,3.13153,3.12947,0.00066,True
+Auto B,4,18,credibility blend,3.08852,3.12947,0.01308,True
+Auto B,4,18,reference only,3.07527,3.12947,0.01732,True
+Auto B,4,18,naive (no further defaults),2.53447,3.12947,0.19013,True
+Auto B,4,24,chain ladder,3.17032,3.12947,0.01305,True
+Auto B,4,24,credibility blend,3.17916,3.12947,0.01588,True
+Auto B,4,24,reference only,3.16999,3.12947,0.01295,True
+Auto B,4,24,naive (no further defaults),2.96763,3.12947,0.05171,True
+Auto B,4,30,chain ladder,3.12155,3.12947,0.00253,True
+Auto B,4,30,credibility blend,3.15195,3.12947,0.00718,True
+Auto B,4,30,reference only,3.1493,3.12947,0.00634,True
+Auto B,4,30,naive (no further defaults),3.08147,3.12947,0.01534,True
+Auto B,5,3,chain ladder,3.28836,3.4041,0.034,True
+Auto B,5,3,credibility blend,3.0202,3.4041,0.11278,True
+Auto B,5,3,reference only,3.00508,3.4041,0.11722,True
+Auto B,5,3,naive (no further defaults),0.29668,3.4041,0.91285,True
+Auto B,5,6,chain ladder,2.2145,3.4041,0.34946,False
+Auto B,5,6,credibility blend,2.69649,3.4041,0.20787,False
+Auto B,5,6,reference only,2.85289,3.4041,0.16192,False
+Auto B,5,6,naive (no further defaults),0.54522,3.4041,0.83983,False
+Auto B,5,9,chain ladder,3.02794,3.4041,0.1105,False
+Auto B,5,9,credibility blend,3.05429,3.4041,0.10276,False
+Auto B,5,9,reference only,3.03127,3.4041,0.10952,False
+Auto B,5,9,naive (no further defaults),1.30162,3.4041,0.61763,False
+Auto B,5,12,chain ladder,3.23215,3.4041,0.05051,True
+Auto B,5,12,credibility blend,3.2795,3.4041,0.0366,True
+Auto B,5,12,reference only,3.19558,3.4041,0.06126,True
+Auto B,5,12,naive (no further defaults),1.89138,3.4041,0.44438,True
+Auto B,5,18,chain ladder,3.21847,3.4041,0.05453,False
+Auto B,5,18,credibility blend,3.1749,3.4041,0.06733,False
+Auto B,5,18,reference only,3.15292,3.4041,0.07379,False
+Auto B,5,18,naive (no further defaults),2.61211,3.4041,0.23266,False
+Auto B,5,24,chain ladder,3.37877,3.4041,0.00744,True
+Auto B,5,24,credibility blend,3.38662,3.4041,0.00514,True
+Auto B,5,24,reference only,3.36868,3.4041,0.0104,True
+Auto B,5,24,naive (no further defaults),3.16633,3.4041,0.06985,True
+Auto B,5,30,chain ladder,3.39619,3.4041,0.00232,True
+Auto B,5,30,credibility blend,3.42718,3.4041,0.00678,True
+Auto B,5,30,reference only,3.42055,3.4041,0.00483,True
+Auto B,5,30,naive (no further defaults),3.35272,3.4041,0.01509,True
+Auto B,6,3,chain ladder,2.66259,3.4363,0.22516,False
+Auto B,6,3,credibility blend,2.82818,3.4363,0.17697,False
+Auto B,6,3,reference only,2.93038,3.4363,0.14723,False
+Auto B,6,3,naive (no further defaults),0.24088,3.4363,0.9299,False
+Auto B,6,6,chain ladder,3.07441,3.4363,0.10531,True
+Auto B,6,6,credibility blend,3.15732,3.4363,0.08119,True
+Auto B,6,6,reference only,3.07293,3.4363,0.10574,True
+Auto B,6,6,naive (no further defaults),0.74985,3.4363,0.78179,True
+Auto B,6,9,chain ladder,3.54155,3.4363,0.03063,True
+Auto B,6,9,credibility blend,3.40487,3.4363,0.00915,True
+Auto B,6,9,reference only,3.2452,3.4363,0.05561,True
+Auto B,6,9,naive (no further defaults),1.51389,3.4363,0.55944,True
+Auto B,6,12,chain ladder,3.36323,3.4363,0.02127,True
+Auto B,6,12,credibility blend,3.38253,3.4363,0.01565,True
+Auto B,6,12,reference only,3.26882,3.4363,0.04874,True
+Auto B,6,12,naive (no further defaults),1.96462,3.4363,0.42827,True
+Auto B,6,18,chain ladder,3.51797,3.4363,0.02377,True
+Auto B,6,18,credibility blend,3.43972,3.4363,0.001,True
+Auto B,6,18,reference only,3.38559,3.4363,0.01476,True
+Auto B,6,18,naive (no further defaults),2.84478,3.4363,0.17214,True
+Auto B,6,24,chain ladder,3.42824,3.4363,0.00235,True
+Auto B,6,24,credibility blend,3.43432,3.4363,0.00058,True
+Auto B,6,24,reference only,3.41431,3.4363,0.0064,True
+Auto B,6,24,naive (no further defaults),3.21196,3.4363,0.06529,True
+Auto B,6,30,chain ladder,3.41263,3.4363,0.00689,True
+Auto B,6,30,credibility blend,3.44473,3.4363,0.00245,True
+Auto B,6,30,reference only,3.43786,3.4363,0.00045,True
+Auto B,6,30,naive (no further defaults),3.37003,3.4363,0.01928,True
+Auto B,7,3,chain ladder,3.63484,3.10491,0.17068,True
+Auto B,7,3,credibility blend,3.11549,3.10491,0.00341,True
+Auto B,7,3,reference only,3.03424,3.10491,0.02276,True
+Auto B,7,3,naive (no further defaults),0.32584,3.10491,0.89506,True
+Auto B,7,6,chain ladder,2.97632,3.10491,0.04142,True
+Auto B,7,6,credibility blend,3.12053,3.10491,0.00503,True
+Auto B,7,6,reference only,3.04823,3.10491,0.01825,True
+Auto B,7,6,naive (no further defaults),0.72515,3.10491,0.76645,True
+Auto B,7,9,chain ladder,3.04619,3.10491,0.01891,True
+Auto B,7,9,credibility blend,3.07099,3.10491,0.01092,True
+Auto B,7,9,reference only,3.03624,3.10491,0.02212,True
+Auto B,7,9,naive (no further defaults),1.30494,3.10491,0.57972,True
+Auto B,7,12,chain ladder,2.80561,3.10491,0.0964,False
+Auto B,7,12,credibility blend,2.8467,3.10491,0.08316,False
+Auto B,7,12,reference only,2.88386,3.10491,0.07119,False
+Auto B,7,12,naive (no further defaults),1.64336,3.10491,0.47072,False
+Auto B,7,18,chain ladder,2.96255,3.10491,0.04585,False
+Auto B,7,18,credibility blend,2.9106,3.10491,0.06258,False
+Auto B,7,18,reference only,2.91871,3.10491,0.05997,False
+Auto B,7,18,naive (no further defaults),2.40227,3.10491,0.2263,False
+Auto B,7,24,chain ladder,3.16416,3.10491,0.01908,True
+Auto B,7,24,credibility blend,3.17172,3.10491,0.02152,True
+Auto B,7,24,reference only,3.16311,3.10491,0.01875,True
+Auto B,7,24,naive (no further defaults),2.96076,3.10491,0.04643,True
+Auto B,7,30,chain ladder,3.12883,3.10491,0.0077,False
+Auto B,7,30,credibility blend,3.15713,3.10491,0.01682,False
+Auto B,7,30,reference only,3.15447,3.10491,0.01596,False
+Auto B,7,30,naive (no further defaults),3.08663,3.10491,0.00589,False
+Auto B,8,3,chain ladder,3.55794,2.97936,0.1942,True
+Auto B,8,3,credibility blend,3.10734,2.97936,0.04296,True
+Auto B,8,3,reference only,3.03395,2.97936,0.01832,True
+Auto B,8,3,naive (no further defaults),0.31795,2.97936,0.89328,True
+Auto B,8,6,chain ladder,4.08211,2.97936,0.37013,False
+Auto B,8,6,credibility blend,3.67142,2.97936,0.23229,False
+Auto B,8,6,reference only,3.31395,2.97936,0.1123,False
+Auto B,8,6,naive (no further defaults),0.98327,2.97936,0.66997,False
+Auto B,8,9,chain ladder,3.66407,2.97936,0.22982,False
+Auto B,8,9,credibility blend,3.49439,2.97936,0.17287,False
+Auto B,8,9,reference only,3.29664,2.97936,0.10649,False
+Auto B,8,9,naive (no further defaults),1.55774,2.97936,0.47716,False
+Auto B,8,12,chain ladder,3.41826,2.97936,0.14731,False
+Auto B,8,12,credibility blend,3.428,2.97936,0.15058,False
+Auto B,8,12,reference only,3.29833,2.97936,0.10706,False
+Auto B,8,12,naive (no further defaults),1.98653,2.97936,0.33324,False
+Auto B,8,18,chain ladder,3.10171,2.97936,0.04107,True
+Auto B,8,18,credibility blend,3.06583,2.97936,0.02902,True
+Auto B,8,18,reference only,3.05611,2.97936,0.02576,True
+Auto B,8,18,naive (no further defaults),2.50771,2.97936,0.15831,True
+Auto B,8,24,chain ladder,2.94347,2.97936,0.01205,True
+Auto B,8,24,credibility blend,2.94455,2.97936,0.01168,True
+Auto B,8,24,reference only,2.94632,2.97936,0.01109,True
+Auto B,8,24,naive (no further defaults),2.75904,2.97936,0.07395,True
+Auto B,8,30,chain ladder,2.95092,2.97936,0.00955,True
+Auto B,8,30,credibility blend,2.96593,2.97936,0.00451,True
+Auto B,8,30,reference only,2.96617,2.97936,0.00443,True
+Auto B,8,30,naive (no further defaults),2.91404,2.97936,0.02192,True
+Auto B,9,3,chain ladder,3.82712,2.86311,0.3367,True
+Auto B,9,3,credibility blend,3.15297,2.86311,0.10124,True
+Auto B,9,3,reference only,3.06066,2.86311,0.069,True
+Auto B,9,3,naive (no further defaults),0.34232,2.86311,0.88044,True
+Auto B,9,6,chain ladder,2.06682,2.86311,0.27812,True
+Auto B,9,6,credibility blend,2.67778,2.86311,0.06473,True
+Auto B,9,6,reference only,2.8232,2.86311,0.01394,True
+Auto B,9,6,naive (no further defaults),0.50559,2.86311,0.82341,True
+Auto B,9,9,chain ladder,2.37957,2.86311,0.16888,True
+Auto B,9,9,credibility blend,2.55959,2.86311,0.10601,True
+Auto B,9,9,reference only,2.70573,2.86311,0.05497,True
+Auto B,9,9,naive (no further defaults),1.02205,2.86311,0.64303,True
+Auto B,9,12,chain ladder,2.72398,2.86311,0.04859,True
+Auto B,9,12,credibility blend,2.79298,2.86311,0.02449,True
+Auto B,9,12,reference only,2.84213,2.86311,0.00733,True
+Auto B,9,12,naive (no further defaults),1.5917,2.86311,0.44407,True
+Auto B,9,18,chain ladder,2.80593,2.86311,0.01997,True
+Auto B,9,18,credibility blend,2.77627,2.86311,0.03033,True
+Auto B,9,18,reference only,2.79875,2.86311,0.02248,True
+Auto B,9,18,naive (no further defaults),2.27238,2.86311,0.20632,True
+Auto B,9,24,chain ladder,2.88319,2.86311,0.00701,True
+Auto B,9,24,credibility blend,2.88557,2.86311,0.00785,True
+Auto B,9,24,reference only,2.88945,2.86311,0.0092,True
+Auto B,9,24,naive (no further defaults),2.69983,2.86311,0.05703,True
+Auto B,9,30,chain ladder,2.87802,2.86311,0.00521,True
+Auto B,9,30,credibility blend,2.8885,2.86311,0.00887,True
+Auto B,9,30,reference only,2.88948,2.86311,0.00921,True
+Auto B,9,30,naive (no further defaults),2.83987,2.86311,0.00812,True
+Auto B,10,3,chain ladder,1.46402,2.67089,0.45186,True
+Auto B,10,3,credibility blend,2.66079,2.67089,0.00378,True
+Auto B,10,3,reference only,2.83212,2.67089,0.06036,True
+Auto B,10,3,naive (no further defaults),0.13268,2.67089,0.95032,True
+Auto B,10,6,chain ladder,2.57297,2.67089,0.03666,True
+Auto B,10,6,credibility blend,2.91554,2.67089,0.0916,True
+Auto B,10,6,reference only,2.94411,2.67089,0.10229,True
+Auto B,10,6,naive (no further defaults),0.62651,2.67089,0.76543,True
+Auto B,10,9,chain ladder,2.33142,2.67089,0.1271,True
+Auto B,10,9,credibility blend,2.53465,2.67089,0.05101,True
+Auto B,10,9,reference only,2.68415,2.67089,0.00496,True
+Auto B,10,9,naive (no further defaults),1.00046,2.67089,0.62542,True
+Auto B,10,12,chain ladder,2.46995,2.67089,0.07524,True
+Auto B,10,12,credibility blend,2.60013,2.67089,0.02649,True
+Auto B,10,12,reference only,2.69472,2.67089,0.00892,True
+Auto B,10,12,naive (no further defaults),1.44429,2.67089,0.45925,True
+Auto B,10,18,chain ladder,2.73809,2.67089,0.02516,True
+Auto B,10,18,credibility blend,2.71383,2.67089,0.01608,True
+Auto B,10,18,reference only,2.74163,2.67089,0.02649,True
+Auto B,10,18,naive (no further defaults),2.21526,2.67089,0.17059,True
+Auto B,10,24,chain ladder,2.65135,2.67089,0.00732,True
+Auto B,10,24,credibility blend,2.66198,2.67089,0.00334,True
+Auto B,10,24,reference only,2.67397,2.67089,0.00115,True
+Auto B,10,24,naive (no further defaults),2.48435,2.67089,0.06984,True
+Auto B,10,30,chain ladder,2.67048,2.67089,0.00015,True
+Auto B,10,30,credibility blend,2.68256,2.67089,0.00437,True
+Auto B,10,30,reference only,2.68549,2.67089,0.00546,True
+Auto B,10,30,naive (no further defaults),2.63587,2.67089,0.01311,True
+Auto B,11,3,chain ladder,4.88556,2.92469,0.67046,True
+Auto B,11,3,credibility blend,3.36058,2.92469,0.14904,True
+Auto B,11,3,reference only,3.15245,2.92469,0.07788,True
+Auto B,11,3,naive (no further defaults),0.43412,2.92469,0.85157,True
+Auto B,11,6,chain ladder,3.089,2.92469,0.05618,True
+Auto B,11,6,credibility blend,3.16985,2.92469,0.08383,True
+Auto B,11,6,reference only,3.08295,2.92469,0.05411,True
+Auto B,11,6,naive (no further defaults),0.74994,2.92469,0.74358,True
+Auto B,11,9,chain ladder,3.29868,2.92469,0.12787,True
+Auto B,11,9,credibility blend,3.23789,2.92469,0.10709,True
+Auto B,11,9,reference only,3.14861,2.92469,0.07656,True
+Auto B,11,9,naive (no further defaults),1.40738,2.92469,0.51879,True
+Auto B,11,12,chain ladder,2.91709,2.92469,0.0026,True
+Auto B,11,12,credibility blend,2.97969,2.92469,0.0188,True
+Auto B,11,12,reference only,2.98219,2.92469,0.01966,True
+Auto B,11,12,naive (no further defaults),1.70229,2.92469,0.41796,True
+Auto B,11,18,chain ladder,2.99619,2.92469,0.02445,True
+Auto B,11,18,credibility blend,2.94501,2.92469,0.00695,True
+Auto B,11,18,reference only,2.9498,2.92469,0.00859,True
+Auto B,11,18,naive (no further defaults),2.42343,2.92469,0.17139,True
+Auto B,11,24,chain ladder,2.99653,2.92469,0.02456,True
+Auto B,11,24,credibility blend,3.01791,2.92469,0.03188,True
+Auto B,11,24,reference only,3.01666,2.92469,0.03145,True
+Auto B,11,24,naive (no further defaults),2.80437,2.92469,0.04114,True
+Auto B,11,30,chain ladder,2.93752,2.92469,0.00439,True
+Auto B,11,30,credibility blend,2.948,2.92469,0.00797,True
+Auto B,11,30,reference only,2.94842,2.92469,0.00811,True
+Auto B,11,30,naive (no further defaults),2.8988,2.92469,0.00885,True
+Auto B,12,3,chain ladder,4.68424,2.88135,0.62571,True
+Auto B,12,3,credibility blend,3.31667,2.88135,0.15108,True
+Auto B,12,3,reference only,3.13466,2.88135,0.08791,True
+Auto B,12,3,naive (no further defaults),0.41633,2.88135,0.85551,True
+Auto B,12,6,chain ladder,3.31133,2.88135,0.14923,True
+Auto B,12,6,credibility blend,3.26879,2.88135,0.13447,True
+Auto B,12,6,reference only,3.13529,2.88135,0.08813,True
+Auto B,12,6,naive (no further defaults),0.80227,2.88135,0.72156,True
+Auto B,12,9,chain ladder,3.09315,2.88135,0.07351,True
+Auto B,12,9,credibility blend,3.10277,2.88135,0.07685,True
+Auto B,12,9,reference only,3.0619,2.88135,0.06266,True
+Auto B,12,9,naive (no further defaults),1.32066,2.88135,0.54165,True
+Auto B,12,12,chain ladder,3.12931,2.88135,0.08606,False
+Auto B,12,12,credibility blend,3.19052,2.88135,0.1073,False
+Auto B,12,12,reference only,3.13623,2.88135,0.08846,False
+Auto B,12,12,naive (no further defaults),1.8221,2.88135,0.36762,False
+Auto B,12,18,chain ladder,3.06953,2.88135,0.06531,True
+Auto B,12,18,credibility blend,3.03606,2.88135,0.0537,True
+Auto B,12,18,reference only,3.03061,2.88135,0.0518,True
+Auto B,12,18,naive (no further defaults),2.47987,2.88135,0.13934,True
+Auto B,12,24,chain ladder,2.88143,2.88135,3e-05,True
+Auto B,12,24,credibility blend,2.88447,2.88135,0.00108,True
+Auto B,12,24,reference only,2.88844,2.88135,0.00246,True
+Auto B,12,24,naive (no further defaults),2.69882,2.88135,0.06335,True
+Auto B,12,30,chain ladder,2.88679,2.88135,0.00189,True
+Auto B,12,30,credibility blend,2.89772,2.88135,0.00568,True
+Auto B,12,30,reference only,2.89862,2.88135,0.006,True
+Auto B,12,30,naive (no further defaults),2.84901,2.88135,0.01122,True
+Personal A,0,3,chain ladder,1.52098,1.8096,0.1595,True
+Personal A,0,3,credibility blend,1.78369,1.8096,0.01432,True
+Personal A,0,3,reference only,1.78848,1.8096,0.01167,True
+Personal A,0,3,naive (no further defaults),0.15631,1.8096,0.91362,True
+Personal A,0,6,chain ladder,1.38117,1.8096,0.23675,True
+Personal A,0,6,credibility blend,1.66466,1.8096,0.08009,True
+Personal A,0,6,reference only,1.71394,1.8096,0.05286,True
+Personal A,0,6,naive (no further defaults),0.38861,1.8096,0.78525,True
+Personal A,0,9,chain ladder,1.49103,1.8096,0.17604,False
+Personal A,0,9,credibility blend,1.61597,1.8096,0.107,False
+Personal A,0,9,reference only,1.66538,1.8096,0.0797,False
+Personal A,0,9,naive (no further defaults),0.70016,1.8096,0.61309,False
+Personal A,0,12,chain ladder,1.78752,1.8096,0.0122,True
+Personal A,0,12,credibility blend,1.82983,1.8096,0.01118,True
+Personal A,0,12,reference only,1.82257,1.8096,0.00717,True
+Personal A,0,12,naive (no further defaults),1.12067,1.8096,0.38071,True
+Personal A,0,18,chain ladder,1.73146,1.8096,0.04318,True
+Personal A,0,18,credibility blend,1.76778,1.8096,0.02311,True
+Personal A,0,18,reference only,1.77009,1.8096,0.02183,True
+Personal A,0,18,naive (no further defaults),1.46315,1.8096,0.19145,True
+Personal A,0,24,chain ladder,1.75699,1.8096,0.02908,True
+Personal A,0,24,credibility blend,1.76026,1.8096,0.02727,True
+Personal A,0,24,reference only,1.76113,1.8096,0.02679,True
+Personal A,0,24,naive (no further defaults),1.67128,1.8096,0.07644,True
+Personal A,0,30,chain ladder,1.80091,1.8096,0.0048,True
+Personal A,0,30,credibility blend,1.80424,1.8096,0.00296,True
+Personal A,0,30,reference only,1.80418,1.8096,0.003,True
+Personal A,0,30,naive (no further defaults),1.78201,1.8096,0.01525,True
+Personal A,1,3,chain ladder,2.13999,1.68352,0.27114,True
+Personal A,1,3,credibility blend,1.92594,1.68352,0.144,True
+Personal A,1,3,reference only,1.8594,1.68352,0.10447,True
+Personal A,1,3,naive (no further defaults),0.21827,1.68352,0.87035,True
+Personal A,1,6,chain ladder,1.86408,1.68352,0.10725,True
+Personal A,1,6,credibility blend,1.88828,1.68352,0.12163,True
+Personal A,1,6,reference only,1.8489,1.68352,0.09824,True
+Personal A,1,6,naive (no further defaults),0.52121,1.68352,0.69041,True
+Personal A,1,9,chain ladder,1.49658,1.68352,0.11104,True
+Personal A,1,9,credibility blend,1.62073,1.68352,0.0373,True
+Personal A,1,9,reference only,1.66677,1.68352,0.00995,True
+Personal A,1,9,naive (no further defaults),0.70155,1.68352,0.58329,True
+Personal A,1,12,chain ladder,1.6795,1.68352,0.00239,True
+Personal A,1,12,credibility blend,1.74626,1.68352,0.03726,True
+Personal A,1,12,reference only,1.75426,1.68352,0.04202,True
+Personal A,1,12,naive (no further defaults),1.05236,1.68352,0.37491,True
+Personal A,1,18,chain ladder,1.69755,1.68352,0.00833,True
+Personal A,1,18,credibility blend,1.73468,1.68352,0.03039,True
+Personal A,1,18,reference only,1.73921,1.68352,0.03308,True
+Personal A,1,18,naive (no further defaults),1.43227,1.68352,0.14924,True
+Personal A,1,24,chain ladder,1.66768,1.68352,0.00941,True
+Personal A,1,24,credibility blend,1.67205,1.68352,0.00681,True
+Personal A,1,24,reference only,1.67501,1.68352,0.00506,True
+Personal A,1,24,naive (no further defaults),1.58516,1.68352,0.05843,True
+Personal A,1,30,chain ladder,1.68873,1.68352,0.00309,True
+Personal A,1,30,credibility blend,1.69191,1.68352,0.00498,True
+Personal A,1,30,reference only,1.69251,1.68352,0.00534,True
+Personal A,1,30,naive (no further defaults),1.67034,1.68352,0.00783,True
+Personal A,2,3,chain ladder,1.6011,1.81555,0.11812,True
+Personal A,2,3,credibility blend,1.7941,1.81555,0.01182,True
+Personal A,2,3,reference only,1.79378,1.81555,0.01199,True
+Personal A,2,3,naive (no further defaults),0.16459,1.81555,0.90935,True
+Personal A,2,6,chain ladder,1.18592,1.81555,0.3468,False
+Personal A,2,6,credibility blend,1.56737,1.81555,0.1367,False
+Personal A,2,6,reference only,1.657,1.81555,0.08733,False
+Personal A,2,6,naive (no further defaults),0.33465,1.81555,0.81568,False
+Personal A,2,9,chain ladder,1.55589,1.81555,0.14302,True
+Personal A,2,9,credibility blend,1.65157,1.81555,0.09032,True
+Personal A,2,9,reference only,1.6925,1.81555,0.06778,True
+Personal A,2,9,naive (no further defaults),0.73025,1.81555,0.59778,True
+Personal A,2,12,chain ladder,1.72522,1.81555,0.04976,True
+Personal A,2,12,credibility blend,1.77821,1.81555,0.02057,True
+Personal A,2,12,reference only,1.7814,1.81555,0.01881,True
+Personal A,2,12,naive (no further defaults),1.08247,1.81555,0.40378,True
+Personal A,2,18,chain ladder,1.77342,1.81555,0.02321,True
+Personal A,2,18,credibility blend,1.80254,1.81555,0.00717,True
+Personal A,2,18,reference only,1.80171,1.81555,0.00762,True
+Personal A,2,18,naive (no further defaults),1.49775,1.81555,0.17505,True
+Personal A,2,24,chain ladder,1.79774,1.81555,0.00981,True
+Personal A,2,24,credibility blend,1.79604,1.81555,0.01075,True
+Personal A,2,24,reference only,1.79598,1.81555,0.01078,True
+Personal A,2,24,naive (no further defaults),1.70911,1.81555,0.05863,True
+Personal A,2,30,chain ladder,1.80902,1.81555,0.0036,True
+Personal A,2,30,credibility blend,1.81331,1.81555,0.00124,True
+Personal A,2,30,reference only,1.81317,1.81555,0.00131,True
+Personal A,2,30,naive (no further defaults),1.78999,1.81555,0.01408,True
+Personal A,3,3,chain ladder,2.0515,1.79749,0.14131,True
+Personal A,3,3,credibility blend,1.89744,1.79749,0.0556,True
+Personal A,3,3,reference only,1.84759,1.79749,0.02787,True
+Personal A,3,3,naive (no further defaults),0.20942,1.79749,0.8835,True
+Personal A,3,6,chain ladder,1.84608,1.79749,0.02703,True
+Personal A,3,6,credibility blend,1.8713,1.79749,0.04106,True
+Personal A,3,6,reference only,1.84181,1.79749,0.02465,True
+Personal A,3,6,naive (no further defaults),0.51648,1.79749,0.71267,True
+Personal A,3,9,chain ladder,1.83059,1.79749,0.01841,True
+Personal A,3,9,credibility blend,1.85027,1.79749,0.02936,True
+Personal A,3,9,reference only,1.83491,1.79749,0.02082,True
+Personal A,3,9,naive (no further defaults),0.85562,1.79749,0.52399,True
+Personal A,3,12,chain ladder,1.86026,1.79749,0.03492,True
+Personal A,3,12,credibility blend,1.91359,1.79749,0.06459,True
+Personal A,3,12,reference only,1.88791,1.79749,0.0503,True
+Personal A,3,12,naive (no further defaults),1.16423,1.79749,0.35231,True
+Personal A,3,18,chain ladder,1.77832,1.79749,0.01067,True
+Personal A,3,18,credibility blend,1.80871,1.79749,0.00624,True
+Personal A,3,18,reference only,1.80789,1.79749,0.00578,True
+Personal A,3,18,naive (no further defaults),1.50095,1.79749,0.16498,True
+Personal A,3,24,chain ladder,1.82444,1.79749,0.01499,True
+Personal A,3,24,credibility blend,1.83524,1.79749,0.021,True
+Personal A,3,24,reference only,1.83412,1.79749,0.02038,True
+Personal A,3,24,naive (no further defaults),1.73255,1.79749,0.03613,True
+Personal A,3,30,chain ladder,1.799,1.79749,0.00084,True
+Personal A,3,30,credibility blend,1.8018,1.79749,0.00239,True
+Personal A,3,30,reference only,1.80179,1.79749,0.00239,True
+Personal A,3,30,naive (no further defaults),1.77962,1.79749,0.00995,True
+Personal A,4,3,chain ladder,2.11033,2.06685,0.02104,True
+Personal A,4,3,credibility blend,1.8899,2.06685,0.08561,True
+Personal A,4,3,reference only,1.82519,2.06685,0.11692,True
+Personal A,4,3,naive (no further defaults),0.21603,2.06685,0.89548,True
+Personal A,4,6,chain ladder,1.84235,2.06685,0.10862,False
+Personal A,4,6,credibility blend,1.84429,2.06685,0.10768,False
+Personal A,4,6,reference only,1.81094,2.06685,0.12381,False
+Personal A,4,6,naive (no further defaults),0.51721,2.06685,0.74976,False
+Personal A,4,9,chain ladder,2.01437,2.06685,0.02539,True
+Personal A,4,9,credibility blend,1.98025,2.06685,0.0419,True
+Personal A,4,9,reference only,1.91344,2.06685,0.07422,True
+Personal A,4,9,naive (no further defaults),0.94241,2.06685,0.54403,True
+Personal A,4,12,chain ladder,2.08115,2.06685,0.00692,True
+Personal A,4,12,credibility blend,2.05975,2.06685,0.00343,True
+Personal A,4,12,reference only,1.99476,2.06685,0.03488,True
+Personal A,4,12,naive (no further defaults),1.30303,2.06685,0.36955,True
+Personal A,4,18,chain ladder,2.12844,2.06685,0.0298,True
+Personal A,4,18,credibility blend,2.13884,2.06685,0.03483,True
+Personal A,4,18,reference only,2.10212,2.06685,0.01707,True
+Personal A,4,18,naive (no further defaults),1.79352,2.06685,0.13224,True
+Personal A,4,24,chain ladder,2.09656,2.06685,0.01437,True
+Personal A,4,24,credibility blend,2.09207,2.06685,0.0122,True
+Personal A,4,24,reference only,2.08251,2.06685,0.00758,True
+Personal A,4,24,naive (no further defaults),1.99076,2.06685,0.03681,True
+Personal A,4,30,chain ladder,2.07396,2.06685,0.00344,True
+Personal A,4,30,credibility blend,2.08049,2.06685,0.0066,True
+Personal A,4,30,reference only,2.07782,2.06685,0.00531,True
+Personal A,4,30,naive (no further defaults),2.05124,2.06685,0.00755,True
+Personal A,5,3,chain ladder,1.92958,1.90341,0.01375,True
+Personal A,5,3,credibility blend,1.84141,1.90341,0.03258,True
+Personal A,5,3,reference only,1.79761,1.90341,0.05558,True
+Personal A,5,3,naive (no further defaults),0.19741,1.90341,0.89629,True
+Personal A,5,6,chain ladder,2.07942,1.90341,0.09247,True
+Personal A,5,6,credibility blend,1.96632,1.90341,0.03305,True
+Personal A,5,6,reference only,1.87636,1.90341,0.01421,True
+Personal A,5,6,naive (no further defaults),0.58062,1.90341,0.69496,True
+Personal A,5,9,chain ladder,1.93227,1.90341,0.01516,True
+Personal A,5,9,credibility blend,1.92938,1.90341,0.01364,True
+Personal A,5,9,reference only,1.87404,1.90341,0.01543,True
+Personal A,5,9,naive (no further defaults),0.90301,1.90341,0.52559,True
+Personal A,5,12,chain ladder,1.87132,1.90341,0.01686,True
+Personal A,5,12,credibility blend,1.896,1.90341,0.00389,True
+Personal A,5,12,reference only,1.86436,1.90341,0.02052,True
+Personal A,5,12,naive (no further defaults),1.17263,1.90341,0.38393,True
+Personal A,5,18,chain ladder,1.97981,1.90341,0.04014,False
+Personal A,5,18,credibility blend,2.00154,1.90341,0.05156,False
+Personal A,5,18,reference only,1.97646,1.90341,0.03838,False
+Personal A,5,18,naive (no further defaults),1.66786,1.90341,0.12375,False
+Personal A,5,24,chain ladder,1.91803,1.90341,0.00768,True
+Personal A,5,24,credibility blend,1.91857,1.90341,0.00797,True
+Personal A,5,24,reference only,1.91368,1.90341,0.00539,True
+Personal A,5,24,naive (no further defaults),1.82193,1.90341,0.04281,True
+Personal A,5,30,chain ladder,1.90135,1.90341,0.00108,True
+Personal A,5,30,credibility blend,1.90902,1.90341,0.00295,True
+Personal A,5,30,reference only,1.90769,1.90341,0.00225,True
+Personal A,5,30,naive (no further defaults),1.88111,1.90341,0.01172,True
+Personal A,6,3,chain ladder,3.0227,1.99483,0.51527,True
+Personal A,6,3,credibility blend,2.07984,1.99483,0.04261,True
+Personal A,6,3,reference only,1.9152,1.99483,0.03992,True
+Personal A,6,3,naive (no further defaults),0.30604,1.99483,0.84659,True
+Personal A,6,6,chain ladder,2.5683,1.99483,0.28747,True
+Personal A,6,6,credibility blend,2.18622,1.99483,0.09594,True
+Personal A,6,6,reference only,2.00985,1.99483,0.00753,True
+Personal A,6,6,naive (no further defaults),0.71412,1.99483,0.64202,True
+Personal A,6,9,chain ladder,2.19556,1.99483,0.10062,True
+Personal A,6,9,credibility blend,2.10112,1.99483,0.05328,True
+Personal A,6,9,reference only,1.99521,1.99483,0.00019,True
+Personal A,6,9,naive (no further defaults),1.02417,1.99483,0.48659,True
+Personal A,6,12,chain ladder,2.04423,1.99483,0.02476,True
+Personal A,6,12,credibility blend,2.03203,1.99483,0.01865,True
+Personal A,6,12,reference only,1.97177,1.99483,0.01156,True
+Personal A,6,12,naive (no further defaults),1.28004,1.99483,0.35832,True
+Personal A,6,18,chain ladder,2.00097,1.99483,0.00307,True
+Personal A,6,18,credibility blend,2.02314,1.99483,0.01419,True
+Personal A,6,18,reference only,1.99713,1.99483,0.00115,True
+Personal A,6,18,naive (no further defaults),1.68853,1.99483,0.15355,True
+Personal A,6,24,chain ladder,2.01408,1.99483,0.00965,True
+Personal A,6,24,credibility blend,2.01265,1.99483,0.00893,True
+Personal A,6,24,reference only,2.00522,1.99483,0.00521,True
+Personal A,6,24,naive (no further defaults),1.91347,1.99483,0.04079,True
+Personal A,6,30,chain ladder,1.97608,1.99483,0.0094,True
+Personal A,6,30,credibility blend,1.98448,1.99483,0.00519,True
+Personal A,6,30,reference only,1.98256,1.99483,0.00615,True
+Personal A,6,30,naive (no further defaults),1.95598,1.99483,0.01948,True
+Personal A,7,3,chain ladder,1.61455,1.93919,0.16741,True
+Personal A,7,3,credibility blend,1.77991,1.93919,0.08214,True
+Personal A,7,3,reference only,1.76622,1.93919,0.08919,True
+Personal A,7,3,naive (no further defaults),0.16602,1.93919,0.91439,True
+Personal A,7,6,chain ladder,1.69902,1.93919,0.12385,True
+Personal A,7,6,credibility blend,1.78305,1.93919,0.08052,True
+Personal A,7,6,reference only,1.77072,1.93919,0.08688,True
+Personal A,7,6,naive (no further defaults),0.47735,1.93919,0.75384,True
+Personal A,7,9,chain ladder,1.93345,1.93919,0.00296,True
+Personal A,7,9,credibility blend,1.93003,1.93919,0.00472,True
+Personal A,7,9,reference only,1.876,1.93919,0.03259,True
+Personal A,7,9,naive (no further defaults),0.90497,1.93919,0.53333,True
+Personal A,7,12,chain ladder,1.78419,1.93919,0.07993,True
+Personal A,7,12,credibility blend,1.80142,1.93919,0.07105,True
+Personal A,7,12,reference only,1.79117,1.93919,0.07633,True
+Personal A,7,12,naive (no further defaults),1.12104,1.93919,0.42191,True
+Personal A,7,18,chain ladder,1.90422,1.93919,0.01803,True
+Personal A,7,18,credibility blend,1.93457,1.93919,0.00238,True
+Personal A,7,18,reference only,1.91695,1.93919,0.01147,True
+Personal A,7,18,naive (no further defaults),1.60835,1.93919,0.17061,True
+Personal A,7,24,chain ladder,1.91262,1.93919,0.0137,True
+Personal A,7,24,credibility blend,1.91519,1.93919,0.01238,True
+Personal A,7,24,reference only,1.91051,1.93919,0.01479,True
+Personal A,7,24,naive (no further defaults),1.81877,1.93919,0.0621,True
+Personal A,7,30,chain ladder,1.93462,1.93919,0.00236,True
+Personal A,7,30,credibility blend,1.94237,1.93919,0.00164,True
+Personal A,7,30,reference only,1.94079,1.93919,0.00082,True
+Personal A,7,30,naive (no further defaults),1.91421,1.93919,0.01288,True
+Personal A,8,3,chain ladder,1.27561,1.751,0.27149,True
+Personal A,8,3,credibility blend,1.7239,1.751,0.01547,True
+Personal A,8,3,reference only,1.76344,1.751,0.0071,True
+Personal A,8,3,naive (no further defaults),0.13127,1.751,0.92503,True
+Personal A,8,6,chain ladder,2.03738,1.751,0.16355,True
+Personal A,8,6,credibility blend,1.96736,1.751,0.12356,True
+Personal A,8,6,reference only,1.89642,1.751,0.08305,True
+Personal A,8,6,naive (no further defaults),0.56873,1.751,0.6752,True
+Personal A,8,9,chain ladder,1.76862,1.751,0.01006,True
+Personal A,8,9,credibility blend,1.78953,1.751,0.022,True
+Personal A,8,9,reference only,1.7927,1.751,0.02382,True
+Personal A,8,9,naive (no further defaults),0.82748,1.751,0.52743,True
+Personal A,8,12,chain ladder,1.59255,1.751,0.09049,True
+Personal A,8,12,credibility blend,1.67428,1.751,0.04382,True
+Personal A,8,12,reference only,1.70239,1.751,0.02776,True
+Personal A,8,12,naive (no further defaults),1.00048,1.751,0.42862,True
+Personal A,8,18,chain ladder,1.7021,1.751,0.02793,True
+Personal A,8,18,credibility blend,1.73871,1.751,0.00702,True
+Personal A,8,18,reference only,1.74469,1.751,0.0036,True
+Personal A,8,18,naive (no further defaults),1.43775,1.751,0.1789,True
+Personal A,8,24,chain ladder,1.71498,1.751,0.02057,True
+Personal A,8,24,credibility blend,1.71845,1.751,0.01859,True
+Personal A,8,24,reference only,1.72078,1.751,0.01726,True
+Personal A,8,24,naive (no further defaults),1.63094,1.751,0.06857,True
+Personal A,8,30,chain ladder,1.75495,1.751,0.00226,True
+Personal A,8,30,credibility blend,1.75776,1.751,0.00386,True
+Personal A,8,30,reference only,1.75806,1.751,0.00403,True
+Personal A,8,30,naive (no further defaults),1.73589,1.751,0.00863,True
+Personal A,9,3,chain ladder,3.1232,1.87353,0.66702,True
+Personal A,9,3,credibility blend,2.0909,1.87353,0.11602,True
+Personal A,9,3,reference only,1.92517,1.87353,0.02757,True
+Personal A,9,3,naive (no further defaults),0.31601,1.87353,0.83133,True
+Personal A,9,6,chain ladder,2.41176,1.87353,0.28728,True
+Personal A,9,6,credibility blend,2.1063,1.87353,0.12424,True
+Personal A,9,6,reference only,1.96705,1.87353,0.04992,True
+Personal A,9,6,naive (no further defaults),0.67132,1.87353,0.64168,True
+Personal A,9,9,chain ladder,2.13537,1.87353,0.13976,True
+Personal A,9,9,credibility blend,2.05702,1.87353,0.09794,True
+Personal A,9,9,reference only,1.96658,1.87353,0.04967,True
+Personal A,9,9,naive (no further defaults),0.99555,1.87353,0.46862,True
+Personal A,9,12,chain ladder,1.95761,1.87353,0.04488,True
+Personal A,9,12,credibility blend,1.96221,1.87353,0.04734,True
+Personal A,9,12,reference only,1.91685,1.87353,0.02313,True
+Personal A,9,12,naive (no further defaults),1.22512,1.87353,0.34609,True
+Personal A,9,18,chain ladder,1.85799,1.87353,0.00829,True
+Personal A,9,18,credibility blend,1.8906,1.87353,0.00911,True
+Personal A,9,18,reference only,1.87679,1.87353,0.00174,True
+Personal A,9,18,naive (no further defaults),1.56819,1.87353,0.16297,True
+Personal A,9,24,chain ladder,1.86978,1.87353,0.002,True
+Personal A,9,24,credibility blend,1.8722,1.87353,0.00071,True
+Personal A,9,24,reference only,1.86858,1.87353,0.00264,True
+Personal A,9,24,naive (no further defaults),1.77683,1.87353,0.05161,True
+Personal A,9,30,chain ladder,1.87498,1.87353,0.00077,True
+Personal A,9,30,credibility blend,1.88246,1.87353,0.00477,True
+Personal A,9,30,reference only,1.88133,1.87353,0.00417,True
+Personal A,9,30,naive (no further defaults),1.85475,1.87353,0.01002,True
+Personal A,10,3,chain ladder,1.85447,1.49465,0.24073,False
+Personal A,10,3,credibility blend,1.86639,1.49465,0.24871,False
+Personal A,10,3,reference only,1.8214,1.49465,0.21861,False
+Personal A,10,3,naive (no further defaults),0.18923,1.49465,0.87339,False
+Personal A,10,6,chain ladder,1.62847,1.49465,0.08953,False
+Personal A,10,6,credibility blend,1.79025,1.49465,0.19777,False
+Personal A,10,6,reference only,1.78058,1.49465,0.1913,False
+Personal A,10,6,naive (no further defaults),0.45525,1.49465,0.69542,False
+Personal A,10,9,chain ladder,1.58146,1.49465,0.05808,True
+Personal A,10,9,credibility blend,1.6838,1.49465,0.12655,True
+Personal A,10,9,reference only,1.7041,1.49465,0.14013,True
+Personal A,10,9,naive (no further defaults),0.73887,1.49465,0.50566,True
+Personal A,10,12,chain ladder,1.68202,1.49465,0.12536,False
+Personal A,10,12,credibility blend,1.75135,1.49465,0.17174,False
+Personal A,10,12,reference only,1.75349,1.49465,0.17318,False
+Personal A,10,12,naive (no further defaults),1.05159,1.49465,0.29644,False
+Personal A,10,18,chain ladder,1.515,1.49465,0.01361,True
+Personal A,10,18,credibility blend,1.56933,1.49465,0.04996,True
+Personal A,10,18,reference only,1.58513,1.49465,0.06053,True
+Personal A,10,18,naive (no further defaults),1.27819,1.49465,0.14482,True
+Personal A,10,24,chain ladder,1.4792,1.49465,0.01034,True
+Personal A,10,24,credibility blend,1.48938,1.49465,0.00353,True
+Personal A,10,24,reference only,1.49592,1.49465,0.00085,True
+Personal A,10,24,naive (no further defaults),1.40608,1.49465,0.05926,True
+Personal A,10,30,chain ladder,1.48751,1.49465,0.00478,True
+Personal A,10,30,credibility blend,1.49238,1.49465,0.00152,True
+Personal A,10,30,reference only,1.49398,1.49465,0.00045,True
+Personal A,10,30,naive (no further defaults),1.47181,1.49465,0.01529,True
+Personal A,11,3,chain ladder,2.1098,1.73131,0.21861,True
+Personal A,11,3,credibility blend,1.91742,1.73131,0.1075,True
+Personal A,11,3,reference only,1.85645,1.73131,0.07228,True
+Personal A,11,3,naive (no further defaults),0.21532,1.73131,0.87563,True
+Personal A,11,6,chain ladder,1.63723,1.73131,0.05434,True
+Personal A,11,6,credibility blend,1.78103,1.73131,0.02872,True
+Personal A,11,6,reference only,1.7842,1.73131,0.03055,True
+Personal A,11,6,naive (no further defaults),0.45887,1.73131,0.73496,True
+Personal A,11,9,chain ladder,1.73527,1.73131,0.00229,True
+Personal A,11,9,credibility blend,1.77206,1.73131,0.02354,True
+Personal A,11,9,reference only,1.77688,1.73131,0.02632,True
+Personal A,11,9,naive (no further defaults),0.81165,1.73131,0.53119,True
+Personal A,11,12,chain ladder,1.56545,1.73131,0.0958,True
+Personal A,11,12,credibility blend,1.6581,1.73131,0.04229,True
+Personal A,11,12,reference only,1.68479,1.73131,0.02687,True
+Personal A,11,12,naive (no further defaults),0.98289,1.73131,0.43229,True
+Personal A,11,18,chain ladder,1.78723,1.73131,0.0323,True
+Personal A,11,18,credibility blend,1.81972,1.73131,0.05106,True
+Personal A,11,18,reference only,1.81698,1.73131,0.04948,True
+Personal A,11,18,naive (no further defaults),1.50701,1.73131,0.12955,True
+Personal A,11,24,chain ladder,1.69805,1.73131,0.01921,True
+Personal A,11,24,credibility blend,1.70222,1.73131,0.0168,True
+Personal A,11,24,reference only,1.70449,1.73131,0.01549,True
+Personal A,11,24,naive (no further defaults),1.61464,1.73131,0.06739,True
+Personal A,11,30,chain ladder,1.73184,1.73131,0.0003,True
+Personal A,11,30,credibility blend,1.73502,1.73131,0.00214,True
+Personal A,11,30,reference only,1.73536,1.73131,0.00234,True
+Personal A,11,30,naive (no further defaults),1.71319,1.73131,0.01046,True
+Personal A,12,3,chain ladder,2.41653,2.76266,0.12529,False
+Personal A,12,3,credibility blend,1.89679,2.76266,0.31342,False
+Personal A,12,3,reference only,1.85752,2.76266,0.32763,False
+Personal A,12,3,naive (no further defaults),0.24836,2.76266,0.9101,False
+Personal A,12,6,chain ladder,2.72574,2.76266,0.01336,False
+Personal A,12,6,credibility blend,2.16533,2.76266,0.21622,False
+Personal A,12,6,reference only,2.05936,2.76266,0.25457,False
+Personal A,12,6,naive (no further defaults),0.76363,2.76266,0.72359,False
+Personal A,12,9,chain ladder,2.55639,2.76266,0.07466,False
+Personal A,12,9,credibility blend,2.27039,2.76266,0.17819,False
+Personal A,12,9,reference only,2.16918,2.76266,0.21482,False
+Personal A,12,9,naive (no further defaults),1.19815,2.76266,0.56631,False
+Personal A,12,12,chain ladder,2.65754,2.76266,0.03805,False
+Personal A,12,12,credibility blend,2.45821,2.76266,0.1102,False
+Personal A,12,12,reference only,2.35835,2.76266,0.14635,False
+Personal A,12,12,naive (no further defaults),1.66662,2.76266,0.39673,False
+Personal A,12,18,chain ladder,2.84525,2.76266,0.0299,True
+Personal A,12,18,credibility blend,2.77145,2.76266,0.00318,True
+Personal A,12,18,reference only,2.70624,2.76266,0.02042,True
+Personal A,12,18,naive (no further defaults),2.39764,2.76266,0.13213,True
+Personal A,12,24,chain ladder,2.79666,2.76266,0.01231,True
+Personal A,12,24,credibility blend,2.76678,2.76266,0.00149,True
+Personal A,12,24,reference only,2.74749,2.76266,0.00549,True
+Personal A,12,24,naive (no further defaults),2.65574,2.76266,0.0387,True
+Personal A,12,30,chain ladder,2.76291,2.76266,9e-05,True
+Personal A,12,30,credibility blend,2.76536,2.76266,0.00098,True
+Personal A,12,30,reference only,2.75978,2.76266,0.00104,True
+Personal A,12,30,naive (no further defaults),2.7332,2.76266,0.01066,True
+Personal B,0,3,chain ladder,6.04176,4.33168,0.39479,True
+Personal B,0,3,credibility blend,4.83042,4.33168,0.11514,True
+Personal B,0,3,reference only,4.54447,4.33168,0.04912,True
+Personal B,0,3,naive (no further defaults),0.64738,4.33168,0.85055,True
+Personal B,0,6,chain ladder,5.1471,4.33168,0.18825,True
+Personal B,0,6,credibility blend,4.66816,4.33168,0.07768,True
+Personal B,0,6,reference only,4.52001,4.33168,0.04348,True
+Personal B,0,6,naive (no further defaults),1.47534,4.33168,0.65941,True
+Personal B,0,9,chain ladder,4.896,4.33168,0.13028,True
+Personal B,0,9,credibility blend,4.67857,4.33168,0.08008,True
+Personal B,0,9,reference only,4.56497,4.33168,0.05386,True
+Personal B,0,9,naive (no further defaults),2.30392,4.33168,0.46812,True
+Personal B,0,12,chain ladder,4.45044,4.33168,0.02742,True
+Personal B,0,12,credibility blend,4.3349,4.33168,0.00074,True
+Personal B,0,12,reference only,4.33807,4.33168,0.00148,True
+Personal B,0,12,naive (no further defaults),2.83123,4.33168,0.34639,True
+Personal B,0,18,chain ladder,4.43586,4.33168,0.02405,True
+Personal B,0,18,credibility blend,4.40908,4.33168,0.01787,True
+Personal B,0,18,reference only,4.40324,4.33168,0.01652,True
+Personal B,0,18,naive (no further defaults),3.76818,4.33168,0.13009,True
+Personal B,0,24,chain ladder,4.35996,4.33168,0.00653,True
+Personal B,0,24,credibility blend,4.34966,4.33168,0.00415,True
+Personal B,0,24,reference only,4.34963,4.33168,0.00414,True
+Personal B,0,24,naive (no further defaults),4.16178,4.33168,0.03922,True
+Personal B,0,30,chain ladder,4.32914,4.33168,0.00059,True
+Personal B,0,30,credibility blend,4.33338,4.33168,0.00039,True
+Personal B,0,30,reference only,4.33347,4.33168,0.00041,True
+Personal B,0,30,naive (no further defaults),4.29507,4.33168,0.00845,True
+Personal B,1,3,chain ladder,4.38745,3.69195,0.18838,False
+Personal B,1,3,credibility blend,4.4013,3.69195,0.19213,False
+Personal B,1,3,reference only,4.39191,3.69195,0.18959,False
+Personal B,1,3,naive (no further defaults),0.47284,3.69195,0.87193,False
+Personal B,1,6,chain ladder,3.67348,3.69195,0.005,True
+Personal B,1,6,credibility blend,3.86188,3.69195,0.04603,True
+Personal B,1,6,reference only,4.09742,3.69195,0.10983,True
+Personal B,1,6,naive (no further defaults),1.0582,3.69195,0.71338,True
+Personal B,1,9,chain ladder,3.75946,3.69195,0.01828,True
+Personal B,1,9,credibility blend,3.85459,3.69195,0.04405,True
+Personal B,1,9,reference only,4.03195,3.69195,0.09209,True
+Personal B,1,9,naive (no further defaults),1.77484,3.69195,0.51927,True
+Personal B,1,12,chain ladder,3.4962,3.69195,0.05302,True
+Personal B,1,12,credibility blend,3.59696,3.69195,0.02573,True
+Personal B,1,12,reference only,3.77773,3.69195,0.02323,True
+Personal B,1,12,naive (no further defaults),2.22927,3.69195,0.39618,True
+Personal B,1,18,chain ladder,3.67503,3.69195,0.00458,True
+Personal B,1,18,credibility blend,3.68751,3.69195,0.0012,True
+Personal B,1,18,reference only,3.75234,3.69195,0.01636,True
+Personal B,1,18,naive (no further defaults),3.12494,3.69195,0.15358,True
+Personal B,1,24,chain ladder,3.66988,3.69195,0.00598,True
+Personal B,1,24,credibility blend,3.66734,3.69195,0.00666,True
+Personal B,1,24,reference only,3.6867,3.69195,0.00142,True
+Personal B,1,24,naive (no further defaults),3.50463,3.69195,0.05074,True
+Personal B,1,30,chain ladder,3.69809,3.69195,0.00166,True
+Personal B,1,30,credibility blend,3.70404,3.69195,0.00328,True
+Personal B,1,30,reference only,3.70801,3.69195,0.00435,True
+Personal B,1,30,naive (no further defaults),3.66865,3.69195,0.00631,True
+Personal B,2,3,chain ladder,2.85298,4.20199,0.32104,True
+Personal B,2,3,credibility blend,3.94166,4.20199,0.06195,True
+Personal B,2,3,reference only,4.22982,4.20199,0.00662,True
+Personal B,2,3,naive (no further defaults),0.31075,4.20199,0.92605,True
+Personal B,2,6,chain ladder,2.98386,4.20199,0.28989,False
+Personal B,2,6,credibility blend,3.44189,4.20199,0.18089,False
+Personal B,2,6,reference only,3.90474,4.20199,0.07074,False
+Personal B,2,6,naive (no further defaults),0.86551,4.20199,0.79402,False
+Personal B,2,9,chain ladder,3.41718,4.20199,0.18677,False
+Personal B,2,9,credibility blend,3.5861,4.20199,0.14657,False
+Personal B,2,9,reference only,3.87854,4.20199,0.07698,False
+Personal B,2,9,naive (no further defaults),1.62143,4.20199,0.61413,False
+Personal B,2,12,chain ladder,4.18621,4.20199,0.00376,True
+Personal B,2,12,credibility blend,4.1517,4.20199,0.01197,True
+Personal B,2,12,reference only,4.2143,4.20199,0.00293,True
+Personal B,2,12,naive (no further defaults),2.66583,4.20199,0.36558,True
+Personal B,2,18,chain ladder,4.19002,4.20199,0.00285,True
+Personal B,2,18,credibility blend,4.16579,4.20199,0.00862,True
+Personal B,2,18,reference only,4.18976,4.20199,0.00291,True
+Personal B,2,18,naive (no further defaults),3.56236,4.20199,0.15222,True
+Personal B,2,24,chain ladder,4.19854,4.20199,0.00082,True
+Personal B,2,24,credibility blend,4.18455,4.20199,0.00415,True
+Personal B,2,24,reference only,4.19097,4.20199,0.00262,True
+Personal B,2,24,naive (no further defaults),4.0089,4.20199,0.04595,True
+Personal B,2,30,chain ladder,4.2029,4.20199,0.00022,True
+Personal B,2,30,credibility blend,4.2078,4.20199,0.00138,True
+Personal B,2,30,reference only,4.20904,4.20199,0.00168,True
+Personal B,2,30,naive (no further defaults),4.16968,4.20199,0.00769,True
+Personal B,3,3,chain ladder,4.81882,4.24844,0.13426,True
+Personal B,3,3,credibility blend,4.53902,4.24844,0.0684,True
+Personal B,3,3,reference only,4.45752,4.24844,0.04921,True
+Personal B,3,3,naive (no further defaults),0.51881,4.24844,0.87788,True
+Personal B,3,6,chain ladder,4.54878,4.24844,0.07069,True
+Personal B,3,6,credibility blend,4.28522,4.24844,0.00866,True
+Personal B,3,6,reference only,4.34626,4.24844,0.02303,True
+Personal B,3,6,naive (no further defaults),1.30704,4.24844,0.69235,True
+Personal B,3,9,chain ladder,4.1384,4.24844,0.0259,True
+Personal B,3,9,credibility blend,4.09906,4.24844,0.03516,True
+Personal B,3,9,reference only,4.2119,4.24844,0.0086,True
+Personal B,3,9,naive (no further defaults),1.95479,4.24844,0.53988,True
+Personal B,3,12,chain ladder,4.4613,4.24844,0.0501,True
+Personal B,3,12,credibility blend,4.3782,4.24844,0.03054,True
+Personal B,3,12,reference only,4.38618,4.24844,0.03242,True
+Personal B,3,12,naive (no further defaults),2.83555,4.24844,0.33257,True
+Personal B,3,18,chain ladder,4.31968,4.24844,0.01677,True
+Personal B,3,18,credibility blend,4.28432,4.24844,0.00845,True
+Personal B,3,18,reference only,4.29701,4.24844,0.01143,True
+Personal B,3,18,naive (no further defaults),3.66961,4.24844,0.13624,True
+Personal B,3,24,chain ladder,4.26014,4.24844,0.00276,True
+Personal B,3,24,credibility blend,4.2442,4.24844,0.001,True
+Personal B,3,24,reference only,4.24906,4.24844,0.00015,True
+Personal B,3,24,naive (no further defaults),4.06699,4.24844,0.04271,True
+Personal B,3,30,chain ladder,4.24712,4.24844,0.00031,True
+Personal B,3,30,credibility blend,4.25211,4.24844,0.00086,True
+Personal B,3,30,reference only,4.25311,4.24844,0.0011,True
+Personal B,3,30,naive (no further defaults),4.21374,4.24844,0.00817,True
+Personal B,4,3,chain ladder,4.76034,4.02161,0.18369,True
+Personal B,4,3,credibility blend,4.53216,4.02161,0.12695,True
+Personal B,4,3,reference only,4.45081,4.02161,0.10672,True
+Personal B,4,3,naive (no further defaults),0.51211,4.02161,0.87266,True
+Personal B,4,6,chain ladder,4.05492,4.02161,0.00828,True
+Personal B,4,6,credibility blend,4.02521,4.02161,0.00089,True
+Personal B,4,6,reference only,4.20612,4.02161,0.04588,True
+Personal B,4,6,naive (no further defaults),1.1669,4.02161,0.70984,True
+Personal B,4,9,chain ladder,4.46501,4.02161,0.11025,True
+Personal B,4,9,credibility blend,4.33547,4.02161,0.07804,True
+Personal B,4,9,reference only,4.35907,4.02161,0.08391,True
+Personal B,4,9,naive (no further defaults),2.10196,4.02161,0.47733,True
+Personal B,4,12,chain ladder,4.13817,4.02161,0.02898,True
+Personal B,4,12,credibility blend,4.10976,4.02161,0.02192,True
+Personal B,4,12,reference only,4.18123,4.02161,0.03969,True
+Personal B,4,12,naive (no further defaults),2.63277,4.02161,0.34535,True
+Personal B,4,18,chain ladder,4.0161,4.02161,0.00137,True
+Personal B,4,18,credibility blend,4.00167,4.02161,0.00496,True
+Personal B,4,18,reference only,4.04135,4.02161,0.00491,True
+Personal B,4,18,naive (no further defaults),3.41395,4.02161,0.1511,True
+Personal B,4,24,chain ladder,4.04201,4.02161,0.00507,True
+Personal B,4,24,credibility blend,4.02982,4.02161,0.00204,True
+Personal B,4,24,reference only,4.04052,4.02161,0.0047,True
+Personal B,4,24,naive (no further defaults),3.85846,4.02161,0.04057,True
+Personal B,4,30,chain ladder,4.01276,4.02161,0.0022,True
+Personal B,4,30,credibility blend,4.01846,4.02161,0.00079,True
+Personal B,4,30,reference only,4.02084,4.02161,0.00019,True
+Personal B,4,30,naive (no further defaults),3.98148,4.02161,0.00998,True
+Personal B,5,3,chain ladder,5.87329,5.45751,0.07619,False
+Personal B,5,3,credibility blend,4.68584,5.45751,0.14139,False
+Personal B,5,3,reference only,4.43424,5.45751,0.1875,False
+Personal B,5,3,naive (no further defaults),0.63294,5.45751,0.88402,False
+Personal B,5,6,chain ladder,5.22494,5.45751,0.04261,False
+Personal B,5,6,credibility blend,4.61979,5.45751,0.1535,False
+Personal B,5,6,reference only,4.45479,5.45751,0.18373,False
+Personal B,5,6,naive (no further defaults),1.5059,5.45751,0.72407,False
+Personal B,5,9,chain ladder,5.70157,5.45751,0.04472,True
+Personal B,5,9,credibility blend,5.15148,5.45751,0.05607,True
+Personal B,5,9,reference only,4.85195,5.45751,0.11096,True
+Personal B,5,9,naive (no further defaults),2.68669,5.45751,0.50771,True
+Personal B,5,12,chain ladder,5.66427,5.45751,0.03789,True
+Personal B,5,12,credibility blend,5.28999,5.45751,0.0307,True
+Personal B,5,12,reference only,5.05722,5.45751,0.07335,True
+Personal B,5,12,naive (no further defaults),3.60056,5.45751,0.34026,True
+Personal B,5,18,chain ladder,5.4411,5.45751,0.00301,False
+Personal B,5,18,credibility blend,5.28814,5.45751,0.03103,False
+Personal B,5,18,reference only,5.19703,5.45751,0.04773,False
+Personal B,5,18,naive (no further defaults),4.62587,5.45751,0.15238,False
+Personal B,5,24,chain ladder,5.51208,5.45751,0.01,True
+Personal B,5,24,credibility blend,5.4684,5.45751,0.002,True
+Personal B,5,24,reference only,5.43547,5.45751,0.00404,True
+Personal B,5,24,naive (no further defaults),5.2598,5.45751,0.03623,True
+Personal B,5,30,chain ladder,5.44144,5.45751,0.00294,True
+Personal B,5,30,credibility blend,5.44204,5.45751,0.00283,True
+Personal B,5,30,reference only,5.4355,5.45751,0.00403,True
+Personal B,5,30,naive (no further defaults),5.39985,5.45751,0.01056,True
+Personal B,6,3,chain ladder,5.38054,5.25466,0.02396,False
+Personal B,6,3,credibility blend,4.58603,5.25466,0.12724,False
+Personal B,6,3,reference only,4.38192,5.25466,0.16609,False
+Personal B,6,3,naive (no further defaults),0.58062,5.25466,0.8895,False
+Personal B,6,6,chain ladder,5.52698,5.25466,0.05183,False
+Personal B,6,6,credibility blend,4.79434,5.25466,0.0876,False
+Personal B,6,6,reference only,4.53706,5.25466,0.13656,False
+Personal B,6,6,naive (no further defaults),1.58817,5.25466,0.69776,False
+Personal B,6,9,chain ladder,5.88241,5.25466,0.11947,True
+Personal B,6,9,credibility blend,5.29407,5.25466,0.0075,True
+Personal B,6,9,reference only,4.93089,5.25466,0.06162,True
+Personal B,6,9,naive (no further defaults),2.76562,5.25466,0.47368,True
+Personal B,6,12,chain ladder,5.4021,5.25466,0.02806,True
+Personal B,6,12,credibility blend,5.09031,5.25466,0.03128,True
+Personal B,6,12,reference only,4.89378,5.25466,0.06868,True
+Personal B,6,12,naive (no further defaults),3.43712,5.25466,0.34589,True
+Personal B,6,18,chain ladder,5.1664,5.25466,0.0168,False
+Personal B,6,18,credibility blend,5.04003,5.25466,0.04085,False
+Personal B,6,18,reference only,4.9676,5.25466,0.05463,False
+Personal B,6,18,naive (no further defaults),4.39643,5.25466,0.16333,False
+Personal B,6,24,chain ladder,5.2492,5.25466,0.00104,True
+Personal B,6,24,credibility blend,5.21584,5.25466,0.00739,True
+Personal B,6,24,reference only,5.18859,5.25466,0.01257,True
+Personal B,6,24,naive (no further defaults),5.01291,5.25466,0.04601,True
+Personal B,6,30,chain ladder,5.23586,5.25466,0.00358,True
+Personal B,6,30,credibility blend,5.23739,5.25466,0.00329,True
+Personal B,6,30,reference only,5.23174,5.25466,0.00436,True
+Personal B,6,30,naive (no further defaults),5.19608,5.25466,0.01115,True
+Personal B,7,3,chain ladder,3.67965,4.52324,0.1865,True
+Personal B,7,3,credibility blend,4.11347,4.52324,0.09059,True
+Personal B,7,3,reference only,4.181,4.52324,0.07566,True
+Personal B,7,3,naive (no further defaults),0.39933,4.52324,0.91172,True
+Personal B,7,6,chain ladder,4.78628,4.52324,0.05815,True
+Personal B,7,6,credibility blend,4.39189,4.52324,0.02904,True
+Personal B,7,6,reference only,4.31125,4.52324,0.04687,True
+Personal B,7,6,naive (no further defaults),1.3753,4.52324,0.69595,True
+Personal B,7,9,chain ladder,4.83789,4.52324,0.06956,True
+Personal B,7,9,credibility blend,4.56439,4.52324,0.0091,True
+Personal B,7,9,reference only,4.44412,4.52324,0.01749,True
+Personal B,7,9,naive (no further defaults),2.27885,4.52324,0.49619,True
+Personal B,7,12,chain ladder,4.68228,4.52324,0.03516,True
+Personal B,7,12,credibility blend,4.50016,4.52324,0.0051,True
+Personal B,7,12,reference only,4.43448,4.52324,0.01962,True
+Personal B,7,12,naive (no further defaults),2.97781,4.52324,0.34166,True
+Personal B,7,18,chain ladder,4.50707,4.52324,0.00358,True
+Personal B,7,18,credibility blend,4.42156,4.52324,0.02248,True
+Personal B,7,18,reference only,4.40311,4.52324,0.02656,True
+Personal B,7,18,naive (no further defaults),3.83195,4.52324,0.15283,True
+Personal B,7,24,chain ladder,4.53438,4.52324,0.00246,True
+Personal B,7,24,credibility blend,4.51296,4.52324,0.00227,True
+Personal B,7,24,reference only,4.50467,4.52324,0.00411,True
+Personal B,7,24,naive (no further defaults),4.329,4.52324,0.04294,True
+Personal B,7,30,chain ladder,4.51637,4.52324,0.00152,True
+Personal B,7,30,credibility blend,4.51849,4.52324,0.00105,True
+Personal B,7,30,reference only,4.51678,4.52324,0.00143,True
+Personal B,7,30,naive (no further defaults),4.48113,4.52324,0.00931,True
+Personal B,8,3,chain ladder,3.97651,4.85173,0.18039,False
+Personal B,8,3,credibility blend,4.19325,4.85173,0.13572,False
+Personal B,8,3,reference only,4.21325,4.85173,0.1316,False
+Personal B,8,3,naive (no further defaults),0.43159,4.85173,0.91105,False
+Personal B,8,6,chain ladder,4.86479,4.85173,0.00269,True
+Personal B,8,6,credibility blend,4.45544,4.85173,0.08168,True
+Personal B,8,6,reference only,4.35007,4.85173,0.1034,True
+Personal B,8,6,naive (no further defaults),1.40118,4.85173,0.7112,True
+Personal B,8,9,chain ladder,4.53829,4.85173,0.0646,False
+Personal B,8,9,credibility blend,4.32199,4.85173,0.10919,False
+Personal B,8,9,reference only,4.29017,4.85173,0.11575,False
+Personal B,8,9,naive (no further defaults),2.14763,4.85173,0.55735,False
+Personal B,8,12,chain ladder,4.58042,4.85173,0.05592,False
+Personal B,8,12,credibility blend,4.42399,4.85173,0.08816,False
+Personal B,8,12,reference only,4.37911,4.85173,0.09741,False
+Personal B,8,12,naive (no further defaults),2.92244,4.85173,0.39765,False
+Personal B,8,18,chain ladder,4.74102,4.85173,0.02282,False
+Personal B,8,18,credibility blend,4.64235,4.85173,0.04316,False
+Personal B,8,18,reference only,4.60524,4.85173,0.05081,False
+Personal B,8,18,naive (no further defaults),4.03408,4.85173,0.16853,False
+Personal B,8,24,chain ladder,4.82442,4.85173,0.00563,True
+Personal B,8,24,credibility blend,4.79911,4.85173,0.01085,True
+Personal B,8,24,reference only,4.78338,4.85173,0.01409,True
+Personal B,8,24,naive (no further defaults),4.60771,4.85173,0.0503,True
+Personal B,8,30,chain ladder,4.86366,4.85173,0.00246,True
+Personal B,8,30,credibility blend,4.86383,4.85173,0.00249,True
+Personal B,8,30,reference only,4.86027,4.85173,0.00176,True
+Personal B,8,30,naive (no further defaults),4.82462,4.85173,0.00559,True
+Personal B,9,3,chain ladder,4.66302,5.10069,0.08581,False
+Personal B,9,3,credibility blend,4.39969,5.10069,0.13743,False
+Personal B,9,3,reference only,4.30226,5.10069,0.15653,False
+Personal B,9,3,naive (no further defaults),0.50467,5.10069,0.90106,False
+Personal B,9,6,chain ladder,4.88144,5.10069,0.04298,False
+Personal B,9,6,credibility blend,4.45763,5.10069,0.12607,False
+Personal B,9,6,reference only,4.35558,5.10069,0.14608,False
+Personal B,9,6,naive (no further defaults),1.40669,5.10069,0.72422,False
+Personal B,9,9,chain ladder,5.07573,5.10069,0.00489,False
+Personal B,9,9,credibility blend,4.72714,5.10069,0.07324,False
+Personal B,9,9,reference only,4.56205,5.10069,0.1056,False
+Personal B,9,9,naive (no further defaults),2.39678,5.10069,0.53011,False
+Personal B,9,12,chain ladder,5.07895,5.10069,0.00426,False
+Personal B,9,12,credibility blend,4.82387,5.10069,0.05427,False
+Personal B,9,12,reference only,4.69103,5.10069,0.08031,False
+Personal B,9,12,naive (no further defaults),3.23436,5.10069,0.3659,False
+Personal B,9,18,chain ladder,5.20752,5.10069,0.02094,True
+Personal B,9,18,credibility blend,5.06816,5.10069,0.00638,True
+Personal B,9,18,reference only,4.99452,5.10069,0.02082,True
+Personal B,9,18,naive (no further defaults),4.42335,5.10069,0.13279,True
+Personal B,9,24,chain ladder,5.12381,5.10069,0.00453,True
+Personal B,9,24,credibility blend,5.09017,5.10069,0.00206,True
+Personal B,9,24,reference only,5.06692,5.10069,0.00662,True
+Personal B,9,24,naive (no further defaults),4.89125,5.10069,0.04106,True
+Personal B,9,30,chain ladder,5.09949,5.10069,0.00024,True
+Personal B,9,30,credibility blend,5.09976,5.10069,0.00018,True
+Personal B,9,30,reference only,5.09499,5.10069,0.00112,True
+Personal B,9,30,naive (no further defaults),5.05934,5.10069,0.00811,True
+Personal B,10,3,chain ladder,3.83377,3.3639,0.13968,False
+Personal B,10,3,credibility blend,4.28449,3.3639,0.27367,False
+Personal B,10,3,reference only,4.33247,3.3639,0.28793,False
+Personal B,10,3,naive (no further defaults),0.4134,3.3639,0.87711,False
+Personal B,10,6,chain ladder,3.51116,3.3639,0.04378,True
+Personal B,10,6,credibility blend,3.79266,3.3639,0.12746,True
+Personal B,10,6,reference only,4.04985,3.3639,0.20391,True
+Personal B,10,6,naive (no further defaults),1.01062,3.3639,0.69957,True
+Personal B,10,9,chain ladder,3.52048,3.3639,0.04655,True
+Personal B,10,9,credibility blend,3.6953,3.3639,0.09852,True
+Personal B,10,9,reference only,3.91865,3.3639,0.16491,True
+Personal B,10,9,naive (no further defaults),1.66154,3.3639,0.50607,True
+Personal B,10,12,chain ladder,3.26444,3.3639,0.02957,True
+Personal B,10,12,credibility blend,3.41156,3.3639,0.01417,True
+Personal B,10,12,reference only,3.62944,3.3639,0.07894,True
+Personal B,10,12,naive (no further defaults),2.08098,3.3639,0.38138,True
+Personal B,10,18,chain ladder,3.27141,3.3639,0.0275,True
+Personal B,10,18,credibility blend,3.31385,3.3639,0.01488,True
+Personal B,10,18,reference only,3.41115,3.3639,0.01405,True
+Personal B,10,18,naive (no further defaults),2.78376,3.3639,0.17246,True
+Personal B,10,24,chain ladder,3.2935,3.3639,0.02093,True
+Personal B,10,24,credibility blend,3.30042,3.3639,0.01887,True
+Personal B,10,24,reference only,3.32902,3.3639,0.01037,True
+Personal B,10,24,naive (no further defaults),3.14695,3.3639,0.06449,True
+Personal B,10,30,chain ladder,3.34718,3.3639,0.00497,True
+Personal B,10,30,credibility blend,3.35496,3.3639,0.00266,True
+Personal B,10,30,reference only,3.36083,3.3639,0.00091,True
+Personal B,10,30,naive (no further defaults),3.32146,3.3639,0.01262,True
+Personal B,11,3,chain ladder,6.19206,4.55035,0.36079,True
+Personal B,11,3,credibility blend,4.80224,4.55035,0.05536,True
+Personal B,11,3,reference only,4.46519,4.55035,0.01871,True
+Personal B,11,3,naive (no further defaults),0.66389,4.55035,0.8541,True
+Personal B,11,6,chain ladder,5.13182,4.55035,0.12779,True
+Personal B,11,6,credibility blend,4.59213,4.55035,0.00918,True
+Personal B,11,6,reference only,4.42183,4.55035,0.02824,True
+Personal B,11,6,naive (no further defaults),1.47294,4.55035,0.6763,True
+Personal B,11,9,chain ladder,4.6484,4.55035,0.02155,True
+Personal B,11,9,credibility blend,4.43254,4.55035,0.02589,True
+Personal B,11,9,reference only,4.35834,4.55035,0.0422,True
+Personal B,11,9,naive (no further defaults),2.19308,4.55035,0.51804,True
+Personal B,11,12,chain ladder,4.75493,4.55035,0.04496,True
+Personal B,11,12,credibility blend,4.55687,4.55035,0.00143,True
+Personal B,11,12,reference only,4.48031,4.55035,0.01539,True
+Personal B,11,12,naive (no further defaults),3.02364,4.55035,0.33551,True
+Personal B,11,18,chain ladder,4.58051,4.55035,0.00663,True
+Personal B,11,18,credibility blend,4.48836,4.55035,0.01362,True
+Personal B,11,18,reference only,4.4641,4.55035,0.01895,True
+Personal B,11,18,naive (no further defaults),3.89294,4.55035,0.14447,True
+Personal B,11,24,chain ladder,4.54166,4.55035,0.00191,True
+Personal B,11,24,credibility blend,4.52023,4.55035,0.00662,True
+Personal B,11,24,reference only,4.51194,4.55035,0.00844,True
+Personal B,11,24,naive (no further defaults),4.33627,4.55035,0.04705,True
+Personal B,11,30,chain ladder,4.57244,4.55035,0.00485,True
+Personal B,11,30,credibility blend,4.57281,4.55035,0.00494,True
+Personal B,11,30,reference only,4.57085,4.55035,0.00451,True
+Personal B,11,30,naive (no further defaults),4.5352,4.55035,0.00333,True
+Personal B,12,3,chain ladder,3.67542,3.85509,0.0466,True
+Personal B,12,3,credibility blend,4.21667,3.85509,0.09379,True
+Personal B,12,3,reference only,4.31682,3.85509,0.11977,True
+Personal B,12,3,naive (no further defaults),0.39775,3.85509,0.89683,True
+Personal B,12,6,chain ladder,3.48904,3.85509,0.09495,True
+Personal B,12,6,credibility blend,3.77102,3.85509,0.02181,True
+Personal B,12,6,reference only,4.04621,3.85509,0.04958,True
+Personal B,12,6,naive (no further defaults),1.00699,3.85509,0.73879,True
+Personal B,12,9,chain ladder,3.45888,3.85509,0.10278,True
+Personal B,12,9,credibility blend,3.6501,3.85509,0.05317,True
+Personal B,12,9,reference only,3.89428,3.85509,0.01017,True
+Personal B,12,9,naive (no further defaults),1.63717,3.85509,0.57532,True
+Personal B,12,12,chain ladder,3.61064,3.85509,0.06341,True
+Personal B,12,12,credibility blend,3.69368,3.85509,0.04187,True
+Personal B,12,12,reference only,3.85135,3.85509,0.00097,True
+Personal B,12,12,naive (no further defaults),2.30289,3.85509,0.40263,True
+Personal B,12,18,chain ladder,3.77416,3.85509,0.02099,True
+Personal B,12,18,credibility blend,3.78227,3.85509,0.01889,True
+Personal B,12,18,reference only,3.83805,3.85509,0.00442,True
+Personal B,12,18,naive (no further defaults),3.21065,3.85509,0.16716,True
+Personal B,12,24,chain ladder,3.8308,3.85509,0.0063,True
+Personal B,12,24,credibility blend,3.82551,3.85509,0.00767,True
+Personal B,12,24,reference only,3.84054,3.85509,0.00377,True
+Personal B,12,24,naive (no further defaults),3.65848,3.85509,0.051,True
+Personal B,12,30,chain ladder,3.84356,3.85509,0.00299,True
+Personal B,12,30,credibility blend,3.84993,3.85509,0.00134,True
+Personal B,12,30,reference only,3.85304,3.85509,0.00053,True
+Personal B,12,30,naive (no further defaults),3.81368,3.85509,0.01074,True
+Personal C,0,3,chain ladder,4.46433,6.79764,0.34325,True
+Personal C,0,3,credibility blend,6.94352,6.79764,0.02146,True
+Personal C,0,3,reference only,7.98632,6.79764,0.17487,True
+Personal C,0,3,naive (no further defaults),0.51864,6.79764,0.9237,True
+Personal C,0,6,chain ladder,6.36988,6.79764,0.06293,True
+Personal C,0,6,credibility blend,7.31479,6.79764,0.07608,True
+Personal C,0,6,reference only,7.97053,6.79764,0.17254,True
+Personal C,0,6,naive (no further defaults),1.9845,6.79764,0.70806,True
+Personal C,0,9,chain ladder,5.82117,6.79764,0.14365,True
+Personal C,0,9,credibility blend,6.52165,6.79764,0.0406,True
+Personal C,0,9,reference only,7.26968,6.79764,0.06944,True
+Personal C,0,9,naive (no further defaults),2.96672,6.79764,0.56357,True
+Personal C,0,12,chain ladder,6.14131,6.79764,0.09655,True
+Personal C,0,12,credibility blend,6.68886,6.79764,0.016,True
+Personal C,0,12,reference only,7.18146,6.79764,0.05646,True
+Personal C,0,12,naive (no further defaults),4.10822,6.79764,0.39564,True
+Personal C,0,18,chain ladder,6.81726,6.79764,0.00289,True
+Personal C,0,18,credibility blend,6.88266,6.79764,0.01251,True
+Personal C,0,18,reference only,7.05222,6.79764,0.03745,True
+Personal C,0,18,naive (no further defaults),5.87943,6.79764,0.13508,True
+Personal C,0,24,chain ladder,6.83375,6.79764,0.00531,True
+Personal C,0,24,credibility blend,6.81398,6.79764,0.0024,True
+Personal C,0,24,reference only,6.86104,6.79764,0.00933,True
+Personal C,0,24,naive (no further defaults),6.5476,6.79764,0.03678,True
+Personal C,0,30,chain ladder,6.80453,6.79764,0.00101,True
+Personal C,0,30,credibility blend,6.82825,6.79764,0.0045,True
+Personal C,0,30,reference only,6.84142,6.79764,0.00644,True
+Personal C,0,30,naive (no further defaults),6.75302,6.79764,0.00656,True
+Personal C,1,3,chain ladder,8.73481,6.7092,0.30191,False
+Personal C,1,3,credibility blend,8.19343,6.7092,0.22122,False
+Personal C,1,3,reference only,8.4725,6.7092,0.26282,False
+Personal C,1,3,naive (no further defaults),1.00481,6.7092,0.85023,False
+Personal C,1,6,chain ladder,6.47395,6.7092,0.03506,True
+Personal C,1,6,credibility blend,7.33516,6.7092,0.0933,True
+Personal C,1,6,reference only,8.00162,6.7092,0.19263,True
+Personal C,1,6,naive (no further defaults),2.01559,6.7092,0.69958,True
+Personal C,1,9,chain ladder,6.8495,6.7092,0.02091,True
+Personal C,1,9,credibility blend,7.28609,6.7092,0.08599,True
+Personal C,1,9,reference only,7.78336,6.7092,0.1601,True
+Personal C,1,9,naive (no further defaults),3.4804,6.7092,0.48125,True
+Personal C,1,12,chain ladder,6.7464,6.7092,0.00554,False
+Personal C,1,12,credibility blend,7.19973,6.7092,0.07311,False
+Personal C,1,12,reference only,7.57776,6.7092,0.12946,False
+Personal C,1,12,naive (no further defaults),4.50453,6.7092,0.3286,False
+Personal C,1,18,chain ladder,6.66418,6.7092,0.00671,True
+Personal C,1,18,credibility blend,6.72983,6.7092,0.00307,True
+Personal C,1,18,reference only,6.92158,6.7092,0.03166,True
+Personal C,1,18,naive (no further defaults),5.74879,6.7092,0.14315,True
+Personal C,1,24,chain ladder,6.65162,6.7092,0.00858,True
+Personal C,1,24,credibility blend,6.63534,6.7092,0.01101,True
+Personal C,1,24,reference only,6.68914,6.7092,0.00299,True
+Personal C,1,24,naive (no further defaults),6.3757,6.7092,0.04971,True
+Personal C,1,30,chain ladder,6.71897,6.7092,0.00146,True
+Personal C,1,30,credibility blend,6.74208,6.7092,0.0049,True
+Personal C,1,30,reference only,6.75644,6.7092,0.00704,True
+Personal C,1,30,naive (no further defaults),6.66804,6.7092,0.00614,True
+Personal C,2,3,chain ladder,7.79122,6.27265,0.24209,False
+Personal C,2,3,credibility blend,7.92668,6.27265,0.26369,False
+Personal C,2,3,reference only,8.36467,6.27265,0.33352,False
+Personal C,2,3,naive (no further defaults),0.89699,6.27265,0.857,False
+Personal C,2,6,chain ladder,6.3767,6.27265,0.01659,False
+Personal C,2,6,credibility blend,7.29222,6.27265,0.16254,False
+Personal C,2,6,reference only,7.96967,6.27265,0.27054,False
+Personal C,2,6,naive (no further defaults),1.98365,6.27265,0.68376,False
+Personal C,2,9,chain ladder,6.26223,6.27265,0.00166,True
+Personal C,2,9,credibility blend,6.82798,6.27265,0.08853,True
+Personal C,2,9,reference only,7.48661,6.27265,0.19353,True
+Personal C,2,9,naive (no further defaults),3.18365,6.27265,0.49246,True
+Personal C,2,12,chain ladder,6.15143,6.27265,0.01932,True
+Personal C,2,12,credibility blend,6.67129,6.27265,0.06355,True
+Personal C,2,12,reference only,7.18307,6.27265,0.14514,True
+Personal C,2,12,naive (no further defaults),4.10983,6.27265,0.3448,True
+Personal C,2,18,chain ladder,6.27138,6.27265,0.0002,True
+Personal C,2,18,credibility blend,6.35464,6.27265,0.01307,True
+Personal C,2,18,reference only,6.58186,6.27265,0.0493,True
+Personal C,2,18,naive (no further defaults),5.40907,6.27265,0.13767,True
+Personal C,2,24,chain ladder,6.28139,6.27265,0.00139,True
+Personal C,2,24,credibility blend,6.26923,6.27265,0.00054,True
+Personal C,2,24,reference only,6.33226,6.27265,0.0095,True
+Personal C,2,24,naive (no further defaults),6.01882,6.27265,0.04047,True
+Personal C,2,30,chain ladder,6.28138,6.27265,0.00139,True
+Personal C,2,30,credibility blend,6.30454,6.27265,0.00508,True
+Personal C,2,30,reference only,6.32205,6.27265,0.00788,True
+Personal C,2,30,naive (no further defaults),6.23365,6.27265,0.00622,True
+Personal C,3,3,chain ladder,4.55308,6.61636,0.31185,True
+Personal C,3,3,credibility blend,6.79109,6.61636,0.02641,True
+Personal C,3,3,reference only,7.99756,6.61636,0.20876,True
+Personal C,3,3,naive (no further defaults),0.52988,6.61636,0.91991,True
+Personal C,3,6,chain ladder,5.35133,6.61636,0.1912,True
+Personal C,3,6,credibility blend,6.57785,6.61636,0.00582,True
+Personal C,3,6,reference only,7.65866,6.61636,0.15753,True
+Personal C,3,6,naive (no further defaults),1.67263,6.61636,0.7472,True
+Personal C,3,9,chain ladder,5.50214,6.61636,0.1684,True
+Personal C,3,9,credibility blend,6.1826,6.61636,0.06556,True
+Personal C,3,9,reference only,7.11103,6.61636,0.07477,True
+Personal C,3,9,naive (no further defaults),2.80807,6.61636,0.57559,True
+Personal C,3,12,chain ladder,6.68771,6.61636,0.01079,False
+Personal C,3,12,credibility blend,7.13643,6.61636,0.0786,False
+Personal C,3,12,reference only,7.53839,6.61636,0.13936,False
+Personal C,3,12,naive (no further defaults),4.46516,6.61636,0.32513,False
+Personal C,3,18,chain ladder,6.594,6.61636,0.00338,True
+Personal C,3,18,credibility blend,6.6581,6.61636,0.00631,True
+Personal C,3,18,reference only,6.86147,6.61636,0.03705,True
+Personal C,3,18,naive (no further defaults),5.68868,6.61636,0.14021,True
+Personal C,3,24,chain ladder,6.57414,6.61636,0.00638,True
+Personal C,3,24,credibility blend,6.55806,6.61636,0.00881,True
+Personal C,3,24,reference only,6.61521,6.61636,0.00017,True
+Personal C,3,24,naive (no further defaults),6.30177,6.61636,0.04755,True
+Personal C,3,30,chain ladder,6.57531,6.61636,0.0062,True
+Personal C,3,30,credibility blend,6.60055,6.61636,0.00239,True
+Personal C,3,30,reference only,6.61633,6.61636,0.0,True
+Personal C,3,30,naive (no further defaults),6.52793,6.61636,0.01336,True
+Personal C,4,3,chain ladder,9.42159,9.31005,0.01198,False
+Personal C,4,3,credibility blend,8.0814,9.31005,0.13197,False
+Personal C,4,3,reference only,7.86058,9.31005,0.15569,False
+Personal C,4,3,naive (no further defaults),1.08809,9.31005,0.88313,False
+Personal C,4,6,chain ladder,9.52982,9.31005,0.02361,True
+Personal C,4,6,credibility blend,9.08184,9.31005,0.02451,True
+Personal C,4,6,reference only,8.39073,9.31005,0.09875,True
+Personal C,4,6,naive (no further defaults),2.96152,9.31005,0.6819,True
+Personal C,4,9,chain ladder,9.56301,9.31005,0.02717,True
+Personal C,4,9,credibility blend,9.29812,9.31005,0.00128,True
+Personal C,4,9,reference only,8.72607,9.31005,0.06273,True
+Personal C,4,9,naive (no further defaults),4.85474,9.31005,0.47855,True
+Personal C,4,12,chain ladder,9.68754,9.31005,0.04055,True
+Personal C,4,12,credibility blend,9.59839,9.31005,0.03097,True
+Personal C,4,12,reference only,9.12793,9.31005,0.01956,True
+Personal C,4,12,naive (no further defaults),6.45769,9.31005,0.30637,True
+Personal C,4,18,chain ladder,9.48362,9.31005,0.01864,True
+Personal C,4,18,credibility blend,9.44159,9.31005,0.01413,True
+Personal C,4,18,reference only,9.26516,9.31005,0.00482,True
+Personal C,4,18,naive (no further defaults),8.17165,9.31005,0.12228,True
+Personal C,4,24,chain ladder,9.33667,9.31005,0.00286,True
+Personal C,4,24,credibility blend,9.29022,9.31005,0.00213,True
+Personal C,4,24,reference only,9.246,9.31005,0.00688,True
+Personal C,4,24,naive (no further defaults),8.94521,9.31005,0.03919,True
+Personal C,4,30,chain ladder,9.31801,9.31005,0.00085,True
+Personal C,4,30,credibility blend,9.3253,9.31005,0.00164,True
+Personal C,4,30,reference only,9.3151,9.31005,0.00054,True
+Personal C,4,30,naive (no further defaults),9.24726,9.31005,0.00675,True
+Personal C,5,3,chain ladder,8.97737,10.13962,0.11463,False
+Personal C,5,3,credibility blend,7.89614,10.13962,0.22126,False
+Personal C,5,3,reference only,7.81195,10.13962,0.22956,False
+Personal C,5,3,naive (no further defaults),1.04112,10.13962,0.89732,False
+Personal C,5,6,chain ladder,10.45589,10.13962,0.03119,True
+Personal C,5,6,credibility blend,9.58563,10.13962,0.05464,True
+Personal C,5,6,reference only,8.67916,10.13962,0.14403,True
+Personal C,5,6,naive (no further defaults),3.24996,10.13962,0.67948,True
+Personal C,5,9,chain ladder,10.27359,10.13962,0.01321,True
+Personal C,5,9,credibility blend,9.82089,10.13962,0.03143,True
+Personal C,5,9,reference only,9.09123,10.13962,0.1034,True
+Personal C,5,9,naive (no further defaults),5.21989,10.13962,0.4852,True
+Personal C,5,12,chain ladder,10.18137,10.13962,0.00412,True
+Personal C,5,12,credibility blend,10.02032,10.13962,0.01177,True
+Personal C,5,12,reference only,9.46833,10.13962,0.0662,True
+Personal C,5,12,naive (no further defaults),6.79809,10.13962,0.32955,True
+Personal C,5,18,chain ladder,9.98722,10.13962,0.01503,True
+Personal C,5,18,credibility blend,9.92987,10.13962,0.02069,True
+Personal C,5,18,reference only,9.71287,10.13962,0.04209,True
+Personal C,5,18,naive (no further defaults),8.61936,10.13962,0.14993,True
+Personal C,5,24,chain ladder,10.18285,10.13962,0.00426,True
+Personal C,5,24,credibility blend,10.12129,10.13962,0.00181,True
+Personal C,5,24,reference only,10.05633,10.13962,0.00821,True
+Personal C,5,24,naive (no further defaults),9.75555,10.13962,0.03788,True
+Personal C,5,30,chain ladder,10.1394,10.13962,2e-05,True
+Personal C,5,30,credibility blend,10.14561,10.13962,0.00059,True
+Personal C,5,30,reference only,10.1308,10.13962,0.00087,True
+Personal C,5,30,naive (no further defaults),10.06296,10.13962,0.00756,True
+Personal C,6,3,chain ladder,10.32826,9.53392,0.08332,False
+Personal C,6,3,credibility blend,8.35243,9.53392,0.12393,False
+Personal C,6,3,reference only,7.96294,9.53392,0.16478,False
+Personal C,6,3,naive (no further defaults),1.19045,9.53392,0.87514,False
+Personal C,6,6,chain ladder,10.0019,9.53392,0.04908,True
+Personal C,6,6,credibility blend,9.3853,9.53392,0.01559,True
+Personal C,6,6,reference only,8.53532,9.53392,0.10474,True
+Personal C,6,6,naive (no further defaults),3.10611,9.53392,0.6742,True
+Personal C,6,9,chain ladder,9.66081,9.53392,0.01331,True
+Personal C,6,9,credibility blend,9.38474,9.53392,0.01565,True
+Personal C,6,9,reference only,8.77886,9.53392,0.0792,True
+Personal C,6,9,naive (no further defaults),4.90753,9.53392,0.48526,True
+Personal C,6,12,chain ladder,9.84555,9.53392,0.03269,True
+Personal C,6,12,credibility blend,9.7456,9.53392,0.0222,True
+Personal C,6,12,reference only,9.23529,9.53392,0.03132,True
+Personal C,6,12,naive (no further defaults),6.56505,9.53392,0.3114,True
+Personal C,6,18,chain ladder,9.50443,9.53392,0.00309,True
+Personal C,6,18,credibility blend,9.47222,9.53392,0.00647,True
+Personal C,6,18,reference only,9.2919,9.53392,0.02539,True
+Personal C,6,18,naive (no further defaults),8.19839,9.53392,0.14008,True
+Personal C,6,24,chain ladder,9.56226,9.53392,0.00297,True
+Personal C,6,24,credibility blend,9.51278,9.53392,0.00222,True
+Personal C,6,24,reference only,9.46201,9.53392,0.00754,True
+Personal C,6,24,naive (no further defaults),9.16122,9.53392,0.03909,True
+Personal C,6,30,chain ladder,9.54167,9.53392,0.00081,True
+Personal C,6,30,credibility blend,9.54878,9.53392,0.00156,True
+Personal C,6,30,reference only,9.53709,9.53392,0.00033,True
+Personal C,6,30,naive (no further defaults),9.46925,9.53392,0.00678,True
+Personal C,7,3,chain ladder,9.05072,8.79761,0.02877,True
+Personal C,7,3,credibility blend,7.99579,8.79761,0.09114,True
+Personal C,7,3,reference only,7.81691,8.79761,0.11147,True
+Personal C,7,3,naive (no further defaults),1.04442,8.79761,0.88128,True
+Personal C,7,6,chain ladder,9.81054,8.79761,0.11514,True
+Personal C,7,6,credibility blend,9.23966,8.79761,0.05025,True
+Personal C,7,6,reference only,8.47039,8.79761,0.03719,True
+Personal C,7,6,naive (no further defaults),3.04119,8.79761,0.65432,True
+Personal C,7,9,chain ladder,9.73727,8.79761,0.10681,False
+Personal C,7,9,credibility blend,9.41696,8.79761,0.0704,False
+Personal C,7,9,reference only,8.80482,8.79761,0.00082,False
+Personal C,7,9,naive (no further defaults),4.93348,8.79761,0.43922,False
+Personal C,7,12,chain ladder,8.84092,8.79761,0.00492,True
+Personal C,7,12,credibility blend,8.85652,8.79761,0.0067,True
+Personal C,7,12,reference only,8.57299,8.79761,0.02553,True
+Personal C,7,12,naive (no further defaults),5.90275,8.79761,0.32905,True
+Personal C,7,18,chain ladder,8.93108,8.79761,0.01517,True
+Personal C,7,18,credibility blend,8.91379,8.79761,0.01321,True
+Personal C,7,18,reference only,8.79187,8.79761,0.00065,True
+Personal C,7,18,naive (no further defaults),7.69836,8.79761,0.12495,True
+Personal C,7,24,chain ladder,8.79663,8.79761,0.00011,True
+Personal C,7,24,credibility blend,8.76044,8.79761,0.00422,True
+Personal C,7,24,reference only,8.73118,8.79761,0.00755,True
+Personal C,7,24,naive (no further defaults),8.4304,8.79761,0.04174,True
+Personal C,7,30,chain ladder,8.7878,8.79761,0.00112,True
+Personal C,7,30,credibility blend,8.79718,8.79761,5e-05,True
+Personal C,7,30,reference only,8.79035,8.79761,0.00082,True
+Personal C,7,30,naive (no further defaults),8.72251,8.79761,0.00854,True
+Personal C,8,3,chain ladder,11.52134,8.27461,0.39237,True
+Personal C,8,3,credibility blend,8.8592,8.27461,0.07065,True
+Personal C,8,3,reference only,8.32772,8.27461,0.00642,True
+Personal C,8,3,naive (no further defaults),1.3194,8.27461,0.84055,True
+Personal C,8,6,chain ladder,9.36969,8.27461,0.13234,False
+Personal C,8,6,credibility blend,9.1447,8.27461,0.10515,False
+Personal C,8,6,reference only,8.56925,8.27461,0.03561,False
+Personal C,8,6,naive (no further defaults),2.9042,8.27461,0.64902,False
+Personal C,8,9,chain ladder,9.21035,8.27461,0.11309,False
+Personal C,8,9,credibility blend,9.21795,8.27461,0.114,False
+Personal C,8,9,reference only,8.77362,8.27461,0.06031,False
+Personal C,8,9,naive (no further defaults),4.66644,8.27461,0.43605,False
+Personal C,8,12,chain ladder,8.42463,8.27461,0.01813,True
+Personal C,8,12,credibility blend,8.70893,8.27461,0.05249,True
+Personal C,8,12,reference only,8.52793,8.27461,0.03061,True
+Personal C,8,12,naive (no further defaults),5.62185,8.27461,0.32059,True
+Personal C,8,18,chain ladder,8.29286,8.27461,0.0022,True
+Personal C,8,18,credibility blend,8.32509,8.27461,0.0061,True
+Personal C,8,18,reference only,8.29347,8.27461,0.00228,True
+Personal C,8,18,naive (no further defaults),7.15089,8.27461,0.1358,True
+Personal C,8,24,chain ladder,8.367,8.27461,0.01117,True
+Personal C,8,24,credibility blend,8.37953,8.27461,0.01268,True
+Personal C,8,24,reference only,8.368,8.27461,0.01129,True
+Personal C,8,24,naive (no further defaults),8.0142,8.27461,0.03147,True
+Personal C,8,30,chain ladder,8.24658,8.27461,0.00339,True
+Personal C,8,30,credibility blend,8.25514,8.27461,0.00235,True
+Personal C,8,30,reference only,8.25369,8.27461,0.00253,True
+Personal C,8,30,naive (no further defaults),8.18603,8.27461,0.01071,True
+Personal C,9,3,chain ladder,9.27779,7.31629,0.2681,False
+Personal C,9,3,credibility blend,8.38459,7.31629,0.14602,False
+Personal C,9,3,reference only,8.55458,7.31629,0.16925,False
+Personal C,9,3,naive (no further defaults),1.06709,7.31629,0.85415,False
+Personal C,9,6,chain ladder,7.78891,7.31629,0.0646,False
+Personal C,9,6,credibility blend,8.25722,7.31629,0.12861,False
+Personal C,9,6,reference only,8.45982,7.31629,0.1563,False
+Personal C,9,6,naive (no further defaults),2.42002,7.31629,0.66923,False
+Personal C,9,9,chain ladder,8.05093,7.31629,0.10041,False
+Personal C,9,9,credibility blend,8.48209,7.31629,0.15934,False
+Personal C,9,9,reference only,8.54637,7.31629,0.16813,False
+Personal C,9,9,naive (no further defaults),4.08376,7.31629,0.44183,False
+Personal C,9,12,chain ladder,7.48776,7.31629,0.02344,False
+Personal C,9,12,credibility blend,7.86553,7.31629,0.07507,False
+Personal C,9,12,reference only,8.07106,7.31629,0.10316,False
+Personal C,9,12,naive (no further defaults),4.99783,7.31629,0.31689,False
+Personal C,9,18,chain ladder,7.24789,7.31629,0.00935,True
+Personal C,9,18,credibility blend,7.28989,7.31629,0.00361,True
+Personal C,9,18,reference only,7.42578,7.31629,0.01497,True
+Personal C,9,18,naive (no further defaults),6.25299,7.31629,0.14533,True
+Personal C,9,24,chain ladder,7.27743,7.31629,0.00531,True
+Personal C,9,24,credibility blend,7.25123,7.31629,0.00889,True
+Personal C,9,24,reference only,7.28857,7.31629,0.00379,True
+Personal C,9,24,naive (no further defaults),6.97514,7.31629,0.04663,True
+Personal C,9,30,chain ladder,7.3249,7.31629,0.00118,True
+Personal C,9,30,credibility blend,7.34778,7.31629,0.0043,True
+Personal C,9,30,reference only,7.35759,7.31629,0.00564,True
+Personal C,9,30,naive (no further defaults),7.26918,7.31629,0.00644,True
+Personal C,10,3,chain ladder,5.21413,6.61106,0.2113,True
+Personal C,10,3,credibility blend,7.13235,6.61106,0.07885,True
+Personal C,10,3,reference only,8.07234,6.61106,0.22104,True
+Personal C,10,3,naive (no further defaults),0.60466,6.61106,0.90854,True
+Personal C,10,6,chain ladder,6.52079,6.61106,0.01365,True
+Personal C,10,6,credibility blend,7.39201,6.61106,0.11813,True
+Personal C,10,6,reference only,8.01579,6.61106,0.21248,True
+Personal C,10,6,naive (no further defaults),2.02977,6.61106,0.69297,True
+Personal C,10,9,chain ladder,6.31628,6.61106,0.04459,True
+Personal C,10,9,credibility blend,6.88733,6.61106,0.04179,True
+Personal C,10,9,reference only,7.51694,6.61106,0.13703,True
+Personal C,10,9,naive (no further defaults),3.21398,6.61106,0.51385,True
+Personal C,10,12,chain ladder,6.15577,6.61106,0.06887,True
+Personal C,10,12,credibility blend,6.68952,6.61106,0.01187,True
+Personal C,10,12,reference only,7.18993,6.61106,0.08756,True
+Personal C,10,12,naive (no further defaults),4.1167,6.61106,0.3773,True
+Personal C,10,18,chain ladder,6.59923,6.61106,0.00179,True
+Personal C,10,18,credibility blend,6.67177,6.61106,0.00918,True
+Personal C,10,18,reference only,6.86447,6.61106,0.03833,True
+Personal C,10,18,naive (no further defaults),5.69168,6.61106,0.13907,True
+Personal C,10,24,chain ladder,6.6263,6.61106,0.0023,True
+Personal C,10,24,credibility blend,6.60948,6.61106,0.00024,True
+Personal C,10,24,reference only,6.66261,6.61106,0.0078,True
+Personal C,10,24,naive (no further defaults),6.34917,6.61106,0.03961,True
+Personal C,10,30,chain ladder,6.60934,6.61106,0.00026,True
+Personal C,10,30,credibility blend,6.63326,6.61106,0.00336,True
+Personal C,10,30,reference only,6.64807,6.61106,0.0056,True
+Personal C,10,30,naive (no further defaults),6.55967,6.61106,0.00777,True
+Personal C,11,3,chain ladder,7.96544,8.74629,0.08928,True
+Personal C,11,3,credibility blend,7.67735,8.74629,0.12222,True
+Personal C,11,3,reference only,7.67535,8.74629,0.12245,True
+Personal C,11,3,naive (no further defaults),0.92267,8.74629,0.89451,True
+Personal C,11,6,chain ladder,8.43779,8.74629,0.03527,True
+Personal C,11,6,credibility blend,8.38891,8.74629,0.04086,True
+Personal C,11,6,reference only,8.05805,8.74629,0.07869,True
+Personal C,11,6,naive (no further defaults),2.62884,8.74629,0.69943,True
+Personal C,11,9,chain ladder,7.37706,8.74629,0.15655,False
+Personal C,11,9,credibility blend,7.21084,8.74629,0.17555,False
+Personal C,11,9,reference only,7.35244,8.74629,0.15937,False
+Personal C,11,9,naive (no further defaults),3.76448,8.74629,0.56959,False
+Personal C,11,12,chain ladder,7.84487,8.74629,0.10306,False
+Personal C,11,12,credibility blend,7.7555,8.74629,0.11328,False
+Personal C,11,12,reference only,7.73821,8.74629,0.11526,False
+Personal C,11,12,naive (no further defaults),5.2526,8.74629,0.39945,False
+Personal C,11,18,chain ladder,8.72293,8.74629,0.00267,True
+Personal C,11,18,credibility blend,8.71498,8.74629,0.00358,True
+Personal C,11,18,reference only,8.61795,8.74629,0.01467,True
+Personal C,11,18,naive (no further defaults),7.52444,8.74629,0.1397,True
+Personal C,11,24,chain ladder,8.74426,8.74629,0.00023,True
+Personal C,11,24,credibility blend,8.70711,8.74629,0.00448,True
+Personal C,11,24,reference only,8.68063,8.74629,0.00751,True
+Personal C,11,24,naive (no further defaults),8.37984,8.74629,0.0419,True
+Personal C,11,30,chain ladder,8.72243,8.74629,0.00273,True
+Personal C,11,30,credibility blend,8.73204,8.74629,0.00163,True
+Personal C,11,30,reference only,8.72592,8.74629,0.00233,True
+Personal C,11,30,naive (no further defaults),8.65808,8.74629,0.01009,True
+Personal C,12,3,chain ladder,10.17767,8.91914,0.1411,True
+Personal C,12,3,credibility blend,8.31502,8.91914,0.06773,True
+Personal C,12,3,reference only,7.94641,8.91914,0.10906,True
+Personal C,12,3,naive (no further defaults),1.17392,8.91914,0.86838,True
+Personal C,12,6,chain ladder,7.40299,8.91914,0.16999,False
+Personal C,12,6,credibility blend,7.49488,8.91914,0.15969,False
+Personal C,12,6,reference only,7.58349,8.91914,0.14975,False
+Personal C,12,6,naive (no further defaults),2.31247,8.91914,0.74073,False
+Personal C,12,9,chain ladder,8.50985,8.91914,0.04589,True
+Personal C,12,9,credibility blend,8.46303,8.91914,0.05114,True
+Personal C,12,9,reference only,8.20255,8.91914,0.08034,True
+Personal C,12,9,naive (no further defaults),4.33122,8.91914,0.51439,True
+Personal C,12,12,chain ladder,8.91991,8.91914,9e-05,True
+Personal C,12,12,credibility blend,8.91077,8.91914,0.00094,True
+Personal C,12,12,reference only,8.62725,8.91914,0.03273,True
+Personal C,12,12,naive (no further defaults),5.95701,8.91914,0.33211,True
+Personal C,12,18,chain ladder,8.82697,8.91914,0.01033,True
+Personal C,12,18,credibility blend,8.81695,8.91914,0.01146,True
+Personal C,12,18,reference only,8.70975,8.91914,0.02348,True
+Personal C,12,18,naive (no further defaults),7.61624,8.91914,0.14608,True
+Personal C,12,24,chain ladder,8.79647,8.91914,0.01375,False
+Personal C,12,24,credibility blend,8.76314,8.91914,0.01749,False
+Personal C,12,24,reference only,8.73506,8.91914,0.02064,False
+Personal C,12,24,naive (no further defaults),8.43428,8.91914,0.05436,False
+Personal C,12,30,chain ladder,8.93875,8.91914,0.0022,True
+Personal C,12,30,credibility blend,8.94552,8.91914,0.00296,True
+Personal C,12,30,reference only,8.93811,8.91914,0.00213,True
+Personal C,12,30,naive (no further defaults),8.87026,8.91914,0.00548,True

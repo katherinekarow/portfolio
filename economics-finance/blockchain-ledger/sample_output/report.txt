@@ -1,0 +1,47 @@
+stream: 4199 events -> 4193 on-chain in 85 blocks, 6 rejected (overdraft)
+account model == UTXO model == SQLite balances: True (523 unspent coins); double spend rejected: double spend (coin already spent)
+clean chain audit: VALID
+tamper experiments:
+       chain  attack  detected       first_failure  n_failed_checks  attacker_hashes
+permissioned    edit      True    block 28: merkle                1                0
+permissioned  rehash      True block 28: consensus                2                0
+permissioned rewrite      True block 28: consensus               58                0
+ PoW 12 bits    edit      True    block 28: merkle                1                0
+ PoW 12 bits  rehash      True      block 29: link                1             2221
+ PoW 12 bits rewrite      True          checkpoint                1           205489
+off-chain docs before {'ok': 4003, 'mismatch': 0, 'erased': 0, 'missing': 0}
+off-chain docs after  {'ok': 3999, 'mismatch': 1, 'erased': 3, 'missing': 0}; chain still valid: True
+benchmark:
+                              system                                          metric     value        unit
+                       sqlite (CRUD)                                      throughput 119811.15        tx/s
+                 ledger permissioned                                      throughput  95030.62        tx/s
+                   ledger PoW 8 bits                                      throughput  86611.31        tx/s
+                  ledger PoW 12 bits                                      throughput  11944.02        tx/s
+                       sqlite (CRUD)                                         storage     58.61    bytes/tx
+                 ledger permissioned                                         storage    192.21    bytes/tx
+ledger permissioned + off-chain docs                                         storage    394.38    bytes/tx
+                       sqlite (CRUD)                               history rows kept   3825.00        rows
+                 ledger permissioned                               history rows kept   4193.00        rows
+                       sqlite (CRUD)                    deleted rows (unrecoverable)    178.00        rows
+                   ledger PoW 8 bits                                hashes per block    271.48      hashes
+                  ledger PoW 12 bits                                hashes per block   4030.52      hashes
+                              ledger     balance lookup | full chain scan (no index)    407.42 us (median)
+                              ledger balance lookup | off-chain index (materialised)      0.13 us (median)
+                              sqlite                    balance lookup | primary key      1.84 us (median)
+                              ledger      payments A->B | full chain scan (no index)    239.82 us (median)
+                              ledger  payments A->B | off-chain index (materialised)      0.46 us (median)
+                              sqlite           payments A->B | no index (table scan)    237.19 us (median)
+                              sqlite                      payments A->B | with index     41.84 us (median)
+                              ledger build off-chain index | one replay of the chain   3200.00 us (median)
+proof of work, measured vs 2^bits:
+ bits  trials  theory  mean_hashes  ratio
+    2     400     4.0        3.940  0.985
+    4     400    16.0       16.638  1.040
+    6     400    64.0       66.268  1.035
+    8     400   256.0      263.152  1.028
+   10     400  1024.0      952.922  0.931
+   12     128  4096.0     4454.664  1.088
+   14      32 16384.0    17600.781  1.074
+   16      32 65536.0    72976.000  1.114
+merkle proof at 4096 tx: 12 hashes = 396 bytes vs block 787,281 bytes
+flagged wash rings: 1 -> Hazel -> Ivy -> Juniper -> Hazel x3 rounds; loops outside flagged rings: 0

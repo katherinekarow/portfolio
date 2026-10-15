@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Market Price Review</title>
+<meta name="description" content="Our produce prices against three buyer marketplaces, by lot and grade, with feed-health checks (synthetic farm co-op data).">
+<link rel="stylesheet" href="../assets/dash.css">
+<style>
+  .heatwrap { max-height:520px; overflow:auto; }
+  .heatwrap td { min-width:84px; }
+  .feed li { margin:4px 0; }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Market price review</h1>
+      <p class="sub">Where the co-op's asking prices sit against three competing buyer marketplaces, lot by lot, and whether the price feeds can be trusted today. All data is synthetic.</p>
+    </div>
+    <div class="note"><a href="../../">← Portfolio</a> · <a href="../">All dashboards</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/professional-work/market-prices">Matching &amp; cleaning code</a></div>
+  </header>
+
+  <section class="kpis" id="kpis" aria-label="Summary"></section>
+
+  <div class="grid21">
+    <div class="panel">
+      <h2>Price index over time</h2>
+      <p class="why">Median of our price ÷ market median across lots. 1.00 = in line with the market; above = priced higher.</p>
+      <div class="chartwrap"><svg class="chart" id="trend" role="img" aria-label="Price index trend by grade"></svg></div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="panel feed">
+      <h2>Feed health</h2>
+      <p class="why">Checks run before any number above is shown.</p>
+      <ul id="feed"></ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="controls" style="margin-bottom:6px">
+      <h2 style="margin:0;flex:1">Latest index by lot and grade</h2>
+      <select id="pos" aria-label="Position"><option value="">All positions</option><option>below market</option><option>in line</option><option>above market</option></select>
+    </div>
+    <p class="why">Blue = priced above the market, orange = below, grey = in line (±2%). Hover a cell for prices.</p>
+    <div class="chartwrap heatwrap" id="heat"></div>
+  </div>
+
+  <details class="help panel">
+    <summary>How this works</summary>
+    <ul>
+      <li>Competitor listings arrive with inconsistent grade labels and lot references. They are matched to our lots with fuzzy grade mapping and an optimal one-to-one assignment, then deduplicated and screened for outliers (see the market-prices project).</li>
+      <li>Index = our price ÷ median competitor price for the same lot and grade on the same day. Cells need at least one valid competitor price.</li>
+      <li>A stale feed (the same prices repeated day after day) is flagged, not silently used.</li>
+    </ul>
+  </details>
+  <footer>Synthetic data · built with plain JavaScript and SVG</footer>
+</main>
+<script src="../assets/dash.js"></script>
+<script>
+D.load().then(data => {
+  const $ = id => document.getElementById(id), f = D.fmt;
+  const cells = data.cells.filter(c => c.index != null);
+  const cnt = p => cells.filter(c => c.position === p).length;
+  const med = a => { const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+  const issues = Object.keys(data.feed.stale).length + Object.keys(data.feed.missing).length;
+  D.kpis($("kpis"), [
+    { v: med(cells.map(c => c.index)).toFixed(3), l: "Median price index", d: "as of " + data.as_of },
+    { v: f.pct(cnt("below market") / cells.length, 0), l: "Lot-grades priced below market" },
+    { v: f.pct(cnt("above market") / cells.length, 0), l: "Lot-grades priced above market" },
+    { v: issues, l: "Feeds with issues", d: issues ? "see feed health" : "all clear" },
+  ]);
+  const order = ["standard", "select", "premium", "organic"].filter(g => data.grades.includes(g));
+  D.line($("trend"), { x: data.dates, xFmt: d => d.slice(5), title: "",
+    series: order.map((g, i) => ({ name: g[0].toUpperCase() + g.slice(1), values: data.trend[g], color: D.color(i) })),
+    yFmt: v => v.toFixed(2), refs: [{ y: 1, label: "market = 1.00" }] });
+  $("legend").innerHTML = order.map((g, i) => `<span><span class="sw" style="background:${D.color(i)}"></span>${g[0].toUpperCase() + g.slice(1)}</span>`).join("");
+  const li = [];
+  for (const [k, v] of Object.entries(data.feed.stale)) li.push(`<li><span class="pill warn">! stale</span> ${k}: prices unchanged ${v.length} days (${v[0]} → ${v[v.length - 1]})</li>`);
+  for (const [k, v] of Object.entries(data.feed.missing)) li.push(`<li><span class="pill warn">! gaps</span> ${k}: no file on ${v.length} days (${v.join(", ")})</li>`);
+  li.push(`<li><span class="pill neutral">i</span> ${data.feed.duplicates} duplicate listings removed</li>`);
+  li.push(`<li><span class="pill neutral">i</span> ${data.feed.outliers} outlier prices excluded</li>`);
+  $("feed").innerHTML = li.join("");
+
+  const lots = [...new Set(data.cells.map(c => c.lot))].sort();
+  const at = {}; data.cells.forEach(c => at[c.lot + "|" + c.grade] = c);
+  function heat() {
+    const p = $("pos").value;
+    let html = `<table><thead><tr><th class="l">Lot</th>${order.map(g => `<th>${g}</th>`).join("")}</tr></thead><tbody>`;
+    lots.forEach(l => {
+      const row = order.map(g => at[l + "|" + g]);
+      if (p && !row.some(c => c && c.position === p)) return;
+      html += `<tr><td class="l">${l}</td>` + row.map(c => {
+        if (!c || c.index == null) return `<td style="color:var(--muted)">—</td>`;
+        const dim = p && c.position !== p ? "opacity:.25;" : "";
+        return `<td data-k="${l}|${c.grade}" style="${dim}background:${D.diverge(Math.abs(c.index - 1) < 0.02 ? 0 : c.index - 1, 0.15)}">${c.index.toFixed(3)}</td>`;
+      }).join("") + "</tr>";
+    });
+    $("heat").innerHTML = html + "</tbody></table>";
+    const tp = D.tip($("heat"));
+    $("heat").querySelectorAll("td[data-k]").forEach(td => {
+      td.onpointermove = ev => { const c = at[td.dataset.k], r = $("heat").getBoundingClientRect();
+        tp.show(`<b>${c.lot} · ${c.grade}</b>` + D.row("Our price", f.usd2(c.price)) + D.row("Market median", f.usd2(c.market)) + D.row("Index", c.index.toFixed(3)) + D.row("Competitors", c.competitors) + D.row("Position", c.position),
+          ev.clientX - r.left + $("heat").scrollLeft, ev.clientY - r.top + $("heat").scrollTop); };
+      td.onpointerleave = () => tp.hide();
+    });
+  }
+  $("pos").onchange = heat; heat();
+  window.__ready = true;
+});
+</script>
+</body>
+</html>

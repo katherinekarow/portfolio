@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Price &amp; Performance</title>
+<meta name="description" content="Season-to-date sales, volume and average price by grade and region against last season (synthetic farm co-op data).">
+<link rel="stylesheet" href="../assets/dash.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Price &amp; performance</h1>
+      <p class="sub">A farm co-op's season to date against the same weeks last season: is revenue up because prices rose or because more cases sold, and where? All data is synthetic.</p>
+    </div>
+    <div class="note"><a href="../../">← Portfolio</a> · <a href="../">All dashboards</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/professional-work/dashboards">Code</a></div>
+  </header>
+
+  <section class="kpis" id="kpis" aria-label="Summary"></section>
+
+  <div class="controls">
+    <select id="grade" aria-label="Grade"><option value="">All grades</option></select>
+    <select id="region" aria-label="Region"><option value="">All regions</option></select>
+    <div class="seg-toggle" id="measure" role="group" aria-label="Measure">
+      <button data-m="sales" class="on">Sales</button><button data-m="units">Cases</button><button data-m="price">Avg price</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2 id="cTitle">Weekly sales</h2>
+    <p class="why">This season (solid) against the same week last season (dashed). Hover for values.</p>
+    <div class="chartwrap"><svg class="chart" id="trend" role="img" aria-label="Weekly trend"></svg></div>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h2>Sales vs last season</h2>
+      <p class="why">Grade × region. Blue = up, orange = down, grey = flat. Click a cell to filter.</p>
+      <div id="heat"></div>
+    </div>
+    <div class="panel">
+      <h2>Price or volume?</h2>
+      <p class="why">Sales growth splits into price change and case-volume change: (1 + price) × (1 + volume) − 1.</p>
+      <div id="movers"></div>
+    </div>
+  </div>
+
+  <details class="help panel">
+    <summary>How this works</summary>
+    <ul>
+      <li>Season to date is weeks 1–26. Last season is cut at the same week so the comparison is like for like.</li>
+      <li>Average price is sales ÷ cases, so mix shifts between grades show up in the "All grades" view.</li>
+      <li>Data comes from <code>dashkit.builders.price_performance</code>: demand follows a seasonal curve and responds to price with a different elasticity per grade.</li>
+    </ul>
+  </details>
+  <footer>Synthetic data · built with plain JavaScript and SVG</footer>
+</main>
+<script src="../assets/dash.js"></script>
+<script>
+D.load().then(data => {
+  const $ = id => document.getElementById(id), f = D.fmt;
+  let measure = "sales";
+  data.grades.forEach(g => $("grade").add(new Option(g, g)));
+  data.regions.forEach(r => $("region").add(new Option(r, r)));
+
+  function pick(year) {
+    const g = $("grade").value, r = $("region").value;
+    const ss = data.series.filter(s => s.year === year && (!g || s.grade === g) && (!r || s.region === r));
+    const n = Math.max(...ss.map(s => s.sales.length));
+    const sales = Array(n).fill(0), units = Array(n).fill(0);
+    ss.forEach(s => s.sales.forEach((v, i) => { sales[i] += v; units[i] += s.units[i]; }));
+    return { sales, units, price: sales.map((v, i) => units[i] ? v / units[i] : null) };
+  }
+  function draw() {
+    const cur = pick("this"), prev = pick("last"), wd = data.weeks_done;
+    const pad = a => [...a, ...Array(52 - a.length).fill(null)];
+    const lab = { sales: "Weekly sales", units: "Weekly cases sold", price: "Average price per case" }[measure];
+    const yf = { sales: f.usdk, units: f.int, price: f.usd2 }[measure];
+    $("cTitle").textContent = lab;
+    D.line($("trend"), {
+      x: Array.from({ length: 52 }, (_, i) => i + 1), xFmt: w => "Wk " + w, title: "",
+      series: [{ name: "This season", values: pad(cur[measure]), color: D.color(0) },
+               { name: "Last season", values: prev[measure], color: D.color(1), dash: "6 4" }],
+      yFmt: yf, yMin: measure === "price" ? undefined : 0,
+    });
+    $("legend").innerHTML = `<span><span class="sw" style="background:${D.color(0)}"></span>This season (to week ${wd})</span><span><span class="sw" style="background:${D.color(1)}"></span>Last season</span>`;
+    // KPIs follow the filters
+    const sum = (o, k) => o[k].slice(0, wd).reduce((a, b) => a + (b || 0), 0);
+    const cs = sum(cur, "sales"), ps = sum(prev, "sales"), cu = sum(cur, "units"), pu = sum(prev, "units");
+    const cp = cs / cu, pp = ps / pu;
+    const arrow = v => `<span class="${v >= 0 ? "arrow-up" : "arrow-down"}">${f.delta(v)}</span> vs last season`;
+    D.kpis($("kpis"), [
+      { v: f.usdk(cs), l: "Sales, season to date", d: arrow(cs / ps - 1) },
+      { v: f.int(cu), l: "Cases sold", d: arrow(cu / pu - 1) },
+      { v: f.usd2(cp), l: "Average price per case", d: arrow(cp / pp - 1) },
+      { v: "Week " + wd, l: "Season to date", d: "of 52" },
+    ]);
+  }
+  // heat grid
+  function heat() {
+    const g = $("grade").value, r = $("region").value;
+    const m = Object.fromEntries(data.movers.map(x => [x.grade + "|" + x.region, x]));
+    let html = `<div class="tablewrap"><table><thead><tr><th class="l">Grade</th>${data.regions.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>`;
+    data.grades.forEach(gr => {
+      html += `<tr><td class="l">${gr}</td>` + data.regions.map(rg => {
+        const x = m[gr + "|" + rg], sel = (gr === g && rg === r);
+        return `<td data-g="${gr}" data-r="${rg}" title="${gr}, ${rg}: sales ${f.delta(x.sales_vs_ly)}" style="cursor:pointer;background:${D.diverge(x.sales_vs_ly, 0.2)};${sel ? "outline:2px solid var(--ink);outline-offset:-2px" : ""}">${f.delta(x.sales_vs_ly)}</td>`;
+      }).join("") + "</tr>";
+    });
+    $("heat").innerHTML = html + "</tbody></table></div>";
+    $("heat").querySelectorAll("td[data-g]").forEach(td => td.onclick = () => {
+      const same = $("grade").value === td.dataset.g && $("region").value === td.dataset.r;
+      $("grade").value = same ? "" : td.dataset.g; $("region").value = same ? "" : td.dataset.r; refresh();
+    });
+  }
+  D.table($("movers"), {
+    rows: data.movers.map(m => ({ ...m, key: m.grade + " · " + m.region })), sortKey: "sales_vs_ly",
+    cols: [{ k: "key", label: "Grade · region", cls: "l" }, { k: "sales", label: "Sales", fmt: f.usdk },
+           { k: "sales_vs_ly", label: "Sales Δ", fmt: f.delta }, { k: "price_vs_ly", label: "Price Δ", fmt: f.delta },
+           { k: "units_vs_ly", label: "Volume Δ", fmt: f.delta }],
+    onRow: m => { $("grade").value = m.grade; $("region").value = m.region; refresh(); window.scrollTo({ top: 0, behavior: "smooth" }); },
+  });
+  const refresh = () => { draw(); heat(); };
+  $("grade").onchange = refresh; $("region").onchange = refresh;
+  $("measure").querySelectorAll("button").forEach(b => b.onclick = () => {
+    measure = b.dataset.m; $("measure").querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); draw();
+  });
+  refresh();
+  window.__ready = true;
+});
+</script>
+</body>
+</html>

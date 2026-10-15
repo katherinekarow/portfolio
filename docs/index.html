@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio</title>
+<meta name="description" content="Data analysis, BI, Python and web projects — plus a daily Sudoku.">
+<style>
+  :root { --bg:#fff8f2; --panel:#ffffff; --ink:#3d2c4d; --muted:#7a6a88; --line:#eadff2; --accent:#b0619b; --chip:#f6eefc; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#1c1622; --panel:#261e2e; --ink:#f3e9fb; --muted:#b7a6c6; --line:#3a2f49; --accent:#e08cc9; --chip:#2e2537; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 "Segoe UI", Helvetica, Arial, sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 24px 16px 48px; }
+  a { color: var(--accent); }
+  .hero { display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; margin-bottom: 8px; }
+  h1 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.4rem); }
+  .tag { color: var(--muted); margin: 4px 0 0; }
+  .btns { display:flex; gap:8px; flex-wrap:wrap; }
+  .btn { display:inline-block; padding:10px 16px; border-radius:12px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
+  .btn.alt { background: var(--panel); color: var(--ink); border:1px solid var(--line); }
+  .filters { display:flex; flex-wrap:wrap; gap:8px; margin: 22px 0 8px; }
+  .filters button { font: inherit; border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:999px; padding:6px 14px; cursor:pointer; }
+  .filters button.on { background: var(--accent); border-color: var(--accent); color:#fff; }
+  input[type=search] { font: inherit; padding: 8px 12px; border-radius: 12px; border:1px solid var(--line); background:var(--panel); color:var(--ink); min-width: 220px; flex: 1; }
+  h2 { margin: 28px 0 4px; font-size: 1.25rem; }
+  .sdesc { color: var(--muted); margin: 0 0 12px; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+  .card { position:relative; background: var(--panel); border:1px solid var(--line); border-radius: 16px; padding: 16px; color:inherit; display:flex; flex-direction:column; gap:8px; transition: transform .15s, box-shadow .15s; }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .card h3 a::after { content:""; position:absolute; inset:0; border-radius:16px; }
+  .demo { position:relative; z-index:1; align-self:flex-start; font-size:.85rem; font-weight:600; padding:4px 12px; border-radius:999px; background:var(--accent); color:#fff; text-decoration:none; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(61,44,77,.12); }
+  .card h3 { margin:0; font-size: 1.05rem; color: var(--ink); }
+  .card p { margin:0; color: var(--muted); font-size: .95rem; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
+  .chip { background: var(--chip); border-radius: 999px; padding: 2px 10px; font-size: .78rem; }
+  .surprise { margin-top: 30px; text-align:center; color: var(--muted); }
+  .empty { color: var(--muted); }
+  footer { margin-top: 40px; color: var(--muted); font-size: .85rem; text-align:center; }
+</style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <div>
+      <h1>👋 Portfolio</h1>
+      <p class="tag">Data analysis · BI · Python · web apps — and a little Sudoku.</p>
+    </div>
+    <div class="btns">
+      <a class="btn" href="sudoku/">🧩 Play Sudoku</a>
+      <a class="btn alt" href="sudoku/?daily=1">📅 Today's puzzle</a>
+      <a class="btn alt" href="dashboards/">📊 Dashboards</a>
+      <a class="btn alt" href="assistant/">💬 Data assistant</a>
+      <a class="btn alt" href="formulas/">🧮 Formula calculator</a>
+      <a class="btn alt" href="https://github.com/katherinekarow/portfolio">View on GitHub</a>
+    </div>
+  </div>
+
+  <div class="filters" id="filters">
+    <input type="search" id="q" placeholder="Search projects or tools (e.g. Tableau, React)…" aria-label="Search projects">
+  </div>
+  <div id="sections"><p class="empty">Loading projects…</p></div>
+
+  <p class="surprise"><button class="btn alt" id="random" style="cursor:pointer;font:inherit">🎲 Surprise me with a random project</button></p>
+  <footer>This page is generated from the repository — every project links to its folder on GitHub.</footer>
+</main>
+<script>
+"use strict";
+let DATA = [], active = "all";
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+// Keep emoji/links from markdown titles readable on the page.
+const plain = s => s.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/[*_`]/g, "");
+
+function render() {
+  const q = $("q").value.trim().toLowerCase();
+  const out = [];
+  for (const s of DATA) {
+    if (active !== "all" && s.key !== active) continue;
+    const items = s.projects.filter(p => !q || (p.title + " " + p.summary + " " + p.tools).toLowerCase().includes(q));
+    if (!items.length) continue;
+    out.push(`<h2>${esc(plain(s.title))}</h2>${s.summary ? `<p class="sdesc">${esc(plain(s.summary))}</p>` : ""}<div class="grid">` +
+      items.map(p => `<div class="card"><h3><a href="${esc(p.url)}">${esc(plain(p.title))}</a></h3><p>${esc(plain(p.summary))}</p>` +
+        (p.demo ? `<a class="demo" href="${esc(p.demo)}">▶ ${esc(p.demo_label || "Live demo")}</a>` : "") +
+        `<div class="chips">${p.tools.split(/,\s*(?![^()]*\))/).filter(Boolean).slice(0, 5).map(t => `<span class="chip">${esc(plain(t))}</span>`).join("")}</div></div>`).join("") +
+      `</div>`);
+  }
+  $("sections").innerHTML = out.join("") || `<p class="empty">No projects match “${esc(q)}”.</p>`;
+}
+
+fetch("projects.json").then(r => r.json()).then(data => {
+  DATA = data;
+  const f = $("filters");
+  const mk = (key, label) => {
+    const b = document.createElement("button"); b.textContent = label; b.dataset.key = key;
+    if (key === active) b.classList.add("on");
+    b.onclick = () => { active = key; [...f.querySelectorAll("button")].forEach(x => x.classList.toggle("on", x === b)); render(); };
+    f.insertBefore(b, $("q"));
+  };
+  mk("all", "All");
+  data.forEach(s => mk(s.key, plain(s.title)));
+  render();
+}).catch(() => { $("sections").innerHTML = '<p class="empty">Couldn’t load the project list — see the repository on GitHub.</p>'; });
+
+$("q").addEventListener("input", render);
+$("random").onclick = () => {
+  const all = DATA.flatMap(s => s.projects);
+  if (all.length) location.href = all[Math.floor(Math.random() * all.length)].url;
+};
+</script>
+</body>
+</html>

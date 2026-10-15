@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparable Sessions</title>
+<meta name="description" content="Find the past clinic sessions most like a new one and average their fill curves into a proxy forecast (synthetic data).">
+<link rel="stylesheet" href="../assets/dash.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Comparable sessions</h1>
+      <p class="sub">A brand-new kind of session has no history to forecast from. Describe it, and this finds the most similar completed sessions and averages how they filled: a proxy curve to plan against. All data is synthetic.</p>
+    </div>
+    <div class="note"><a href="../../">← Portfolio</a> · <a href="../">All dashboards</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/professional-work/capacity-planning">Curve model</a></div>
+  </header>
+
+  <div class="panel controls" style="gap:14px">
+    <label class="f">Reach<select id="reach"></select></label>
+    <label class="f">Season<select id="season"></select></label>
+    <label class="f">Length<select id="length"></select></label>
+    <label class="f">Capacity<select id="cap"></select></label>
+    <label class="f">Comparables<select id="k"><option>3</option><option selected>5</option><option>8</option></select></label>
+  </div>
+
+  <section class="kpis" id="kpis" aria-label="Proxy summary"></section>
+
+  <div class="panel">
+    <h2>Proxy fill curve</h2>
+    <p class="why">Grey: each comparable session. Blue: their average, the proxy. Shaded: lowest to highest comparable.</p>
+    <div class="chartwrap"><svg class="chart" id="curve" role="img" aria-label="Proxy fill curve"></svg></div>
+    <div class="legend"><span><span class="sw" style="background:var(--s1)"></span>Proxy (average)</span><span><span class="sw" style="background:var(--neutral)"></span>Comparable sessions</span></div>
+  </div>
+
+  <div class="panel">
+    <h2>Closest matches</h2>
+    <div id="tbl"></div>
+  </div>
+
+  <details class="help panel">
+    <summary>How this works</summary>
+    <ul>
+      <li>Distance = 1.0 × (reach differs) + 1.0 × (season differs) + 0.8 × (length differs) + 0.5 × |capacity difference| ÷ capacity range. Ties are broken by session id so the result is repeatable.</li>
+      <li>The proxy is the plain average of the comparables' fill rate at each point before the session. The band shows how much they disagree.</li>
+      <li>The Python version (<code>dashkit.builders.nearest</code>) is the reference; tests check that results come back in distance order and that an exact match ranks first.</li>
+    </ul>
+  </details>
+  <footer>Synthetic data · built with plain JavaScript and SVG</footer>
+</main>
+<script src="../assets/dash.js"></script>
+<script>
+function nearest(data, reach, season, length, capacity, k) {    // port of dashkit.builders.nearest
+  const w = data.weights, caps = data.sessions.map(s => s.capacity), span = (Math.max(...caps) - Math.min(...caps)) || 1;
+  const dist = s => w.reach * (s.reach !== reach) + w.season * (s.season !== season) + w.length * (s.length !== length) + w.capacity * Math.abs(s.capacity - capacity) / span;
+  return data.sessions.map(s => ({ ...s, dist: dist(s) })).sort((a, b) => a.dist - b.dist || (a.id < b.id ? -1 : 1)).slice(0, k);
+}
+window.nearest = nearest;
+D.load().then(data => {
+  const $ = id => document.getElementById(id), f = D.fmt;
+  window.DATA = data;
+  const uniq = k => [...new Set(data.sessions.map(s => s[k]))].sort((a, b) => a > b ? 1 : -1);
+  [["reach", "reach"], ["season", "season"], ["length", "length"], ["cap", "capacity"]].forEach(([id, k]) => uniq(k).forEach(v => $(id).add(new Option(k === "capacity" ? f.int(v) + " slots" : v, v))));
+  const tbl = D.table($("tbl"), { rows: [], sortKey: "dist", desc: false, cols: [
+    { k: "id", label: "Session", cls: "l" }, { k: "reach", label: "Reach", cls: "l" }, { k: "season", label: "Season", cls: "l" },
+    { k: "length", label: "Length", cls: "l" }, { k: "capacity", label: "Capacity", fmt: f.int }, { k: "dist", label: "Distance", fmt: v => v.toFixed(2) },
+    { k: "final_fill", label: "Final fill", fmt: v => f.pct(v, 1) } ] });
+  function draw() {
+    const nn = nearest(data, $("reach").value, $("season").value, $("length").value, +$("cap").value, +$("k").value);
+    const n = data.days_out.length, avg = [], lo = [], hi = [];
+    for (let i = 0; i < n; i++) { const v = nn.map(s => s.curve[i]); avg.push(v.reduce((a, b) => a + b, 0) / v.length); lo.push(Math.min(...v)); hi.push(Math.max(...v)); }
+    D.line($("curve"), { x: data.days_out, xFmt: d => d + " days out", yFmt: v => f.pct(v, 0), yMin: 0,
+      series: [...nn.map(s => ({ name: s.id, values: s.curve, color: D.css("--neutral") })),
+               { name: "Proxy", values: avg, color: D.color(0), band: [lo, hi] }] });
+    const exact = nn.filter(s => s.dist === 0).length, i90 = data.days_out.indexOf(91) >= 0 ? data.days_out.indexOf(91) : data.days_out.findIndex(d => d <= 90);
+    D.kpis($("kpis"), [
+      { v: f.pct(avg[n - 1], 1), l: "Proxy final fill rate", d: `range ${f.pct(lo[n - 1], 0)} – ${f.pct(hi[n - 1], 0)}` },
+      { v: f.pct(avg[i90], 0), l: `Expected fill ~${data.days_out[i90]} days out` },
+      { v: `${exact} of ${nn.length}`, l: "Exact attribute matches" },
+      { v: f.pct((hi[n - 1] - lo[n - 1]), 0), l: "Spread at session", d: "lower = more confident proxy" },
+    ]);
+    tbl.set(nn);
+  }
+  ["reach", "season", "length", "cap", "k"].forEach(id => $(id).onchange = draw);
+  const s0 = data.sessions[0];                       // start on a combination that has history
+  $("reach").value = s0.reach; $("season").value = s0.season; $("length").value = s0.length; $("cap").value = s0.capacity;
+  draw();
+  window.__ready = true;
+});
+</script>
+</body>
+</html>

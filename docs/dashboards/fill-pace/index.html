@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clinic Fill Dashboard</title>
+<meta name="description" content="Interactive fill-to-target dashboard for clinic screening sessions (synthetic data).">
+<style>
+  :root {
+    --bg:#f6f5f1; --surface:#fcfcfb; --panel:#ffffff; --ink:#0b0b0b; --muted:#52514e; --grid:#e6e5e0; --line:#dcdad3;
+    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --band:rgba(42,120,214,.10); --pband:rgba(235,104,52,.16);
+    --good:#0ca30c; --warn:#fab219; --crit:#d03b3b; --accent:#b0619b; --shadow:0 1px 2px rgba(0,0,0,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:#121214; --surface:#1a1a1d; --panel:#1f1f23; --ink:#f2f1ee; --muted:#a9a8a3; --grid:#2e2e33; --line:#34343a;
+      --s1:#5b9cf0; --s2:#f2864f; --s3:#36c891; --s4:#f4b630; --band:rgba(91,156,240,.14); --pband:rgba(242,134,79,.20);
+      --accent:#e08cc9; --shadow:none;
+    }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.45 "Segoe UI", Helvetica, Arial, sans-serif; }
+  main { max-width:1180px; margin:0 auto; padding:20px 16px 48px; }
+  a { color:var(--accent); }
+  header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:12px; margin-bottom:16px; }
+  h1 { margin:0; font-size:clamp(1.4rem,3.2vw,1.9rem); }
+  .sub { margin:2px 0 0; color:var(--muted); }
+  .note { font-size:.82rem; color:var(--muted); }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:14px; }
+  .kpi { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 14px; box-shadow:var(--shadow); }
+  .kpi .v { font-size:1.45rem; font-weight:700; font-variant-numeric:tabular-nums; }
+  .kpi .l { color:var(--muted); font-size:.8rem; }
+  .kpi .bar { display:flex; height:6px; border-radius:3px; overflow:hidden; margin-top:6px; background:var(--grid); }
+  .controls { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px; }
+  select, input[type=search] { font:inherit; padding:7px 10px; border-radius:10px; border:1px solid var(--line); background:var(--panel); color:var(--ink); }
+  input[type=search] { flex:1; min-width:160px; }
+  .chip { font:inherit; font-size:.85rem; border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:999px; padding:5px 12px; cursor:pointer; display:inline-flex; gap:6px; align-items:center; }
+  .chip[aria-pressed=false] { opacity:.45; }
+  .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .layout { display:grid; grid-template-columns:320px 1fr; gap:14px; }
+  @media (max-width:860px) { .layout { grid-template-columns:1fr; } .list { max-height:300px; } }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:var(--shadow); min-width:0; }
+  .list { max-height:880px; overflow:auto; padding:6px; }
+  @media (max-width:860px) { .list { max-height:320px; } }
+  .row { display:block; width:100%; text-align:left; font:inherit; color:inherit; background:none; border:1px solid transparent; border-radius:10px; padding:8px 10px; cursor:pointer; }
+  .row:hover { background:var(--surface); }
+  .row.sel { border-color:var(--s1); background:var(--surface); }
+  .row .top { display:flex; justify-content:space-between; gap:8px; align-items:center; }
+  .row .id { font-weight:700; }
+  .row .seg { color:var(--muted); font-size:.8rem; }
+  .pill { font-size:.72rem; font-weight:700; padding:2px 8px; border-radius:999px; color:#fff; white-space:nowrap; }
+  .pill.on { background:var(--good); } .pill.watch { background:var(--warn); color:#3a2a00; } .pill.behind { background:var(--crit); }
+  .meter { position:relative; height:8px; background:var(--grid); border-radius:4px; margin-top:6px; }
+  .meter .fill { position:absolute; left:0; top:0; bottom:0; background:var(--s1); border-radius:4px; }
+  .meter .proj { position:absolute; top:-2px; bottom:-2px; width:2px; background:var(--s2); }
+  .meter .tgt { position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--ink); }
+  .row .nums { display:flex; justify-content:space-between; font-size:.75rem; color:var(--muted); margin-top:3px; font-variant-numeric:tabular-nums; }
+  h2 { font-size:1.1rem; margin:0; }
+  h3 { font-size:.95rem; margin:14px 0 6px; }
+  .dhead { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; align-items:baseline; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:8px; margin:10px 0; }
+  .stat { background:var(--surface); border-radius:10px; padding:8px 10px; }
+  .stat .v { font-weight:700; font-variant-numeric:tabular-nums; }
+  .stat .l { color:var(--muted); font-size:.75rem; }
+  .chartwrap { position:relative; }
+  svg { display:block; width:100%; height:auto; overflow:visible; }
+  svg text { fill:var(--muted); font-size:11px; font-family:inherit; }
+  .legend { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+  .legend .chip { font-size:.78rem; padding:3px 10px; }
+  .sw { width:14px; height:3px; display:inline-block; border-radius:2px; }
+  .tip { position:absolute; pointer-events:none; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:8px 10px; font-size:.8rem; box-shadow:0 6px 18px rgba(0,0,0,.15); min-width:170px; display:none; z-index:5; font-variant-numeric:tabular-nums; }
+  .tip b { display:block; margin-bottom:4px; }
+  .tip div { display:flex; justify-content:space-between; gap:12px; }
+  .seg-toggle { display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; }
+  .seg-toggle button { font:inherit; font-size:.82rem; border:0; background:var(--panel); color:var(--ink); padding:5px 12px; cursor:pointer; }
+  .seg-toggle button.on { background:var(--s1); color:#fff; }
+  .why { color:var(--muted); font-size:.88rem; }
+  .bottom { margin-top:14px; display:grid; grid-template-columns:1.2fr 1fr; gap:14px; }
+  @media (max-width:860px) { .bottom { grid-template-columns:1fr; } }
+  table { width:100%; border-collapse:collapse; font-size:.85rem; font-variant-numeric:tabular-nums; }
+  th, td { text-align:right; padding:6px 6px; border-bottom:1px solid var(--grid); }
+  th:first-child, td:first-child { text-align:left; }
+  th { color:var(--muted); font-weight:600; }
+  .help summary { cursor:pointer; color:var(--muted); }
+  .help { margin-top:16px; }
+  footer { margin-top:28px; color:var(--muted); font-size:.82rem; text-align:center; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>Clinic fill dashboard</h1>
+      <p class="sub">Screening sessions across a clinic network: are we on pace, where will we land, and how much outreach is needed? All data is synthetic.</p>
+    </div>
+    <div class="note"><a href="../../">← Portfolio</a> · <a href="../">All dashboards</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/professional-work/capacity-planning">Model &amp; code</a></div>
+  </header>
+
+  <section class="kpis" id="kpis" aria-label="Summary"></section>
+
+  <div class="controls">
+    <select id="seg" aria-label="Segment"><option value="">All segments</option></select>
+    <span id="statusChips"></span>
+    <select id="sort" aria-label="Sort by">
+      <option value="gap">Sort: gap to target</option>
+      <option value="pace">Sort: behind pace today</option>
+      <option value="days_out">Sort: soonest session</option>
+      <option value="fill">Sort: projected fill rate</option>
+    </select>
+    <input type="search" id="q" placeholder="Find a session (e.g. S0251)" aria-label="Find a session">
+  </div>
+
+  <div class="layout">
+    <div class="panel list" id="list" role="listbox" aria-label="Sessions"></div>
+    <div class="panel" id="detail">
+      <div class="dhead">
+        <h2 id="dTitle">—</h2>
+        <span id="dStatus"></span>
+      </div>
+      <div class="stats" id="dStats"></div>
+      <div class="chartwrap" id="chartwrap">
+        <svg id="chart" viewBox="0 0 760 340" role="img" aria-label="Fill curve chart"></svg>
+        <div class="tip" id="tip"></div>
+      </div>
+      <div class="legend" id="legend"></div>
+      <h3>Outreach plan: extra appointments needed per week</h3>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <div class="seg-toggle" id="strat" role="group" aria-label="Strategy">
+          <button data-s="baseline" class="on">Baseline</button><button data-s="milestones">Milestones</button>
+        </div>
+        <span class="why" id="stratNote"></span>
+      </div>
+      <svg id="ini" viewBox="0 0 760 150" role="img" aria-label="Outreach units per week"></svg>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="panel">
+      <h3 style="margin-top:0">Where every session stands</h3>
+      <p class="why" style="margin:0 0 6px">Right = behind today's target pace. Up = projected to finish short of target. Click a dot to open it.</p>
+      <div class="chartwrap" id="scatterwrap">
+        <svg id="scatter" viewBox="0 0 520 300" role="img" aria-label="Pace gap vs projected gap"></svg>
+        <div class="tip" id="tip2"></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3 style="margin-top:0">By segment</h3>
+      <table id="segTable"></table>
+      <p class="note" id="recon"></p>
+    </div>
+  </div>
+
+  <details class="help">
+    <summary>How to read this</summary>
+    <p class="why"><b>Target</b> is the 60th-percentile pace of similar past sessions, and it never decreases. <b>Historical range</b> is the
+      10th to 90th percentile. <b>Projection</b> blends the session's own pickup with its segment's history, weighting
+      history more heavily early in the appointment window, with a low/high band. <b>Glide path</b> is the route from today's appointments to the final target,
+      shaped like appointments normally arrive. <b>Outreach plan</b> spreads the remaining gap over the weeks left: <i>baseline</i>
+      follows the normal appointment shape, while <i>milestones</i> front-loads it (50% of the gap by a quarter of the remaining time, 80% by half).
+      Sessions with a small gap or thin history are not eligible, so the plan doesn't over-allocate.</p>
+  </details>
+  <footer>Generated by <code>python -m curvekit.export</code> from the same functions the pipeline uses · synthetic data only</footer>
+</main>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const fmt = n => Math.round(n).toLocaleString("en-US");
+const pct = (n, d = 1) => (n * 100).toFixed(d) + "%";
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const STATUS = { "on pace": ["on", "--good", "On pace"], "watch": ["watch", "--warn", "Watch"], "behind": ["behind", "--crit", "Behind"] };
+const SVGNS = "http://www.w3.org/2000/svg";
+let D = null, sel = null, strategy = "baseline";
+const showStatus = { "on pace": true, "watch": true, "behind": true };
+const series = {
+  band:   { label: "Historical range", on: true,  color: "--band", kind: "area" },
+  target: { label: "Target",           on: true,  color: "--muted", kind: "line", dash: "5 4" },
+  gross:  { label: "Gross appointments",   on: false, color: "--s4", kind: "line" },
+  net:    { label: "Net appointments",     on: true,  color: "--s1", kind: "line", w: 2.5 },
+  proj:   { label: "Projection",       on: true,  color: "--s2", kind: "line", dash: "6 3", w: 2 },
+  glide:  { label: "Glide path",       on: true,  color: "--s3", kind: "line", dash: "2 3", w: 2 },
+};
+
+// draw in CSS pixels (up to a max) so labels stay readable on phones
+const fitW = (svg, max) => Math.max(320, Math.min(max, Math.round(svg.parentElement.clientWidth || max)));
+function niceTicks(max, n) {
+  const raw = max / n, mag = 10 ** Math.floor(Math.log10(raw));
+  const step = [1, 2, 2.5, 5, 10].map(k => k * mag).find(s => s >= raw);
+  const out = [];
+  for (let v = 0; v <= max + 1e-9; v += step) out.push(v);
+  return out;
+}
+function el(tag, attrs = {}, parent) {
+  const e = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const pill = s => `<span class="pill ${STATUS[s][0]}">${STATUS[s][2]}</span>`;
+
+function filtered() {
+  const seg = $("seg").value, q = $("q").value.trim().toUpperCase();
+  let xs = D.sessions.filter(d => (!seg || d.segment === seg) && showStatus[d.status] && (!q || d.id.includes(q)));
+  const key = $("sort").value;
+  const by = { gap: d => -d.gap_to_target, pace: d => -d.pace_gap_today / d.capacity, days_out: d => d.days_out_today, fill: d => d.projected.mid / d.capacity };
+  return xs.sort((a, b) => by[key](a) - by[key](b) || a.id.localeCompare(b.id));
+}
+
+function kpis(xs) {
+  const n = xs.length, cnt = s => xs.filter(d => d.status === s).length;
+  const cap = xs.reduce((a, d) => a + d.capacity, 0), net = xs.reduce((a, d) => a + d.net, 0);
+  const proj = xs.reduce((a, d) => a + d.projected.mid, 0), gap = xs.reduce((a, d) => a + d.gap_to_target, 0);
+  const elig = xs.filter(d => d.eligible).length;
+  const bar = ["on pace", "watch", "behind"].map(s => `<span style="width:${n ? cnt(s) / n * 100 : 0}%;background:var(${STATUS[s][1]})"></span>`).join("");
+  $("kpis").innerHTML = [
+    [n, "Open sessions", `<div class="bar">${bar}</div>`],
+    [`${cnt("on pace")} · ${cnt("watch")} · ${cnt("behind")}`, "On pace · watch · behind", ""],
+    [cap ? pct(net / cap) : "–", "Booked so far (of slots)", ""],
+    [cap ? pct(proj / cap) : "–", "Projected final fill rate", ""],
+    [fmt(gap), "Total gap to target (units)", ""],
+    [`${elig} / ${n}`, "Eligible for outreach campaigns", ""],
+  ].map(([v, l, x]) => `<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div>${x}</div>`).join("");
+}
+
+function list(xs) {
+  if (!xs.length) { $("list").innerHTML = '<p class="why" style="padding:8px">No sessions match these filters.</p>'; return; }
+  if (!xs.some(d => d.id === sel)) sel = xs[0].id;
+  $("list").innerHTML = xs.map(d => {
+    const c = d.capacity;
+    return `<button class="row${d.id === sel ? " sel" : ""}" role="option" aria-selected="${d.id === sel}" data-id="${d.id}">
+      <div class="top"><span class="id">${d.id}</span>${pill(d.status)}</div>
+      <div class="seg">${esc(d.segment)} · ${d.days_out_today} days out</div>
+      <div class="meter" title="booked / projected / target"><div class="fill" style="width:${d.net / c * 100}%"></div>
+        <div class="proj" style="left:${d.projected.mid / c * 100}%"></div><div class="tgt" style="left:${d.target_final / c * 100}%"></div></div>
+      <div class="nums"><span>${fmt(d.net)} booked</span><span>gap ${fmt(d.gap_to_target)}</span></div></button>`;
+  }).join("");
+  [...$("list").querySelectorAll(".row")].forEach(b => b.onclick = () => select(b.dataset.id));
+}
+
+function select(id) {
+  sel = id;
+  [...$("list").querySelectorAll(".row")].forEach(b => { const on = b.dataset.id === id; b.classList.toggle("sel", on); b.setAttribute("aria-selected", on); });
+  detail();
+  scatter(filtered());
+}
+
+function detail() {
+  const d = D.sessions.find(x => x.id === sel);
+  if (!d) return;
+  $("dTitle").textContent = `${d.id} · ${d.segment}`;
+  $("dStatus").innerHTML = pill(d.status);
+  const st = [
+    [fmt(d.net), `booked of ${fmt(d.capacity)}`],
+    [`${d.pace_gap_today > 0 ? "+" : ""}${fmt(d.pace_gap_today)}`, "behind target today"],
+    [`${fmt(d.projected.mid)}`, `projected (${fmt(d.projected.low)}–${fmt(d.projected.high)})`],
+    [fmt(d.target_final), "final target"],
+    [fmt(d.gap_to_target), "gap to target"],
+    [fmt(d.gap_to_full), "gap to full"],
+    [pct(d.cancel_rate), "expected cancellations"],
+  ];
+  $("dStats").innerHTML = st.map(([v, l]) => `<div class="stat"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
+  chart(d);
+  outreachPlan(d);
+}
+
+function chart(d) {
+  const svg = $("chart"); svg.innerHTML = "";
+  const W = fitW(svg, 760), H = W < 560 ? 300 : 340, m = { l: 48, r: 16, t: 12, b: 30 };
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const s = d.series, ymax = d.capacity * 1.06;
+  const x = v => m.l + (365 - v) / 365 * (W - m.l - m.r);
+  const y = v => H - m.b - v / ymax * (H - m.t - m.b);
+  // grid + axes
+  for (const v of niceTicks(ymax, 5)) {
+    el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: css("--grid") }, svg);
+    el("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = fmt(v);
+  }
+  for (const v of (W < 560 ? [360, 240, 120, 0] : [360, 300, 240, 180, 120, 60, 0])) {
+    el("text", { x: x(v), y: H - m.b + 18, "text-anchor": "middle" }, svg).textContent = v;
+  }
+  el("text", { x: W - m.r, y: H - 2, "text-anchor": "end" }, svg).textContent = "days to session →";
+  el("line", { x1: m.l, x2: W - m.r, y1: y(d.capacity), y2: y(d.capacity), stroke: css("--ink"), "stroke-width": 1, opacity: .5 }, svg);
+  el("text", { x: m.l + 4, y: y(d.capacity) - 5 }, svg).textContent = `capacity ${fmt(d.capacity)}`;
+  // today marker
+  el("line", { x1: x(d.days_out_today), x2: x(d.days_out_today), y1: m.t, y2: H - m.b, stroke: css("--muted"), "stroke-dasharray": "2 3" }, svg);
+  el("text", { x: x(d.days_out_today) + 4, y: m.t + 10 }, svg).textContent = "today";
+
+  const path = (xs, ys) => xs.map((v, i) => `${i ? "L" : "M"}${x(v).toFixed(1)},${y(ys[i]).toFixed(1)}`).join("");
+  const area = (xs, lo, hi) => path(xs, hi) + xs.slice().reverse().map((v, i) => `L${x(v).toFixed(1)},${y(lo[lo.length - 1 - i]).toFixed(1)}`).join("") + "Z";
+  if (series.band.on) el("path", { d: area(s.days_out_all, s.p10, s.p90), fill: css("--band") }, svg);
+  if (series.proj.on) el("path", { d: area(s.days_out_fut, s.proj_low, s.proj_high), fill: css("--pband") }, svg);
+  const line = (k, xs, ys) => series[k].on && el("path", { d: path(xs, ys), fill: "none", stroke: css(series[k].color),
+    "stroke-width": series[k].w || 1.6, "stroke-dasharray": series[k].dash || "", "stroke-linejoin": "round" }, svg);
+  line("target", s.days_out_all, s.target);
+  line("gross", s.days_out_hist, s.gross);
+  line("glide", s.days_out_fut, s.glide);
+  line("proj", s.days_out_fut, s.proj_mid);
+  line("net", s.days_out_hist, s.net);
+  if (series.net.on) el("circle", { cx: x(d.days_out_today), cy: y(d.net), r: 4, fill: css("--s1") }, svg);
+  if (series.proj.on) el("circle", { cx: x(0), cy: y(d.projected.mid), r: 4, fill: css("--s2") }, svg);
+
+  // hover crosshair
+  const cross = el("line", { y1: m.t, y2: H - m.b, stroke: css("--ink"), opacity: 0, "stroke-width": 1 }, svg);
+  const hit = el("rect", { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent" }, svg);
+  const at = (xs, ys, v) => { let best = -1, bd = 1e9; xs.forEach((t, i) => { const dd = Math.abs(t - v); if (dd < bd) { bd = dd; best = i; } }); return bd <= 4 ? ys[best] : null; };
+  const tip = $("tip");
+  const move = ev => {
+    const r = svg.getBoundingClientRect();
+    const px = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+    const sx = px * W / r.width;
+    const v = Math.max(0, Math.min(365, Math.round(365 - (sx - m.l) / (W - m.l - m.r) * 365)));
+    const xs = [...new Set([...s.days_out_all])];
+    let near = xs.reduce((a, b) => Math.abs(b - v) < Math.abs(a - v) ? b : a);
+    if (Math.abs(d.days_out_today - v) < Math.abs(near - v)) near = d.days_out_today;
+    cross.setAttribute("x1", x(near)); cross.setAttribute("x2", x(near)); cross.setAttribute("opacity", .35);
+    const rows = [
+      ["Net appointments", at(s.days_out_hist, s.net, near), "--s1"],
+      ["Gross appointments", series.gross.on ? at(s.days_out_hist, s.gross, near) : null, "--s4"],
+      ["Target", at(s.days_out_all, s.target, near), "--muted"],
+      ["Projection", at(s.days_out_fut, s.proj_mid, near), "--s2"],
+      ["Glide path", at(s.days_out_fut, s.glide, near), "--s3"],
+      ["Hist. range", (() => { const lo = at(s.days_out_all, s.p10, near), hi = at(s.days_out_all, s.p90, near); return lo == null ? null : `${fmt(lo)}–${fmt(hi)}`; })(), "--muted"],
+    ].filter(r => r[1] != null);
+    tip.innerHTML = `<b>${near} days out${near === d.days_out_today ? " (today)" : ""}</b>` + rows.map(([l, v, c]) =>
+      `<div><span><span class="sw" style="background:${css(c)}"></span> ${l}</span><span>${typeof v === "number" ? fmt(v) : v}</span></div>`).join("");
+    tip.style.display = "block";
+    const tx = px + 14 + tip.offsetWidth > r.width ? px - tip.offsetWidth - 14 : px + 14;
+    tip.style.left = tx + "px"; tip.style.top = "10px";
+  };
+  hit.addEventListener("mousemove", move);
+  hit.addEventListener("touchmove", e => { move(e); e.preventDefault(); }, { passive: false });
+  hit.addEventListener("mouseleave", () => { tip.style.display = "none"; cross.setAttribute("opacity", 0); });
+}
+
+function legend() {
+  $("legend").innerHTML = Object.entries(series).map(([k, s]) => {
+    const sw = s.kind === "area" ? `<span class="sw" style="height:9px;background:${css(s.color)};border:1px solid ${css("--s1")}"></span>`
+      : `<span class="sw" style="background:${css(s.color)}"></span>`;
+    return `<button class="chip" aria-pressed="${s.on}" data-k="${k}">${sw}${s.label}</button>`;
+  }).join("");
+  [...$("legend").querySelectorAll("button")].forEach(b => b.onclick = () => { series[b.dataset.k].on = !series[b.dataset.k].on; legend(); detail(); });
+}
+
+function outreachPlan(d) {
+  const svg = $("ini"); svg.innerHTML = "";
+  const W = fitW(svg, 760), H = 150, m = { l: 48, r: 16, t: 10, b: 26 };
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const units = d.outreach[strategy] || [];
+  if (!d.eligible || !units.length) {
+    const why = d.gap_to_target <= 0 ? "No gap to target: projected to reach the target without extra actions."
+      : d.support < D.settings.min_history ? `Benchmark supported by only ${d.support} past sessions (need ${D.settings.min_history}).`
+      : `Gap of ${fmt(d.gap_to_target)} is below the minimum (${D.settings.min_gap_units} units and ${pct(D.settings.min_gap_pct, 0)} of capacity).`;
+    $("stratNote").textContent = "Not eligible. " + why;
+    el("text", { x: W / 2, y: H / 2, "text-anchor": "middle" }, svg).textContent = "No outreach plan for this session";
+    return;
+  }
+  const total = units.reduce((a, b) => a + b, 0);
+  const half = Math.ceil(units.length / 4);
+  const early = units.slice(0, half).reduce((a, b) => a + b, 0);
+  $("stratNote").textContent = `${fmt(total)} units over ${units.length} weeks · ${pct(early / total, 0)} in the first quarter of the remaining time`;
+  const ymax = Math.max(...units) * 1.15;
+  const bw = (W - m.l - m.r) / units.length;
+  const y = v => H - m.b - v / ymax * (H - m.t - m.b);
+  for (const v of niceTicks(ymax, 3)) {
+    el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: css("--grid") }, svg);
+    el("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = fmt(v);
+  }
+  units.forEach((u, i) => {
+    const r = el("rect", { x: m.l + i * bw + 1, y: y(u), width: Math.max(bw - 2, 1), height: H - m.b - y(u), fill: css(strategy === "baseline" ? "--s1" : "--s2"), rx: 2 }, svg);
+    el("title", {}, r).textContent = `week ${i + 1}: ${u.toFixed(1)} units`;
+  });
+  [1, Math.ceil(units.length / 2), units.length].forEach(w =>
+    el("text", { x: m.l + (w - 0.5) * bw, y: H - m.b + 16, "text-anchor": "middle" }, svg).textContent = `wk ${w}`);
+}
+
+function scatter(xs) {
+  const svg = $("scatter"); svg.innerHTML = "";
+  const W = fitW(svg, 520), H = W < 440 ? 280 : 300, m = { l: 46, r: 14, t: 12, b: 34 };
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const px = d => d.pace_gap_today / d.capacity, py = d => d.gap_to_target / d.capacity;
+  const all = D.sessions;
+  const xmin = Math.min(-0.02, ...all.map(px)), xmax = Math.max(0.02, ...all.map(px));
+  const ymax = Math.max(0.02, ...all.map(py)) * 1.1;
+  const x = v => m.l + (v - xmin) / (xmax - xmin) * (W - m.l - m.r);
+  const y = v => H - m.b - v / ymax * (H - m.t - m.b);
+  for (let i = 0; i <= 4; i++) {
+    const v = ymax / 4 * i;
+    el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), stroke: css("--grid") }, svg);
+    el("text", { x: m.l - 6, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = pct(v, 0);
+  }
+  el("line", { x1: x(0), x2: x(0), y1: m.t, y2: H - m.b, stroke: css("--muted"), "stroke-dasharray": "3 3" }, svg);
+  el("text", { x: m.l, y: H - 4 }, svg).textContent = "← ahead of pace";
+  el("text", { x: W - m.r, y: H - 4, "text-anchor": "end" }, svg).textContent = "behind pace today →";
+  el("text", { x: 12, y: m.t + 4, transform: `rotate(-90 12 ${m.t + 4})`, "text-anchor": "end" }, svg).textContent = "gap to target (% of capacity)";
+  const shown = new Set(xs.map(d => d.id));
+  const tip = $("tip2");
+  for (const d of all) {
+    const c = el("circle", { cx: x(px(d)), cy: y(py(d)), r: d.id === sel ? 8 : 5.5, fill: css(STATUS[d.status][1]),
+      opacity: shown.has(d.id) ? .9 : .15, stroke: d.id === sel ? css("--ink") : "none", "stroke-width": 2, style: "cursor:pointer" }, svg);
+    c.addEventListener("click", () => { if (shown.has(d.id)) select(d.id); });
+    c.addEventListener("mouseenter", () => {
+      const r = svg.getBoundingClientRect();
+      tip.innerHTML = `<b>${d.id}</b><div><span>${esc(d.segment)}</span></div><div><span>pace gap today</span><span>${fmt(d.pace_gap_today)}</span></div><div><span>gap to target</span><span>${fmt(d.gap_to_target)}</span></div>`;
+      tip.style.display = "block";
+      const cx = x(px(d)) * r.width / W, cy = y(py(d)) * r.height / H;
+      tip.style.left = (cx + 12 + tip.offsetWidth > r.width ? cx - tip.offsetWidth - 12 : cx + 12) + "px";
+      tip.style.top = Math.max(0, cy - 20) + "px";
+    });
+    c.addEventListener("mouseleave", () => tip.style.display = "none");
+  }
+}
+
+function segTable() {
+  const rows = D.segments.map(s => `<tr><td>${esc(s.segment)}</td><td>${s.sessions}</td><td>${pct(s.net / s.capacity, 0)}</td><td>${pct(s.projected / s.capacity, 0)}</td><td>${pct(s.target / s.capacity, 0)}</td><td>${fmt(s.gap)}</td></tr>`);
+  $("segTable").innerHTML = `<thead><tr><th>Segment</th><th>Sessions</th><th>Booked</th><th>Proj.</th><th>Target</th><th>Gap</th></tr></thead><tbody>${rows.join("")}</tbody>`;
+  const ok = Object.entries(D.reconciled).map(([k, v]) => `${k} ${v ? "✓" : "✗"}`).join(" · ");
+  $("recon").textContent = `Control totals: outreach plans add up exactly to each session's gap (${ok}).`;
+}
+
+function render() { const xs = filtered(); kpis(xs); list(xs); detail(); scatter(xs); }
+
+fetch("data.json").then(r => r.json()).then(data => {
+  D = data;
+  [...new Set(D.sessions.map(d => d.segment))].sort().forEach(s => $("seg").insertAdjacentHTML("beforeend", `<option>${esc(s)}</option>`));
+  $("statusChips").innerHTML = Object.entries(STATUS).map(([k, [, c, l]]) =>
+    `<button class="chip" aria-pressed="true" data-s="${k}"><span class="dot" style="background:var(${c})"></span>${l}</button>`).join(" ");
+  [...$("statusChips").querySelectorAll("button")].forEach(b => b.onclick = () => {
+    showStatus[b.dataset.s] = !showStatus[b.dataset.s]; b.setAttribute("aria-pressed", showStatus[b.dataset.s]); render(); });
+  ["seg", "sort", "q"].forEach(id => $(id).addEventListener("input", render));
+  [...$("strat").querySelectorAll("button")].forEach(b => b.onclick = () => {
+    strategy = b.dataset.s; [...$("strat").querySelectorAll("button")].forEach(x => x.classList.toggle("on", x === b)); detail(); });
+  const want = new URLSearchParams(location.search).get("d");
+  if (want) sel = want.toUpperCase();
+  legend(); segTable(); render();
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { detail(); scatter(filtered()); }, 150); });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { legend(); render(); });
+}).catch(e => { $("list").innerHTML = `<p class="why">Couldn't load data.json (${esc(e.message)}).</p>`; });
+</script>
+</body>
+</html>

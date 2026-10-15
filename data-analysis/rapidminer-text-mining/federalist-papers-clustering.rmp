@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="11.0.000">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="11.0.000" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="text:read_document" compatibility="10.1.000" expanded="true" height="68" name="Paper 5" width="90" x="112" y="34">
+        <parameter key="file" value="/Users/[redacted]/Chapter12_Federalist05_Jay.txt"/>
+        <parameter key="extract_text_only" value="true"/>
+        <parameter key="use_file_extension_as_type" value="true"/>
+        <parameter key="content_type" value="txt"/>
+        <parameter key="encoding" value="SYSTEM"/>
+      </operator>
+      <operator activated="true" class="text:read_document" compatibility="10.1.000" expanded="true" height="68" name="Paper 14" width="90" x="112" y="136">
+        <parameter key="file" value="/Users/[redacted]/Chapter12_Federalist14_Madison.txt"/>
+        <parameter key="extract_text_only" value="true"/>
+        <parameter key="use_file_extension_as_type" value="true"/>
+        <parameter key="content_type" value="txt"/>
+        <parameter key="encoding" value="SYSTEM"/>
+      </operator>
+      <operator activated="true" class="text:read_document" compatibility="10.1.000" expanded="true" height="68" name="Paper 17" width="90" x="112" y="238">
+        <parameter key="file" value="/Users/[redacted]/Chapter12_Federalist17_Hamilton.txt"/>
+        <parameter key="extract_text_only" value="true"/>
+        <parameter key="use_file_extension_as_type" value="true"/>
+        <parameter key="content_type" value="txt"/>
+        <parameter key="encoding" value="SYSTEM"/>
+      </operator>
+      <operator activated="true" class="text:read_document" compatibility="10.1.000" expanded="true" height="68" name="Paper 18" width="90" x="112" y="340">
+        <parameter key="file" value="/Users/[redacted]/Chapter12_Federalist18_Collaboration.txt"/>
+        <parameter key="extract_text_only" value="true"/>
+        <parameter key="use_file_extension_as_type" value="true"/>
+        <parameter key="content_type" value="txt"/>
+        <parameter key="encoding" value="SYSTEM"/>
+      </operator>
+      <operator activated="true" class="text:create_document" compatibility="10.1.000" expanded="true" height="68" name="Paper 3 (Jay)" width="90" x="112" y="442">
+        <parameter key="text" value="To the People of the State of New York: QUEEN ANNE, in her letter of the 1st July, 1706, to the Scotch Parliament, makes some observations on the importance of the UNION then forming between England and Scotland, which merit our attention. I shall present the public with one or two extracts from it: &quot;An entire and perfect union will be the solid foundation of lasting peace: It will secure your religion, liberty, and property; remove the animosities amongst yourselves, and the jealousies and differences betwixt our two kingdoms. It must increase your strength, riches, and trade; and by this union the whole island, being joined in affection and free from all apprehensions of different interest, will be ENABLED TO RESIST ALL ITS ENEMIES.'' &quot;We most earnestly recommend to you calmness and unanimity in this great and weighty affair, that the union may be brought to a happy conclusion, being the only EFFECTUAL way to secure our present and future happiness, and disappoint the designs of our and your enemies, who will doubtless, on this occasion, USE THEIR UTMOST ENDEAVORS TO PREVENT OR DELAY THIS UNION.''&#10;&#10;It was remarked in the preceding paper, that weakness and divisions at home would invite dangers from abroad; and that nothing would tend more to secure us from them than union, strength, and good government within ourselves. This subject is copious and cannot easily be exhausted.&#10;&#10;The history of Great Britain is the one with which we are in general the best acquainted, and it gives us many useful lessons. We may profit by their experience without paying the price which it cost them. Although it seems obvious to common sense that the people of such an island should be but one nation, yet we find that they were for ages divided into three, and that those three were almost constantly embroiled in quarrels and wars with one another. Notwithstanding their true interest with respect to the continental nations was really the same, yet by the arts and policy and practices of those nations, their mutual jealousies were perpetually kept inflamed, and for a long series of years they were far more inconvenient and troublesome than they were useful and assisting to each other.&#10;&#10;Should the people of America divide themselves into three or four nations, would not the same thing happen? Would not similar jealousies arise, and be in like manner cherished? Instead of their being &quot;joined in affection'' and free from all apprehension of different &quot;interests,'' envy and jealousy would soon extinguish confidence and affection, and the partial interests of each confederacy, instead of the general interests of all America, would be the only objects of their policy and pursuits. Hence, like most other BORDERING nations, they would always be either involved in disputes and war, or live in the constant apprehension of them.&#10;&#10;The most sanguine advocates for three or four confederacies cannot reasonably suppose that they would long remain exactly on an equal footing in point of strength, even if it was possible to form them so at first; but, admitting that to be practicable, yet what human contrivance can secure the continuance of such equality? Independent of those local circumstances which tend to beget and increase power in one part and to impede its progress in another, we must advert to the effects of that superior policy and good management which would probably distinguish the government of one above the rest, and by which their relative equality in strength and consideration would be destroyed. For it cannot be presumed that the same degree of sound policy, prudence, and foresight would uniformly be observed by each of these confederacies for a long succession of years.&#10;&#10;Whenever, and from whatever causes, it might happen, and happen it would, that any one of these nations or confederacies should rise on the scale of political importance much above the degree of her neighbors, that moment would those neighbors behold her with envy and with fear. Both those passions would lead them to countenance, if not to promote, whatever might promise to diminish her importance; and would also restrain them from measures calculated to advance or even to secure her prosperity. Much time would not be necessary to enable her to discern these unfriendly dispositions. She would soon begin, not only to lose confidence in her neighbors, but also to feel a disposition equally unfavorable to them. Distrust naturally creates distrust, and by nothing is good-will and kind conduct more speedily changed than by invidious jealousies and uncandid imputations, whether expressed or implied.&#10;&#10;The North is generally the region of strength, and many local circumstances render it probable that the most Northern of the proposed confederacies would, at a period not very distant, be unquestionably more formidable than any of the others. No sooner would this become evident than the NORTHERN HIVE would excite the same ideas and sensations in the more southern parts of America which it formerly did in the southern parts of Europe. Nor does it appear to be a rash conjecture that its young swarms might often be tempted to gather honey in the more blooming fields and milder air of their luxurious and more delicate neighbors.&#10;&#10;They who well consider the history of similar divisions and confederacies will find abundant reason to apprehend that those in contemplation would in no other sense be neighbors than as they would be borderers; that they would neither love nor trust one another, but on the contrary would be a prey to discord, jealousy, and mutual injuries; in short, that they would place us exactly in the situations in which some nations doubtless wish to see us, viz., FORMIDABLE ONLY TO EACH OTHER.&#10;&#10;From these considerations it appears that those gentlemen are greatly mistaken who suppose that alliances offensive and defensive might be formed between these confederacies, and would produce that combination and union of wills of arms and of resources, which would be necessary to put and keep them in a formidable state of defense against foreign enemies.&#10;&#10;When did the independent states, into which Britain and Spain were formerly divided, combine in such alliance, or unite their forces against a foreign enemy? The proposed confederacies will be DISTINCT NATIONS. Each of them would have its commerce with foreigners to regulate by distinct treaties; and as their productions and commodities are different and proper for different markets, so would those treaties be essentially different. Different commercial concerns must create different interests, and of course different degrees of political attachment to and connection with different foreign nations. Hence it might and probably would happen that the foreign nation with whom the SOUTHERN confederacy might be at war would be the one with whom the NORTHERN confederacy would be the most desirous of preserving peace and friendship. An alliance so contrary to their immediate interest would not therefore be easy to form, nor, if formed, would it be observed and fulfilled with perfect good faith.&#10;&#10;Nay, it is far more probable that in America, as in Europe, neighboring nations, acting under the impulse of opposite interests and unfriendly passions, would frequently be found taking different sides. Considering our distance from Europe, it would be more natural for these confederacies to apprehend danger from one another than from distant nations, and therefore that each of them should be more desirous to guard against the others by the aid of foreign alliances, than to guard against foreign dangers by alliances between themselves. And here let us not forget how much more easy it is to receive foreign fleets into our ports, and foreign armies into our country, than it is to persuade or compel them to depart. How many conquests did the Romans and others make in the characters of allies, and what innovations did they under the same character introduce into the governments of those whom they pretended to protect.&#10;&#10;Let candid men judge, then, whether the division of America into any given number of independent sovereignties would tend to secure us against the hostilities and improper interference of foreign nations.&#10;&#10;PUBLIUS."/>
+        <parameter key="add label" value="false"/>
+        <parameter key="label_type" value="nominal"/>
+      </operator>
+      <operator activated="true" class="text:create_document" compatibility="10.1.000" expanded="true" height="68" name="Paper 4 (Jay)" width="90" x="112" y="544">
+        <parameter key="text" value="To the People of the State of New York: QUEEN ANNE, in her letter of the 1st July, 1706, to the Scotch Parliament, makes some observations on the importance of the UNION then forming between England and Scotland, which merit our attention. I shall present the public with one or two extracts from it: &quot;An entire and perfect union will be the solid foundation of lasting peace: It will secure your religion, liberty, and property; remove the animosities amongst yourselves, and the jealousies and differences betwixt our two kingdoms. It must increase your strength, riches, and trade; and by this union the whole island, being joined in affection and free from all apprehensions of different interest, will be ENABLED TO RESIST ALL ITS ENEMIES.'' &quot;We most earnestly recommend to you calmness and unanimity in this great and weighty affair, that the union may be brought to a happy conclusion, being the only EFFECTUAL way to secure our present and future happiness, and disappoint the designs of our and your enemies, who will doubtless, on this occasion, USE THEIR UTMOST ENDEAVORS TO PREVENT OR DELAY THIS UNION.''&#10;&#10;It was remarked in the preceding paper, that weakness and divisions at home would invite dangers from abroad; and that nothing would tend more to secure us from them than union, strength, and good government within ourselves. This subject is copious and cannot easily be exhausted.&#10;&#10;The history of Great Britain is the one with which we are in general the best acquainted, and it gives us many useful lessons. We may profit by their experience without paying the price which it cost them. Although it seems obvious to common sense that the people of such an island should be but one nation, yet we find that they were for ages divided into three, and that those three were almost constantly embroiled in quarrels and wars with one another. Notwithstanding their true interest with respect to the continental nations was really the same, yet by the arts and policy and practices of those nations, their mutual jealousies were perpetually kept inflamed, and for a long series of years they were far more inconvenient and troublesome than they were useful and assisting to each other.&#10;&#10;Should the people of America divide themselves into three or four nations, would not the same thing happen? Would not similar jealousies arise, and be in like manner cherished? Instead of their being &quot;joined in affection'' and free from all apprehension of different &quot;interests,'' envy and jealousy would soon extinguish confidence and affection, and the partial interests of each confederacy, instead of the general interests of all America, would be the only objects of their policy and pursuits. Hence, like most other BORDERING nations, they would always be either involved in disputes and war, or live in the constant apprehension of them.&#10;&#10;The most sanguine advocates for three or four confederacies cannot reasonably suppose that they would long remain exactly on an equal footing in point of strength, even if it was possible to form them so at first; but, admitting that to be practicable, yet what human contrivance can secure the continuance of such equality? Independent of those local circumstances which tend to beget and increase power in one part and to impede its progress in another, we must advert to the effects of that superior policy and good management which would probably distinguish the government of one above the rest, and by which their relative equality in strength and consideration would be destroyed. For it cannot be presumed that the same degree of sound policy, prudence, and foresight would uniformly be observed by each of these confederacies for a long succession of years.&#10;&#10;Whenever, and from whatever causes, it might happen, and happen it would, that any one of these nations or confederacies should rise on the scale of political importance much above the degree of her neighbors, that moment would those neighbors behold her with envy and with fear. Both those passions would lead them to countenance, if not to promote, whatever might promise to diminish her importance; and would also restrain them from measures calculated to advance or even to secure her prosperity. Much time would not be necessary to enable her to discern these unfriendly dispositions. She would soon begin, not only to lose confidence in her neighbors, but also to feel a disposition equally unfavorable to them. Distrust naturally creates distrust, and by nothing is good-will and kind conduct more speedily changed than by invidious jealousies and uncandid imputations, whether expressed or implied.&#10;&#10;The North is generally the region of strength, and many local circumstances render it probable that the most Northern of the proposed confederacies would, at a period not very distant, be unquestionably more formidable than any of the others. No sooner would this become evident than the NORTHERN HIVE would excite the same ideas and sensations in the more southern parts of America which it formerly did in the southern parts of Europe. Nor does it appear to be a rash conjecture that its young swarms might often be tempted to gather honey in the more blooming fields and milder air of their luxurious and more delicate neighbors.&#10;&#10;They who well consider the history of similar divisions and confederacies will find abundant reason to apprehend that those in contemplation would in no other sense be neighbors than as they would be borderers; that they would neither love nor trust one another, but on the contrary would be a prey to discord, jealousy, and mutual injuries; in short, that they would place us exactly in the situations in which some nations doubtless wish to see us, viz., FORMIDABLE ONLY TO EACH OTHER.&#10;&#10;From these considerations it appears that those gentlemen are greatly mistaken who suppose that alliances offensive and defensive might be formed between these confederacies, and would produce that combination and union of wills of arms and of resources, which would be necessary to put and keep them in a formidable state of defense against foreign enemies.&#10;&#10;When did the independent states, into which Britain and Spain were formerly divided, combine in such alliance, or unite their forces against a foreign enemy? The proposed confederacies will be DISTINCT NATIONS. Each of them would have its commerce with foreigners to regulate by distinct treaties; and as their productions and commodities are different and proper for different markets, so would those treaties be essentially different. Different commercial concerns must create different interests, and of course different degrees of political attachment to and connection with different foreign nations. Hence it might and probably would happen that the foreign nation with whom the SOUTHERN confederacy might be at war would be the one with whom the NORTHERN confederacy would be the most desirous of preserving peace and friendship. An alliance so contrary to their immediate interest would not therefore be easy to form, nor, if formed, would it be observed and fulfilled with perfect good faith.&#10;&#10;Nay, it is far more probable that in America, as in Europe, neighboring nations, acting under the impulse of opposite interests and unfriendly passions, would frequently be found taking different sides. Considering our distance from Europe, it would be more natural for these confederacies to apprehend danger from one another than from distant nations, and therefore that each of them should be more desirous to guard against the others by the aid of foreign alliances, than to guard against foreign dangers by alliances between themselves. And here let us not forget how much more easy it is to receive foreign fleets into our ports, and foreign armies into our country, than it is to persuade or compel them to depart. How many conquests did the Romans and others make in the characters of allies, and what innovations did they under the same character introduce into the governments of those whom they pretended to protect.&#10;&#10;Let candid men judge, then, whether the division of America into any given number of independent sovereignties would tend to secure us against the hostilities and improper interference of foreign nations.&#10;&#10;PUBLIUS."/>
+        <parameter key="add label" value="false"/>
+        <parameter key="label_type" value="nominal"/>
+      </operator>
+      <operator activated="true" class="text:process_documents" compatibility="10.1.000" expanded="true" height="208" name="Process Documents" width="90" x="313" y="136">
+        <parameter key="create_word_vector" value="true"/>
+        <parameter key="vector_creation" value="TF-IDF"/>
+        <parameter key="add_meta_information" value="true"/>
+        <parameter key="keep_text" value="false"/>
+        <parameter key="prune_method" value="none"/>
+        <parameter key="prune_below_percent" value="3.0"/>
+        <parameter key="prune_above_percent" value="30.0"/>
+        <parameter key="prune_below_rank" value="0.05"/>
+        <parameter key="prune_above_rank" value="0.95"/>
+        <parameter key="datamanagement" value="double_sparse_array"/>
+        <parameter key="data_management" value="auto"/>
+        <process expanded="true">
+          <operator activated="true" class="text:tokenize" compatibility="10.1.000" expanded="true" height="68" name="Tokenize" width="90" x="45" y="34">
+            <parameter key="mode" value="non letters"/>
+            <parameter key="characters" value=".:"/>
+            <parameter key="language" value="English"/>
+            <parameter key="max_token_length" value="3"/>
+          </operator>
+          <operator activated="true" class="text:filter_stopwords_english" compatibility="10.1.000" expanded="true" height="68" name="Filter Stopwords (English)" width="90" x="179" y="34"/>
+          <operator activated="true" class="text:transform_cases" compatibility="10.1.000" expanded="true" height="68" name="Transform Cases" width="90" x="313" y="34">
+            <parameter key="transform_to" value="lower case"/>
+          </operator>
+          <operator activated="true" class="text:generate_n_grams_terms" compatibility="10.1.000" expanded="true" height="68" name="Generate n-Grams (Terms)" width="90" x="447" y="34">
+            <parameter key="max_length" value="5"/>
+          </operator>
+          <operator activated="true" class="text:replace_tokens" compatibility="10.1.000" expanded="true" height="68" name="Replace Tokens" width="90" x="581" y="34">
+            <list key="replace_dictionary"/>
+          </operator>
+          <connect from_port="document" to_op="Tokenize" to_port="document"/>
+          <connect from_op="Tokenize" from_port="document" to_op="Filter Stopwords (English)" to_port="document"/>
+          <connect from_op="Filter Stopwords (English)" from_port="document" to_op="Transform Cases" to_port="document"/>
+          <connect from_op="Transform Cases" from_port="document" to_op="Generate n-Grams (Terms)" to_port="document"/>
+          <connect from_op="Generate n-Grams (Terms)" from_port="document" to_op="Replace Tokens" to_port="document"/>
+          <connect from_op="Replace Tokens" from_port="document" to_port="document 1"/>
+          <portSpacing port="source_document" spacing="0"/>
+          <portSpacing port="sink_document 1" spacing="0"/>
+          <portSpacing port="sink_document 2" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="concurrency:k_means" compatibility="11.0.000" expanded="true" height="82" name="Clustering" width="90" x="447" y="34">
+        <parameter key="add_cluster_attribute" value="true"/>
+        <parameter key="add_as_label" value="false"/>
+        <parameter key="remove_unlabeled" value="false"/>
+        <parameter key="k" value="2"/>
+        <parameter key="max_runs" value="10"/>
+        <parameter key="determine_good_start_values" value="false"/>
+        <parameter key="measure_types" value="BregmanDivergences"/>
+        <parameter key="mixed_measure" value="MixedEuclideanDistance"/>
+        <parameter key="nominal_measure" value="NominalDistance"/>
+        <parameter key="numerical_measure" value="EuclideanDistance"/>
+        <parameter key="divergence" value="SquaredEuclideanDistance"/>
+        <parameter key="kernel_type" value="radial"/>
+        <parameter key="kernel_gamma" value="1.0"/>
+        <parameter key="kernel_sigma1" value="1.0"/>
+        <parameter key="kernel_sigma2" value="0.0"/>
+        <parameter key="kernel_sigma3" value="2.0"/>
+        <parameter key="kernel_degree" value="3.0"/>
+        <parameter key="kernel_shift" value="1.0"/>
+        <parameter key="kernel_a" value="1.0"/>
+        <parameter key="kernel_b" value="0.0"/>
+        <parameter key="max_optimization_steps" value="100"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
+      <connect from_op="Paper 5" from_port="output" to_op="Process Documents" to_port="documents 1"/>
+      <connect from_op="Paper 14" from_port="output" to_op="Process Documents" to_port="documents 2"/>
+      <connect from_op="Paper 17" from_port="output" to_op="Process Documents" to_port="documents 3"/>
+      <connect from_op="Paper 18" from_port="output" to_op="Process Documents" to_port="documents 4"/>
+      <connect from_op="Paper 3 (Jay)" from_port="output" to_op="Process Documents" to_port="documents 5"/>
+      <connect from_op="Paper 4 (Jay)" from_port="output" to_op="Process Documents" to_port="documents 6"/>
+      <connect from_op="Process Documents" from_port="example set" to_op="Clustering" to_port="example set"/>
+      <connect from_op="Process Documents" from_port="word list" to_port="result 2"/>
+      <connect from_op="Clustering" from_port="cluster model" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+    </process>
+  </operator>
+</process>

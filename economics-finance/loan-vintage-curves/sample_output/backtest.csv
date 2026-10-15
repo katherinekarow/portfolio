@@ -1,0 +1,29 @@
+cut_mob,method,mape,n,band_coverage,best_at_cut
+3,chain ladder,0.22516,52,,credibility blend
+3,credibility blend,0.11105,52,0.69231,credibility blend
+3,naive (no further defaults),0.89122,52,,credibility blend
+3,reference only,0.1164,52,,credibility blend
+6,chain ladder,0.11375,52,,credibility blend
+6,credibility blend,0.09239,52,0.71154,credibility blend
+6,naive (no further defaults),0.72192,52,,credibility blend
+6,reference only,0.10153,52,,credibility blend
+9,chain ladder,0.08133,52,,credibility blend
+9,credibility blend,0.0729,52,0.73077,credibility blend
+9,naive (no further defaults),0.53438,52,,credibility blend
+9,reference only,0.07872,52,,credibility blend
+12,chain ladder,0.04762,52,,credibility blend
+12,credibility blend,0.0472,52,0.75,credibility blend
+12,naive (no further defaults),0.37639,52,,credibility blend
+12,reference only,0.0581,52,,credibility blend
+18,chain ladder,0.01704,52,,chain ladder
+18,credibility blend,0.01902,52,0.88462,chain ladder
+18,naive (no further defaults),0.15798,52,,chain ladder
+18,reference only,0.02487,52,,chain ladder
+24,chain ladder,0.00921,52,,credibility blend
+24,credibility blend,0.00882,52,0.96154,credibility blend
+24,naive (no further defaults),0.05126,52,,credibility blend
+24,reference only,0.00944,52,,credibility blend
+30,chain ladder,0.00297,52,,chain ladder
+30,credibility blend,0.0041,52,0.96154,chain ladder
+30,naive (no further defaults),0.01031,52,,chain ladder
+30,reference only,0.00418,52,,chain ladder

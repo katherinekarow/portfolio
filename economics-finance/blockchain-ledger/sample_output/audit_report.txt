@@ -1,0 +1,66 @@
+== clean permissioned chain ==
+blocks: 85  transactions: 4193
+verdict: VALID
+checkpoint (published head hash): match
+
+== permissioned: edit tx 5 of block 28 (866829 -> 433414 cents) ==
+blocks: 85  transactions: 4193
+verdict: INVALID
+checkpoint (published head hash): match
+failed checks (block, check):
+  - block 28: merkle
+
+== permissioned: rehash tx 5 of block 28 (866829 -> 433414 cents) ==
+blocks: 85  transactions: 4193
+verdict: INVALID
+checkpoint (published head hash): match
+failed checks (block, check):
+  - block 28: consensus
+  - block 29: link
+
+== permissioned: rewrite tx 5 of block 28 (866829 -> 433414 cents) ==
+blocks: 85  transactions: 4193
+verdict: INVALID
+checkpoint (published head hash): MISMATCH
+failed checks (block, check):
+  - block 28: consensus
+  - block 29: consensus
+  - block 30: consensus
+  - block 31: consensus
+  - block 32: consensus
+  - block 33: consensus
+  - block 34: consensus
+  - block 35: consensus
+  - block 36: consensus
+  - block 37: consensus
+  - block 38: consensus
+  - block 39: consensus
+  ... 46 more
+
+== PoW 12 bits: edit tx 5 of block 28 (866829 -> 433414 cents) ==
+blocks: 85  transactions: 4193
+verdict: INVALID
+checkpoint (published head hash): match
+failed checks (block, check):
+  - block 28: merkle
+
+== PoW 12 bits: rehash tx 5 of block 28 (866829 -> 433414 cents) ==
+blocks: 85  transactions: 4193
+verdict: INVALID
+checkpoint (published head hash): match
+failed checks (block, check):
+  - block 29: link
+
+== PoW 12 bits: rewrite tx 5 of block 28 (866829 -> 433414 cents) ==
+blocks: 85  transactions: 4193
+verdict: INVALID
+checkpoint (published head hash): MISMATCH
+failed checks (block, check):
+  - block -: checkpoint
+
+== off-chain documents ==
+before: {'ok': 4003, 'mismatch': 0, 'erased': 0, 'missing': 0}
+erased ['INV-00006', 'INV-00011', 'INV-00016'] and corrupted INV-00001 off-chain
+after:  {'ok': 3999, 'mismatch': 1, 'erased': 3, 'missing': 0}
+chain still valid after erasure: True
+on-chain hash for INV-00006 is still 6cf73af66cb0d2f7..., its content is gone: True

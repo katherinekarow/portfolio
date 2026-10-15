@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Short-Notice Openings</title>
+<meta name="description" content="Clinic sessions in the next two weeks with open slots: probability each fills, expected empty slots and the recommended action (synthetic data).">
+<link rel="stylesheet" href="../assets/dash.css">
+<style>
+  .pbar { display:inline-block; width:70px; height:8px; border-radius:4px; background:var(--grid); vertical-align:middle; margin-right:6px; position:relative; overflow:hidden; }
+  .pbar i { position:absolute; left:0; top:0; bottom:0; background:var(--s1); border-radius:4px; }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Short-notice openings</h1>
+      <p class="sub">Every clinic session in the next 14 days: how likely its open slots are to fill on their own, how many will sit empty after no-shows, and what to do about it. All data is synthetic.</p>
+    </div>
+    <div class="note"><a href="../../">← Portfolio</a> · <a href="../">All dashboards</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/professional-work/dashboards">Code</a></div>
+  </header>
+
+  <section class="kpis" id="kpis" aria-label="Summary"></section>
+
+  <div class="grid2">
+    <div class="panel">
+      <h2>Expected empty slots by day</h2>
+      <p class="why">Unfilled slots plus expected no-shows, summed over the sessions on each day.</p>
+      <div class="chartwrap"><svg class="chart" id="byday" role="img" aria-label="Expected empty slots by day"></svg></div>
+    </div>
+    <div class="panel">
+      <h2>Recommended actions</h2>
+      <p class="why">Click a bar to filter the list below.</p>
+      <div class="chartwrap"><svg class="chart" id="byaction" role="img" aria-label="Sessions by action"></svg></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="controls">
+      <h2 style="margin:0;flex:1">Sessions</h2>
+      <select id="site" aria-label="Site"><option value="">All sites</option></select>
+      <select id="type" aria-label="Service"><option value="">All services</option></select>
+      <select id="act" aria-label="Action"><option value="">All actions</option></select>
+    </div>
+    <div id="tbl"></div>
+  </div>
+
+  <details class="help panel">
+    <summary>How this works</summary>
+    <ul>
+      <li>Late demand for each session is modelled as Poisson with a rate that depends on open slots and days remaining; people on the waitlist add to it. P(fill) = P(late demand ≥ open slots).</li>
+      <li>No-shows are expected at each session's historical rate, so a full session can still be overbooked safely by a fraction of its expected no-shows.</li>
+      <li>Actions, in order: overbook full sessions with ≥ 2 expected no-shows → call the waitlist if it covers the gap → partner referral push if P(fill) &lt; 30% within 5 days → SMS nearby patients if P(fill) &lt; 60% → otherwise on track.</li>
+    </ul>
+  </details>
+  <footer>Synthetic data · built with plain JavaScript and SVG</footer>
+</main>
+<script src="../assets/dash.js"></script>
+<script>
+D.load().then(data => {
+  const $ = id => document.getElementById(id), f = D.fmt, S = data.sessions;
+  const actKey = a => a.startsWith("Overbook") ? "Overbook" : a;
+  S.forEach(s => s.act = actKey(s.action));
+  const uniq = k => [...new Set(S.map(s => s[k]))].sort();
+  uniq("site").forEach(v => $("site").add(new Option(v, v)));
+  uniq("type").forEach(v => $("type").add(new Option(v, v)));
+  const ACTS = ["Partner referral push", "SMS to nearby patients", "Call waitlist", "Overbook", "On track"];
+  ACTS.forEach(v => $("act").add(new Option(v, v)));
+  const open = S.reduce((a, s) => a + s.open, 0), empty = S.reduce((a, s) => a + s.expected_empty, 0);
+  D.kpis($("kpis"), [
+    { v: S.length, l: "Sessions in the next 14 days" },
+    { v: f.int(open), l: "Open slots today" },
+    { v: f.int(empty), l: "Expected empty slots", d: "after late demand and no-shows" },
+    { v: S.filter(s => s.p_fill < 0.3 && s.open > 0).length, l: "Sessions unlikely to fill", d: "P(fill) below 30%" },
+  ]);
+  // by day (one series -> one colour, no legend)
+  const days = uniq("date"), byDay = days.map(d => S.filter(s => s.date === d).reduce((a, s) => a + s.expected_empty, 0));
+  D.hbars($("byday"), { items: days.map((d, i) => ({ label: new Date(d + "T00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }), value: byDay[i], color: D.color(0),
+    tip: `<b>${d}</b>` + D.row("Sessions", S.filter(s => s.date === d).length) + D.row("Expected empty", byDay[i].toFixed(1)) })), xFmt: v => v.toFixed(0) });
+  const actItems = ACTS.map(a => ({ label: a, value: S.filter(s => s.act === a).length, color: a === "On track" ? D.css("--neutral") : D.color(0) }));
+  D.hbars($("byaction"), { items: actItems, xFmt: v => Number.isInteger(v) ? String(v) : "" });
+  $("byaction").querySelectorAll("rect[fill='transparent']").forEach((r, i) => { r.style.cursor = "pointer"; r.addEventListener("click", () => { $("act").value = $("act").value === ACTS[i] ? "" : ACTS[i]; draw(); }); });
+  const pill = s => s.act === "On track" ? `<span class="pill neutral">${s.action}</span>` : s.act === "Overbook" ? `<span class="pill good">↑ ${s.action}</span>` : s.act === "Partner referral push" ? `<span class="pill crit">! ${s.action}</span>` : `<span class="pill warn">• ${s.action}</span>`;
+  const tbl = D.table($("tbl"), { rows: S, sortKey: "expected_empty", cols: [
+    { k: "session", label: "Session", cls: "l" }, { k: "date", label: "Date", cls: "l" }, { k: "days_left", label: "Days left" },
+    { k: "site", label: "Site", cls: "l" }, { k: "type", label: "Service", cls: "l" },
+    { k: "booked", label: "Booked", html: s => `${s.booked} / ${s.capacity}` }, { k: "open", label: "Open" }, { k: "waitlist", label: "Waitlist" },
+    { k: "p_fill", label: "P(fill)", html: s => s.open ? `<span class="pbar"><i style="width:${s.p_fill * 100}%"></i></span>${f.pct(s.p_fill, 0)}` : "full" },
+    { k: "exp_no_shows", label: "Exp. no-shows", fmt: v => v.toFixed(1) }, { k: "expected_empty", label: "Exp. empty", fmt: v => v.toFixed(1) },
+    { k: "act", label: "Action", cls: "l", html: pill } ] });
+  function draw() { const st = $("site").value, ty = $("type").value, ac = $("act").value;
+    tbl.set(S.filter(s => (!st || s.site === st) && (!ty || s.type === ty) && (!ac || s.act === ac))); }
+  ["site", "type", "act"].forEach(id => $(id).onchange = draw);
+  window.__ready = true;
+});
+</script>
+</body>
+</html>

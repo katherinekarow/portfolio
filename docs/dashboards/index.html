@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard Gallery</title>
+<meta name="description" content="Interactive dashboards re-created on synthetic clinic and farm co-op data: pacing, pricing, campaign measurement, market review, short-notice openings, quoting and comparables.">
+<link rel="stylesheet" href="assets/dash.css">
+<style>
+  .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+  .card { display:flex; flex-direction:column; gap:6px; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; text-decoration:none; color:var(--ink); box-shadow:var(--shadow); transition:border-color .15s, transform .15s; }
+  .card:hover, .card:focus-visible { border-color:var(--ink); transform:translateY(-2px); }
+  .card h2 { margin:0; font-size:1.08rem; }
+  .card .q { color:var(--muted); font-size:.9rem; margin:0; }
+  .card .tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:8px; }
+  .card .tags span { font-size:.72rem; border:1px solid var(--line); border-radius:999px; padding:2px 8px; color:var(--muted); }
+  .card .kind { font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+  .intro { max-width:820px; }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div class="intro">
+      <h1>Dashboard gallery</h1>
+      <p class="sub">I've built many kinds of dashboards for planning, pricing and operations teams. These are re-creations of the <em>types</em> of dashboard and the logic behind them, rebuilt on invented data from a clinic network and a farm co-op. Every one is interactive, and every number is computed by tested Python code.</p>
+    </div>
+    <div class="note"><a href="../">← Portfolio</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/professional-work/dashboards">Code &amp; tests</a></div>
+  </header>
+
+  <section class="cards" id="cards"></section>
+
+  <details class="help panel" style="margin-top:16px">
+    <summary>How the gallery is built</summary>
+    <ul>
+      <li>Each dashboard is a static page that reads its own <code>data.json</code>. The JSON is written by <code>python -m dashkit build</code>, so the logic (confidence intervals, Poisson fill odds, displacement pricing, nearest-neighbour search) lives in Python, where it is tested.</li>
+      <li>The two interactive calculators (quote and comparables) also run their maths in the browser; the Python versions are the reference, and the browser tests check they agree.</li>
+      <li>Shared chart code: one colour palette checked for colour-blind safety, one y-axis per chart, tooltips on every chart, and dark mode.</li>
+    </ul>
+  </details>
+  <footer>Synthetic data · no employer data, names or figures are used</footer>
+</main>
+<script>
+const DASHES = [
+  { slug: "fill-pace", kind: "Planning", title: "Fill pace & outreach plan", q: "Is each session on pace to its target, where will it land, and how much outreach does it need?", tags: ["Pacing curves", "Projection bands", "Glide paths"] },
+  { slug: "price-performance", kind: "Performance", title: "Price & performance", q: "Is revenue up because prices rose or because volume grew, and in which grade and region?", tags: ["Year-over-year", "Price/volume split", "Drill-down"] },
+  { slug: "outreach-effectiveness", kind: "Measurement", title: "Outreach effectiveness", q: "Which campaigns created extra appointments, and what did each one really cost?", tags: ["Holdout tests", "Confidence intervals", "Cost per incremental"] },
+  { slug: "market-review", kind: "Market", title: "Market price review", q: "Where do our prices sit against the market, lot by lot, and can today's feeds be trusted?", tags: ["Price index", "Heat map", "Feed health"] },
+  { slug: "same-week-openings", kind: "Operations", title: "Short-notice openings", q: "Which sessions in the next two weeks will have empty slots, and what should we do about each?", tags: ["Poisson fill odds", "No-show model", "Action rules"] },
+  { slug: "group-quote", kind: "Calculator", title: "Group screening quote", q: "What's the lowest price for a block of slots that doesn't cost the clinic money?", tags: ["Displacement pricing", "Interactive", "Monte Carlo check"] },
+  { slug: "comparables", kind: "Calculator", title: "Comparable sessions", q: "No history for a new session? Find the most similar past ones and plan against their curve.", tags: ["Nearest neighbours", "Proxy curves", "Interactive"] },
+];
+document.getElementById("cards").innerHTML = DASHES.map(d => `<a class="card" href="${d.slug}/"><span class="kind">${d.kind}</span><h2>${d.title}</h2><p class="q">${d.q}</p><div class="tags">${d.tags.map(t => `<span>${t}</span>`).join("")}</div></a>`).join("");
+</script>
+</body>
+</html>

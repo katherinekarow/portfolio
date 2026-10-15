@@ -1,0 +1,287 @@
+[
+  {
+    "key": "professional-work",
+    "title": "💼 Professional work",
+    "summary": "The techniques I use at work, applied to invented data from a clinic network and a farm co-op. Every project runs, and its tests prove it does what the write-up says.",
+    "projects": [
+      {
+        "demo": "https://katherinekarow.github.io/portfolio/dashboards/fill-pace/",
+        "demo_label": "Interactive fill dashboard",
+        "title": "Clinic capacity planning: fill targets, glide paths & outreach sizing",
+        "summary": "A planning product for a clinic network's screening sessions: it turns appointment pace into targets, projections and gap-to-target, then sizes the outreach needed to close the gap, with a config-driven pipeline, SQL layer, notebook and live dashboard.",
+        "tools": "Python (pandas, NumPy), SQL (Snowflake dialect), YAML config, pytest, Jupyter, JavaScript (SVG)",
+        "path": "professional-work/capacity-planning",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/professional-work/capacity-planning"
+      },
+      {
+        "demo": "https://katherinekarow.github.io/portfolio/dashboards/",
+        "demo_label": "Open the gallery",
+        "title": "Dashboard gallery: seven interactive dashboards and the logic behind them",
+        "summary": "Re-creations of the kinds of dashboards I build for planning, pricing and operations teams, on invented clinic-network and farm co-op data. Every number is computed by tested Python, and every page is interactive.",
+        "tools": "Python (pandas, NumPy, SciPy), statistics (holdout tests, Poisson models), JavaScript, SVG, Playwright, pytest",
+        "path": "professional-work/dashboards",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/professional-work/dashboards"
+      },
+      {
+        "demo": "https://katherinekarow.github.io/portfolio/assistant/",
+        "demo_label": "Ask the assistant",
+        "title": "Data knowledge assistant: catalog, glossary, lineage & grounded Q&A",
+        "summary": "A self-service assistant for a clinic network's appointment-planning data. It answers \"what is this view, where does this column live, what feeds what, what does this term mean?\" from a validated catalog, with sources for every answer, as a static web app and a Python package.",
+        "tools": "Python (PyYAML, networkx), information retrieval (BM25), JavaScript, GitHub Pages, Playwright, pytest",
+        "path": "professional-work/knowledge-assistant",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/professional-work/knowledge-assistant"
+      },
+      {
+        "title": "Market price intelligence: product matching, feed monitoring & price index",
+        "summary": "A pipeline that tells a farm co-op where its prices sit against competing suppliers: it matches their listings to the co-op's lots, cleans a daily price feed with every common defect planted, and computes a price index that only uses data it can trust.",
+        "tools": "Python (pandas, SciPy assignment, difflib), pytest",
+        "path": "professional-work/market-prices",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/professional-work/market-prices"
+      },
+      {
+        "title": "Buyer-order reconciliation & substitution bids (farm co-op)",
+        "summary": "Daily and weekly reconciliation between a buyer marketplace and a farm co-op's invoicing system, plus an optimizer that decides which grade-substitution bids to accept. Runnable, tested, with an Excel exception report.",
+        "tools": "Python (pandas, NumPy, SciPy MILP), Excel automation (openpyxl, XlsxWriter), pytest",
+        "path": "professional-work/order-reconciliation",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/professional-work/order-reconciliation"
+      },
+      {
+        "title": "Produce pricing: elasticity, constrained price optimization & handover",
+        "summary": "A pricing model for a farm co-op: estimates how price-sensitive each market segment and produce grade is, recommends prices within harvest volume, guardrails and a grade ladder, and comes with plain-SQL validation checks for whoever runs it next.",
+        "tools": "Python (pandas, NumPy), regression (log-log OLS, empirical-Bayes shrinkage), optimization, SQL, pytest",
+        "path": "professional-work/produce-pricing",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/professional-work/produce-pricing"
+      },
+      {
+        "title": "SQL performance tuning: measured, explained and checked for correctness",
+        "summary": "A benchmark on 1M clinic appointments and 2.5M status events: five slow-query patterns, each with query plans before and after, timings, and a check that the results didn't change, except where the old query was wrong.",
+        "tools": "SQL (SQLite here; the same patterns apply to Snowflake and Oracle), query plans (EXPLAIN), indexing, Python, pytest",
+        "path": "professional-work/query-tuning",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/professional-work/query-tuning"
+      },
+      {
+        "title": "Legacy report migration kit: Oracle → Snowflake translator, column audit & parity harness",
+        "summary": "Tools for moving a clinic network's legacy Oracle reports onto a modern warehouse: a rule-based SQL translator that logs every change, an output-column audit that finds the cause of \"merged\" columns, a parity harness that explains every difference, and a migration-wave planner.",
+        "tools": "SQL (Oracle, Snowflake, SQLite), Python (pandas), pytest",
+        "path": "professional-work/report-migration",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/professional-work/report-migration"
+      },
+      {
+        "title": "Clinic data warehouse: layers, lineage, linting & data contracts",
+        "summary": "A working mini-warehouse for a clinic network's appointment data: SQL models built in dependency order, a convention linter, data contracts and generated documentation, so everyone can see what feeds what and broken data can't reach a report quietly.",
+        "tools": "SQL (SQLite here, written to port to Snowflake), Python (networkx, matplotlib), pytest, data modelling, data governance",
+        "path": "professional-work/warehouse-governance",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/professional-work/warehouse-governance"
+      }
+    ]
+  },
+  {
+    "key": "analytics-methods",
+    "title": "📐 Analytical methods",
+    "summary": "The analysis techniques behind my projects (clustering, historical and velocity analysis, scatter and regression, statistics and quality control, optimisation) with the maths, the formulas, and tested code.",
+    "projects": [
+      {
+        "title": "Cluster analysis: finding booking-behaviour segments",
+        "summary": "Scaling, distance measures, k-means++, choosing k (elbow, silhouette, gap), Ward hierarchy, PCA, validation and segment profiling, written from scratch in NumPy and checked against four segments planted in synthetic clinic data.",
+        "tools": "Python (NumPy, pandas, matplotlib; SciPy only to draw the dendrogram), pytest (SciPy and scikit-learn as independent cross-checks)",
+        "path": "analytics-methods/cluster-analysis",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/analytics-methods/cluster-analysis"
+      },
+      {
+        "title": "Historical comparisons & order velocity: reading demand against its own past",
+        "summary": "Weekday-aligned YoY, rolling sums, lead-time velocity curves, pace projections with intervals, classical decomposition, forecasting baselines with a rolling-origin backtest, CUSUM change detection and cohort triangles, written from scratch in NumPy/pandas and checked against planted structure.",
+        "tools": "Python (NumPy, pandas, matplotlib), pytest",
+        "path": "analytics-methods/historical-velocity-analysis",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/analytics-methods/historical-velocity-analysis"
+      },
+      {
+        "title": "Optimisation & decision maths: from linear programs to expected value",
+        "summary": "A from-scratch toolkit for planning and decision problems: simplex with shadow prices and sensitivity ranges, transportation, knapsack and branch-and-bound, the Hungarian algorithm, Newton and golden-section pricing, Lagrange budget splits, decision trees, EVPI and the newsvendor rule, each checked against brute force, closed forms or SciPy.",
+        "tools": "Python (NumPy, pandas, Matplotlib), SciPy (as an independent check in tests only), pytest",
+        "path": "analytics-methods/optimization-decisions",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/analytics-methods/optimization-decisions"
+      },
+      {
+        "title": "Scatter, correlation & regression: reading relationships honestly",
+        "summary": "Correlation, OLS with full inference, log-log elasticity, diagnostics, confounding and robust fits, written from scratch in NumPy and tested against data where the true relationships are known.",
+        "tools": "Python (NumPy, pandas, SciPy for the t / χ² distributions, matplotlib), pytest",
+        "path": "analytics-methods/scatter-regression",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/analytics-methods/scatter-regression"
+      },
+      {
+        "title": "Statistics & quality control: from a confidence interval to a control chart",
+        "summary": "A from-scratch toolkit for everyday statistics and process quality: descriptive stats and the core distributions, confidence intervals and tests, control charts with CUSUM and EWMA, capability indices, Pareto/ABC and Gini, queueing formulas checked by simulation, and Monte Carlo with tornado sensitivity, each validated against hand calculations, closed forms or SciPy.",
+        "tools": "Python (NumPy, pandas, Matplotlib), SciPy (probability tables, and as an independent check in tests), pytest",
+        "path": "analytics-methods/statistics-quality",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/analytics-methods/statistics-quality"
+      }
+    ]
+  },
+  {
+    "key": "recent-work",
+    "title": "🚀 Recent work",
+    "summary": "What I've been building lately — written up as case studies, since the source code for these lives in private repositories.",
+    "projects": [
+      {
+        "title": "Reproducible developer environment",
+        "summary": "A version-controlled setup that rebuilds a full development machine — packages, runtimes, editor and shell — from a few files.",
+        "tools": "Homebrew (Brewfile), conda, zsh, VS Code, Git, shell scripting",
+        "path": "recent-work/dev-environment-setup",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/recent-work/dev-environment-setup"
+      },
+      {
+        "title": "Keyless Google Cloud access from GitHub Actions",
+        "summary": "Replaced a long-lived service-account key stored in CI with short-lived, keyless credentials (Workload Identity Federation).",
+        "tools": "GitHub Actions (OIDC), Google Cloud IAM, Workload Identity Federation, Python (google-auth)",
+        "path": "recent-work/keyless-ci-auth",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/recent-work/keyless-ci-auth"
+      },
+      {
+        "title": "Media library & catalog app",
+        "summary": "A full-stack app for cataloging books, manga and anime: shared catalog, personal shelves, barcode scanning and admin import tools.",
+        "tools": "React 18, React Router, Vite, Supabase (Postgres, Auth, Storage, Edge Functions), SQL, GitHub Actions",
+        "path": "recent-work/media-library-app",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/recent-work/media-library-app"
+      }
+    ]
+  },
+  {
+    "key": "data-analysis",
+    "title": "📊 Data analysis & BI",
+    "summary": "Tableau dashboards, clustering, forecasting and text mining on real-world and sample datasets.",
+    "projects": [
+      {
+        "title": "How does a country's quality of life affect mortality?",
+        "summary": "Interactive Tableau story on the cost of a healthy diet, food affordability, GDP and mortality around the world.",
+        "tools": "Tableau (dashboards, maps, forecasting), data blending",
+        "path": "data-analysis/global-food-affordability",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/data-analysis/global-food-affordability"
+      },
+      {
+        "title": "Google Play app segmentation & marketing strategy",
+        "summary": "Clustered Google Play Store apps by rating, reviews, installs and price, then built a marketing budget plan per segment.",
+        "tools": "R (tidyverse, cluster), K-means, hierarchical clustering",
+        "path": "data-analysis/google-play-app-clustering",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/data-analysis/google-play-app-clustering"
+      },
+      {
+        "title": "Home health care providers",
+        "summary": "Mapped and summarized home-health providers and patient volumes from a public U.S. survey dataset.",
+        "tools": "Tableau (maps, aggregation)",
+        "path": "data-analysis/home-health-providers",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/data-analysis/home-health-providers"
+      },
+      {
+        "title": "Hospital revenue & procedure analysis",
+        "summary": "Table calculations, cohorts, rankings and a what-if parameter on hospital revenue data.",
+        "tools": "Tableau (table calculations, LOD-style dimensions, parameters)",
+        "path": "data-analysis/hospital-revenue-analysis",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/data-analysis/hospital-revenue-analysis"
+      },
+      {
+        "title": "Predictive models & market-basket analysis in RapidMiner",
+        "summary": "Classification and association-rule models built as visual RapidMiner workflows.",
+        "tools": "RapidMiner Studio (decision trees, linear discriminant analysis, FP-Growth, association rules)",
+        "path": "data-analysis/rapidminer-predictive-models",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/data-analysis/rapidminer-predictive-models"
+      },
+      {
+        "title": "Text mining in RapidMiner",
+        "summary": "Turned unstructured text — reviews, support messages and historical essays — into clusters, keywords and themes.",
+        "tools": "RapidMiner Studio (tokenizing, stemming, TF-IDF, n-grams, K-means, FP-Growth, PCA)",
+        "path": "data-analysis/rapidminer-text-mining",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/data-analysis/rapidminer-text-mining"
+      },
+      {
+        "title": "Superstore sales: forecasting, trend lines & clustering",
+        "summary": "Forecasted sales, fitted regression trend lines and clustered customers by profit and sales.",
+        "tools": "Tableau (forecasting, clustering, regression)",
+        "path": "data-analysis/superstore-forecasting-clustering",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/data-analysis/superstore-forecasting-clustering"
+      }
+    ]
+  },
+  {
+    "key": "economics-finance",
+    "title": "💹 Economics & finance",
+    "summary": "Finance, economics and pricing methods as tested code: a formula toolkit, credit vintage curves, marketing ROI, overbooking economics and a ledger lab.",
+    "projects": [
+      {
+        "title": "Blockchain ledger vs database: a settlement data-management lab",
+        "summary": "A from-scratch hash-linked ledger (Merkle trees, proof of work, a permissioned signer set, UTXO and account models, off-chain documents) run on the same settlement workload as a SQLite database, so tamper evidence, storage, speed and erasure can be compared with real numbers.",
+        "tools": "Python (hashlib, sqlite3, pandas, NumPy, matplotlib), SQL, graph cycle detection, pytest",
+        "path": "economics-finance/blockchain-ledger",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/economics-finance/blockchain-ledger"
+      },
+      {
+        "demo": "https://katherinekarow.github.io/portfolio/formulas/",
+        "demo_label": "Open the formula calculator",
+        "title": "Finance & demand-analytics formula toolkit",
+        "summary": "40 finance, economics and demand-analytics formulas, including NPV/IRR, amortisation, elasticities, curve normalisation, gross vs net targets and credibility weighting, as a tested Python package with an in-browser calculator.",
+        "tools": "Python, pytest, JavaScript, Playwright",
+        "path": "economics-finance/formula-toolkit",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/economics-finance/formula-toolkit"
+      },
+      {
+        "title": "Loan vintage curves: reference bands, credibility projection & loss vs plan",
+        "summary": "Vintage analysis for a synthetic consumer-loan book: cumulative default curves by months on book, seasoned reference bands, lifetime projections that blend each vintage's own pace with the reference by Bühlmann credibility, and a back-test of how well that works.",
+        "tools": "Python (pandas, NumPy, matplotlib), survival/hazard simulation, chain ladder, Bühlmann-Straub credibility, pytest",
+        "path": "economics-finance/loan-vintage-curves",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/economics-finance/loan-vintage-curves"
+      },
+      {
+        "title": "Marketing budget allocation & ROI: response curves, optimal split, NPV and A/B test design",
+        "summary": "Fits media response curves to weekly sales, splits a $500k digital budget so every channel earns the same marginal return, prices the plan (NPV, IRR, payback, ROI range from 5,000 simulations) and sizes the A/B tests that check it.",
+        "tools": "Python (NumPy, pandas, SciPy, matplotlib), nonlinear least squares, constrained optimisation (SLSQP, KKT check), discounted cash flow, Monte Carlo simulation, power analysis, pytest",
+        "path": "economics-finance/marketing-roi",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/economics-finance/marketing-roi"
+      },
+      {
+        "demo": "https://katherinekarow.github.io/portfolio/overbooking/",
+        "demo_label": "Try the overbooking calculator",
+        "title": "Overbooking economics: how many patients to book into a session",
+        "summary": "Exact expected profit for every booking limit when patients may not show, three ways to find the best limit (they agree), show-rate estimation with empirical-Bayes shrinkage, a Monte Carlo check, and an interactive calculator that runs the same maths in the browser.",
+        "tools": "Python (NumPy, SciPy, pandas, matplotlib), probability (binomial, beta-binomial, Poisson), empirical Bayes, Monte Carlo, JavaScript (SVG), Playwright, pytest",
+        "path": "economics-finance/overbooking-economics",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/economics-finance/overbooking-economics"
+      }
+    ]
+  },
+  {
+    "key": "python-fundamentals",
+    "title": "🐍 Python fundamentals",
+    "summary": "Early programming work: classes, input handling, exceptions and loops — kept here to show where things started.",
+    "projects": [
+      {
+        "title": "Date class",
+        "summary": "A Python class that stores, validates, parses and formats calendar dates (ISO and \"Month D, YYYY\" styles), with a demo script.",
+        "tools": "Python (classes, private attributes, string parsing)",
+        "path": "python-fundamentals/date-class",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/python-fundamentals/date-class"
+      },
+      {
+        "title": "Small exercises",
+        "summary": "Bite-sized programs on loops, input validation and exception handling.",
+        "tools": "Python",
+        "path": "python-fundamentals/small-exercises",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/python-fundamentals/small-exercises"
+      }
+    ]
+  },
+  {
+    "key": "fun",
+    "title": "🎲 Just for fun",
+    "summary": "Small games and toys. Start with the Sudoku!",
+    "projects": [
+      {
+        "demo": "https://katherinekarow.github.io/portfolio/sudoku/",
+        "demo_label": "Play in the browser",
+        "title": "🧩 Sudoku generator & game",
+        "summary": "Generates Sudoku puzzles with exactly one solution — play in the browser, in the terminal, or solve the daily puzzle.",
+        "tools": "Python, JavaScript, GitHub Pages, GitHub Actions",
+        "path": "fun/sudoku",
+        "url": "https://github.com/katherinekarow/portfolio/tree/main/fun/sudoku"
+      }
+    ]
+  }
+]

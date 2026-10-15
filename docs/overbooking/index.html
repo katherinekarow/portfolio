@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overbooking Calculator</title>
+<meta name="description" content="How many patients should a clinic book into a session when some won't show? Exact expected profit by booking limit from binomial and beta-binomial show-up models (synthetic data).">
+<link rel="stylesheet" href="../dashboards/assets/dash.css">
+<style>
+  .controls label.f input { width:100px; }
+  .presets { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+  .presets button { font:inherit; font-size:.8rem; border:1px solid var(--line); background:var(--panel); color:var(--ink); padding:5px 11px; border-radius:999px; cursor:pointer; }
+  .presets button:hover { border-color:var(--muted); }
+  .warn-msg { color:var(--crit); font-size:.85rem; margin:0 0 10px; }
+  svg.chart .opt-label { fill:var(--ink); font-weight:600; }
+  @media (max-width:560px) { .controls label.f input { width:84px; } }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Overbooking calculator</h1>
+      <p class="sub">A session has a fixed number of slots and some booked patients don't show. Book too few and slots sit empty; book too many and patients who do show have to be rescheduled. This page computes the exact expected profit for every booking limit and picks the best one. All data is synthetic.</p>
+    </div>
+    <div class="note"><a href="../">← Portfolio</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/economics-finance/overbooking-economics">Code</a></div>
+  </header>
+
+  <div class="presets" id="presets" aria-label="Presets"></div>
+  <div class="panel controls" style="gap:14px">
+    <label class="f">Slots per session<input type="number" id="C" min="1" max="300" step="1"></label>
+    <label class="f">Show-up rate (%)<input type="number" id="p" min="30" max="99.9" step="0.5"></label>
+    <label class="f">Revenue per visit ($)<input type="number" id="r" min="1" step="10"></label>
+    <label class="f">Bump cost ($)<input type="number" id="b" min="0" step="10"></label>
+    <label class="f">Over-dispersion ρ<input type="number" id="rho" min="0" max="0.5" step="0.01"></label>
+    <label class="f">Requests λ (0 = unlimited)<input type="number" id="lam" min="0" step="1"></label>
+  </div>
+  <p class="warn-msg" id="warn" hidden></p>
+
+  <section class="kpis" id="kpis" aria-label="Best booking limit"></section>
+
+  <div class="grid2">
+    <div class="panel">
+      <h2>Expected profit by booking limit</h2>
+      <p class="why">Profit per session = revenue × patients seen − bump cost × patients bumped, computed exactly from the show-up distribution. The dot marks the best limit.</p>
+      <div class="chartwrap"><svg class="chart" id="profit" role="img" aria-label="Expected profit per session by booking limit"></svg></div>
+    </div>
+    <div class="panel">
+      <h2>Empty slots and bumped patients</h2>
+      <p class="why">Both in patients per session. Raising the limit swaps empty slots for bumps; the best limit stops where the next booking's expected bump cost outweighs its expected revenue.</p>
+      <div class="chartwrap"><svg class="chart" id="trade" role="img" aria-label="Expected empty slots and bumped patients by booking limit"></svg></div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Limits around the best one</h2>
+    <div id="tbl"></div>
+  </div>
+
+  <details class="help panel">
+    <summary>How this works</summary>
+    <ul>
+      <li>Show-ups out of <i>n</i> booked are binomial(<i>n</i>, <i>p</i>); with over-dispersion ρ &gt; 0 the session's show rate itself varies (beta-binomial with the same mean and intra-session correlation ρ), which fattens both tails.</li>
+      <li>Booking one more patient adds <i>p</i>·[<i>r</i> − (<i>r</i> + <i>b</i>)·P(<i>S</i> ≥ <i>C</i>)] for binomial show-ups, so the best limit is the first one where P(at least <i>C</i> show) reaches the critical ratio <i>r</i> / (<i>r</i> + <i>b</i>).</li>
+      <li>With requests ~ Poisson(λ), bookings are min(requests, limit). Demand scales the value of a higher limit but never flips its sign, so the best limit barely moves; the profit it earns falls.</li>
+      <li>The same functions run in Python (<code>overbook.profit</code>), and a browser test checks that this page returns the same best limit and profit for a grid of inputs.</li>
+    </ul>
+  </details>
+  <footer>Synthetic data · plain JavaScript and SVG</footer>
+</main>
+<script src="../dashboards/assets/dash.js"></script>
+<script>
+// ---- exact model: a line-for-line port of overbook/showup.py + overbook/profit.py ----
+const REL_TOL = 1e-9, P_EPS = 1e-9;
+function defaultLmax(C, p) { return Math.ceil(2 * C / Math.max(p, 0.05)) + 10; }
+
+function showupPmf(n, p, rho) {            // P(S = k), k = 0..n (binomial, or beta-binomial when rho > 0)
+  if (n <= 0) return [1];
+  p = Math.min(Math.max(p, P_EPS), 1 - P_EPS);
+  let a = 0, b = 0;
+  if (rho > 0) { const k = (1 - rho) / rho; a = p * k; b = (1 - p) * k; }
+  const logp = [0]; let acc = 0;
+  for (let k = 0; k < n; k++) {
+    acc += Math.log((n - k) / (k + 1)) + (rho > 0 ? Math.log((k + a) / (n - k - 1 + b)) : Math.log(p / (1 - p)));
+    logp.push(acc);
+  }
+  const mx = Math.max(...logp), w = logp.map(v => Math.exp(v - mx)), s = w.reduce((x, y) => x + y, 0);
+  return w.map(v => v / s);
+}
+
+function sessionTable(C, p, r, b, rho, lmax) {
+  const t = { served: [], bumps: [], empty: [], shows: [], pbump: [], profit: [] };
+  for (let n = 0; n <= lmax; n++) {
+    const f = showupPmf(n, p, rho);
+    let sv = 0, bu = 0, em = 0, sh = 0, pb = 0;
+    for (let s = 0; s <= n; s++) {
+      sv += f[s] * Math.min(s, C); bu += f[s] * Math.max(s - C, 0); em += f[s] * Math.max(C - s, 0); sh += f[s] * s;
+      if (s > C) pb += f[s];
+    }
+    t.served.push(sv); t.bumps.push(bu); t.empty.push(em); t.shows.push(sh); t.pbump.push(pb);
+    t.profit.push(r * sv - b * bu);
+  }
+  return t;
+}
+
+function poissonPmf(lam, nmax) {
+  const out = []; let lf = 0;
+  for (let n = 0; n <= nmax; n++) { if (n > 0) lf += Math.log(n); out.push(Math.exp(-lam + n * Math.log(lam) - lf)); }
+  return out;
+}
+
+function profitCurve(C, p, r, b, rho = 0, lam = 0, lmax = null) {
+  lmax = lmax ?? defaultLmax(C, p);
+  const t = sessionTable(C, p, r, b, rho, lmax), n = lmax + 1;
+  const keys = ["served", "bumps", "empty", "shows", "pbump", "profit"];
+  t.booked = Array.from({ length: n }, (_, i) => i);
+  if (!lam || lam <= 0) return { limit: t.booked.slice(), ...t };
+  const pois = poissonPmf(lam, n - 1), out = { limit: t.booked.slice() };
+  const sf = []; let c = 0;
+  for (let L = 0; L < n; L++) { sf.push(Math.max(0, 1 - c)); c += pois[L]; }
+  for (const k of [...keys, "booked"]) {
+    const x = t[k], col = []; let before = 0;
+    for (let L = 0; L < n; L++) { col.push(before + sf[L] * x[L]); before += pois[L] * x[L]; }
+    out[k] = col;
+  }
+  return out;
+}
+
+function optimalLimit(C, p, r, b, rho = 0, lam = 0, lmax = null) {
+  const cur = profitCurve(C, p, r, b, rho, lam, lmax), pr = cur.profit;
+  const best = Math.max(...pr), tol = REL_TOL * r * Math.max(C, 1);
+  const L = pr.findIndex(v => v >= best - tol);
+  return { limit: L, profit: pr[L], bumps: cur.bumps[L], empty: cur.empty[L], pbump: cur.pbump[L], atEdge: L === pr.length - 1, curve: cur };
+}
+window.overbook = { showupPmf, profitCurve, optimalLimit, defaultLmax };
+
+// ---- page ----
+const ids = ["C", "p", "r", "b", "rho", "lam"];
+const $ = id => document.getElementById(id);
+function readInputs() {
+  const B = window.DATA.bounds, v = {};
+  for (const k of ids) {
+    let x = parseFloat($(k).value);
+    if (k === "p") x = x / 100;
+    if (!isFinite(x)) x = window.DATA.defaults[k];
+    v[k] = Math.min(Math.max(x, B[k][0]), B[k][1]);
+  }
+  v.C = Math.round(v.C);
+  return v;
+}
+function setInputs(d) { for (const k of ids) $(k).value = k === "p" ? +(d.p * 100).toFixed(2) : d[k]; }
+
+function markIndex(svg, pathIdx, i, label, color) {
+  // read the drawn line's own vertex so the marker sits exactly on it
+  const path = svg.querySelectorAll("path[fill='none']")[pathIdx];
+  const pts = path.getAttribute("d").split(/[ML]/).filter(Boolean).map(s => s.split(",").map(Number));
+  const [x, y] = pts[i];
+  const vb = svg.viewBox.baseVal;
+  D.el("line", { x1: x, x2: x, y1: 14, y2: vb.height - 30, stroke: D.css("--muted"), "stroke-dasharray": "3 3" }, svg);
+  if (color) D.el("circle", { cx: x, cy: y, r: 5.5, fill: color, stroke: D.css("--panel"), "stroke-width": 2 }, svg);
+  if (label) {
+    const right = x > vb.width * 0.7;
+    const t = D.el("text", { x: right ? x - 8 : x + 8, y: Math.max(y - 10, 24), "text-anchor": right ? "end" : "start", class: "opt-label" }, svg);
+    t.textContent = label;
+  }
+}
+
+function render() {
+  const v = readInputs();
+  const o = optimalLimit(v.C, v.p, v.r, v.b, v.rho, v.lam);
+  const cur = o.curve, n = cur.limit.length;
+  const lo = Math.max(0, Math.floor(v.C * 0.8) - 1), hi = Math.min(n - 1, o.limit + Math.max(5, Math.ceil(v.C * 0.25)));
+  const sl = a => a.slice(lo, hi + 1), xs = sl(cur.limit), i0 = o.limit - lo;
+  const atCap = cur.profit[Math.min(v.C, n - 1)];
+
+  $("warn").hidden = !o.atEdge;
+  $("warn").textContent = o.atEdge ? "The best limit is at the edge of the range searched: bumps are nearly free relative to revenue, so the model keeps adding bookings." : "";
+
+  D.kpis($("kpis"), [
+    { v: o.limit, l: "Best booking limit", d: `${o.limit - v.C >= 0 ? "+" : ""}${o.limit - v.C} vs ${v.C} slots` },
+    { v: D.fmt.usd(o.profit), l: "Expected profit / session", d: `${D.fmt.usd(o.profit - atCap)} vs booking to capacity` },
+    { v: D.fmt.num(o.empty, 2), l: "Expected empty slots", d: `of ${v.C}` },
+    { v: D.fmt.num(o.bumps, 2), l: "Expected bumped patients", d: "per session" },
+    { v: D.fmt.pct(o.pbump), l: "Sessions with ≥ 1 bump", d: "service-level view" },
+    { v: D.fmt.num(v.r / (v.r + v.b), 3), l: "Critical ratio r / (r + b)", d: "target P(≥ C show)" },
+  ]);
+
+  const c1 = D.color(0), c2 = D.color(1);
+  D.line($("profit"), { x: xs, series: [{ name: "Expected profit", values: sl(cur.profit), color: c1 }], yFmt: D.fmt.usd, title: "Limit ", xTicks: 8 });
+  markIndex($("profit"), 0, i0, `best ${o.limit}: ${D.fmt.usd(o.profit)}`, c1);
+  D.line($("trade"), { x: xs, series: [{ name: "Empty slots", values: sl(cur.empty), color: c1 }, { name: "Bumped patients", values: sl(cur.bumps), color: c2 }],
+    yFmt: v => D.fmt.num(v, 1), yMin: 0, title: "Limit ", xTicks: 8 });
+  markIndex($("trade"), 0, i0, `best ${o.limit}`, null);
+  $("legend").innerHTML = `<span><span class="sw" style="background:${c1}"></span>Empty slots</span><span><span class="sw" style="background:${c2}"></span>Bumped patients</span>`;
+
+  const rows = [];
+  for (let L = Math.max(0, o.limit - 3); L <= Math.min(n - 1, o.limit + 3); L++)
+    rows.push({ limit: L, profit: cur.profit[L], diff: cur.profit[L] - o.profit, empty: cur.empty[L], bumps: cur.bumps[L], pbump: cur.pbump[L] });
+  D.table($("tbl"), { sortKey: "limit", desc: false, rows, cols: [
+    { k: "limit", label: "Limit", cls: "l", html: r => r.limit === o.limit ? `<b>${r.limit}</b> <span class="pill good">best</span>` : r.limit },
+    { k: "profit", label: "Profit / session", fmt: D.fmt.usd2 },
+    { k: "diff", label: "vs best", fmt: v => (v < -0.005 ? "−" + D.fmt.usd2(-v) : "—") },
+    { k: "empty", label: "Empty slots", fmt: v => D.fmt.num(v, 2) },
+    { k: "bumps", label: "Bumped", fmt: v => D.fmt.num(v, 2) },
+    { k: "pbump", label: "P(≥1 bump)", fmt: v => D.fmt.pct(v) },
+  ] });
+  window.__last = { limit: o.limit, profit: o.profit };
+}
+
+D.load("data.json").then(d => {
+  window.DATA = d;
+  setInputs(d.defaults);
+  const box = $("presets");
+  d.presets.forEach(pr => {
+    const bt = D.h("button", { type: "button" }, pr.name);
+    bt.onclick = () => { setInputs(pr); render(); };
+    box.appendChild(bt);
+  });
+  ids.forEach(k => $(k).addEventListener("input", render));
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(render, 250); });   // after dash.js redraws, re-add markers
+  render();
+  window.__ready = true;
+}).catch(e => { document.querySelector("main").insertAdjacentHTML("beforeend", `<p class="warn-msg">Could not load data.json (${e.message}).</p>`); });
+</script>
+</body>
+</html>

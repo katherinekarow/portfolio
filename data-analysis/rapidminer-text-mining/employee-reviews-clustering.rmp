@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process version="9.10.001">
+  <operator activated="true" class="read_csv" compatibility="9.10.001" expanded="true" height="68" name="Read CSV" width="90" x="45" y="34">
+    <parameter key="csv_file" value=""/>
+    <parameter key="first_row_as_names" value="true"/>
+    <parameter key="encoding" value="UTF-8"/>
+    <list key="annotations"/>
+    <list key="data_set_meta_data_information"/>
+  </operator>
+  <operator activated="true" class="process_documents_from_file" compatibility="9.10.001" expanded="true" height="82" name="Process Documents from File" width="90" x="179" y="34">
+    <process expanded="true">
+      <operator activated="true" class="tokenize" compatibility="9.10.001" expanded="true" height="68" name="Tokenize" width="90" x="45" y="34">
+        <parameter key="mode" value="non-letters"/>
+      </operator>
+      <operator activated="true" class="transform_cases" compatibility="9.10.001" expanded="true" height="68" name="Transform Cases" width="90" x="179" y="34">
+        <parameter key="transform_to" value="lower"/>
+      </operator>
+      <operator activated="true" class="filter_stopwords_english" compatibility="9.10.001" expanded="true" height="68" name="Filter Stopwords" width="90" x="313" y="34"/>
+      <operator activated="true" class="stem_porter" compatibility="9.10.001" expanded="true" height="68" name="Stem (Porter Stemmer)" width="90" x="447" y="34"/>
+      <operator activated="true" class="generate_tfidf" compatibility="9.10.001" expanded="true" height="68" name="Generate TF-IDF" width="90" x="581" y="34">
+        <parameter key="normalize" value="true"/>
+        <parameter key="add_meta_information" value="true"/>
+      </operator>
+    </process>
+  </operator>
+  <operator activated="true" class="fp_growth" compatibility="9.10.001" expanded="true" height="68" name="FP-Growth" width="90" x="313" y="34">
+    <parameter key="min_support" value="0.01"/>
+    <parameter key="max_number_of_items" value="3"/>
+  </operator>
+  <operator activated="true" class="k_means" compatibility="9.10.001" expanded="true" height="82" name="K-Means" width="90" x="447" y="34">
+    <parameter key="k" value="5"/>
+    <parameter key="max_runs" value="10"/>
+    <parameter key="distance" value="Cosine Similarity"/>
+  </operator>
+  <connect from_op="Read CSV" from_port="output" to_op="Process Documents from File" to_port="file"/>
+  <connect from_op="Process Documents from File" from_port="example set" to_op="FP-Growth" to_port="example set"/>
+  <connect from_op="FP-Growth" from_port="example set" to_op="K-Means" to_port="example set"/>
+  <portSpacing port="source_input 1" spacing="0"/>
+  <portSpacing port="source_output 1" spacing="0"/>
+  <portSpacing port="sink_result 1" spacing="0"/>
+</process>

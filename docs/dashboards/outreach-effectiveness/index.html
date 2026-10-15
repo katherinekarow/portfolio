@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outreach Effectiveness</title>
+<meta name="description" content="Which outreach campaigns create extra appointments, measured against randomised holdout groups (synthetic clinic data).">
+<link rel="stylesheet" href="../assets/dash.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Outreach effectiveness</h1>
+      <p class="sub">Each clinic outreach campaign held back a random 20% of patients. Comparing the two groups shows how many appointments the campaign actually created, and what each one cost. All data is synthetic.</p>
+    </div>
+    <div class="note"><a href="../../">← Portfolio</a> · <a href="../">All dashboards</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/professional-work/dashboards">Code</a></div>
+  </header>
+
+  <section class="kpis" id="kpis" aria-label="Summary"></section>
+
+  <div class="grid2">
+    <div class="panel">
+      <h2>Lift over holdout</h2>
+      <p class="why">Booking rate of contacted patients minus the holdout's, in percentage points, with a 95% confidence interval. An interval that crosses zero means the effect isn't proven.</p>
+      <div class="chartwrap"><svg class="chart" id="lift" role="img" aria-label="Lift by campaign"></svg></div>
+    </div>
+    <div class="panel">
+      <h2>Cost per extra appointment</h2>
+      <p class="why">Campaign spend ÷ incremental appointments. Grey = not significant, so the cost figure can't be trusted.</p>
+      <div class="chartwrap"><svg class="chart" id="cpi" role="img" aria-label="Cost per incremental appointment"></svg></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Incremental appointments over the campaign</h2>
+    <div class="chartwrap"><svg class="chart" id="cum" role="img" aria-label="Cumulative incremental appointments"></svg></div>
+    <div class="legend" id="legend"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Campaign detail</h2>
+    <div id="tbl"></div>
+  </div>
+
+  <details class="help panel">
+    <summary>How this works</summary>
+    <ul>
+      <li>Lift = treated booking rate − holdout booking rate. Standard error = √(p₁(1−p₁)/n₁ + p₀(1−p₀)/n₀); the interval is lift ± 1.96 × SE.</li>
+      <li>Incremental appointments = lift × patients contacted. A cheap campaign with no proven lift is not a bargain.</li>
+      <li>Every figure is computed in <code>dashkit.builders.outreach_effectiveness</code>; the tests recompute the interval independently.</li>
+    </ul>
+  </details>
+  <footer>Synthetic data · built with plain JavaScript and SVG</footer>
+</main>
+<script src="../assets/dash.js"></script>
+<script>
+D.load().then(data => {
+  const $ = id => document.getElementById(id), f = D.fmt, C = data.campaigns;
+  // colour follows the campaign, fixed order; unproven campaigns are neutral
+  let k = 0; const col = {};
+  C.forEach(c => col[c.campaign] = c.significant ? D.color(k++) : D.css("--neutral"));
+  const inc = C.filter(c => c.significant).reduce((a, c) => a + c.incremental, 0);
+  const spend = C.reduce((a, c) => a + c.spend, 0), spendSig = C.filter(c => c.significant).reduce((a, c) => a + c.spend, 0);
+  D.kpis($("kpis"), [
+    { v: f.int(inc), l: "Proven extra appointments", d: "from significant campaigns" },
+    { v: f.usdk(spend), l: "Total outreach spend" },
+    { v: f.usd2(spendSig / inc), l: "Blended cost per extra appointment", d: "significant campaigns only" },
+    { v: `${C.filter(c => c.significant).length} of ${C.length}`, l: "Campaigns with proven lift" },
+  ]);
+  const tipFor = c => `<b>${c.campaign}</b>` + D.row("Lift", f.pp(c.lift, 2)) + D.row("95% CI", `${f.pp(c.lift_lo, 2)} to ${f.pp(c.lift_hi, 2)}`)
+      + D.row("Contacted / holdout", `${f.int(c.contacted)} / ${f.int(c.holdout)}`) + D.row("Rate: treated", f.pct(c.rate_treated, 2))
+      + D.row("Rate: holdout", f.pct(c.rate_holdout, 2)) + D.row("Verdict", c.significant ? "proven" : "not proven");
+  const byLift = [...C].sort((a, b) => b.lift - a.lift);
+  D.hbars($("lift"), { items: byLift.map(c => ({ label: c.campaign, value: c.lift * 100, lo: c.lift_lo * 100, hi: c.lift_hi * 100, color: col[c.campaign], tip: tipFor(c) })), xFmt: v => v.toFixed(1) + " pts" });
+  const byCost = [...C].sort((a, b) => (a.cost_per_incremental ?? 1e9) - (b.cost_per_incremental ?? 1e9));
+  D.hbars($("cpi"), { items: byCost.map(c => ({ label: c.campaign, value: c.cost_per_incremental, color: col[c.campaign],
+    tip: `<b>${c.campaign}</b>` + D.row("Spend", f.usd(c.spend)) + D.row("Extra appointments", f.int(c.incremental)) + D.row("Cost each", f.usd2(c.cost_per_incremental)) + D.row("Verdict", c.significant ? "proven" : "not proven") })),
+    xFmt: v => "$" + Math.round(v) });
+  D.line($("cum"), { x: Array.from({ length: data.weeks }, (_, i) => i + 1), xFmt: w => "Week " + w,
+    series: data.weekly.map(w => ({ name: w.campaign, values: w.cumulative, color: col[w.campaign], dash: C.find(c => c.campaign === w.campaign).significant ? "" : "4 4" })), yMin: 0 });
+  $("legend").innerHTML = C.map(c => `<span><span class="sw" style="background:${col[c.campaign]}"></span>${c.campaign}${c.significant ? "" : " (not proven)"}</span>`).join("");
+  D.table($("tbl"), { rows: C, sortKey: "incremental", cols: [
+    { k: "campaign", label: "Campaign", cls: "l" }, { k: "contacted", label: "Contacted", fmt: f.int }, { k: "holdout", label: "Holdout", fmt: f.int },
+    { k: "rate_treated", label: "Rate (contacted)", fmt: v => f.pct(v, 2) }, { k: "rate_holdout", label: "Rate (holdout)", fmt: v => f.pct(v, 2) },
+    { k: "lift", label: "Lift", fmt: v => f.pp(v, 2) }, { k: "incremental", label: "Extra appts", fmt: f.int }, { k: "spend", label: "Spend", fmt: f.usd },
+    { k: "cost_per_incremental", label: "Cost each", fmt: f.usd2 },
+    { k: "significant", label: "Verdict", html: c => c.significant ? `<span class="pill good">✓ proven</span>` : `<span class="pill neutral">? not proven</span>` } ] });
+  window.__ready = true;
+});
+</script>
+</body>
+</html>

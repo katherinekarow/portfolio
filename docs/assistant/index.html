@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Knowledge Assistant</title>
+<meta name="description" content="Self-service catalog, glossary, lineage and grounded Q&A for a clinic network's planning data (synthetic).">
+<style>
+  :root {
+    --bg:#f6f5f1; --panel:#ffffff; --surface:#f1f0eb; --ink:#0b0b0b; --muted:#52514e; --line:#dcdad3; --grid:#e6e5e0;
+    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --good:#0ca30c; --warn:#fab219; --crit:#d03b3b; --accent:#b0619b;
+    --raw:#8a8984; --stg:#eda100; --core:#2a78d6; --mart:#1baf7a; --rpt:#eb6834;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#121214; --panel:#1f1f23; --surface:#26262b; --ink:#f2f1ee; --muted:#a9a8a3; --line:#34343a; --grid:#2e2e33;
+      --s1:#5b9cf0; --s2:#f2864f; --s3:#36c891; --accent:#e08cc9; --core:#5b9cf0; --mart:#36c891; --rpt:#f2864f; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 "Segoe UI", Helvetica, Arial, sans-serif; }
+  main { max-width:1080px; margin:0 auto; padding:20px 16px 48px; }
+  a { color:var(--accent); }
+  header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:10px; margin-bottom:14px; }
+  h1 { margin:0; font-size:clamp(1.4rem,3.2vw,1.9rem); }
+  .sub { margin:2px 0 0; color:var(--muted); }
+  .note { font-size:.82rem; color:var(--muted); }
+  nav { display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid var(--line); margin-bottom:14px; }
+  nav button { font:inherit; border:0; background:none; color:var(--muted); padding:8px 12px; cursor:pointer; border-bottom:3px solid transparent; }
+  nav button.on { color:var(--ink); border-bottom-color:var(--accent); font-weight:600; }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px; }
+  section[hidden] { display:none; }
+  .chat { display:flex; flex-direction:column; gap:10px; min-height:280px; max-height:60vh; overflow:auto; padding:4px; }
+  .msg { max-width:85%; padding:10px 12px; border-radius:14px; white-space:pre-wrap; overflow-wrap:anywhere; }
+  .msg.q { align-self:flex-end; background:var(--s1); color:#fff; border-bottom-right-radius:4px; }
+  .msg.a { align-self:flex-start; background:var(--surface); border-bottom-left-radius:4px; }
+  .msg.a.blocked, .msg.a.redirect { border-left:4px solid var(--crit); }
+  .msg.a.unknown { border-left:4px solid var(--warn); }
+  .badge { display:inline-block; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:4px; }
+  pre { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; overflow:auto; font-size:.82rem; margin:8px 0 0; white-space:pre; }
+  code { font-family:ui-monospace, Consolas, monospace; font-size:.88em; background:var(--panel); border-radius:4px; padding:0 3px; }
+  .srcs { margin-top:6px; display:flex; flex-wrap:wrap; gap:4px; }
+  .src { font-size:.75rem; border:1px solid var(--line); border-radius:999px; padding:1px 8px; background:var(--panel); color:var(--ink); cursor:pointer; text-decoration:none; }
+  form { display:flex; gap:8px; margin-top:10px; }
+  input[type=search], input[type=text] { font:inherit; flex:1; padding:9px 12px; border-radius:10px; border:1px solid var(--line); background:var(--panel); color:var(--ink); min-width:0; }
+  button.go { font:inherit; padding:9px 16px; border-radius:10px; border:0; background:var(--accent); color:#fff; font-weight:600; cursor:pointer; }
+  .sugg { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .sugg button { font:inherit; font-size:.82rem; border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:999px; padding:4px 10px; cursor:pointer; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:10px; margin-top:10px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .card h3 { margin:0 0 4px; font-size:1rem; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .layer { font-size:.7rem; font-weight:700; color:#fff; border-radius:999px; padding:1px 8px; text-transform:uppercase; }
+  .card p { margin:4px 0; color:var(--muted); font-size:.9rem; }
+  details summary { cursor:pointer; font-size:.85rem; color:var(--muted); }
+  table { width:100%; border-collapse:collapse; font-size:.84rem; }
+  td { padding:3px 4px; border-bottom:1px solid var(--grid); vertical-align:top; }
+  td:first-child { font-family:ui-monospace, Consolas, monospace; white-space:nowrap; }
+  .chips { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+  mark { background:rgba(237,161,0,.35); color:inherit; border-radius:3px; }
+  svg { width:100%; height:auto; display:block; }
+  svg text { font-size:11px; fill:var(--ink); font-family:inherit; }
+  .lineage-help { color:var(--muted); font-size:.88rem; margin:0 0 8px; }
+  .ok { color:var(--good); font-weight:700; } .bad { color:var(--crit); font-weight:700; }
+  footer { margin-top:28px; color:var(--muted); font-size:.82rem; text-align:center; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>Data knowledge assistant</h1>
+      <p class="sub">Self-service answers about a clinic network's appointment-planning data: views, columns, terms, lineage and how things work. All content is synthetic.</p>
+    </div>
+    <div class="note"><a href="../">← Portfolio</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/professional-work/knowledge-assistant">Code</a></div>
+  </header>
+
+  <nav id="tabs">
+    <button data-t="ask" class="on">Ask</button><button data-t="views">Views</button><button data-t="terms">Glossary</button>
+    <button data-t="lineage">Lineage</button><button data-t="guard">Guardrails &amp; tests</button>
+  </nav>
+
+  <section id="t-ask" class="panel">
+    <div class="chat" id="chat" aria-live="polite"></div>
+    <form id="askForm"><input type="text" id="question" placeholder="Ask e.g. “what feeds mart.session_plan?”" aria-label="Question" autocomplete="off"><button class="go">Ask</button></form>
+    <div class="sugg" id="sugg"></div>
+  </section>
+
+  <section id="t-views" hidden>
+    <input type="search" id="vq" placeholder="Search views by name, description or column (e.g. utilization, gap, cancel)" aria-label="Search views" style="width:100%">
+    <div class="grid" id="viewGrid"></div>
+  </section>
+
+  <section id="t-terms" hidden>
+    <input type="search" id="tq" placeholder="Filter terms (e.g. projection, days out)" aria-label="Filter terms" style="width:100%">
+    <div class="grid" id="termGrid"></div>
+  </section>
+
+  <section id="t-lineage" class="panel" hidden>
+    <p class="lineage-help">Each column is a layer. Click a view to highlight everything it depends on (upstream) and everything that would be affected if it changed (downstream).</p>
+    <svg id="lin" role="img" aria-label="Lineage graph"></svg>
+    <p class="note" id="linInfo"></p>
+  </section>
+
+  <section id="t-guard" class="panel" hidden>
+    <h3 style="margin-top:0">Guardrails (checked before any search)</h3>
+    <div id="guardList"></div>
+    <h3>Self-test: browser vs. Python</h3>
+    <p class="note">The questions below were answered by the Python package when the knowledge base was built. This page answers them again with its own JavaScript port; every row should match.</p>
+    <div id="selftest"></div>
+  </section>
+
+  <footer>Built by <code>python -m kbassist build</code> from a validated catalog, glossary and the project write-ups · no API calls, nothing leaves your browser</footer>
+</main>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+let KB, A;
+
+/* ---------------- search: same steps as src/kbassist/search.py ---------------- */
+const STOP = new Set(`a an and are as at be by can do does for from has have how i in into is it its me my of on or our
+show tell that the their them then there these this to was we what when where which who why will with you your
+about get find see list give between mean means`.split(/\s+/));
+function stem(t) {
+  if (t.length > 4 && t.endsWith("ies")) return t.slice(0, -3) + "y";
+  if (t.length > 5 && t.endsWith("ing")) return t.slice(0, -3);
+  if (t.length > 4 && t.endsWith("ed")) return t.slice(0, -2);
+  if (t.length > 3 && t.endsWith("s") && !t.endsWith("ss")) return t.slice(0, -1);
+  return t;
+}
+function tokens(text) {
+  const out = [];
+  for (const raw of (text.toLowerCase().match(/[a-z0-9_]+/g) || [])) {
+    const parts = [raw].concat(raw.includes("_") ? raw.split("_").filter(Boolean) : []);
+    for (const p of parts) if (!STOP.has(p) && p.length > 1) out.push(stem(p));
+  }
+  return out;
+}
+class BM25 {
+  constructor(docs, k1 = 1.2, b = 0.75, tw = 2) {
+    this.docs = docs; this.k1 = k1; this.b = b;
+    this.tf = docs.map(d => { const m = new Map(); const tt = tokens(d.title);
+      for (let i = 0; i < tw; i++) tt.forEach(t => m.set(t, (m.get(t) || 0) + 1));
+      tokens(d.text).forEach(t => m.set(t, (m.get(t) || 0) + 1)); return m; });
+    this.pos = new Map(docs.map((d, i) => [d.id, i]));
+    this.len = this.tf.map(m => [...m.values()].reduce((a, b) => a + b, 0));
+    this.avg = this.len.reduce((a, b) => a + b, 0) / Math.max(this.len.length, 1);
+    const df = new Map(); this.tf.forEach(m => m.forEach((_, t) => df.set(t, (df.get(t) || 0) + 1)));
+    const n = docs.length; this.idf = new Map([...df].map(([t, f]) => [t, Math.log(1 + (n - f + 0.5) / (f + 0.5))]));
+  }
+  coverage(qt, id) { const m = this.tf[this.pos.get(id)]; return [...new Set(qt)].filter(t => m.has(t)).length; }
+  search(qt, k = 5, kinds = null, coverageFirst = false) {
+    const q = [...new Set(qt)], scored = [];
+    this.docs.forEach((d, i) => {
+      if (kinds && !kinds.has(d.kind)) return;
+      let s = 0, cov = 0;
+      for (const t of q) { const f = this.tf[i].get(t) || 0;
+        if (f) { cov++; s += this.idf.get(t) * f * (this.k1 + 1) / (f + this.k1 * (1 - this.b + this.b * this.len[i] / this.avg)); } }
+      if (s > 0) scored.push([Math.round(s * 1e6) / 1e6, cov, d]);
+    });
+    scored.sort((x, y) => (coverageFirst ? y[1] - x[1] : 0) || y[0] - x[0] || (x[2].id < y[2].id ? -1 : x[2].id > y[2].id ? 1 : 0));
+    return scored.slice(0, k).map(([s, , d]) => [s, d]);
+  }
+}
+function expand(query, syn) {
+  const q = " " + query.toLowerCase().replace(/[^a-z0-9_]+/g, " ") + " ";
+  const toks = tokens(query);
+  for (const [phrase, alts] of Object.entries(syn)) if (q.includes(` ${phrase} `)) alts.forEach(a => toks.push(...tokens(a)));
+  return toks;
+}
+
+/* ---------------- answers: same routing as src/kbassist/answer.py ---------------- */
+const norm = s => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+const R = (p, f = "") => new RegExp(p, f);
+class Assistant {
+  constructor(kb) {
+    this.kb = kb; this.views = Object.fromEntries(kb.views.map(v => [v.name, v])); this.terms = kb.terms;
+    this.index = new BM25(kb.docs); this.guard = kb.guardrails; this.columns = {};
+    kb.views.forEach(v => Object.keys(v.columns).forEach(c => (this.columns[c] ||= []).push(v.name)));
+  }
+  mentionedViews(q) {
+    const ql = q.toLowerCase(); const names = Object.keys(this.views);
+    let hits = names.filter(n => ql.includes(n));
+    if (!hits.length) hits = names.filter(n => n.split(".")[1].includes("_") && R(`\\b${reEsc(n.split(".")[1])}\\b`).test(ql));
+    return hits.sort((a, b) => b.length - a.length);
+  }
+  termHits(q) {
+    const ql = " " + norm(q) + " ", found = [], spans = [];
+    const cands = this.terms.flatMap(t => [t.term, ...(t.aliases || [])].map(p => [p, t])).sort((a, b) => b[0].length - a[0].length);
+    for (const [phrase, t] of cands) {
+      const i = ql.indexOf(" " + norm(phrase) + " ");
+      if (i >= 0 && !spans.some(([a, b]) => a <= i && i < b) && found.every(f => f[1] !== t)) {
+        found.push([i, t]); spans.push([i, i + norm(phrase).length + 2]); }
+    }
+    return found.sort((a, b) => a[0] - b[0]).map(f => f[1]);
+  }
+  static termText(t) {
+    let s = `**${t.term}** - ${t.definition}`;
+    if (t.formula) s += `\n\`${t.formula}\``;
+    if (t.example) s += `\nExample: ${t.example}`;
+    return s;
+  }
+  ask(q) {
+    q = q.trim();
+    const A = (type, text, sources = [], score = 0, sql = "") => ({ type, text, sources, score, sql });
+    if (!q) return A("empty", "Ask about a view, a column, a term, or how part of the pipeline works.");
+    for (const r of this.guard.block) if (r.patterns.some(p => R(p, "i").test(q))) return A("blocked", r.reply, [`guardrail:${r.id}`]);
+    for (const r of this.guard.redirect) if (r.patterns.some(p => R(p, "i").test(q))) return A("redirect", r.reply, [`guardrail:${r.id}`]);
+    const ql = q.toLowerCase();
+    const views = this.mentionedViews(q);
+    if (views.length && /\b(upstream|feeds?|fed|sources?|depends?|comes? from|built from|lineage|downstream|impact|breaks?|affected|uses?|used by|reads?)\b/.test(ql)) {
+      const v = views[0], lin = this.kb.lineage[v];
+      const down = /\b(downstream|impact|breaks?|affected|used by|uses)\b/.test(ql) && !/\b(upstream|feeds?|built from|comes? from)\b/.test(ql);
+      if (down) return A("lineage", `**${v}** is read by ${lin.direct_down.join(", ") || "nothing"}.` +
+        (lin.downstream.length ? ` Changing it affects ${lin.downstream.length} views in total: ${lin.downstream.join(", ")}.` : ""),
+        [`view:${v}`, ...lin.direct_down.map(x => `view:${x}`)]);
+      return A("lineage", `**${v}** is built from ${lin.direct_up.join(", ") || "no other views (it is a raw source)"}.` +
+        (lin.upstream.length ? ` Full upstream chain: ${lin.upstream.join(", ")}.` : ""), [`view:${v}`, ...lin.direct_up.map(x => `view:${x}`)]);
+    }
+    const cols = Object.keys(this.columns).filter(c => R(`\\b${reEsc(c)}\\b`).test(ql) && (c.includes("_") || /\bcolumn|field\b/.test(ql)));
+    if (cols.length && /\b(which|what|where)\b.*\b(view|table|column|field)s?\b|\bcolumn\b|\bfield\b/.test(ql)) {
+      const c = cols.slice().sort((a, b) => a.length - b.length).at(-1), where = this.columns[c];
+      return A("column", `\`${c}\` (${this.views[where[0]].columns[c]}) is in: ` + where.map(w => `**${w}**`).join(", ") + ".", where.map(w => `view:${w}`));
+    }
+    const terms = this.termHits(q);
+    if (terms.length >= 2 && /\b(differen\w*|vs\.?|versus|compare)\b/.test(ql))
+      return A("definition", Assistant.termText(terms[0]) + "\n\n" + Assistant.termText(terms[1]), [`term:${terms[0].term}`, `term:${terms[1].term}`]);
+    if (terms.length && /^(what|define|meaning|explain)\b|\bmean\b|\bdefinition\b|\bstand for\b|\bformula\b/.test(ql))
+      return A("definition", Assistant.termText(terms[0]), [`term:${terms[0].term}`]);
+    const qt = expand(q, this.kb.synonyms);
+    if (/\b(sql|query|select)\b|^how (do|can) i (get|find|see|list|pull|check)/.test(ql)) {
+      const hits = this.index.search(qt, 3, new Set(["view"]), true);
+      const v = views.length ? this.views[views[0]] : hits.length ? this.views[hits[0][1].title] : null;
+      if (v) return A("query", `Start from **${v.name}** (${v.grain}):`, [`view:${v.name}`], hits.length ? hits[0][0] : 0,
+        (v.sample_query || "").trim() || starterSql(v));
+    }
+    const hits = this.index.search(qt, 3);
+    const weak = !hits.length || hits[0][0] < this.guard.min_score || (new Set(qt).size >= 2 && this.index.coverage(qt, hits[0][1].id) < 2);
+    if (weak) {
+      const sug = this.terms.slice(0, 4).map(t => t.term).join(", ");
+      return A("unknown", `I don't know that one yet - I'd rather not guess. Try a view name, a column, or a term such as ${sug}. If it's missing, add it to the catalog or glossary.`,
+        [], hits.length ? hits[0][0] : 0);
+    }
+    const top = hits[0][1]; let txt;
+    if (top.kind === "view") { const v = this.views[top.title]; txt = `**${v.name}** - ${v.description} Grain: ${v.grain}.`; }
+    else if (top.kind === "term") txt = Assistant.termText(this.terms.find(t => t.term === top.title));
+    else txt = `From *${top.title}*: ${snippet(top.text, qt)}`;
+    return A("search", txt, hits.map(h => h[1].id), hits[0][0]);
+  }
+}
+function starterSql(v) { const c = Object.keys(v.columns).slice(0, 6); return "SELECT " + c.join(",\n       ") + `\nFROM ${v.name}\nLIMIT 100;`; }
+function snippet(text, qt, width = 45) {
+  const words = text.split(/\s+/).filter(Boolean);
+  if (words.length <= width) return text;
+  const want = new Set(qt); let best = 0, bestS = -1;
+  for (let i = 0; i <= words.length - width; i += 5) {
+    const s = new Set(tokens(words.slice(i, i + width).join(" ")).filter(t => want.has(t))).size;
+    if (s > bestS) { best = i; bestS = s; }
+  }
+  return (best ? "... " : "") + words.slice(best, best + width).join(" ") + (best + width < words.length ? " ..." : "");
+}
+
+/* ---------------- UI ---------------- */
+const md = s => esc(s).replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/\*([^*]+)\*/g, "<i>$1</i>").replace(/`([^`]+)`/g, "<code>$1</code>");
+const LAYER_COLOR = l => `var(--${l})`;
+function srcChip(id) {
+  if (id.startsWith("view:")) return `<button class="src" data-view="${esc(id.slice(5))}">🗂 ${esc(id.slice(5))}</button>`;
+  if (id.startsWith("term:")) return `<button class="src" data-term="${esc(id.slice(5))}">📖 ${esc(id.slice(5))}</button>`;
+  if (id.startsWith("doc:")) { const d = KB.docs.find(x => x.id === id); return `<a class="src" href="${esc(d.url)}" target="_blank" rel="noopener">📄 ${esc(d.title)}</a>`; }
+  return `<span class="src">🛡 ${esc(id.split(":")[1])}</span>`;
+}
+function say(q) {
+  const r = A.ask(q);
+  $("chat").insertAdjacentHTML("beforeend", `<div class="msg q">${esc(q)}</div><div class="msg a ${r.type}"><span class="badge">${r.type}${r.score ? ` · score ${r.score.toFixed(1)}` : ""}</span><div>${md(r.text)}</div>` +
+    (r.sql ? `<pre>${esc(r.sql)}</pre>` : "") + (r.sources.length ? `<div class="srcs">${r.sources.map(srcChip).join("")}</div>` : "") + `</div>`);
+  $("chat").scrollTop = $("chat").scrollHeight;
+}
+function show(tab) {
+  [...$("tabs").children].forEach(b => b.classList.toggle("on", b.dataset.t === tab));
+  for (const t of ["ask", "views", "terms", "lineage", "guard"]) $("t-" + t).hidden = t !== tab;
+  if (tab === "lineage") lineage();
+}
+function hl(text, q) {
+  if (!q) return esc(text);
+  return esc(text).replace(R(`(${q.split(/\s+/).filter(Boolean).map(reEsc).join("|")})`, "gi"), "<mark>$1</mark>");
+}
+function renderViews() {
+  const q = $("vq").value.trim().toLowerCase();
+  const xs = KB.views.filter(v => !q || q.split(/\s+/).every(w => (v.name + " " + v.description + " " + v.grain + " " + Object.entries(v.columns).flat().join(" ")).toLowerCase().includes(w)));
+  $("viewGrid").innerHTML = xs.map(v => {
+    const lin = KB.lineage[v.name];
+    return `<div class="card" id="v-${esc(v.name)}"><h3><span class="layer" style="background:${LAYER_COLOR(v.layer)}">${v.layer}</span>${hl(v.name, q)}</h3>
+      <p>${hl(v.description, q)}</p><p><b>Grain:</b> ${esc(v.grain)} · <b>Refresh:</b> ${esc(v.refresh || "")} · <b>Owner:</b> ${esc(v.owner)}</p>
+      <details${q && Object.keys(v.columns).some(c => c.includes(q)) ? " open" : ""}><summary>${Object.keys(v.columns).length} columns</summary><table>${Object.entries(v.columns).map(([c, d]) => `<tr><td>${hl(c, q)}</td><td>${hl(d, q)}</td></tr>`).join("")}</table></details>
+      ${v.sample_query ? `<details><summary>Example query</summary><pre>${esc(v.sample_query.trim())}</pre></details>` : ""}
+      <div class="chips">${lin.direct_up.map(u => `<button class="src" data-view="${esc(u)}">↑ ${esc(u)}</button>`).join("")}${lin.direct_down.map(u => `<button class="src" data-view="${esc(u)}">↓ ${esc(u)}</button>`).join("")}</div></div>`;
+  }).join("") || '<p class="note">No views match.</p>';
+}
+function renderTerms() {
+  const q = $("tq").value.trim().toLowerCase();
+  const xs = KB.terms.filter(t => !q || (t.term + " " + (t.aliases || []).join(" ") + " " + t.definition).toLowerCase().includes(q));
+  $("termGrid").innerHTML = xs.map(t => `<div class="card" id="t-${esc(t.term)}"><h3>${hl(t.term, q)}</h3>
+    ${(t.aliases || []).length ? `<p>also: ${t.aliases.map(a => hl(a, q)).join(", ")}</p>` : ""}<p style="color:var(--ink)">${hl(t.definition, q)}</p>
+    ${t.formula ? `<pre>${esc(t.formula)}</pre>` : ""}${t.example ? `<p><i>${esc(t.example)}</i></p>` : ""}</div>`).join("") || '<p class="note">No terms match.</p>';
+}
+function openView(name) { show("views"); $("vq").value = name; renderViews(); }
+function openTerm(name) { show("terms"); $("tq").value = name.toLowerCase(); renderTerms(); }
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-view],[data-term]"); if (!b) return;
+  if (b.dataset.view) openView(b.dataset.view); else openTerm(b.dataset.term);
+});
+
+let focus = null;
+function lineage() {
+  const svg = $("lin"); svg.innerHTML = "";
+  const W = Math.max(640, svg.parentElement.clientWidth - 28), layers = KB.layers;
+  const byLayer = layers.map(l => KB.views.filter(v => v.layer === l).map(v => v.name));
+  const rowH = 44, H = Math.max(...byLayer.map(c => c.length)) * rowH + 40;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const colW = W / layers.length, nodeW = Math.min(colW - 24, 170), pos = {};
+  byLayer.forEach((names, li) => names.forEach((n, i) => {
+    const off = (H - 30 - names.length * rowH) / 2;
+    pos[n] = { x: li * colW + (colW - nodeW) / 2, y: 30 + off + i * rowH };
+  }));
+  const NS = "http://www.w3.org/2000/svg", mk = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); svg.appendChild(e); return e; };
+  layers.forEach((l, i) => { const t = mk("text", { x: i * colW + colW / 2, y: 16, "text-anchor": "middle", "font-weight": 700, fill: getComputedStyle(document.documentElement).getPropertyValue(`--${l}`) }); t.textContent = l.toUpperCase(); });
+  const lin = focus ? KB.lineage[focus] : null;
+  const rel = n => !focus ? "all" : n === focus ? "focus" : lin.upstream.includes(n) ? "up" : lin.downstream.includes(n) ? "down" : "none";
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const upSet = new Set(focus ? [focus, ...lin.upstream] : []), downSet = new Set(focus ? [focus, ...lin.downstream] : []);
+  for (const [a, b] of KB.edges) {
+    const p = pos[a], q = pos[b];
+    const on = !focus || (upSet.has(a) && upSet.has(b)) || (downSet.has(a) && downSet.has(b));
+    const same = a.split(".")[0] === b.split(".")[0];
+    const x1 = p.x + nodeW, y1 = p.y + 14, x2 = same ? q.x + nodeW : q.x, y2 = q.y + 14, mx = (x1 + x2) / 2;
+    // edges inside one layer loop out to the right instead of crossing the boxes
+    const d = same ? `M${x1},${y1} C${x1 + 26},${y1} ${x2 + 26},${y2} ${x2},${y2}` : `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
+    mk("path", { d, fill: "none", stroke: on ? css("--muted") : css("--grid"), "stroke-width": on && focus ? 1.8 : 1, opacity: on ? .9 : .5 });
+  }
+  for (const v of KB.views) {
+    const p = pos[v.name], r = rel(v.name);
+    const fill = r === "focus" ? css("--ink") : r === "up" ? css("--s1") : r === "down" ? css("--s2") : css("--panel");
+    const g = document.createElementNS(NS, "g"); g.style.cursor = "pointer"; svg.appendChild(g);
+    const rect = document.createElementNS(NS, "rect");
+    Object.entries({ x: p.x, y: p.y, width: nodeW, height: 28, rx: 7, fill, stroke: css(`--${v.layer}`), "stroke-width": 2, opacity: r === "none" ? .35 : 1 }).forEach(([k, val]) => rect.setAttribute(k, val));
+    const t = document.createElementNS(NS, "text");
+    Object.entries({ x: p.x + nodeW / 2, y: p.y + 18, "text-anchor": "middle", opacity: r === "none" ? .45 : 1 }).forEach(([k, val]) => t.setAttribute(k, val));
+    if (["focus", "up", "down"].includes(r)) t.style.fill = r === "focus" ? css("--panel") : "#fff";
+    t.textContent = v.name.split(".")[1];
+    const tt = document.createElementNS(NS, "title"); tt.textContent = `${v.name}\n${v.description}`;
+    g.append(rect, t, tt);
+    g.addEventListener("click", () => { focus = focus === v.name ? null : v.name; lineage(); });
+  }
+  $("linInfo").innerHTML = focus ? `<b>${esc(focus)}</b>: ${lin.upstream.length} upstream (blue) · ${lin.downstream.length} downstream (orange). Click it again to clear.` : "Tip: try core.appointments_daily — almost everything depends on it.";
+}
+
+function guard() {
+  $("guardList").innerHTML = KB.guardrails.block.concat(KB.guardrails.redirect).map(r =>
+    `<p><b>${esc(r.id)}</b>: ${esc(r.reply)}<br><span class="note">patterns: ${r.patterns.map(p => `<code>${esc(p)}</code>`).join(" ")}</span></p>`).join("") +
+    `<p class="note">Below a BM25 score of ${KB.guardrails.min_score} the assistant says it doesn't know rather than guessing.</p>`;
+  let pass = 0;
+  const tests = KB.selftest || [];
+  const rows = tests.map(t => { const r = A.ask(t.q); const first = r.sources[0] || ""; const ok = r.type === t.type && first === t.first; pass += ok;
+    return `<tr><td>${ok ? '<span class="ok">✓</span>' : '<span class="bad">✗</span>'}</td><td style="font-family:inherit;white-space:normal">${esc(t.q)}</td><td>${esc(r.type)}</td><td style="white-space:normal">${esc(first)}</td></tr>`; });
+  $("selftest").innerHTML = `<p id="selftestSummary" class="${pass === tests.length ? "ok" : "bad"}">${pass} / ${tests.length} match the Python answers</p><table>${rows.join("")}</table>`;
+}
+
+fetch("kb.json").then(r => r.json()).then(kb => {
+  KB = kb; A = new Assistant(kb);
+  $("tabs").addEventListener("click", e => e.target.dataset.t && show(e.target.dataset.t));
+  $("askForm").addEventListener("submit", e => { e.preventDefault(); const q = $("question").value; if (q.trim()) { say(q); $("question").value = ""; } });
+  const examples = ["what is a glide path?", "difference between target curve and glide path", "which view has gap_to_full",
+    "what breaks if core.appointments_daily changes", "sql for forecast accuracy by lead time", "how does the validation gate work?", "give me the warehouse password"];
+  $("sugg").innerHTML = examples.map(x => `<button type="button">${esc(x)}</button>`).join("");
+  $("sugg").addEventListener("click", e => e.target.tagName === "BUTTON" && say(e.target.textContent));
+  $("vq").addEventListener("input", renderViews); $("tq").addEventListener("input", renderTerms);
+  renderViews(); renderTerms(); guard();
+  $("chat").innerHTML = `<div class="msg a"><span class="badge">hello</span><div>I answer from the catalog (${kb.views.length} views), the glossary (${kb.terms.length} terms) and the project write-ups. Every answer lists its sources. Pick an example below or ask your own question.</div></div>`;
+  const p = new URLSearchParams(location.search);
+  if (p.get("q")) say(p.get("q"));
+  if (p.has("selftest")) show("guard");
+  addEventListener("resize", () => !$("t-lineage").hidden && lineage());
+}).catch(e => { console.error(e); $("chat").innerHTML = `<p class="note">Couldn't load kb.json (${esc(e.message)}).</p>`; });
+</script>
+</body>
+</html>

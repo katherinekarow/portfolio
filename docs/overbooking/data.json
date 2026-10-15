@@ -1,0 +1,286 @@
+{
+ "defaults": {
+  "C": 20,
+  "p": 0.85,
+  "r": 150.0,
+  "b": 300.0,
+  "rho": 0.0,
+  "lam": 0.0
+ },
+ "presets": [
+  {
+   "name": "Default",
+   "C": 20,
+   "p": 0.85,
+   "r": 150.0,
+   "b": 300.0,
+   "rho": 0.0,
+   "lam": 0.0,
+   "python": {
+    "limit": 22,
+    "profit": 2730.872397
+   }
+  },
+  {
+   "name": "Estimated new patient",
+   "C": 20,
+   "p": 0.808,
+   "r": 150.0,
+   "b": 300.0,
+   "rho": 0.028,
+   "lam": 0.0,
+   "python": {
+    "limit": 23,
+    "profit": 2630.428517
+   }
+  },
+  {
+   "name": "Estimated follow-up",
+   "C": 20,
+   "p": 0.9,
+   "r": 150.0,
+   "b": 300.0,
+   "rho": 0.032,
+   "lam": 0.0,
+   "python": {
+    "limit": 21,
+    "profit": 2751.364494
+   }
+  },
+  {
+   "name": "Costly bumps",
+   "C": 20,
+   "p": 0.85,
+   "r": 150.0,
+   "b": 1500.0,
+   "rho": 0.0,
+   "lam": 0.0,
+   "python": {
+    "limit": 21,
+    "profit": 2623.139758
+   }
+  },
+  {
+   "name": "Thin demand",
+   "C": 20,
+   "p": 0.85,
+   "r": 150.0,
+   "b": 300.0,
+   "rho": 0.0,
+   "lam": 21.0,
+   "python": {
+    "limit": 22,
+    "profit": 2467.65153
+   }
+  },
+  {
+   "name": "Large session",
+   "C": 120,
+   "p": 0.9,
+   "r": 150.0,
+   "b": 300.0,
+   "rho": 0.0,
+   "lam": 0.0,
+   "python": {
+    "limit": 132,
+    "profit": 17446.014462
+   }
+  }
+ ],
+ "bounds": {
+  "C": [
+   1,
+   300
+  ],
+  "p": [
+   0.3,
+   0.999
+  ],
+  "r": [
+   1,
+   10000
+  ],
+  "b": [
+   0,
+   100000
+  ],
+  "rho": [
+   0,
+   0.5
+  ],
+  "lam": [
+   0,
+   1000
+  ]
+ },
+ "estimates": [
+  {
+   "clinic": "Clinic A",
+   "type": "new patient",
+   "sessions": 260,
+   "raw_p": 0.8096,
+   "shrunk_p": 0.8096
+  },
+  {
+   "clinic": "Clinic B",
+   "type": "new patient",
+   "sessions": 220,
+   "raw_p": 0.8186,
+   "shrunk_p": 0.8183
+  },
+  {
+   "clinic": "Clinic C",
+   "type": "new patient",
+   "sessions": 180,
+   "raw_p": 0.8109,
+   "shrunk_p": 0.8107
+  },
+  {
+   "clinic": "Clinic D",
+   "type": "new patient",
+   "sessions": 150,
+   "raw_p": 0.8682,
+   "shrunk_p": 0.8654
+  },
+  {
+   "clinic": "Clinic E",
+   "type": "new patient",
+   "sessions": 120,
+   "raw_p": 0.7871,
+   "shrunk_p": 0.7883
+  },
+  {
+   "clinic": "Clinic F",
+   "type": "new patient",
+   "sessions": 96,
+   "raw_p": 0.8835,
+   "shrunk_p": 0.8782
+  },
+  {
+   "clinic": "Clinic G",
+   "type": "new patient",
+   "sessions": 72,
+   "raw_p": 0.8049,
+   "shrunk_p": 0.8052
+  },
+  {
+   "clinic": "Clinic H",
+   "type": "new patient",
+   "sessions": 48,
+   "raw_p": 0.7311,
+   "shrunk_p": 0.7411
+  },
+  {
+   "clinic": "Clinic I",
+   "type": "new patient",
+   "sessions": 30,
+   "raw_p": 0.7955,
+   "shrunk_p": 0.7979
+  },
+  {
+   "clinic": "Clinic J",
+   "type": "new patient",
+   "sessions": 18,
+   "raw_p": 0.7601,
+   "shrunk_p": 0.7738
+  },
+  {
+   "clinic": "Clinic K",
+   "type": "new patient",
+   "sessions": 10,
+   "raw_p": 0.8045,
+   "shrunk_p": 0.806
+  },
+  {
+   "clinic": "Clinic L",
+   "type": "new patient",
+   "sessions": 5,
+   "raw_p": 0.7909,
+   "shrunk_p": 0.801
+  },
+  {
+   "clinic": "Clinic A",
+   "type": "follow-up",
+   "sessions": 260,
+   "raw_p": 0.9152,
+   "shrunk_p": 0.9146
+  },
+  {
+   "clinic": "Clinic B",
+   "type": "follow-up",
+   "sessions": 220,
+   "raw_p": 0.8915,
+   "shrunk_p": 0.8919
+  },
+  {
+   "clinic": "Clinic C",
+   "type": "follow-up",
+   "sessions": 180,
+   "raw_p": 0.8896,
+   "shrunk_p": 0.8901
+  },
+  {
+   "clinic": "Clinic D",
+   "type": "follow-up",
+   "sessions": 150,
+   "raw_p": 0.9176,
+   "shrunk_p": 0.9165
+  },
+  {
+   "clinic": "Clinic E",
+   "type": "follow-up",
+   "sessions": 120,
+   "raw_p": 0.9273,
+   "shrunk_p": 0.9252
+  },
+  {
+   "clinic": "Clinic F",
+   "type": "follow-up",
+   "sessions": 96,
+   "raw_p": 0.8452,
+   "shrunk_p": 0.8501
+  },
+  {
+   "clinic": "Clinic G",
+   "type": "follow-up",
+   "sessions": 72,
+   "raw_p": 0.9242,
+   "shrunk_p": 0.9213
+  },
+  {
+   "clinic": "Clinic H",
+   "type": "follow-up",
+   "sessions": 48,
+   "raw_p": 0.8655,
+   "shrunk_p": 0.8712
+  },
+  {
+   "clinic": "Clinic I",
+   "type": "follow-up",
+   "sessions": 30,
+   "raw_p": 0.9076,
+   "shrunk_p": 0.9056
+  },
+  {
+   "clinic": "Clinic J",
+   "type": "follow-up",
+   "sessions": 18,
+   "raw_p": 0.8535,
+   "shrunk_p": 0.8696
+  },
+  {
+   "clinic": "Clinic K",
+   "type": "follow-up",
+   "sessions": 10,
+   "raw_p": 0.9636,
+   "shrunk_p": 0.9322
+  },
+  {
+   "clinic": "Clinic L",
+   "type": "follow-up",
+   "sessions": 5,
+   "raw_p": 0.9182,
+   "shrunk_p": 0.9059
+  }
+ ]
+}

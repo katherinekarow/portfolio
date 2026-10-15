@@ -1,0 +1,1298 @@
+{
+ "groups": {
+  "finance": "Time value of money",
+  "macro": "Money & interest rates",
+  "demand": "Demand & price elasticity",
+  "curves": "Demand curves & pacing",
+  "targets": "Gross vs net targets",
+  "stats": "Benchmarking, credibility & data checks"
+ },
+ "formulas": [
+  {
+   "key": "future_value",
+   "group": "finance",
+   "title": "Compound growth (future value)",
+   "formula": "FV = PV × (1 + r)^n",
+   "explain": "What an amount grows to after n periods at rate r per period.",
+   "out": "money",
+   "params": [
+    {
+     "name": "pv",
+     "label": "Present value",
+     "default": 1000,
+     "kind": "num"
+    },
+    {
+     "name": "rate",
+     "label": "Rate per period",
+     "default": 0.05,
+     "kind": "num"
+    },
+    {
+     "name": "n",
+     "label": "Periods",
+     "default": 10,
+     "kind": "num"
+    }
+   ],
+   "example_result": 1628.894626777442
+  },
+  {
+   "key": "present_value",
+   "group": "finance",
+   "title": "Present value",
+   "formula": "PV = FV ÷ (1 + r)^n",
+   "explain": "What a future amount is worth today when money can earn r per period.",
+   "out": "money",
+   "params": [
+    {
+     "name": "fv",
+     "label": "Future value",
+     "default": 1628.89,
+     "kind": "num"
+    },
+    {
+     "name": "rate",
+     "label": "Rate per period",
+     "default": 0.05,
+     "kind": "num"
+    },
+    {
+     "name": "n",
+     "label": "Periods",
+     "default": 10,
+     "kind": "num"
+    }
+   ],
+   "example_result": 999.9971595600073
+  },
+  {
+   "key": "growth_rate",
+   "group": "finance",
+   "title": "Growth rate between two values (CAGR)",
+   "formula": "r = (end ÷ start)^(1/n) − 1",
+   "explain": "The constant rate per period that turns the start value into the end value.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "start",
+     "label": "Start value",
+     "default": 1000,
+     "kind": "num"
+    },
+    {
+     "name": "end",
+     "label": "End value",
+     "default": 1628.89,
+     "kind": "num"
+    },
+    {
+     "name": "n",
+     "label": "Periods",
+     "default": 10,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.0499997017534195
+  },
+  {
+   "key": "npv",
+   "group": "finance",
+   "title": "Net present value",
+   "formula": "NPV = Σ CFₜ ÷ (1 + r)^t,  t = 0, 1, 2 …",
+   "explain": "Today's value of a stream of cash flows; the first flow is at t = 0 (usually the investment, negative).",
+   "out": "money",
+   "params": [
+    {
+     "name": "rate",
+     "label": "Discount rate per period",
+     "default": 0.08,
+     "kind": "num"
+    },
+    {
+     "name": "flows",
+     "label": "Cash flows (t = 0, 1, …)",
+     "default": "-1000, 300, 400, 500, 200",
+     "kind": "list"
+    }
+   ],
+   "example_result": 164.6353969678665
+  },
+  {
+   "key": "irr",
+   "group": "finance",
+   "title": "Internal rate of return",
+   "formula": "IRR = the r where NPV(r) = 0",
+   "explain": "The break-even discount rate. Found by bisection, so it needs one sign change in NPV between −99% and 1,000%.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "flows",
+     "label": "Cash flows (t = 0, 1, …)",
+     "default": "-1000, 300, 400, 500, 200",
+     "kind": "list"
+    }
+   ],
+   "example_result": 0.1532213787718154
+  },
+  {
+   "key": "payback",
+   "group": "finance",
+   "title": "Payback period",
+   "formula": "first t where Σ CF₀…CFₜ ≥ 0 (interpolated within the period)",
+   "explain": "How long until cumulative cash flow turns positive. Ignores the time value of money; read it next to NPV.",
+   "out": "num",
+   "params": [
+    {
+     "name": "flows",
+     "label": "Cash flows (t = 0, 1, …)",
+     "default": "-1000, 300, 400, 500, 200",
+     "kind": "list"
+    }
+   ],
+   "example_result": 2.6
+  },
+  {
+   "key": "loan_payment",
+   "group": "finance",
+   "title": "Loan payment (annuity)",
+   "formula": "PMT = P × r ÷ (1 − (1 + r)^−n)",
+   "explain": "The level payment that repays principal P over n periods at rate r per period.",
+   "out": "money",
+   "params": [
+    {
+     "name": "principal",
+     "label": "Principal",
+     "default": 20000,
+     "kind": "num"
+    },
+    {
+     "name": "rate",
+     "label": "Rate per period",
+     "default": 0.01,
+     "kind": "num"
+    },
+    {
+     "name": "n",
+     "label": "Number of payments",
+     "default": 36,
+     "kind": "num"
+    }
+   ],
+   "example_result": 664.2861962570233
+  },
+  {
+   "key": "amortization",
+   "group": "finance",
+   "title": "Amortisation schedule",
+   "formula": "interestₜ = balanceₜ₋₁ × r;  principalₜ = PMT − interestₜ;  balanceₜ = balanceₜ₋₁ − principalₜ",
+   "explain": "Splits every payment into interest and principal. Principal paid always adds up to the amount borrowed.",
+   "out": "table",
+   "params": [
+    {
+     "name": "principal",
+     "label": "Principal",
+     "default": 20000,
+     "kind": "num"
+    },
+    {
+     "name": "rate",
+     "label": "Rate per period",
+     "default": 0.01,
+     "kind": "num"
+    },
+    {
+     "name": "n",
+     "label": "Number of payments",
+     "default": 36,
+     "kind": "int"
+    }
+   ],
+   "example_result": [
+    {
+     "period": 1,
+     "payment": 664.2861962570233,
+     "interest": 200.0,
+     "principal": 464.28619625702333,
+     "balance": 19535.713803742976
+    },
+    {
+     "period": 2,
+     "payment": 664.2861962570233,
+     "interest": 195.35713803742976,
+     "principal": 468.92905821959357,
+     "balance": 19066.784745523382
+    },
+    {
+     "period": 3,
+     "payment": 664.2861962570233,
+     "interest": 190.66784745523384,
+     "principal": 473.61834880178947,
+     "balance": 18593.166396721594
+    },
+    {
+     "period": 4,
+     "payment": 664.2861962570233,
+     "interest": 185.93166396721594,
+     "principal": 478.35453228980737,
+     "balance": 18114.811864431787
+    },
+    {
+     "period": 5,
+     "payment": 664.2861962570233,
+     "interest": 181.1481186443179,
+     "principal": 483.13807761270544,
+     "balance": 17631.673786819083
+    },
+    {
+     "period": 6,
+     "payment": 664.2861962570233,
+     "interest": 176.31673786819084,
+     "principal": 487.9694583888325,
+     "balance": 17143.70432843025
+    },
+    {
+     "period": 7,
+     "payment": 664.2861962570233,
+     "interest": 171.4370432843025,
+     "principal": 492.84915297272084,
+     "balance": 16650.855175457527
+    },
+    {
+     "period": 8,
+     "payment": 664.2861962570233,
+     "interest": 166.50855175457528,
+     "principal": 497.7776445024481,
+     "balance": 16153.077530955079
+    },
+    {
+     "period": 9,
+     "payment": 664.2861962570233,
+     "interest": 161.5307753095508,
+     "principal": 502.75542094747254,
+     "balance": 15650.322110007606
+    },
+    {
+     "period": 10,
+     "payment": 664.2861962570233,
+     "interest": 156.50322110007608,
+     "principal": 507.78297515694726,
+     "balance": 15142.539134850658
+    },
+    {
+     "period": 11,
+     "payment": 664.2861962570233,
+     "interest": 151.4253913485066,
+     "principal": 512.8608049085167,
+     "balance": 14629.678329942142
+    },
+    {
+     "period": 12,
+     "payment": 664.2861962570233,
+     "interest": 146.29678329942143,
+     "principal": 517.9894129576019,
+     "balance": 14111.68891698454
+    },
+    {
+     "period": 13,
+     "payment": 664.2861962570233,
+     "interest": 141.1168891698454,
+     "principal": 523.1693070871779,
+     "balance": 13588.519609897361
+    },
+    {
+     "period": 14,
+     "payment": 664.2861962570233,
+     "interest": 135.8851960989736,
+     "principal": 528.4010001580498,
+     "balance": 13060.118609739311
+    },
+    {
+     "period": 15,
+     "payment": 664.2861962570233,
+     "interest": 130.6011860973931,
+     "principal": 533.6850101596302,
+     "balance": 12526.433599579681
+    },
+    {
+     "period": 16,
+     "payment": 664.2861962570233,
+     "interest": 125.26433599579681,
+     "principal": 539.0218602612265,
+     "balance": 11987.411739318455
+    },
+    {
+     "period": 17,
+     "payment": 664.2861962570233,
+     "interest": 119.87411739318455,
+     "principal": 544.4120788638388,
+     "balance": 11442.999660454616
+    },
+    {
+     "period": 18,
+     "payment": 664.2861962570233,
+     "interest": 114.42999660454616,
+     "principal": 549.8561996524771,
+     "balance": 10893.143460802139
+    },
+    {
+     "period": 19,
+     "payment": 664.2861962570233,
+     "interest": 108.93143460802139,
+     "principal": 555.354761649002,
+     "balance": 10337.788699153138
+    },
+    {
+     "period": 20,
+     "payment": 664.2861962570233,
+     "interest": 103.37788699153138,
+     "principal": 560.908309265492,
+     "balance": 9776.880389887645
+    },
+    {
+     "period": 21,
+     "payment": 664.2861962570233,
+     "interest": 97.76880389887646,
+     "principal": 566.5173923581469,
+     "balance": 9210.362997529497
+    },
+    {
+     "period": 22,
+     "payment": 664.2861962570233,
+     "interest": 92.10362997529498,
+     "principal": 572.1825662817283,
+     "balance": 8638.180431247769
+    },
+    {
+     "period": 23,
+     "payment": 664.2861962570233,
+     "interest": 86.38180431247768,
+     "principal": 577.9043919445456,
+     "balance": 8060.276039303223
+    },
+    {
+     "period": 24,
+     "payment": 664.2861962570233,
+     "interest": 80.60276039303223,
+     "principal": 583.6834358639911,
+     "balance": 7476.592603439232
+    },
+    {
+     "period": 25,
+     "payment": 664.2861962570233,
+     "interest": 74.76592603439232,
+     "principal": 589.520270222631,
+     "balance": 6887.072333216602
+    },
+    {
+     "period": 26,
+     "payment": 664.2861962570233,
+     "interest": 68.87072333216602,
+     "principal": 595.4154729248573,
+     "balance": 6291.656860291744
+    },
+    {
+     "period": 27,
+     "payment": 664.2861962570233,
+     "interest": 62.916568602917444,
+     "principal": 601.3696276541059,
+     "balance": 5690.287232637638
+    },
+    {
+     "period": 28,
+     "payment": 664.2861962570233,
+     "interest": 56.90287232637638,
+     "principal": 607.383323930647,
+     "balance": 5082.903908706991
+    },
+    {
+     "period": 29,
+     "payment": 664.2861962570233,
+     "interest": 50.829039087069916,
+     "principal": 613.4571571699535,
+     "balance": 4469.446751537038
+    },
+    {
+     "period": 30,
+     "payment": 664.2861962570233,
+     "interest": 44.69446751537038,
+     "principal": 619.591728741653,
+     "balance": 3849.8550227953847
+    },
+    {
+     "period": 31,
+     "payment": 664.2861962570233,
+     "interest": 38.49855022795385,
+     "principal": 625.7876460290695,
+     "balance": 3224.067376766315
+    },
+    {
+     "period": 32,
+     "payment": 664.2861962570233,
+     "interest": 32.240673767663154,
+     "principal": 632.0455224893602,
+     "balance": 2592.021854276955
+    },
+    {
+     "period": 33,
+     "payment": 664.2861962570233,
+     "interest": 25.92021854276955,
+     "principal": 638.3659777142537,
+     "balance": 1953.655876562701
+    },
+    {
+     "period": 34,
+     "payment": 664.2861962570233,
+     "interest": 19.53655876562701,
+     "principal": 644.7496374913964,
+     "balance": 1308.9062390713048
+    },
+    {
+     "period": 35,
+     "payment": 664.2861962570233,
+     "interest": 13.089062390713048,
+     "principal": 651.1971338663103,
+     "balance": 657.7091052049944
+    },
+    {
+     "period": 36,
+     "payment": 664.2861962570233,
+     "interest": 6.577091052049944,
+     "principal": 657.7091052049734,
+     "balance": 2.1032064978498966e-11
+    }
+   ]
+  },
+  {
+   "key": "effective_rate",
+   "group": "finance",
+   "title": "Effective annual rate",
+   "formula": "EAR = (1 + APR ÷ m)^m − 1",
+   "explain": "The true yearly rate when a nominal rate is compounded m times a year.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "apr",
+     "label": "Nominal annual rate",
+     "default": 0.12,
+     "kind": "num"
+    },
+    {
+     "name": "m",
+     "label": "Compounding periods per year",
+     "default": 12,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.12682503013196977
+  },
+  {
+   "key": "money_multiplier",
+   "group": "macro",
+   "title": "Money multiplier",
+   "formula": "m = 1 ÷ reserve ratio",
+   "explain": "How much broad money a unit of reserves can support in the simple textbook model.",
+   "out": "num",
+   "params": [
+    {
+     "name": "reserve_ratio",
+     "label": "Reserve ratio",
+     "default": 0.1,
+     "kind": "num"
+    }
+   ],
+   "example_result": 10.0
+  },
+  {
+   "key": "reserve_ratio",
+   "group": "macro",
+   "title": "Reserve ratio",
+   "formula": "rr = 1 ÷ money multiplier",
+   "explain": "The inverse of the money multiplier.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "multiplier",
+     "label": "Money multiplier",
+     "default": 10,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.1
+  },
+  {
+   "key": "real_rate",
+   "group": "macro",
+   "title": "Real interest rate (exact Fisher)",
+   "formula": "real = (1 + nominal) ÷ (1 + inflation) − 1   (≈ nominal − inflation)",
+   "explain": "Purchasing-power return. The subtraction shortcut is close only when rates are small.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "nominal",
+     "label": "Nominal rate",
+     "default": 0.07,
+     "kind": "num"
+    },
+    {
+     "name": "inflation",
+     "label": "Inflation rate",
+     "default": 0.03,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.03883495145631066
+  },
+  {
+   "key": "nominal_rate",
+   "group": "macro",
+   "title": "Nominal interest rate (exact Fisher)",
+   "formula": "nominal = (1 + real) × (1 + inflation) − 1",
+   "explain": "The rate needed to earn a given real return when prices rise.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "real",
+     "label": "Real rate",
+     "default": 0.0388,
+     "kind": "num"
+    },
+    {
+     "name": "inflation",
+     "label": "Inflation rate",
+     "default": 0.03,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.06996399999999992
+  },
+  {
+   "key": "arc_elasticity",
+   "group": "demand",
+   "title": "Price elasticity (arc / midpoint)",
+   "formula": "e = [(Q₂ − Q₁) ÷ ((Q₁ + Q₂)/2)] ÷ [(P₂ − P₁) ÷ ((P₁ + P₂)/2)]",
+   "explain": "% change in quantity per % change in price between two observed points. The midpoint base gives the same answer in either direction.",
+   "out": "num",
+   "params": [
+    {
+     "name": "p1",
+     "label": "Price before",
+     "default": 20,
+     "kind": "num"
+    },
+    {
+     "name": "q1",
+     "label": "Quantity before",
+     "default": 1000,
+     "kind": "num"
+    },
+    {
+     "name": "p2",
+     "label": "Price after",
+     "default": 22,
+     "kind": "num"
+    },
+    {
+     "name": "q2",
+     "label": "Quantity after",
+     "default": 880,
+     "kind": "num"
+    }
+   ],
+   "example_result": -1.3404255319148937
+  },
+  {
+   "key": "point_elasticity",
+   "group": "demand",
+   "title": "Price elasticity (point, linear demand)",
+   "formula": "e = (dQ/dP) × (P ÷ Q)",
+   "explain": "Elasticity at one point on a demand line with slope dQ/dP.",
+   "out": "num",
+   "params": [
+    {
+     "name": "slope",
+     "label": "Slope dQ/dP",
+     "default": -60,
+     "kind": "num"
+    },
+    {
+     "name": "p",
+     "label": "Price",
+     "default": 20,
+     "kind": "num"
+    },
+    {
+     "name": "q",
+     "label": "Quantity",
+     "default": 1000,
+     "kind": "num"
+    }
+   ],
+   "example_result": -1.2
+  },
+  {
+   "key": "fit_elasticity",
+   "group": "demand",
+   "title": "Elasticity from data (log-log regression)",
+   "formula": "ln Q = a + e × ln P   →   e = cov(ln P, ln Q) ÷ var(ln P)",
+   "explain": "Estimates a constant elasticity from several price/quantity observations by least squares on logs.",
+   "out": "num",
+   "params": [
+    {
+     "name": "prices",
+     "label": "Prices",
+     "default": "18, 19, 20, 21, 22, 23",
+     "kind": "list"
+    },
+    {
+     "name": "quantities",
+     "label": "Quantities",
+     "default": "1180, 1090, 1000, 935, 880, 820",
+     "kind": "list"
+    }
+   ],
+   "example_result": -1.476265006583355
+  },
+  {
+   "key": "demand_at_price",
+   "group": "demand",
+   "title": "Demand at a new price (constant elasticity)",
+   "formula": "Q₁ = Q₀ × (P₁ ÷ P₀)^e",
+   "explain": "Projects volume after a price change using an elasticity e (negative for normal goods).",
+   "out": "num",
+   "params": [
+    {
+     "name": "q0",
+     "label": "Current quantity",
+     "default": 1000,
+     "kind": "num"
+    },
+    {
+     "name": "p0",
+     "label": "Current price",
+     "default": 20,
+     "kind": "num"
+    },
+    {
+     "name": "p1",
+     "label": "New price",
+     "default": 22,
+     "kind": "num"
+    },
+    {
+     "name": "e",
+     "label": "Elasticity",
+     "default": -1.3,
+     "kind": "num"
+    }
+   ],
+   "example_result": 883.4653263771346
+  },
+  {
+   "key": "revenue_change",
+   "group": "demand",
+   "title": "Revenue effect of a price change",
+   "formula": "ΔRevenue % = (1 + Δp)^(1 + e) − 1",
+   "explain": "With constant elasticity: raising price lifts revenue only when demand is inelastic (|e| < 1).",
+   "out": "pct",
+   "params": [
+    {
+     "name": "price_change",
+     "label": "Price change (e.g. 0.10 = +10%)",
+     "default": 0.1,
+     "kind": "num"
+    },
+    {
+     "name": "e",
+     "label": "Elasticity",
+     "default": -1.3,
+     "kind": "num"
+    }
+   ],
+   "example_result": -0.028188140985151877
+  },
+  {
+   "key": "optimal_price",
+   "group": "demand",
+   "title": "Profit-maximising price (markup rule)",
+   "formula": "P* = c × e ÷ (1 + e)   (needs e < −1);  Lerner: (P − c) ÷ P = −1 ÷ e",
+   "explain": "With constant elasticity e and unit cost c, the best price is a fixed markup over cost; the more elastic the demand, the smaller the markup.",
+   "out": "money",
+   "params": [
+    {
+     "name": "cost",
+     "label": "Unit cost",
+     "default": 12,
+     "kind": "num"
+    },
+    {
+     "name": "e",
+     "label": "Elasticity",
+     "default": -2.5,
+     "kind": "num"
+    }
+   ],
+   "example_result": 20.0
+  },
+  {
+   "key": "capacity_price",
+   "group": "demand",
+   "title": "Price that just fills capacity",
+   "formula": "P = P₀ × (capacity ÷ Q₀)^(1/e)",
+   "explain": "When capacity is fixed and marginal cost is near zero, revenue is maximised at the price where demand meets capacity (if demand is elastic) - the core trade-off in pricing perishable inventory.",
+   "out": "money",
+   "params": [
+    {
+     "name": "q0",
+     "label": "Demand at current price",
+     "default": 1200,
+     "kind": "num"
+    },
+    {
+     "name": "p0",
+     "label": "Current price",
+     "default": 20,
+     "kind": "num"
+    },
+    {
+     "name": "capacity",
+     "label": "Capacity",
+     "default": 1000,
+     "kind": "num"
+    },
+    {
+     "name": "e",
+     "label": "Elasticity",
+     "default": -1.5,
+     "kind": "num"
+    }
+   ],
+   "example_result": 22.58486469314468
+  },
+  {
+   "key": "cross_elasticity",
+   "group": "demand",
+   "title": "Cross-price elasticity",
+   "formula": "e_AB = %ΔQ_A ÷ %ΔP_B (midpoint)",
+   "explain": "How demand for A responds to B's price: positive = substitutes, negative = complements. Used to check that a price move on one grade doesn't just shift volume between grades.",
+   "out": "num",
+   "params": [
+    {
+     "name": "qa1",
+     "label": "Quantity of A before",
+     "default": 500,
+     "kind": "num"
+    },
+    {
+     "name": "qa2",
+     "label": "Quantity of A after",
+     "default": 540,
+     "kind": "num"
+    },
+    {
+     "name": "pb1",
+     "label": "Price of B before",
+     "default": 30,
+     "kind": "num"
+    },
+    {
+     "name": "pb2",
+     "label": "Price of B after",
+     "default": 33,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.8076923076923078
+  },
+  {
+   "key": "fill_rate",
+   "group": "curves",
+   "title": "Fill rate",
+   "formula": "fill = units sold (or booked) ÷ capacity",
+   "explain": "The common unit that makes products or sessions of different sizes comparable.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "units",
+     "label": "Units sold",
+     "default": 450,
+     "kind": "num"
+    },
+    {
+     "name": "capacity",
+     "label": "Capacity",
+     "default": 2000,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.225
+  },
+  {
+   "key": "normalized_position",
+   "group": "curves",
+   "title": "Position against a benchmark",
+   "formula": "position = fill today ÷ benchmark fill at the same lead time",
+   "explain": "1.00 means exactly on the benchmark path; 0.80 means 20% behind where comparable items stood at this point.",
+   "out": "num",
+   "params": [
+    {
+     "name": "fill_today",
+     "label": "Fill today",
+     "default": 0.225,
+     "kind": "num"
+    },
+    {
+     "name": "benchmark",
+     "label": "Benchmark fill at this lead time",
+     "default": 0.3,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.75
+  },
+  {
+   "key": "blend_curves",
+   "group": "curves",
+   "title": "Capacity-weighted curve blend",
+   "formula": "blend(t) = Σ wᵢ × curveᵢ(t),  wᵢ = capacityᵢ ÷ Σ capacity",
+   "explain": "Combines the curves of components that sell differently (e.g. tiers or channels) into one curve for the whole product, weighting each by its share of capacity.",
+   "out": "num",
+   "params": [
+    {
+     "name": "curves",
+     "label": "Component fills at one lead time",
+     "default": "0.35, 0.28, 0.42",
+     "kind": "list"
+    },
+    {
+     "name": "capacities",
+     "label": "Component capacities",
+     "default": "1200, 600, 200",
+     "kind": "list"
+    }
+   ],
+   "example_result": 0.336
+  },
+  {
+   "key": "percentile",
+   "group": "curves",
+   "title": "Benchmark percentile",
+   "formula": "linear-interpolated percentile of comparable items' fill at the same lead time (as SQL PERCENTILE_CONT)",
+   "explain": "Turns history into strategy choices: P25 = conservative target, P50 = typical, P75 = aggressive.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "values",
+     "label": "Fill of comparable items",
+     "default": "0.22, 0.24, 0.19, 0.28, 0.26, 0.31, 0.21",
+     "kind": "list"
+    },
+    {
+     "name": "q",
+     "label": "Percentile (0-1)",
+     "default": 0.6,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.252
+  },
+  {
+   "key": "monotone_curve",
+   "group": "curves",
+   "title": "Make a cumulative curve non-decreasing",
+   "formula": "curve'(t) = max(curve(t), curve'(t−1)) walking toward the event",
+   "explain": "Percentiles taken lead time by lead time can dip; a cumulative target must never go down, so each point is lifted to the previous maximum.",
+   "out": "list",
+   "params": [
+    {
+     "name": "curve",
+     "label": "Curve (far → near)",
+     "default": "0.05, 0.12, 0.11, 0.25, 0.24, 0.40, 0.62",
+     "kind": "list"
+    }
+   ],
+   "example_result": [
+    0.05,
+    0.12,
+    0.12,
+    0.25,
+    0.25,
+    0.4,
+    0.62
+   ]
+  },
+  {
+   "key": "velocity",
+   "group": "curves",
+   "title": "Demand velocity (share of final)",
+   "formula": "share(t) = cumulative units at t ÷ final units",
+   "explain": "What fraction of the eventual total has normally arrived by each lead time. Dividing today's units by it gives a pace-based projection.",
+   "out": "list",
+   "params": [
+    {
+     "name": "cumulative",
+     "label": "Cumulative units (far → near)",
+     "default": "40, 110, 260, 520, 800, 950, 1000",
+     "kind": "list"
+    }
+   ],
+   "example_result": [
+    0.04,
+    0.11,
+    0.26,
+    0.52,
+    0.8,
+    0.95,
+    1.0
+   ]
+  },
+  {
+   "key": "pace_projection",
+   "group": "curves",
+   "title": "Pace projection",
+   "formula": "projected final = units today ÷ typical share of final at this lead time",
+   "explain": "If comparable items normally have 35% of their final demand by now, 350 today projects to 1,000.",
+   "out": "num",
+   "params": [
+    {
+     "name": "units_today",
+     "label": "Units today",
+     "default": 350,
+     "kind": "num"
+    },
+    {
+     "name": "share",
+     "label": "Typical share of final by now",
+     "default": 0.35,
+     "kind": "num"
+    }
+   ],
+   "example_result": 1000.0000000000001
+  },
+  {
+   "key": "residual_allocation",
+   "group": "curves",
+   "title": "Residual demand allocation (glide path)",
+   "formula": "extraₜ = gap × (ref(t) − ref(t−1)) ÷ (ref(end) − ref(start)), rounded so the parts sum exactly to the gap",
+   "explain": "Spreads the units still needed to hit target over the remaining days in the same shape demand normally arrives - more near the event, little far out. Integer rounding uses largest remainders.",
+   "out": "list",
+   "params": [
+    {
+     "name": "gap",
+     "label": "Units still needed",
+     "default": 300,
+     "kind": "num"
+    },
+    {
+     "name": "reference",
+     "label": "Reference cumulative curve over the remaining window",
+     "default": "0.30, 0.34, 0.40, 0.48, 0.60, 0.76, 1.00",
+     "kind": "list"
+    }
+   ],
+   "example_result": [
+    17,
+    26,
+    34,
+    51,
+    69,
+    103
+   ]
+  },
+  {
+   "key": "survival_rate",
+   "group": "targets",
+   "title": "Survival (show-up / keep) rate",
+   "formula": "survival = net units ÷ gross units;  cancellation rate = 1 − survival",
+   "explain": "Of everything taken so far, the share that is still there (not cancelled) at the end.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "net",
+     "label": "Net units",
+     "default": 860,
+     "kind": "num"
+    },
+    {
+     "name": "gross",
+     "label": "Gross units",
+     "default": 1000,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.86
+  },
+  {
+   "key": "gross_target",
+   "group": "targets",
+   "title": "Gross target from a net target",
+   "formula": "gross target = net target ÷ survival",
+   "explain": "If 14% of what you take will cancel, you must take 1,000 ÷ 0.86 ≈ 1,163 to keep 1,000.",
+   "out": "num",
+   "params": [
+    {
+     "name": "net_target",
+     "label": "Net target",
+     "default": 1000,
+     "kind": "num"
+    },
+    {
+     "name": "survival",
+     "label": "Expected survival",
+     "default": 0.86,
+     "kind": "num"
+    }
+   ],
+   "example_result": 1162.7906976744187
+  },
+  {
+   "key": "expected_net",
+   "group": "targets",
+   "title": "Expected net from today's gross",
+   "formula": "expected net = gross today × survival from this lead time",
+   "explain": "Converts today's gross position into what will remain, using the survival rate observed for this lead time (later units cancel less).",
+   "out": "num",
+   "params": [
+    {
+     "name": "gross_today",
+     "label": "Gross today",
+     "default": 740,
+     "kind": "num"
+    },
+    {
+     "name": "survival_from_here",
+     "label": "Survival from this lead time",
+     "default": 0.89,
+     "kind": "num"
+    }
+   ],
+   "example_result": 658.6
+  },
+  {
+   "key": "gross_still_needed",
+   "group": "targets",
+   "title": "Gross still needed today",
+   "formula": "needed = (net target − expected net from current gross) ÷ survival of new units",
+   "explain": "Bridges the two views: how many more gross units to take from now on to land on the net target.",
+   "out": "num",
+   "params": [
+    {
+     "name": "net_target",
+     "label": "Net target",
+     "default": 1000,
+     "kind": "num"
+    },
+    {
+     "name": "gross_today",
+     "label": "Gross today",
+     "default": 740,
+     "kind": "num"
+    },
+    {
+     "name": "survival_existing",
+     "label": "Survival of current units",
+     "default": 0.89,
+     "kind": "num"
+    },
+    {
+     "name": "survival_new",
+     "label": "Survival of new units",
+     "default": 0.93,
+     "kind": "num"
+    }
+   ],
+   "example_result": 367.09677419354836
+  },
+  {
+   "key": "credibility_weight",
+   "group": "stats",
+   "title": "Credibility weight",
+   "formula": "Z = n ÷ (n + k)",
+   "explain": "How much to trust an item's own data versus the group benchmark. n = evidence (exposure, observations); k = noise ÷ between-item spread.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "n",
+     "label": "Evidence (n)",
+     "default": 40,
+     "kind": "num"
+    },
+    {
+     "name": "k",
+     "label": "Credibility constant (k)",
+     "default": 60,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.4
+  },
+  {
+   "key": "credibility_blend",
+   "group": "stats",
+   "title": "Credibility-weighted estimate",
+   "formula": "estimate = Z × own + (1 − Z) × benchmark",
+   "explain": "Blends an item's own pace with its segment benchmark; early on the benchmark dominates, later the item's own data does.",
+   "out": "num",
+   "params": [
+    {
+     "name": "own",
+     "label": "Own estimate",
+     "default": 1150,
+     "kind": "num"
+    },
+    {
+     "name": "benchmark",
+     "label": "Benchmark estimate",
+     "default": 1000,
+     "kind": "num"
+    },
+    {
+     "name": "z",
+     "label": "Credibility weight Z",
+     "default": 0.4,
+     "kind": "num"
+    }
+   ],
+   "example_result": 1060.0
+  },
+  {
+   "key": "buhlmann_k",
+   "group": "stats",
+   "title": "Credibility constant from data (Bühlmann)",
+   "formula": "k = expected process variance ÷ variance of hypothetical means",
+   "explain": "Estimated from groups of observations: noisy items (high within-variance) need more evidence before they are trusted. Each group is entered as values separated by '|'.",
+   "out": "num",
+   "params": [
+    {
+     "name": "groups",
+     "label": "Groups (values; groups split by |)",
+     "default": "10,12,11,13 | 15,17,16,14 | 9,8,10,9",
+     "kind": "groups"
+    }
+   ],
+   "example_result": 0.128
+  },
+  {
+   "key": "shrink_rate",
+   "group": "stats",
+   "title": "Shrinking a small sample's rate",
+   "formula": "rate = (successes + m × prior) ÷ (trials + m)",
+   "explain": "Empirical-Bayes style: a 3-out-of-4 record is pulled toward the group rate; a 300-out-of-400 record barely moves. m is the prior's weight in pseudo-observations.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "successes",
+     "label": "Successes",
+     "default": 3,
+     "kind": "num"
+    },
+    {
+     "name": "trials",
+     "label": "Trials",
+     "default": 4,
+     "kind": "num"
+    },
+    {
+     "name": "prior",
+     "label": "Group rate",
+     "default": 0.55,
+     "kind": "num"
+    },
+    {
+     "name": "m",
+     "label": "Prior weight (pseudo-trials)",
+     "default": 20,
+     "kind": "num"
+    }
+   ],
+   "example_result": 0.5833333333333334
+  },
+  {
+   "key": "variance_gate",
+   "group": "stats",
+   "title": "Change tolerance gate",
+   "formula": "|new − old| ÷ max(|old|, 1) ≤ tolerance  →  pass",
+   "explain": "The check run before overwriting a published table: if row counts or totals move more than the tolerance (e.g. 2%), stop and investigate instead of publishing.",
+   "out": "gate",
+   "params": [
+    {
+     "name": "old",
+     "label": "Previous value",
+     "default": 12450,
+     "kind": "num"
+    },
+    {
+     "name": "new",
+     "label": "New value",
+     "default": 12610,
+     "kind": "num"
+    },
+    {
+     "name": "tolerance",
+     "label": "Tolerance",
+     "default": 0.02,
+     "kind": "num"
+    }
+   ],
+   "example_result": {
+    "change": 0.01285140562248996,
+    "pass": true
+   }
+  },
+  {
+   "key": "reconcile_match",
+   "group": "stats",
+   "title": "Reconciliation match within tolerance",
+   "formula": "match if |a − b| ÷ max(|a|, |b|) ≤ tolerance",
+   "explain": "Two systems rarely agree to the cent (rounding, currency). A relative tolerance separates real breaks from noise.",
+   "out": "gate",
+   "params": [
+    {
+     "name": "a",
+     "label": "Value in system A",
+     "default": 1049.5,
+     "kind": "num"
+    },
+    {
+     "name": "b",
+     "label": "Value in system B",
+     "default": 1000.0,
+     "kind": "num"
+    },
+    {
+     "name": "tolerance",
+     "label": "Tolerance",
+     "default": 0.05,
+     "kind": "num"
+    }
+   ],
+   "example_result": {
+    "change": 0.04716531681753216,
+    "pass": true
+   }
+  },
+  {
+   "key": "wape",
+   "group": "stats",
+   "title": "Forecast error (WAPE)",
+   "formula": "WAPE = Σ|actual − forecast| ÷ Σ|actual|",
+   "explain": "Volume-weighted error: unlike MAPE it isn't blown up by tiny actuals.",
+   "out": "pct",
+   "params": [
+    {
+     "name": "actual",
+     "label": "Actuals",
+     "default": "120, 80, 15, 300",
+     "kind": "list"
+    },
+    {
+     "name": "forecast",
+     "label": "Forecasts",
+     "default": "110, 95, 5, 310",
+     "kind": "list"
+    }
+   ],
+   "example_result": 0.08737864077669903
+  }
+ ]
+}

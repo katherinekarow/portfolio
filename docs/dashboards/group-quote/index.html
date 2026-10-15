@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Group Screening Quote</title>
+<meta name="description" content="Price a block of slots for an employer screening day: floor price from displaced regular demand, delivery cost and margin (synthetic clinic data).">
+<link rel="stylesheet" href="../assets/dash.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Group screening quote</h1>
+      <p class="sub">An employer wants a block of slots at one clinic in one week. What is the lowest price that leaves the clinic no worse off than selling those slots to regular patients? All data is synthetic.</p>
+    </div>
+    <div class="note"><a href="../../">← Portfolio</a> · <a href="../">All dashboards</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/professional-work/dashboards">Code</a></div>
+  </header>
+
+  <div class="panel controls" style="gap:14px">
+    <label class="f">Clinic<select id="site"></select></label>
+    <label class="f">Week<select id="week"></select></label>
+    <label class="f">Slots requested<input type="number" id="slots" min="1" value="20"></label>
+    <span class="why" id="avail" style="margin:0"></span>
+  </div>
+
+  <section class="kpis" id="kpis" aria-label="Quote"></section>
+
+  <div class="grid21">
+    <div class="panel">
+      <h2>Floor vs list price by block size</h2>
+      <p class="why">The floor rises faster as the block grows: each extra slot given away is more likely to be one a regular patient would have booked. Hover for values.</p>
+      <div class="chartwrap"><svg class="chart" id="curve" role="img" aria-label="Floor and list price by number of slots"></svg></div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="panel">
+      <h2>How the floor is built</h2>
+      <div id="build"></div>
+    </div>
+  </div>
+
+  <details class="help panel">
+    <summary>How this works</summary>
+    <ul>
+      <li>Regular demand for the remaining open slots is Poisson with the expected rate shown. Giving the <i>k</i>-th slot to the group loses the regular price × P(regular demand ≥ open − k + 1).</li>
+      <li>Floor = (displaced revenue + delivery cost per slot) × (1 + margin). List = regular price × slots, less a volume discount at 50 and 100 slots. The quote is whichever is higher.</li>
+      <li>The same formula runs in Python (<code>dashkit.builders.quote</code>), where a Monte Carlo simulation checks the displacement maths.</li>
+    </ul>
+  </details>
+  <footer>Synthetic data · built with plain JavaScript and SVG</footer>
+</main>
+<script src="../assets/dash.js"></script>
+<script>
+function poissonSf(k, lam) {            // P(X >= k), X ~ Poisson(lam)
+  if (k <= 0) return 1;
+  let term = Math.exp(-lam), cdf = 0;
+  for (let i = 0; i < k; i++) { cdf += term; term *= lam / (i + 1); }
+  return Math.max(0, 1 - cdf);
+}
+const r2 = v => Math.round(v * 100) / 100;
+function quote(p, site, week, slots) {   // port of dashkit.builders.quote
+  const s = p.sites.find(x => x.site === site), w = s.weeks.find(x => x.week === week);
+  const open = w.capacity - w.booked;
+  if (slots > open) return { feasible: false, open };
+  const lam = w.expected_regular, price = s.regular_price;
+  let displaced = 0;
+  for (let k = 1; k <= slots; k++) displaced += price * poissonSf(open - k + 1, lam);
+  const cost = p.delivery_cost_per_slot * slots, floor = (displaced + cost) * (1 + p.margin);
+  let disc = 0;
+  Object.entries(p.min_discount_for_size).map(([k, v]) => [+k, v]).sort((a, b) => a[0] - b[0]).forEach(([size, d]) => { if (slots >= size) disc = d; });
+  const list = price * slots * (1 - disc), q = Math.max(floor, list);
+  return { feasible: true, open, displaced: r2(displaced), delivery_cost: r2(cost), floor: r2(floor), list_price: r2(list), quote: r2(q), per_slot: r2(q / slots), binding: floor > list ? "floor" : "list" };
+}
+window.quote = quote;
+D.load().then(P => {
+  const $ = id => document.getElementById(id), f = D.fmt;
+  window.P = P;
+  P.sites.forEach(s => $("site").add(new Option(`${s.site} (regular ${f.usd2(s.regular_price)})`, s.site)));
+  function weeks() { const s = P.sites.find(x => x.site === $("site").value); const cur = $("week").value; $("week").innerHTML = "";
+    s.weeks.forEach(w => $("week").add(new Option(`Week ${w.week}: ${w.capacity - w.booked} open`, w.week))); if (cur) $("week").value = cur; }
+  function draw() {
+    const site = $("site").value, week = +$("week").value, s = P.sites.find(x => x.site === site), w = s.weeks.find(x => x.week === week);
+    const open = w.capacity - w.booked; $("slots").max = open;
+    const n = Math.max(1, +$("slots").value || 1);
+    $("avail").textContent = `${w.booked} of ${w.capacity} booked · ${open} open · about ${w.expected_regular.toFixed(1)} more regular patients expected`;
+    const q = quote(P, site, week, n);
+    if (!q.feasible) {
+      D.kpis($("kpis"), [{ v: "Not possible", l: `Only ${q.open} slots are open that week` }]);
+      $("build").innerHTML = `<p class="why">Reduce the block to ${q.open} or fewer, or pick another week.</p>`;
+    } else {
+      D.kpis($("kpis"), [
+        { v: f.usd(q.quote), l: "Quote for the block", d: q.binding === "floor" ? "set by the floor" : "list price clears the floor" },
+        { v: f.usd2(q.per_slot), l: "Per slot", d: `regular price ${f.usd2(s.regular_price)}` },
+        { v: f.usd(q.floor), l: "Floor (walk-away price)" },
+        { v: f.pct(1 - q.floor / q.quote, 0), l: "Headroom over the floor" },
+      ]);
+      $("build").innerHTML = `<table><tbody>
+        <tr><td class="l">Regular revenue displaced</td><td>${f.usd2(q.displaced)}</td></tr>
+        <tr><td class="l">Delivery cost (${n} × ${f.usd2(P.delivery_cost_per_slot)})</td><td>${f.usd2(q.delivery_cost)}</td></tr>
+        <tr><td class="l">Margin (${f.pct(P.margin, 0)})</td><td>${f.usd2(q.floor - q.displaced - q.delivery_cost)}</td></tr>
+        <tr><th class="l">Floor</th><th>${f.usd2(q.floor)}</th></tr>
+        <tr><td class="l">List price after volume discount</td><td>${f.usd2(q.list_price)}</td></tr>
+        <tr><th class="l">Quote</th><th>${f.usd2(q.quote)}</th></tr></tbody></table>
+        <p class="why" style="margin-top:8px">Displaced revenue is ${f.pct(q.displaced / (s.regular_price * n), 0)} of the block's list value: that share of the slots would probably have sold anyway.</p>`;
+    }
+    const xs = Array.from({ length: open }, (_, i) => i + 1), qs = xs.map(k => quote(P, site, week, k));
+    D.line($("curve"), { x: xs, xFmt: k => k + " slots", series: [
+      { name: "Floor", values: qs.map(q => q.floor), color: D.color(0) },
+      { name: "List price", values: qs.map(q => q.list_price), color: D.color(1), dash: "6 4" } ], yFmt: f.usd, yMin: 0 });
+    $("legend").innerHTML = `<span><span class="sw" style="background:${D.color(0)}"></span>Floor</span><span><span class="sw" style="background:${D.color(1)}"></span>List price</span>`;
+  }
+  $("site").onchange = () => { $("week").value = ""; weeks(); draw(); };
+  $("week").onchange = draw; $("slots").oninput = draw;
+  // open on an example where the floor matters: a busy week where most slots would sell anyway
+  let best = null;
+  P.sites.forEach(s => s.weeks.forEach(w => { const o = w.capacity - w.booked, n = Math.max(1, Math.round(o * 0.6)), q = quote(P, s.site, w.week, n);
+    const score = q.floor / q.list_price; if (!best || score > best.score) best = { score, site: s.site, week: w.week, n }; }));
+  $("site").value = best.site; weeks(); $("week").value = best.week; $("slots").value = best.n;
+  draw();
+  window.__ready = true;
+});
+</script>
+</body>
+</html>

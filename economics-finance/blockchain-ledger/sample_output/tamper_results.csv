@@ -1,0 +1,7 @@
+chain,attack,detected,first_failure,n_failed_checks,attacker_hashes
+permissioned,edit,True,block 28: merkle,1,0
+permissioned,rehash,True,block 28: consensus,2,0
+permissioned,rewrite,True,block 28: consensus,58,0
+PoW 12 bits,edit,True,block 28: merkle,1,0
+PoW 12 bits,rehash,True,block 29: link,1,2221
+PoW 12 bits,rewrite,True,checkpoint,1,205489

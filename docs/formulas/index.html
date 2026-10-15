@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formula Calculator</title>
+<meta name="description" content="Interactive calculator for 40+ finance, economics and demand-analytics formulas: NPV, IRR, amortisation, elasticities, curve normalisation, gross vs net targets, credibility weighting.">
+<link rel="stylesheet" href="../dashboards/assets/dash.css">
+<style>
+  .layout { display:grid; grid-template-columns:220px 1fr; gap:16px; align-items:start; }
+  @media (max-width:860px) { .layout { grid-template-columns:1fr; } nav.side { position:static !important; display:flex; flex-wrap:wrap; gap:6px; } nav.side a { border:1px solid var(--line); border-radius:999px; } }
+  nav.side { position:sticky; top:12px; }
+  nav.side a { display:block; padding:6px 10px; color:var(--ink); text-decoration:none; border-radius:8px; font-size:.9rem; }
+  nav.side a:hover { background:var(--panel); }
+  nav.side .count { color:var(--muted); font-size:.75rem; }
+  .group h2 { margin:18px 0 8px; font-size:1.15rem; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:12px; }
+  .fcard { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:var(--shadow); min-width:0; }
+  .fcard h3 { margin:0 0 4px; font-size:1rem; }
+  .fcard code.f { display:block; font-size:.82rem; background:var(--surface); border:1px solid var(--grid); border-radius:8px; padding:6px 8px; margin:6px 0; white-space:pre-wrap; color:var(--ink); }
+  .fcard p { margin:0 0 8px; color:var(--muted); font-size:.85rem; }
+  .inputs { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .inputs label { font-size:.75rem; color:var(--muted); display:flex; flex-direction:column; gap:3px; }
+  .inputs label.wide { grid-column:1 / -1; }
+  .inputs input { width:100%; font-size:.9rem; padding:6px 8px; }
+  .result { margin-top:10px; padding:8px 10px; border-radius:10px; background:var(--surface); font-variant-numeric:tabular-nums; font-weight:700; font-size:1.15rem; overflow-x:auto; }
+  .result small { display:block; font-weight:400; color:var(--muted); font-size:.75rem; }
+  .result table { font-size:.78rem; font-weight:400; }
+  #search { width:100%; margin-bottom:6px; }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1>Formula calculator</h1>
+      <p class="sub">The finance, economics and demand-analytics formulas I use in my work and studies (40 of them), with live inputs. Each one is a JavaScript copy of a tested Python function, and the tests check that both give the same answers.</p>
+    </div>
+    <div class="note"><a href="../">← Portfolio</a> · <a href="https://github.com/katherinekarow/portfolio/tree/main/economics-finance/formula-toolkit">Python package &amp; tests</a> · <a href="https://github.com/katherinekarow/portfolio/blob/main/economics-finance/formula-toolkit/FORMULAS.md">Formula reference</a></div>
+  </header>
+  <div class="layout">
+    <nav class="side" id="side" aria-label="Formula groups"><input type="search" id="search" placeholder="Search formulas" aria-label="Search formulas"></nav>
+    <div id="groups"></div>
+  </div>
+  <footer>Inputs that take several numbers are comma-separated; groups of numbers are separated by "|".</footer>
+</main>
+<script src="../dashboards/assets/dash.js"></script>
+<script src="formulas.js"></script>
+<script>
+const show = (spec, v) => {
+  const f = D.fmt;
+  if (v === null || v === undefined || (typeof v === "number" && !isFinite(v))) return `<span style="color:var(--muted)">No solution for these inputs</span>`;
+  switch (spec.out) {
+    case "pct": return f.pct(v, 2) + `<small>${v.toFixed(6)}</small>`;
+    case "money": return f.usd2(v).replace("$", "");
+    case "list": return v.map(x => Number.isInteger(x) ? x : x.toFixed(3)).join(", ") + (spec.key === "residual_allocation" ? `<small>total ${v.reduce((a, b) => a + b, 0)}</small>` : "");
+    case "gate": return (v.pass ? `<span class="pill good">✓ pass</span>` : `<span class="pill crit">✕ fail</span>`) + ` change ${f.pct(v.change, 2)}`;
+    case "table": return `<div class="chartwrap"><svg class="chart" id="amort-chart" role="img" aria-label="Balance and payment split"></svg></div>
+      <div class="tablewrap" style="max-height:220px;overflow:auto"><table><thead><tr>${Object.keys(v[0]).map(k => `<th>${k}</th>`).join("")}</tr></thead><tbody>${v.map(r => `<tr>${Object.values(r).map((x, i) => `<td>${i ? x.toFixed(2) : x}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    default: return Math.abs(v) >= 1000 ? v.toLocaleString("en-US", { maximumFractionDigits: 2 }) : Number(v.toPrecision(6));
+  }
+};
+D.load("formulas.json").then(data => {
+  window.SPECS = data.formulas;
+  const side = document.getElementById("side"), groups = document.getElementById("groups");
+  for (const [g, name] of Object.entries(data.groups)) {
+    const fs = data.formulas.filter(x => x.group === g);
+    side.insertAdjacentHTML("beforeend", `<a href="#g-${g}">${name} <span class="count">${fs.length}</span></a>`);
+    groups.insertAdjacentHTML("beforeend", `<section class="group" id="g-${g}"><h2>${name}</h2><div class="cards">${fs.map(s => `
+      <div class="fcard" id="f-${s.key}" data-text="${(s.title + " " + s.explain + " " + s.key).toLowerCase().replace(/"/g, "")}">
+        <h3>${s.title}</h3><code class="f">${s.formula}</code><p>${s.explain}</p>
+        <div class="inputs">${s.params.map(p => `<label class="${p.kind === "list" || p.kind === "groups" ? "wide" : ""}">${p.label}<input data-p="${p.name}" value="${p.default}" ${p.kind === "list" || p.kind === "groups" ? "" : 'inputmode="decimal"'}></label>`).join("")}</div>
+        <div class="result" aria-live="polite"></div>
+      </div>`).join("")}</div></section>`);
+  }
+  function calc(card) {
+    const s = data.formulas.find(x => "f-" + x.key === card.id), raw = {};
+    card.querySelectorAll("input[data-p]").forEach(i => raw[i.dataset.p] = i.value);
+    let v; try { v = FK.run(s, raw); } catch (e) { v = null; }
+    card.querySelector(".result").innerHTML = show(s, v);
+    if (s.out === "table" && v && v.length) {
+      D.line(card.querySelector("#amort-chart"), { x: v.map(r => r.period), xFmt: t => "Payment " + t, yMin: 0, yFmt: D.fmt.usd,
+        series: [{ name: "Balance", values: v.map(r => r.balance), color: D.color(0) }] });
+    }
+  }
+  document.querySelectorAll(".fcard").forEach(c => { calc(c); c.addEventListener("input", () => calc(c)); });
+  document.getElementById("search").addEventListener("input", e => {
+    const q = e.target.value.toLowerCase().trim();
+    document.querySelectorAll(".fcard").forEach(c => c.style.display = !q || c.dataset.text.includes(q) ? "" : "none");
+    document.querySelectorAll(".group").forEach(g => g.style.display = [...g.querySelectorAll(".fcard")].some(c => c.style.display !== "none") ? "" : "none");
+  });
+  window.__ready = true;
+});
+</script>
+</body>
+</html>
