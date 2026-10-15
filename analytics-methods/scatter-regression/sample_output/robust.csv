@@ -1,0 +1,7 @@
+data,method,intercept,slope,true_slope,slope_error,pearson_r,spearman_rho
+with outliers,OLS,153.515,0.222947,0.35,-0.127053,0.50135,0.602073
+with outliers,Theil-Sen,125.932,0.320351,0.35,-0.0296491,0.50135,0.602073
+with outliers,Huber,131.747,0.305937,0.35,-0.0440625,0.50135,0.602073
+outliers removed,OLS,119.445,0.36546,0.35,0.01546,0.830074,0.868579
+outliers removed,Theil-Sen,123.115,0.352135,0.35,0.00213546,0.830074,0.868579
+outliers removed,Huber,123.171,0.347082,0.35,-0.00291754,0.830074,0.868579

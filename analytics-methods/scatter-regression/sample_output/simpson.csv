@@ -1,0 +1,9 @@
+fit,ln_price_slope
+pooled (no controls),0.521344
+controlling for ln size,-1.38343
+format fixed effects,-1.38018
+partial regression (FWL),-1.38343
+within kiosk stores,-1.32317
+within market stores,-1.36518
+within standard stores,-1.35897
+within superstore stores,-1.47747

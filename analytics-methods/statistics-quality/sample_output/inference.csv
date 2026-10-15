@@ -1,0 +1,7 @@
+quantity,estimate,ci_low,ci_high,method
+Site A mean wait (min),17.1025,15.624642626554568,18.58035737344543,"t interval, 95%"
+Site A median wait (min),15.7,13.748750000000005,17.6,"percentile bootstrap, 95%, B=5000"
+Site B − Site A mean wait (min),2.788214285714286,,,"Welch t=2.22, df=263.9, p=0.027"
+"Defect rate, first week",0.03328804347826087,0.025270470661200944,0.043735219761720866,"Wilson, 95%"
+Defect reason vs shift,10.614645359906023,,,"chi-square df=2, p=0.005"
+n per site to detect 3 min (80% power),199.0,,,"sim: type I 0.053, power 0.789, sd 10.7"

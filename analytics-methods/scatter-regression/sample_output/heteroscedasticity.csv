@@ -1,0 +1,3 @@
+data,bp_lm,bp_p,slope_se_classical,slope_se_hc1
+"promo, heteroscedastic + outliers",19.0753,1.25662e-05,0.0505226,0.0783989
+"promo, homoscedastic clean",3.6352,0.0565697,0.0143748,0.0149361

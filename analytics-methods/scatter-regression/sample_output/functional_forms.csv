@@ -1,0 +1,5 @@
+form,model,price_coef,se,r2,elasticity_at_mean,reading,breusch_pagan_p
+level-level,units = a + b·price + controls,-89.6516,3.49481,0.795921,-0.795339,+$0.10 in price → -9.0 units/week,6.85008e-30
+log-level,ln units = a + b·price + controls,-0.253239,0.00744039,0.882484,-0.848084,+$0.10 in price → -2.5% units,0.00869473
+level-log,units = a + b·ln price + controls,-525.581,13.7687,0.831587,-1.39228,+1% price → -5.23 units/week,1.3393e-37
+log-log,ln units = a + b·ln price + controls,-1.39257,0.0283887,0.909043,-1.39257,+1% price → -1.38% units (elasticity -1.39),0.0792132
