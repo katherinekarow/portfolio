@@ -24,6 +24,10 @@
   .cell.bad { color:var(--bad); background:var(--bad-soft); }
   .notes { position:absolute; inset:2px; display:grid; grid-template-columns:repeat(3, 1fr); font-size:clamp(8px, 2vw, 11px); color:var(--muted); line-height:1; }
   .notes span { display:flex; align-items:center; justify-content:center; }
+  .cagebox { position:absolute; border:1.5px none var(--pink-500); pointer-events:none; }
+  .csum { position:absolute; top:1px; left:3px; font:700 clamp(8px, 1.9vw, 11px)/1 var(--font); color:var(--pink-700); background:var(--panel); padding:0 2px; border-radius:3px; z-index:1; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .csum { color:var(--pink-300); } }
+  .killer .notes { top:12px; }
   #pad { display:grid; grid-template-columns:repeat(9, 1fr); gap:6px; margin-top:12px; }
   #pad button, .tools button { font:600 1.1rem var(--font); padding:9px 0; border-radius:9px; border:1.5px solid var(--ink); background:var(--panel); color:var(--ink); box-shadow:2px 2px 0 var(--ink); cursor:pointer; }
   #pad button:active, .tools button:active { transform:translate(2px,2px); box-shadow:none; }
@@ -46,7 +50,7 @@
         <div class="gamebar">
           <select id="level" aria-label="Difficulty">
             <option value="easy">Easy</option><option value="medium" selected>Medium</option>
-            <option value="hard">Hard</option><option value="expert">Expert</option>
+            <option value="hard">Hard</option><option value="expert">Expert</option><option value="killer">Killer (sums)</option>
           </select>
           <button class="btn alt" id="new">New puzzle</button>
           <button class="btn lav" id="daily">Today's puzzle</button>
@@ -69,7 +73,7 @@
       <div class="win-body" id="hs"><p class="muted">Loading…</p></div>
     </section>
 
-    <p class="muted small" style="margin-top:14px">Fill every row, column and 3×3 box with 1–9. Click a cell, then a number, or use the keyboard:
+    <p class="muted small" style="margin-top:14px">Fill every row, column and 3×3 box with 1–9. In <b>Killer</b>, the digits in each dashed cage add up to its small number and can't repeat. Click a cell, then a number, or use the keyboard:
       arrows to move, 1–9 to fill, <b>N</b> for notes, Backspace to erase. Every puzzle is generated in your browser and has exactly one solution.
       <a id="share" href="#">Copy a link to this puzzle</a>.</p>
   </div>
@@ -112,7 +116,7 @@ for (let i = 0; i < 81; i++) {
   for (let dr = 0; dr < 3; dr++) for (let dc = 0; dc < 3; dc++) s.add((br + dr) * 9 + bc + dc);
   s.delete(i); PEERS.push([...s]);
 }
-const LEVELS = { easy: 40, medium: 32, hard: 27, expert: 24 };
+const LEVELS = { easy: 40, medium: 32, hard: 27, expert: 24, killer: 0 };
 
 function candidates(g, i) {
   const used = new Set(PEERS[i].map(p => g[p]));
@@ -144,7 +148,79 @@ function fullGrid(rnd) {
   })(0);
   return g;
 }
+// ---------- killer sudoku: cages of cells whose digits add up to the cage total (no repeats in a cage) ----------
+function makeCages(sol, rnd) {
+  const cage = new Array(81).fill(-1), cages = [];
+  const sizes = [2, 2, 2, 3, 3, 3, 3, 4, 4, 5];
+  for (const start of shuffle([...Array(81).keys()], rnd)) {
+    if (cage[start] >= 0) continue;
+    const id = cages.length, cells = [start], used = new Set([sol[start]]);
+    cage[start] = id;
+    const want = sizes[Math.floor(rnd() * sizes.length)];
+    while (cells.length < want) {
+      const opts = [];
+      for (const c of cells) {
+        const r = Math.floor(c / 9), k = c % 9;
+        for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const rr = r + dr, cc = k + dc, n = rr * 9 + cc;
+          if (rr >= 0 && rr < 9 && cc >= 0 && cc < 9 && cage[n] < 0 && !used.has(sol[n])) opts.push(n);
+        }
+      }
+      if (!opts.length) break;
+      const n = opts[Math.floor(rnd() * opts.length)];
+      cage[n] = id; cells.push(n); used.add(sol[n]);
+    }
+    cages.push({ cells, sum: cells.reduce((a, c) => a + sol[c], 0) });
+  }
+  return { cage, cages };
+}
+function killerCandidates(g, i, K) {
+  const base = candidates(g, i), cg = K.cages[K.cage[i]];
+  let filled = 0, empty = 0; const inCage = new Set();
+  for (const c of cg.cells) { if (g[c]) { filled += g[c]; inCage.add(g[c]); } else empty++; }
+  return base.filter(d => {
+    if (inCage.has(d)) return false;
+    const left = cg.sum - filled - d, k = empty - 1;
+    if (k === 0) return left === 0;
+    const free = []; for (let x = 1; x <= 9; x++) if (x !== d && !inCage.has(x)) free.push(x);
+    if (free.length < k) return false;
+    const lo = free.slice(0, k).reduce((a, b) => a + b, 0), hi = free.slice(-k).reduce((a, b) => a + b, 0);
+    return left >= lo && left <= hi;
+  });
+}
+function killerSolutions(g, K, limit = 2, budget = { n: 200000 }) {
+  // returns up to `limit` solutions; gives up (returns limit fake entries) if the search budget runs out
+  const found = [];
+  (function go() {
+    if (found.length >= limit) return;
+    if (--budget.n < 0) { while (found.length < limit) found.push(null); return; }
+    let best = -1, opts = null;
+    for (let i = 0; i < 81; i++) if (!g[i]) {
+      const o = killerCandidates(g, i, K);
+      if (!o.length) return;
+      if (!opts || o.length < opts.length) { best = i; opts = o; if (o.length === 1) break; }
+    }
+    if (best < 0) { found.push(g.slice()); return; }
+    for (const d of opts) { g[best] = d; go(); g[best] = 0; if (found.length >= limit) return; }
+  })();
+  return found;
+}
+function generateKiller(seed) {
+  const rnd = mulberry32(seed);
+  const solution = fullGrid(rnd), K = makeCages(solution, rnd), puzzle = new Array(81).fill(0);
+  for (let guard = 0; guard < 81; guard++) {           // add a given wherever two answers disagree, until only one remains
+    const sols = killerSolutions(puzzle.slice(), K);
+    if (sols.length < 2) break;
+    const other = sols.find(x => x && x.some((v, i) => v !== solution[i]));
+    const diff = other ? [...Array(81).keys()].filter(i => !puzzle[i] && other[i] !== solution[i])
+                       : [...Array(81).keys()].filter(i => !puzzle[i]);
+    const i = diff[Math.floor(rnd() * diff.length)];
+    puzzle[i] = solution[i];
+  }
+  return { puzzle, solution, cages: K.cages, cage: K.cage };
+}
 function generate(level, seed) {
+  if (level === "killer") return generateKiller(seed);
   const rnd = mulberry32(seed);
   const solution = fullGrid(rnd), puzzle = solution.slice();
   let clues = 81;
@@ -167,6 +243,7 @@ function newGame(game) {
   sel = S.puzzle.findIndex(v => !v); history = []; mistakes = 0; done = false; hints = 0;
   started = Date.now(); clearInterval(timerId); timerId = setInterval(tick, 1000); tick();
   $("level").value = S.level; $("msg").textContent = S.label;
+  boardEl.classList.toggle("killer", !!S.cage);
   $("hsLevel").textContent = S.level; Scores.table($("hs"), "sudoku", S.level);
   render();
 }
@@ -177,7 +254,7 @@ function tick() {
 function randomGame(level) {
   const seed = Math.floor(Math.random() * 1e9);
   history_replace(level, seed);
-  newGame({ ...generate(level, seed), level, seed, label: `New ${level} puzzle. Good luck!` });
+  newGame({ ...generate(level, seed), level, seed, label: level === "killer" ? "Killer sudoku: each dashed cage adds up to its number, with no repeats inside a cage." : `New ${level} puzzle. Good luck!` });
 }
 function history_replace(level, seed) {
   const u = new URL(location.href); u.searchParams.set("level", level); u.searchParams.set("seed", seed);
@@ -215,7 +292,17 @@ function render() {
     if (i === sel) el.classList.add("sel");
     el.setAttribute("role", "gridcell");
     el.setAttribute("aria-label", `Row ${r + 1} column ${c + 1}: ${v || "empty"}`);
-    if (v) el.textContent = v;
+    if (S.cage) {
+      const id = S.cage[i], rr = Math.floor(i / 9), cc = i % 9, same = n => n >= 0 && S.cage[n] === id;
+      const box = document.createElement("div"); box.className = "cagebox";
+      // outer edges of the cage get a dashed line 3px inside the cell; inner edges run on into the neighbour
+      const edge = (open, side) => { box.style[side] = open ? "-2px" : "3px"; if (!open) box.style["border" + side[0].toUpperCase() + side.slice(1) + "Style"] = "dashed"; };
+      edge(rr > 0 && same(i - 9), "top"); edge(rr < 8 && same(i + 9), "bottom");
+      edge(cc > 0 && same(i - 1), "left"); edge(cc < 8 && same(i + 1), "right");
+      el.appendChild(box);
+      if (Math.min(...S.cages[id].cells) === i) { const t = document.createElement("span"); t.className = "csum"; t.textContent = S.cages[id].sum; el.appendChild(t); }
+    }
+    if (v) el.appendChild(document.createTextNode(v));
     else if (S.notes[i].size) {
       const n = document.createElement("div"); n.className = "notes";
       for (let d = 1; d <= 9; d++) { const s = document.createElement("span"); s.textContent = S.notes[i].has(d) ? d : ""; n.appendChild(s); }
@@ -310,7 +397,7 @@ document.addEventListener("keydown", e => {
 (function start() {
   const q = new URLSearchParams(location.search);
   if (q.has("daily")) return dailyGame();
-  const level = LEVELS[q.get("level")] ? q.get("level") : "medium";
+  const level = q.get("level") in LEVELS ? q.get("level") : "medium";
   const seed = Number(q.get("seed"));
   if (q.has("seed") && Number.isFinite(seed)) {
     newGame({ ...generate(level, seed), level, seed, label: `Shared ${level} puzzle #${seed}` });

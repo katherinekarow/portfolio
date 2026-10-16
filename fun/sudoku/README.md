@@ -1,13 +1,15 @@
 # Sudoku generator & game
-> Generates Sudoku puzzles with exactly one solution — play in the browser, in the terminal, or solve the daily puzzle.
+> Generates Sudoku and Killer Sudoku puzzles with exactly one solution: play in the browser, in the terminal, or solve the daily puzzle.
 
 **Tools:** Python, JavaScript, GitHub Pages, GitHub Actions
 
 **Live demo:** [Play in the browser](https://katherinekarow.github.io/portfolio/sudoku/)
 
-### ▶ [Play in your browser](https://katherinekarow.github.io/portfolio/sudoku/) · [Today's puzzle](https://katherinekarow.github.io/portfolio/sudoku/?daily=1)
+### [Play in your browser](https://katherinekarow.github.io/portfolio/sudoku/) · [Today's puzzle](https://katherinekarow.github.io/portfolio/sudoku/?daily=1)
 
-Four levels, pencil notes, hints, undo, a timer, keyboard controls — and confetti when you win.
+Four classic levels plus **Killer Sudoku**, with pencil notes, hints, undo, a timer, keyboard controls and falling petals when you win.
+
+**Killer Sudoku:** the board is split into dashed *cages*. The digits in a cage add up to its small number and can't repeat, on top of the usual row, column and box rules, and there are almost no starting digits. The generator builds the cages from a solved grid. A solver then prunes on cage sums (the remaining cells must still be able to reach the remaining total with unused digits). It adds a starting digit wherever two answers are still possible, until exactly one solution remains.
 Every puzzle link can be shared: the same link always opens the same puzzle.
 
 ### In the terminal
