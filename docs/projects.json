@@ -286,7 +286,7 @@
         "demo": "https://katherinekarow.github.io/portfolio/sudoku/",
         "demo_label": "Play in the browser",
         "title": "Sudoku generator & game",
-        "summary": "Generates Sudoku puzzles with exactly one solution — play in the browser, in the terminal, or solve the daily puzzle.",
+        "summary": "Generates Sudoku and Killer Sudoku puzzles with exactly one solution: play in the browser, in the terminal, or solve the daily puzzle.",
         "tools": "Python, JavaScript, GitHub Pages, GitHub Actions",
         "path": "fun/sudoku",
         "url": "https://github.com/katherinekarow/portfolio/tree/main/fun/sudoku"

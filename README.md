@@ -121,7 +121,7 @@ Small games and toys. Start with the Sudoku!
 | Project | What it is | Tools |
 |---|---|---|
 | [Sakura Minesweeper](fun/minesweeper/) · [live demo](https://katherinekarow.github.io/portfolio/minesweeper/) | Classic Minesweeper in plain JavaScript: a safe first click, flood fill, chording, long-press on touch screens, cherry-blossom flags and best times saved on your device. | JavaScript, HTML/CSS |
-| [Sudoku generator & game](fun/sudoku/) · [live demo](https://katherinekarow.github.io/portfolio/sudoku/) | Generates Sudoku puzzles with exactly one solution — play in the browser, in the terminal, or solve the daily puzzle. | Python, JavaScript, GitHub Pages, GitHub Actions |
+| [Sudoku generator & game](fun/sudoku/) · [live demo](https://katherinekarow.github.io/portfolio/sudoku/) | Generates Sudoku and Killer Sudoku puzzles with exactly one solution: play in the browser, in the terminal, or solve the daily puzzle. | Python, JavaScript, GitHub Pages, GitHub Actions |
 
 <!-- PROJECTS:END -->
 
