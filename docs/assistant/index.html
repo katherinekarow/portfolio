@@ -2,23 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="../assets/sakura.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Data Knowledge Assistant</title>
 <meta name="description" content="Self-service catalog, glossary, lineage and grounded Q&A for a clinic network's planning data (synthetic).">
+<link rel="stylesheet" href="../assets/sakura.css">
 <style>
   :root {
-    --bg:#f6f5f1; --panel:#ffffff; --surface:#f1f0eb; --ink:#0b0b0b; --muted:#52514e; --line:#dcdad3; --grid:#e6e5e0;
-    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --good:#0ca30c; --warn:#fab219; --crit:#d03b3b; --accent:#b0619b;
-    --raw:#8a8984; --stg:#eda100; --core:#2a78d6; --mart:#1baf7a; --rpt:#eb6834;
+    --s1:#d6457a; --s2:#7b5ea7; --s3:#2e9e6b; --s4:#c27a12; --good:#1f8a5c; --warn:#f2b134; --crit:#d03a55;
+    --raw:#a99db5; --stg:#c27a12; --core:#7b5ea7; --mart:#2e9e6b; --rpt:#d6457a;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#121214; --panel:#1f1f23; --surface:#26262b; --ink:#f2f1ee; --muted:#a9a8a3; --line:#34343a; --grid:#2e2e33;
-      --s1:#5b9cf0; --s2:#f2864f; --s3:#36c891; --accent:#e08cc9; --core:#5b9cf0; --mart:#36c891; --rpt:#f2864f; }
+    :root:not([data-theme="light"]) { --s1:#dc5288; --s2:#9478d4; --s3:#2fa073; --s4:#b8761a; --core:#9478d4; --mart:#2fa073; --rpt:#dc5288; --stg:#b8761a; }
   }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 "Segoe UI", Helvetica, Arial, sans-serif; }
+  body { margin:0; color:var(--ink); font:15px/1.5 var(--font); }
   main { max-width:1080px; margin:0 auto; padding:20px 16px 48px; }
-  a { color:var(--accent); }
+  a { color:var(--link); }
   header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:10px; margin-bottom:14px; }
   h1 { margin:0; font-size:clamp(1.4rem,3.2vw,1.9rem); }
   .sub { margin:2px 0 0; color:var(--muted); }
@@ -60,9 +60,14 @@
   .lineage-help { color:var(--muted); font-size:.88rem; margin:0 0 8px; }
   .ok { color:var(--good); font-weight:700; } .bad { color:var(--crit); font-weight:700; }
   footer { margin-top:28px; color:var(--muted); font-size:.82rem; text-align:center; }
+  .panel { border:1.5px solid var(--ink); border-radius:12px; box-shadow:var(--shadow); position:relative; padding-top:42px; }
+  .panel::before { content:""; position:absolute; left:0; right:0; top:0; height:26px; border-bottom:1.5px solid var(--ink); background:linear-gradient(90deg, var(--bar-a), var(--bar-b)); border-radius:10px 10px 0 0; }
+  button.go { border:1.5px solid var(--ink); box-shadow:2px 2px 0 var(--ink); }
+  nav button { font-family:var(--pixel); font-size:.72rem; }
+  header h1::before { content:""; display:inline-block; width:.9em; height:.9em; margin-right:.35em; vertical-align:-.08em; background:url("../assets/sakura.svg") center/contain no-repeat; }
 </style>
 </head>
-<body>
+<body class="sakura" data-page="assistant">
 <main>
   <header>
     <div>
@@ -382,5 +387,6 @@ fetch("kb.json").then(r => r.json()).then(kb => {
   addEventListener("resize", () => !$("t-lineage").hidden && lineage());
 }).catch(e => { console.error(e); $("chat").innerHTML = `<p class="note">Couldn't load kb.json (${esc(e.message)}).</p>`; });
 </script>
+<script src="../assets/sakura.js"></script>
 </body>
 </html>

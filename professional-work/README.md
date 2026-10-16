@@ -1,10 +1,10 @@
-# 💼 Professional work
+# Professional work
 > The techniques I use at work, applied to invented data from a clinic network and a farm co-op. Every project runs, and its tests prove it does what the write-up says.
 
 ## Start here
 | If you have… | Look at |
 |---|---|
-| 2 minutes | the live demos: [📊 dashboard gallery](https://katherinekarow.github.io/portfolio/dashboards/) (seven interactive dashboards) and [💬 knowledge assistant](https://katherinekarow.github.io/portfolio/assistant/) |
+| 2 minutes | the live demos: [dashboard gallery](https://katherinekarow.github.io/portfolio/dashboards/) (seven interactive dashboards) and [knowledge assistant](https://katherinekarow.github.io/portfolio/assistant/) |
 | 10 minutes | [clinic capacity planning](capacity-planning/), the flagship data product, with a walkthrough notebook |
 | an interest in a specific skill | the map below |
 

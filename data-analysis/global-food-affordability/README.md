@@ -3,7 +3,7 @@
 
 **Tools:** Tableau (dashboards, maps, forecasting), data blending
 
-📊 Workbook: [`food-affordability.twbx`](food-affordability.twbx) · Group project
+ Workbook: [`food-affordability.twbx`](food-affordability.twbx) · Group project
 
 | | |
 |---|---|

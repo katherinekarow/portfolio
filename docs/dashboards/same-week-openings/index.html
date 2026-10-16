@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="../../assets/sakura.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Short-Notice Openings</title>
 <meta name="description" content="Clinic sessions in the next two weeks with open slots: probability each fills, expected empty slots and the recommended action (synthetic data).">
@@ -11,7 +12,7 @@
   .pbar i { position:absolute; left:0; top:0; bottom:0; background:var(--s1); border-radius:4px; }
 </style>
 </head>
-<body>
+<body class="sakura" data-page="dashboards">
 <main>
   <header class="top">
     <div>
@@ -95,5 +96,6 @@ D.load().then(data => {
   window.__ready = true;
 });
 </script>
+<script src="../../assets/sakura.js"></script>
 </body>
 </html>

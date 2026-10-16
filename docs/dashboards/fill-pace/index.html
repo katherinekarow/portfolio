@@ -2,26 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="../../assets/sakura.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Clinic Fill Dashboard</title>
 <meta name="description" content="Interactive fill-to-target dashboard for clinic screening sessions (synthetic data).">
+<link rel="stylesheet" href="../../assets/sakura.css">
 <style>
   :root {
-    --bg:#f6f5f1; --surface:#fcfcfb; --panel:#ffffff; --ink:#0b0b0b; --muted:#52514e; --grid:#e6e5e0; --line:#dcdad3;
-    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --band:rgba(42,120,214,.10); --pband:rgba(235,104,52,.16);
-    --good:#0ca30c; --warn:#fab219; --crit:#d03b3b; --accent:#b0619b; --shadow:0 1px 2px rgba(0,0,0,.05);
+    --s1:#d6457a; --s2:#7b5ea7; --s3:#2e9e6b; --s4:#c27a12; --band:rgba(214,69,122,.10); --pband:rgba(123,94,167,.16);
+    --good:#1f8a5c; --warn:#f2b134; --crit:#d03a55;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
-      --bg:#121214; --surface:#1a1a1d; --panel:#1f1f23; --ink:#f2f1ee; --muted:#a9a8a3; --grid:#2e2e33; --line:#34343a;
-      --s1:#5b9cf0; --s2:#f2864f; --s3:#36c891; --s4:#f4b630; --band:rgba(91,156,240,.14); --pband:rgba(242,134,79,.20);
-      --accent:#e08cc9; --shadow:none;
-    }
+    :root:not([data-theme="light"]) { --s1:#dc5288; --s2:#9478d4; --s3:#2fa073; --s4:#b8761a; --band:rgba(220,82,136,.14); --pband:rgba(148,120,212,.20); }
   }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.45 "Segoe UI", Helvetica, Arial, sans-serif; }
+  body { margin:0; color:var(--ink); font:15px/1.5 var(--font); }
   main { max-width:1180px; margin:0 auto; padding:20px 16px 48px; }
-  a { color:var(--accent); }
+  a { color:var(--link); }
   header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:12px; margin-bottom:16px; }
   h1 { margin:0; font-size:clamp(1.4rem,3.2vw,1.9rem); }
   .sub { margin:2px 0 0; color:var(--muted); }
@@ -73,7 +70,7 @@
   .tip div { display:flex; justify-content:space-between; gap:12px; }
   .seg-toggle { display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; }
   .seg-toggle button { font:inherit; font-size:.82rem; border:0; background:var(--panel); color:var(--ink); padding:5px 12px; cursor:pointer; }
-  .seg-toggle button.on { background:var(--s1); color:#fff; }
+  .seg-toggle button.on { background:var(--pink-300); color:#2b1f38; }
   .why { color:var(--muted); font-size:.88rem; }
   .bottom { margin-top:14px; display:grid; grid-template-columns:1.2fr 1fr; gap:14px; }
   @media (max-width:860px) { .bottom { grid-template-columns:1fr; } }
@@ -84,9 +81,13 @@
   .help summary { cursor:pointer; color:var(--muted); }
   .help { margin-top:16px; }
   footer { margin-top:28px; color:var(--muted); font-size:.82rem; text-align:center; }
+  .panel, .kpi { border:1.5px solid var(--ink) !important; border-radius:12px; box-shadow:var(--shadow); }
+  .panel { position:relative; padding-top:42px !important; }
+  .panel::before { content:""; position:absolute; left:0; right:0; top:0; height:26px; border-bottom:1.5px solid var(--ink); background:linear-gradient(90deg, var(--bar-a), var(--bar-b)); border-radius:10px 10px 0 0; }
+  .list.panel { padding-top:34px !important; }
 </style>
 </head>
-<body>
+<body class="sakura" data-page="dashboards">
 <main>
   <header>
     <div>
@@ -437,5 +438,6 @@ fetch("data.json").then(r => r.json()).then(data => {
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { legend(); render(); });
 }).catch(e => { $("list").innerHTML = `<p class="why">Couldn't load data.json (${esc(e.message)}).</p>`; });
 </script>
+<script src="../../assets/sakura.js"></script>
 </body>
 </html>

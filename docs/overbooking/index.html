@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="../assets/sakura.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Overbooking Calculator</title>
 <meta name="description" content="How many patients should a clinic book into a session when some won't show? Exact expected profit by booking limit from binomial and beta-binomial show-up models (synthetic data).">
@@ -16,7 +17,7 @@
   @media (max-width:560px) { .controls label.f input { width:84px; } }
 </style>
 </head>
-<body>
+<body class="sakura" data-page="overbooking">
 <main>
   <header class="top">
     <div>
@@ -223,5 +224,6 @@ D.load("data.json").then(d => {
   window.__ready = true;
 }).catch(e => { document.querySelector("main").insertAdjacentHTML("beforeend", `<p class="warn-msg">Could not load data.json (${e.message}).</p>`); });
 </script>
+<script src="../assets/sakura.js"></script>
 </body>
 </html>

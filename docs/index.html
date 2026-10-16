@@ -3,76 +3,109 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portfolio</title>
-<meta name="description" content="Data analysis, BI, Python and web projects — plus a daily Sudoku.">
+<title>Sakura Portfolio</title>
+<meta name="description" content="Data analysis, BI, finance and Python projects with interactive dashboards, calculators and two games.">
+<link rel="icon" href="assets/sakura.svg">
+<link rel="stylesheet" href="assets/sakura.css">
 <style>
-  :root { --bg:#fff8f2; --panel:#ffffff; --ink:#3d2c4d; --muted:#7a6a88; --line:#eadff2; --accent:#b0619b; --chip:#f6eefc; }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#1c1622; --panel:#261e2e; --ink:#f3e9fb; --muted:#b7a6c6; --line:#3a2f49; --accent:#e08cc9; --chip:#2e2537; }
-  }
-  * { box-sizing: border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 "Segoe UI", Helvetica, Arial, sans-serif; }
-  main { max-width: 980px; margin: 0 auto; padding: 24px 16px 48px; }
-  a { color: var(--accent); }
-  .hero { display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; margin-bottom: 8px; }
-  h1 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.4rem); }
-  .tag { color: var(--muted); margin: 4px 0 0; }
-  .btns { display:flex; gap:8px; flex-wrap:wrap; }
-  .btn { display:inline-block; padding:10px 16px; border-radius:12px; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; }
-  .btn.alt { background: var(--panel); color: var(--ink); border:1px solid var(--line); }
-  .filters { display:flex; flex-wrap:wrap; gap:8px; margin: 22px 0 8px; }
-  .filters button { font: inherit; border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:999px; padding:6px 14px; cursor:pointer; }
-  .filters button.on { background: var(--accent); border-color: var(--accent); color:#fff; }
-  input[type=search] { font: inherit; padding: 8px 12px; border-radius: 12px; border:1px solid var(--line); background:var(--panel); color:var(--ink); min-width: 220px; flex: 1; }
-  h2 { margin: 28px 0 4px; font-size: 1.25rem; }
-  .sdesc { color: var(--muted); margin: 0 0 12px; }
-  .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-  .card { position:relative; background: var(--panel); border:1px solid var(--line); border-radius: 16px; padding: 16px; color:inherit; display:flex; flex-direction:column; gap:8px; transition: transform .15s, box-shadow .15s; }
-  .card h3 a { color: inherit; text-decoration: none; }
-  .card h3 a::after { content:""; position:absolute; inset:0; border-radius:16px; }
-  .demo { position:relative; z-index:1; align-self:flex-start; font-size:.85rem; font-weight:600; padding:4px 12px; border-radius:999px; background:var(--accent); color:#fff; text-decoration:none; }
-  .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(61,44,77,.12); }
-  .card h3 { margin:0; font-size: 1.05rem; color: var(--ink); }
-  .card p { margin:0; color: var(--muted); font-size: .95rem; }
-  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
-  .chip { background: var(--chip); border-radius: 999px; padding: 2px 10px; font-size: .78rem; }
-  .surprise { margin-top: 30px; text-align:center; color: var(--muted); }
-  .empty { color: var(--muted); }
-  footer { margin-top: 40px; color: var(--muted); font-size: .85rem; text-align:center; }
+  .hero { display:grid; grid-template-columns:1.35fr 1fr; gap:18px; margin:26px 0 22px; align-items:stretch; }
+  @media (max-width:860px) { .hero { grid-template-columns:1fr; } }
+  .hello { display:flex; gap:18px; align-items:flex-start; }
+  .avatar { width:92px; height:92px; border-radius:14px; border:1.5px solid var(--ink); box-shadow:3px 3px 0 var(--pink-300); object-fit:cover; flex:none; background:var(--pink-100); }
+  .hello h1 { margin:4px 0 8px; }
+  .cta { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+  .icons { display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:6px; }
+  .app { display:flex; flex-direction:column; align-items:center; gap:6px; padding:10px 4px; border-radius:10px; text-decoration:none; color:var(--ink); font-size:.8rem; text-align:center; }
+  .app:hover, .app:focus-visible { background:var(--pink-100); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .app:hover { background:var(--surface); } }
+  .app svg { width:46px; height:46px; filter:drop-shadow(2px 2px 0 rgba(43,31,56,.25)); }
+  .stats { display:flex; gap:22px; flex-wrap:wrap; margin-top:14px; }
+  .stats div b { display:block; font-family:var(--pixel); font-size:1.15rem; color:var(--pink-700); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .stats div b { color:var(--pink-300); } }
+  .stats div span { font-size:.8rem; color:var(--muted); }
+  .toolbar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:14px; }
+  .toolbar input { flex:1; min-width:200px; }
+  .sec { margin:22px 0 10px; display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .sec h2 { margin:0; font-size:1.2rem; display:flex; gap:8px; align-items:center; }
+  .sec p { margin:0; color:var(--muted); font-size:.92rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:14px; }
+  .card { position:relative; display:flex; flex-direction:column; transition:transform .15s ease, box-shadow .15s ease; }
+  .card:hover { transform:translateY(-3px); }
+  .card .win-body { display:flex; flex-direction:column; gap:8px; flex:1; padding:14px 16px; }
+  .card h3 { margin:0; font-size:1rem; line-height:1.3; }
+  .card h3 a { color:var(--ink); text-decoration:none; }
+  .card h3 a::after { content:""; position:absolute; inset:0; }
+  .card p { margin:0; color:var(--muted); font-size:.9rem; }
+  .card .tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:auto; padding-top:4px; }
+  .card .demo { position:relative; z-index:2; align-self:flex-start; padding:6px 12px; font-size:.8rem; box-shadow:2px 2px 0 var(--ink); }
+  .empty { color:var(--muted); }
 </style>
 </head>
-<body>
-<main>
-  <div class="hero">
-    <div>
-      <h1>👋 Portfolio</h1>
-      <p class="tag">Data analysis · BI · Python · web apps — and a little Sudoku.</p>
+<body class="sakura" data-page="home">
+<main class="wrap">
+  <section class="hero">
+    <div class="win">
+      <div class="win-bar"><span class="title"><i class="bl"></i>welcome.exe</span><span class="ctl"><i></i><i></i><i></i></span></div>
+      <div class="win-body">
+        <div class="hello">
+          <img class="avatar" src="https://github.com/katherinekarow.png?size=200" alt="" width="92" height="92" onerror="this.src='assets/sakura.svg'">
+          <div>
+            <div class="kicker">Data analyst · analytics engineer</div>
+            <h1>Hi, welcome to my portfolio.</h1>
+            <p class="lede" style="margin:0">I build data products: planning models, dashboards, pricing tools and the SQL and Python behind them. Everything here runs, has tests, and uses invented data.</p>
+          </div>
+        </div>
+        <div class="stats" id="stats"></div>
+        <div class="cta">
+          <a class="btn" href="dashboards/">Open the dashboards</a>
+          <a class="btn lav" href="minesweeper/">Play Minesweeper</a>
+          <a class="btn leaf" href="sudoku/?daily=1">Today's Sudoku</a>
+        </div>
+      </div>
     </div>
-    <div class="btns">
-      <a class="btn" href="sudoku/">🧩 Play Sudoku</a>
-      <a class="btn alt" href="sudoku/?daily=1">📅 Today's puzzle</a>
-      <a class="btn alt" href="dashboards/">📊 Dashboards</a>
-      <a class="btn alt" href="assistant/">💬 Data assistant</a>
-      <a class="btn alt" href="formulas/">🧮 Formula calculator</a>
-      <a class="btn alt" href="https://github.com/katherinekarow/portfolio">View on GitHub</a>
+    <div class="win">
+      <div class="win-bar"><span class="title">my_computer</span><span class="ctl"><i></i><i></i><i></i></span></div>
+      <div class="win-body icons" id="icons"></div>
     </div>
-  </div>
+  </section>
 
-  <div class="filters" id="filters">
-    <input type="search" id="q" placeholder="Search projects or tools (e.g. Tableau, React)…" aria-label="Search projects">
-  </div>
-  <div id="sections"><p class="empty">Loading projects…</p></div>
+  <section class="win soft">
+    <div class="win-bar"><span class="title">projects/</span><span class="ctl"><i></i><i></i><i></i></span></div>
+    <div class="win-body">
+      <div class="toolbar" id="filters">
+        <input type="search" id="q" placeholder="Search projects or tools (e.g. SQL, Tableau, regression)" aria-label="Search projects">
+      </div>
+      <div id="sections"><p class="empty">Loading projects…</p></div>
+      <p style="text-align:center;margin:26px 0 4px"><button class="btn alt" id="random">Surprise me with a project</button></p>
+    </div>
+  </section>
 
-  <p class="surprise"><button class="btn alt" id="random" style="cursor:pointer;font:inherit">🎲 Surprise me with a random project</button></p>
-  <footer>This page is generated from the repository — every project links to its folder on GitHub.</footer>
+  <footer class="footer"><i class="bl"></i><span>Built from the repository: every project links to its folder on GitHub.</span></footer>
 </main>
+<script src="assets/sakura.js"></script>
 <script>
 "use strict";
+// desktop app icons (simple pixel-style drawings, palette colours)
+const ICON = {
+  folder: c => `<svg viewBox="0 0 48 48"><path d="M4 12h14l4 5h22v23H4z" fill="${c}" stroke="#2b1f38" stroke-width="2" stroke-linejoin="round"/><path d="M4 18h40" stroke="#2b1f38" stroke-width="2"/></svg>`,
+  chart: `<svg viewBox="0 0 48 48"><rect x="5" y="7" width="38" height="32" rx="3" fill="#fff" stroke="#2b1f38" stroke-width="2"/><rect x="5" y="7" width="38" height="7" fill="#f6a9c4" stroke="#2b1f38" stroke-width="2"/><rect x="12" y="27" width="5" height="8" fill="#d6457a"/><rect x="21" y="21" width="5" height="14" fill="#7b5ea7"/><rect x="30" y="17" width="5" height="18" fill="#2e9e6b"/></svg>`,
+  calc: `<svg viewBox="0 0 48 48"><rect x="10" y="4" width="28" height="40" rx="4" fill="#ddd0fa" stroke="#2b1f38" stroke-width="2"/><rect x="15" y="9" width="18" height="8" fill="#fff" stroke="#2b1f38" stroke-width="2"/>${[0,1,2].map(r=>[0,1,2].map(c=>`<rect x="${15+c*7}" y="${22+r*7}" width="5" height="5" fill="${r===2&&c===2?'#e0558b':'#fff'}" stroke="#2b1f38" stroke-width="1.5"/>`).join('')).join('')}</svg>`,
+  chat: `<svg viewBox="0 0 48 48"><path d="M6 8h36v24H20l-9 8v-8H6z" fill="#9fd9b7" stroke="#2b1f38" stroke-width="2" stroke-linejoin="round"/><circle cx="17" cy="20" r="2.5" fill="#2b1f38"/><circle cx="24" cy="20" r="2.5" fill="#2b1f38"/><circle cx="31" cy="20" r="2.5" fill="#2b1f38"/></svg>`,
+  sudoku: `<svg viewBox="0 0 48 48"><rect x="6" y="6" width="36" height="36" fill="#fff" stroke="#2b1f38" stroke-width="2"/>${[18,30].map(v=>`<path d="M${v} 6v36M6 ${v}h36" stroke="#2b1f38" stroke-width="2"/>`).join('')}<text x="12" y="16" font-size="9" font-family="monospace" fill="#d6457a">5</text><text x="23" y="28" font-size="9" font-family="monospace" fill="#7b5ea7">3</text><text x="34" y="39" font-size="9" font-family="monospace" fill="#2e9e6b">9</text></svg>`,
+  mine: `<svg viewBox="0 0 48 48"><rect x="5" y="5" width="38" height="38" fill="#efe8fd" stroke="#2b1f38" stroke-width="2"/><circle cx="24" cy="25" r="9" fill="#2b1f38"/><path d="M24 11v6M24 33v6M10 25h6M32 25h6M14 15l4 4M30 31l4 4M34 15l-4 4M18 31l-4 4" stroke="#2b1f38" stroke-width="2.5" stroke-linecap="round"/><circle cx="21" cy="22" r="2.5" fill="#fff"/></svg>`,
+  trophy: `<svg viewBox="0 0 48 48"><path d="M15 7h18v10a9 9 0 0 1-18 0z" fill="#f2c46d" stroke="#2b1f38" stroke-width="2"/><path d="M15 10H8c0 7 4 10 8 10M33 10h7c0 7-4 10-8 10" fill="none" stroke="#2b1f38" stroke-width="2"/><path d="M21 26h6v7h-6zM14 33h20v7H14z" fill="#f6a9c4" stroke="#2b1f38" stroke-width="2"/></svg>`,
+  scale: `<svg viewBox="0 0 48 48"><rect x="6" y="30" width="36" height="10" rx="2" fill="#9fd9b7" stroke="#2b1f38" stroke-width="2"/><path d="M24 30V10M12 14h24" stroke="#2b1f38" stroke-width="2"/><path d="M12 14l-5 10h10zM36 14l-5 10h10z" fill="#f6a9c4" stroke="#2b1f38" stroke-width="2" stroke-linejoin="round"/></svg>`,
+};
+const APPS = [["dashboards/", "Dashboards", ICON.chart], ["formulas/", "Formulas", ICON.calc], ["assistant/", "Data assistant", ICON.chat],
+  ["overbooking/", "Overbooking", ICON.scale], ["sudoku/", "Sudoku", ICON.sudoku], ["minesweeper/", "Minesweeper", ICON.mine],
+  ["https://github.com/katherinekarow/portfolio", "Source code", ICON.folder("#f6a9c4")]];
+document.getElementById("icons").innerHTML = APPS.map(([h, t, svg]) => `<a class="app" href="${h}">${svg}<span>${t}</span></a>`).join("");
+
 let DATA = [], active = "all";
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-// Keep emoji/links from markdown titles readable on the page.
-const plain = s => s.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/[*_`]/g, "");
+// strip markdown links/emphasis and any emoji from titles
+const plain = s => s.replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/[*_`]/g, "").replace(/[\p{Extended_Pictographic}️]/gu, "").trim();
 
 function render() {
   const q = $("q").value.trim().toLowerCase();
@@ -81,10 +114,11 @@ function render() {
     if (active !== "all" && s.key !== active) continue;
     const items = s.projects.filter(p => !q || (p.title + " " + p.summary + " " + p.tools).toLowerCase().includes(q));
     if (!items.length) continue;
-    out.push(`<h2>${esc(plain(s.title))}</h2>${s.summary ? `<p class="sdesc">${esc(plain(s.summary))}</p>` : ""}<div class="grid">` +
-      items.map(p => `<div class="card"><h3><a href="${esc(p.url)}">${esc(plain(p.title))}</a></h3><p>${esc(plain(p.summary))}</p>` +
-        (p.demo ? `<a class="demo" href="${esc(p.demo)}">▶ ${esc(p.demo_label || "Live demo")}</a>` : "") +
-        `<div class="chips">${p.tools.split(/,\s*(?![^()]*\))/).filter(Boolean).slice(0, 5).map(t => `<span class="chip">${esc(plain(t))}</span>`).join("")}</div></div>`).join("") +
+    out.push(`<div class="sec"><h2>${SAKURA.BLOSSOM}${esc(plain(s.title))}</h2>${s.summary ? `<p>${esc(plain(s.summary))}</p>` : ""}</div><div class="grid">` +
+      items.map(p => `<article class="card win soft"><div class="win-bar"><span class="title">${esc(p.path.split("/").pop())}</span><span class="ctl"><i></i><i></i><i></i></span></div><div class="win-body">
+        <h3><a href="${esc(p.url)}">${esc(plain(p.title))}</a></h3><p>${esc(plain(p.summary))}</p>` +
+        (p.demo ? `<a class="btn demo" href="${esc(p.demo)}">Open live demo</a>` : "") +
+        `<div class="tags">${p.tools.split(/,\s*(?![^()]*\))/).filter(Boolean).slice(0, 4).map(t => `<span class="tag">${esc(plain(t))}</span>`).join("")}</div></div></article>`).join("") +
       `</div>`);
   }
   $("sections").innerHTML = out.join("") || `<p class="empty">No projects match “${esc(q)}”.</p>`;
@@ -92,17 +126,20 @@ function render() {
 
 fetch("projects.json").then(r => r.json()).then(data => {
   DATA = data;
+  const all = data.flatMap(s => s.projects);
+  $("stats").innerHTML = [[all.length, "projects"], [all.filter(p => p.demo).length, "live demos"], [data.length, "sections"], ["2", "games"]]
+    .map(([v, l]) => `<div><b>${v}</b><span>${l}</span></div>`).join("");
   const f = $("filters");
   const mk = (key, label) => {
-    const b = document.createElement("button"); b.textContent = label; b.dataset.key = key;
-    if (key === active) b.classList.add("on");
-    b.onclick = () => { active = key; [...f.querySelectorAll("button")].forEach(x => x.classList.toggle("on", x === b)); render(); };
+    const b = document.createElement("button"); b.className = "chipbtn"; b.textContent = label; b.dataset.key = key;
+    b.setAttribute("aria-pressed", key === active);
+    b.onclick = () => { active = key; f.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); render(); };
     f.insertBefore(b, $("q"));
   };
   mk("all", "All");
   data.forEach(s => mk(s.key, plain(s.title)));
   render();
-}).catch(() => { $("sections").innerHTML = '<p class="empty">Couldn’t load the project list — see the repository on GitHub.</p>'; });
+}).catch(() => { $("sections").innerHTML = '<p class="empty">Couldn’t load the project list. See the repository on GitHub.</p>'; });
 
 $("q").addEventListener("input", render);
 $("random").onclick = () => {

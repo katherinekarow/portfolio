@@ -1,4 +1,4 @@
-# 💹 Economics & finance
+# Economics & finance
 > Finance, economics and pricing methods as tested code: a formula toolkit, credit vintage curves, marketing ROI, overbooking economics and a ledger lab.
 
 | Project | What it shows |

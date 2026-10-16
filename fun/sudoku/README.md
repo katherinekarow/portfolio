@@ -1,4 +1,4 @@
-# 🧩 Sudoku generator & game
+# Sudoku generator & game
 > Generates Sudoku puzzles with exactly one solution — play in the browser, in the terminal, or solve the daily puzzle.
 
 **Tools:** Python, JavaScript, GitHub Pages, GitHub Actions

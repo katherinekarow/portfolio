@@ -140,7 +140,7 @@ scores = X_c V = U S
 ```
 The first two components explain 59% and 27% of the variance (86% together). PC1 is roughly "how early the session
 books". PC2 separates the under-filled, high-cancellation sessions. The scatter at the top of this page shows the four
-segments as separate groups, with the planted outliers (✕) out on their own.
+segments as separate groups, with the planted outliers () out on their own.
 
 *Used for:* drawing many features in 2-D, removing redundancy among correlated measures before modelling.
 

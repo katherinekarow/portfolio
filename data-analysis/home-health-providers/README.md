@@ -3,7 +3,7 @@
 
 **Tools:** Tableau (maps, aggregation)
 
-📊 Workbook: [`home-health-providers.twbx`](home-health-providers.twbx) · Data: public U.S. home health care survey
+ Workbook: [`home-health-providers.twbx`](home-health-providers.twbx) · Data: public U.S. home health care survey
 
 | Patients by city | Providers |
 |---|---|

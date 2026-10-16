@@ -31,7 +31,7 @@ Booking patient L+1 adds one Bernoulli(p) show X that is independent of the S_L 
 if X = 1 and S_L < C, one more patient is seen (+r); if X = 1 and S_L ≥ C, one more patient is bumped (−b). So
 
 ```
-Δ(L) = E[profit | L+1] − E[profit | L] = p · [ r − (r + b) · P(S_L ≥ C) ]
+Δ(L) = E[profit | L+1] − E[profit | L] = p · [r − (r + b) · P(S_L ≥ C) ]
 ```
 
 P(S_L ≥ C) rises with L, so Δ falls (profit is concave), and the best limit is **the first L where

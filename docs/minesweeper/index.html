@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sakura Minesweeper</title>
+<meta name="description" content="Classic Minesweeper with a cherry-blossom twist and a high-score board. Plain JavaScript.">
+<link rel="icon" href="../assets/sakura.svg">
+<link rel="stylesheet" href="../assets/sakura.css">
+<style>
+  .game { max-width:none; width:fit-content; min-width:min(620px, 100%); }
+  @media (max-width:700px) { .game { width:100%; } }
+  .panel3 { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 10px; margin-bottom:10px;
+    border:1.5px solid var(--ink); border-radius:10px; background:var(--lav-100); box-shadow:inset 2px 2px 0 rgba(255,255,255,.7), inset -2px -2px 0 rgba(109,79,163,.18); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .panel3 { background:#2a2133; box-shadow:none; } }
+  .lcd7 { font-family:var(--pixel); font-size:1.15rem; background:#2b1f38; color:#f6a9c4; padding:4px 10px; border-radius:6px; min-width:64px; text-align:center; letter-spacing:.08em; }
+  .face { width:44px; height:44px; border:1.5px solid var(--ink); border-radius:10px; background:var(--panel); box-shadow:2px 2px 0 var(--ink); cursor:pointer; display:grid; place-items:center; padding:0; }
+  .face:active { transform:translate(2px,2px); box-shadow:none; }
+  .face svg { width:30px; height:30px; }
+  .boardwrap { display:flex; justify-content:center; overflow:auto; max-width:calc(100vw - 48px); padding-bottom:4px; }
+  #board { display:grid; gap:0; border:2px solid var(--ink); border-radius:6px; width:max-content; user-select:none; touch-action:manipulation; background:var(--ink); }
+  .c { width:var(--cs); height:var(--cs); display:grid; place-items:center; font:700 calc(var(--cs) * .55)/1 var(--font); cursor:pointer;
+    background:linear-gradient(145deg, #fbe4f0, #e9dcfb); border-top:2px solid #fff; border-left:2px solid #fff; border-right:2px solid #c3a9e6; border-bottom:2px solid #c3a9e6; padding:0; }
+  .c:hover { filter:brightness(1.04); }
+  .c.open { background:var(--panel); border:1px solid var(--grid); cursor:default; }
+  .c.boom { background:#f7c1cb; }
+  .c.wrong { background:var(--lav-200); }
+  .c svg { width:72%; height:72%; }
+  .n1 { color:#6d4fa3; } .n2 { color:#1f8a5c; } .n3 { color:#d03a55; } .n4 { color:#4f3680; }
+  .n5 { color:#a3233f; } .n6 { color:#16707a; } .n7 { color:#2b1f38; } .n8 { color:#6c5d7c; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .c { background:linear-gradient(145deg, #4a2a3d, #3a2d5a); border-top-color:#6b4a7d; border-left-color:#6b4a7d; border-right-color:#1d1624; border-bottom-color:#1d1624; }
+    :root:not([data-theme="light"]) .n1 { color:#c9b4f4; } :root:not([data-theme="light"]) .n2 { color:#7fd6a8; } :root:not([data-theme="light"]) .n3 { color:#ff8fa3; }
+    :root:not([data-theme="light"]) .n4 { color:#d9c8ff; } :root:not([data-theme="light"]) .n5 { color:#ffb3c1; } :root:not([data-theme="light"]) .n6 { color:#7fd3dc; } :root:not([data-theme="light"]) .n7 { color:#f7ecf8; } }
+  .flagmode[aria-pressed="true"] { background:var(--pink-300); }
+</style>
+</head>
+<body class="sakura" data-page="minesweeper">
+<main class="wrap">
+  <div class="game">
+    <section class="win">
+      <div class="win-bar"><span class="title"><i class="bl"></i>minesweeper.exe</span><span class="ctl"><i></i><i></i><i></i></span></div>
+      <div class="win-body">
+        <div class="gamebar">
+          <span class="chipwrap" role="group" aria-label="Difficulty" id="levels"></span>
+          <button class="btn alt flagmode" id="flagmode" aria-pressed="false" title="Tap mode: place blossoms instead of digging (F)">Blossom mode</button>
+        </div>
+        <div class="panel3">
+          <span class="lcd7" id="left" aria-label="Mines left">010</span>
+          <button class="face" id="face" aria-label="New game"></button>
+          <span class="lcd7" id="time" aria-label="Seconds">000</span>
+        </div>
+        <div class="boardwrap"><div id="board" role="grid" aria-label="Minefield"></div></div>
+        <p class="muted small" id="msg" style="text-align:center;margin:10px 0 0">Click to dig. Right-click (or long-press, or Blossom mode) to mark a mine with a blossom. Click a number to clear around it.</p>
+      </div>
+    </section>
+    <section class="win soft side">
+      <div class="win-bar"><span class="title">best_times.txt · <span id="hsLevel">beginner</span></span><span class="ctl"><i></i><i></i><i></i></span></div>
+      <div class="win-body" id="hs"><p class="muted">Loading…</p></div>
+    </section>
+  </div>
+</main>
+
+<dialog id="win" class="win">
+  <div class="win-bar"><span class="title"><i class="bl"></i>cleared.txt</span><span class="ctl"><i></i><i></i><i></i></span></div>
+  <div class="win-body">
+    <h2>Field cleared!</h2>
+    <p id="winText"></p>
+    <div id="offer"></div>
+    <p style="margin-top:14px"><button class="btn alt" id="again">Play again</button></p>
+  </div>
+</dialog>
+
+<script src="../assets/sakura.js"></script>
+<script src="../assets/scores.js"></script>
+<script>
+"use strict";
+const LEVELS = { beginner: { r: 9, c: 9, m: 10 }, intermediate: { r: 16, c: 16, m: 40 }, expert: { r: 16, c: 30, m: 99 } };
+const $ = id => document.getElementById(id);
+const FLAG = SAKURA.BLOSSOM.replace('class="blossom"', "");
+const MINE = `<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10.5" r="5.2" fill="#2b1f38"/><path d="M10 2.5v3M10 15.5v3M2 10.5h3M15 10.5h3M4.4 4.9l2.1 2.1M13.5 14l2.1 2.1M15.6 4.9l-2.1 2.1M6.5 14l-2.1 2.1" stroke="#2b1f38" stroke-width="1.6" stroke-linecap="round"/><circle cx="8.3" cy="8.8" r="1.4" fill="#fff"/></svg>`;
+const FACES = {
+  play: `<svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="#ffe3ee" stroke="#2b1f38" stroke-width="1.6"/><circle cx="11" cy="13" r="1.6" fill="#2b1f38"/><circle cx="19" cy="13" r="1.6" fill="#2b1f38"/><path d="M10.5 18.5q4.5 4 9 0" fill="none" stroke="#2b1f38" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="17.5" r="1.8" fill="#f6a9c4"/><circle cx="22" cy="17.5" r="1.8" fill="#f6a9c4"/></svg>`,
+  oh: `<svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="#ffe3ee" stroke="#2b1f38" stroke-width="1.6"/><circle cx="11" cy="12.5" r="1.8" fill="#2b1f38"/><circle cx="19" cy="12.5" r="1.8" fill="#2b1f38"/><circle cx="15" cy="19.5" r="2.4" fill="#2b1f38"/></svg>`,
+  lost: `<svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="#ddd0fa" stroke="#2b1f38" stroke-width="1.6"/><path d="M9 11l4 4M13 11l-4 4M17 11l4 4M21 11l-4 4" stroke="#2b1f38" stroke-width="1.6" stroke-linecap="round"/><path d="M10.5 21q4.5-4 9 0" fill="none" stroke="#2b1f38" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+  won: `<svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="#ffe3ee" stroke="#2b1f38" stroke-width="1.6"/><rect x="6.5" y="10.5" width="7" height="4" rx="1.5" fill="#2b1f38"/><rect x="16.5" y="10.5" width="7" height="4" rx="1.5" fill="#2b1f38"/><path d="M13.5 12.5h3" stroke="#2b1f38" stroke-width="1.4"/><path d="M10 18q5 5 10 0" fill="none" stroke="#2b1f38" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+};
+
+let G = null, timer = null, flagMode = false;
+function newGame(level = G ? G.level : "beginner") {
+  const L = LEVELS[level];
+  G = { level, ...L, mines: null, open: new Uint8Array(L.r * L.c), flag: new Uint8Array(L.r * L.c), state: "ready", start: 0, opened: 0, clicks: 0 };
+  clearInterval(timer); $("time").textContent = "000";
+  document.querySelectorAll("#levels button").forEach(b => b.setAttribute("aria-pressed", b.dataset.l === level));
+  $("hsLevel").textContent = level; Scores.table($("hs"), "minesweeper", level);
+  try { localStorage.setItem("ms-level", level); } catch {}
+  const cs = Math.max(22, Math.min(L.c <= 9 ? 44 : 32, Math.floor((Math.min(innerWidth, 1100) - 90) / L.c)));
+  $("board").style.setProperty("--cs", cs + "px");
+  $("board").style.gridTemplateColumns = `repeat(${L.c}, ${cs}px)`;
+  $("board").innerHTML = "";
+  for (let i = 0; i < L.r * L.c; i++) {
+    const b = document.createElement("button"); b.className = "c"; b.dataset.i = i; b.setAttribute("aria-label", "hidden");
+    $("board").appendChild(b);
+  }
+  face("play"); counter();
+}
+const nb = i => { const r = Math.floor(i / G.c), c = i % G.c, out = [];
+  for (let dr = -1; dr <= 1; dr++) for (let dc = -1; dc <= 1; dc++) {
+    if (!dr && !dc) continue; const rr = r + dr, cc = c + dc;
+    if (rr >= 0 && rr < G.r && cc >= 0 && cc < G.c) out.push(rr * G.c + cc);
+  } return out; };
+function layMines(safe) {                       // first click and its neighbours are always safe
+  const banned = new Set([safe, ...nb(safe)]), cells = [];
+  for (let i = 0; i < G.r * G.c; i++) if (!banned.has(i)) cells.push(i);
+  for (let k = cells.length - 1; k > 0; k--) { const j = Math.floor(Math.random() * (k + 1)); [cells[k], cells[j]] = [cells[j], cells[k]]; }
+  G.mines = new Uint8Array(G.r * G.c); cells.slice(0, G.m).forEach(i => G.mines[i] = 1);
+  G.count = Array.from({ length: G.r * G.c }, (_, i) => nb(i).reduce((a, j) => a + G.mines[j], 0));
+}
+const cell = i => $("board").children[i];
+function face(k) { $("face").innerHTML = FACES[k]; }
+function counter() { const left = G.m - G.flag.reduce((a, b) => a + b, 0); $("left").textContent = (left < 0 ? "-" : "") + String(Math.abs(left)).padStart(3, "0"); }
+
+function reveal(i) {
+  if (G.state === "over" || G.open[i] || G.flag[i]) return;
+  if (G.state === "ready") { layMines(i); G.state = "play"; G.start = performance.now();
+    timer = setInterval(() => $("time").textContent = String(Math.min(999, Math.floor((performance.now() - G.start) / 1000))).padStart(3, "0"), 250); }
+  if (G.mines[i]) return lose(i);
+  const stack = [i];
+  while (stack.length) {                         // flood fill through zero cells
+    const k = stack.pop();
+    if (G.open[k] || G.flag[k]) continue;
+    G.open[k] = 1; G.opened++;
+    const el = cell(k); el.classList.add("open"); el.setAttribute("aria-label", G.count[k] ? String(G.count[k]) : "empty");
+    if (G.count[k]) { el.textContent = G.count[k]; el.classList.add("n" + G.count[k]); }
+    else nb(k).forEach(j => { if (!G.open[j] && !G.mines[j]) stack.push(j); });
+  }
+  if (G.opened === G.r * G.c - G.m) win();
+}
+function chord(i) {                              // click an open number with the right number of blossoms around it
+  if (!G.open[i] || !G.count[i]) return;
+  const ns = nb(i);
+  if (ns.reduce((a, j) => a + G.flag[j], 0) === G.count[i]) ns.forEach(reveal);
+}
+function toggleFlag(i) {
+  if (G.state === "over" || G.open[i]) return;
+  G.flag[i] ^= 1; const el = cell(i);
+  el.innerHTML = G.flag[i] ? FLAG : ""; el.setAttribute("aria-label", G.flag[i] ? "marked" : "hidden"); counter();
+}
+function lose(i) {
+  G.state = "over"; clearInterval(timer); face("lost");
+  for (let k = 0; k < G.r * G.c; k++) {
+    if (G.mines[k] && !G.flag[k]) { cell(k).innerHTML = MINE; cell(k).classList.add("open"); }
+    if (!G.mines[k] && G.flag[k]) cell(k).classList.add("wrong");
+  }
+  cell(i).classList.add("boom");
+  $("msg").textContent = "Boom. Press the face to try again.";
+}
+function win() {
+  G.state = "over"; clearInterval(timer); face("won");
+  const secs = (performance.now() - G.start) / 1000;
+  for (let k = 0; k < G.r * G.c; k++) if (G.mines[k] && !G.flag[k]) { G.flag[k] = 1; cell(k).innerHTML = FLAG; }
+  counter();
+  $("winText").textContent = `${G.level[0].toUpperCase() + G.level.slice(1)} cleared in ${secs.toFixed(1)} seconds.`;
+  Scores.offer($("offer"), { game: "minesweeper", level: G.level, seconds: secs, detail: { clicks: G.clicks } });
+  $("win").showModal();
+}
+
+// input: left click digs (or marks in Blossom mode), right click marks, long-press marks on touch
+const B = $("board");
+let pressTimer = null, longPressed = false;
+B.addEventListener("click", e => {
+  const t = e.target.closest(".c"); if (!t || longPressed) { longPressed = false; return; }
+  const i = +t.dataset.i; G.clicks++;
+  if (G.open[i]) chord(i); else if (flagMode && G.state === "play") toggleFlag(i); else reveal(i);
+});
+B.addEventListener("contextmenu", e => { e.preventDefault(); const t = e.target.closest(".c"); if (t) toggleFlag(+t.dataset.i); });
+B.addEventListener("pointerdown", e => {
+  if (G.state !== "over") face("oh");
+  if (e.pointerType !== "mouse") { const t = e.target.closest(".c"); pressTimer = setTimeout(() => { if (t) { longPressed = true; toggleFlag(+t.dataset.i); } }, 420); }
+});
+addEventListener("pointerup", () => { clearTimeout(pressTimer); if (G && G.state !== "over") face("play"); });
+$("face").onclick = () => newGame();
+$("again").onclick = () => { $("win").close(); newGame(); };
+$("flagmode").onclick = () => { flagMode = !flagMode; $("flagmode").setAttribute("aria-pressed", flagMode); };
+addEventListener("keydown", e => { if (e.key.toLowerCase() === "f" && !$("win").open && !/INPUT/.test(document.activeElement.tagName)) $("flagmode").click(); });
+$("levels").innerHTML = Object.entries(LEVELS).map(([k, v]) => `<button class="chipbtn" data-l="${k}" aria-pressed="false">${k[0].toUpperCase() + k.slice(1)} <span class="muted small">${v.c}×${v.r}</span></button>`).join(" ");
+$("levels").onclick = e => { const b = e.target.closest("button"); if (b) newGame(b.dataset.l); };
+let start = "beginner";
+try { start = new URLSearchParams(location.search).get("level") || localStorage.getItem("ms-level") || "beginner"; } catch {}
+newGame(LEVELS[start] ? start : "beginner");
+window.__ms = { get G() { return G; }, reveal, toggleFlag };     // used by the browser test
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 
 **Tools:** R (tidyverse, cluster), K-means, hierarchical clustering
 
-📄 **[Read the full report (PDF)](google-play-clustering-report.pdf)** · Group project · 7 contributors
+ **[Read the full report (PDF)](google-play-clustering-report.pdf)** · Group project · 7 contributors
 
 ## The question
 Which kinds of apps behave alike, and how should a marketing budget be split between them?

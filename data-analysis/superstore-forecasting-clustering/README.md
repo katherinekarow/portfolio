@@ -3,7 +3,7 @@
 
 **Tools:** Tableau (forecasting, clustering, regression)
 
-📊 Workbook: [`superstore-forecasting-clustering.twbx`](superstore-forecasting-clustering.twbx) · Data: Tableau "Sample – Superstore"
+ Workbook: [`superstore-forecasting-clustering.twbx`](superstore-forecasting-clustering.twbx) · Data: Tableau "Sample – Superstore"
 
 | Forecast | Clusters | Regression |
 |---|---|---|

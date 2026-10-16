@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="../../assets/sakura.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Market Price Review</title>
 <meta name="description" content="Our produce prices against three buyer marketplaces, by lot and grade, with feed-health checks (synthetic farm co-op data).">
@@ -12,7 +13,7 @@
   .feed li { margin:4px 0; }
 </style>
 </head>
-<body>
+<body class="sakura" data-page="dashboards">
 <main>
   <header class="top">
     <div>
@@ -110,5 +111,6 @@ D.load().then(data => {
   window.__ready = true;
 });
 </script>
+<script src="../../assets/sakura.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 
 **Tools:** Tableau (table calculations, LOD-style dimensions, parameters)
 
-📊 Workbook: [`hospital-revenue-analysis.twbx`](hospital-revenue-analysis.twbx) · Data: course-provided sample dataset
+ Workbook: [`hospital-revenue-analysis.twbx`](hospital-revenue-analysis.twbx) · Data: course-provided sample dataset
 
 | Revenue by procedure | Diverging view | Table calculation |
 |---|---|---|

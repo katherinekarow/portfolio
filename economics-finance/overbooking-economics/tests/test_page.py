@@ -31,7 +31,7 @@ def page(server):
         pg = br.new_page(viewport={"width": 1200, "height": 900})
         errors = []
         pg.on("pageerror", lambda e: errors.append(str(e)))
-        pg.on("console", lambda m: m.type == "error" and errors.append(m.text))
+        pg.on("console", lambda m: m.type == "error" and "Failed to load resource" not in m.text and errors.append(m.text))  # web fonts may be offline in CI
         pg.goto(server)
         pg.wait_for_function("window.__ready === true", timeout=15000)
         pg.errors = errors

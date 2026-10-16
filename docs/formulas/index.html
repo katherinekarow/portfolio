@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="../assets/sakura.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Formula Calculator</title>
 <meta name="description" content="Interactive calculator for 40+ finance, economics and demand-analytics formulas: NPV, IRR, amortisation, elasticities, curve normalisation, gross vs net targets, credibility weighting.">
@@ -29,7 +30,7 @@
   #search { width:100%; margin-bottom:6px; }
 </style>
 </head>
-<body>
+<body class="sakura" data-page="formulas">
 <main>
   <header class="top">
     <div>
@@ -92,5 +93,6 @@ D.load("formulas.json").then(data => {
   window.__ready = true;
 });
 </script>
+<script src="../assets/sakura.js"></script>
 </body>
 </html>

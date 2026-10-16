@@ -3,116 +3,90 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sudoku · Portfolio</title>
-<meta name="description" content="A fresh Sudoku puzzle every time — plus a daily puzzle. Built from scratch in plain JavaScript.">
+<title>Sakura Sudoku</title>
+<meta name="description" content="A fresh Sudoku every time, a daily puzzle and a high-score board. Built from scratch in plain JavaScript.">
+<link rel="icon" href="../assets/sakura.svg">
+<link rel="stylesheet" href="../assets/sakura.css">
 <style>
-  :root {
-    --bg: #fff8f2; --panel: #ffffff; --ink: #3d2c4d; --muted: #7a6a88;
-    --line: #c9b8d6; --thick: #3d2c4d; --box: #f6eefc; --accent: #b0619b;
-    --accent-soft: #f3d9ec; --same: #e7dcf3; --given: #3d2c4d; --entry: #2d6cdf;
-    --bad: #d64545; --bad-soft: #fde2e2; --good: #2f9e6e;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1c1622; --panel: #261e2e; --ink: #f3e9fb; --muted: #b7a6c6;
-      --line: #4a3d57; --thick: #d9c6ea; --box: #2e2537; --accent: #e08cc9;
-      --accent-soft: #4b2f45; --same: #3a2f49; --given: #f3e9fb; --entry: #8db5ff;
-      --bad: #ff7b7b; --bad-soft: #4d2626; --good: #5fd3a0;
-    }
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink);
-    font: 16px/1.4 "Segoe UI", Helvetica, Arial, sans-serif; }
-  main { max-width: 560px; margin: 0 auto; padding: 16px; }
-  header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-  h1 { font-size: 1.6rem; margin: 8px 0; }
-  a { color: var(--accent); }
-  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
-  button, select { font: inherit; border: 1px solid var(--line); background: var(--panel); color: var(--ink);
-    border-radius: 10px; padding: 7px 12px; cursor: pointer; }
-  button:hover, select:hover { border-color: var(--accent); }
-  button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .stats { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
-  #board { display: grid; grid-template-columns: repeat(9, 1fr); width: 100%; aspect-ratio: 1;
-    border: 3px solid var(--thick); border-radius: 8px; overflow: hidden; background: var(--panel);
-    user-select: none; touch-action: manipulation; }
-  .cell { position: relative; display: flex; align-items: center; justify-content: center;
-    border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
-    font-size: clamp(18px, 5.5vw, 28px); cursor: pointer; }
-  .cell.boxshade { background: var(--box); }
-  .cell:nth-child(9n) { border-right: none; }
-  .cell:nth-child(n+73) { border-bottom: none; }
-  .cell.c3, .cell.c6 { border-left: 2px solid var(--thick); }
-  .cell.r3, .cell.r6 { border-top: 2px solid var(--thick); }
-  .cell.given { color: var(--given); font-weight: 700; }
-  .cell.entry { color: var(--entry); }
-  .cell.peer { background: var(--same); }
-  .cell.same { background: var(--accent-soft); }
-  .cell.sel { background: var(--accent-soft); outline: 3px solid var(--accent); outline-offset: -3px; z-index: 1; }
-  .cell.bad { color: var(--bad); background: var(--bad-soft); }
-  .notes { position: absolute; inset: 2px; display: grid; grid-template-columns: repeat(3, 1fr);
-    font-size: clamp(8px, 2vw, 11px); color: var(--muted); line-height: 1; }
-  .notes span { display: flex; align-items: center; justify-content: center; }
-  #pad { display: grid; grid-template-columns: repeat(9, 1fr); gap: 6px; margin-top: 12px; }
-  #pad button { padding: 10px 0; font-size: 1.15rem; font-weight: 600; }
-  #pad button.done { opacity: .35; }
-  .tools { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 8px; }
-  .msg { min-height: 1.4em; margin: 8px 0 0; color: var(--muted); text-align: center; }
-  .help { color: var(--muted); font-size: .9rem; margin-top: 18px; }
-  dialog { border: none; border-radius: 18px; padding: 24px 28px; background: var(--panel); color: var(--ink);
-    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.25); max-width: 90vw; }
-  dialog::backdrop { background: rgba(30, 15, 40, .45); }
-  dialog h2 { margin: 0 0 6px; font-size: 1.8rem; }
-  .confetti { position: fixed; top: -12px; width: 10px; height: 14px; border-radius: 2px; pointer-events: none;
-    animation: fall linear forwards; z-index: 9; }
-  @keyframes fall { to { transform: translateY(105vh) rotate(720deg); } }
-  @media (prefers-reduced-motion: reduce) { .confetti { display: none; } }
+  :root { --thick:var(--ink); --cellline:var(--line); --box:var(--pink-50); --same:var(--lav-100); --sel:var(--pink-100);
+    --given:var(--ink); --entry:var(--plum); --bad:var(--red); --bad-soft:#fde2e7; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --box:#2a2133; --same:#33283e; --sel:#4a2a3d; --entry:#c9b4f4; --bad-soft:#4d2630; } }
+  #board { display:grid; grid-template-columns:repeat(9, 1fr); width:100%; aspect-ratio:1; border:2.5px solid var(--thick);
+    border-radius:8px; overflow:hidden; background:var(--panel); user-select:none; touch-action:manipulation; }
+  .cell { position:relative; display:flex; align-items:center; justify-content:center; border-right:1px solid var(--cellline);
+    border-bottom:1px solid var(--cellline); font-size:clamp(18px, 5.5vw, 28px); cursor:pointer; transition:background .12s; }
+  .cell.boxshade { background:var(--box); }
+  .cell:nth-child(9n) { border-right:none; } .cell:nth-child(n+73) { border-bottom:none; }
+  .cell.c3, .cell.c6 { border-left:2px solid var(--thick); } .cell.r3, .cell.r6 { border-top:2px solid var(--thick); }
+  .cell.given { color:var(--given); font-weight:700; } .cell.entry { color:var(--entry); font-weight:500; }
+  .cell.peer { background:var(--same); } .cell.same { background:var(--sel); }
+  .cell.sel { background:var(--sel); outline:3px solid var(--pink-500); outline-offset:-3px; z-index:1; }
+  .cell.bad { color:var(--bad); background:var(--bad-soft); }
+  .notes { position:absolute; inset:2px; display:grid; grid-template-columns:repeat(3, 1fr); font-size:clamp(8px, 2vw, 11px); color:var(--muted); line-height:1; }
+  .notes span { display:flex; align-items:center; justify-content:center; }
+  #pad { display:grid; grid-template-columns:repeat(9, 1fr); gap:6px; margin-top:12px; }
+  #pad button, .tools button { font:600 1.1rem var(--font); padding:9px 0; border-radius:9px; border:1.5px solid var(--ink); background:var(--panel); color:var(--ink); box-shadow:2px 2px 0 var(--ink); cursor:pointer; }
+  #pad button:active, .tools button:active { transform:translate(2px,2px); box-shadow:none; }
+  #pad button.done { opacity:.3; }
+  .tools { display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; margin-top:8px; }
+  .tools button { font-size:.85rem; }
+  .tools button.on { background:var(--pink-300); }
+  .msg { min-height:1.4em; margin:10px 0 0; color:var(--muted); text-align:center; }
+  .confetti { position:fixed; top:-14px; width:12px; height:10px; border-radius:10px 1px 10px 1px; pointer-events:none; animation:drop linear forwards; z-index:30; }
+  @keyframes drop { to { transform:translateY(105vh) rotate(540deg); } }
+  @media (prefers-reduced-motion: reduce) { .confetti { display:none; } }
 </style>
 </head>
-<body>
-<main>
-  <header>
-    <h1>🧩 Sudoku</h1>
-    <a href="../">← back to the portfolio</a>
-  </header>
+<body class="sakura" data-page="sudoku">
+<main class="wrap">
+  <div class="game">
+    <section class="win">
+      <div class="win-bar"><span class="title"><i class="bl"></i>sudoku.exe</span><span class="ctl"><i></i><i></i><i></i></span></div>
+      <div class="win-body">
+        <div class="gamebar">
+          <select id="level" aria-label="Difficulty">
+            <option value="easy">Easy</option><option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option><option value="expert">Expert</option>
+          </select>
+          <button class="btn alt" id="new">New puzzle</button>
+          <button class="btn lav" id="daily">Today's puzzle</button>
+          <span class="lcd"><span id="timer">0:00</span> · <span id="mistakes">0</span> err</span>
+        </div>
+        <div id="board" role="grid" aria-label="Sudoku board"></div>
+        <div id="pad"></div>
+        <div class="tools">
+          <button id="notes" title="Pencil marks (N)">Notes</button>
+          <button id="erase" title="Erase (Backspace)">Erase</button>
+          <button id="undo" title="Undo (Ctrl+Z)">Undo</button>
+          <button id="hint" title="Fill one cell (the game then won't count as a best time)">Hint</button>
+        </div>
+        <p class="msg" id="msg"></p>
+      </div>
+    </section>
 
-  <div class="bar">
-    <select id="level" aria-label="Difficulty">
-      <option value="easy">Easy</option>
-      <option value="medium" selected>Medium</option>
-      <option value="hard">Hard</option>
-      <option value="expert">Expert</option>
-    </select>
-    <button id="new">New puzzle</button>
-    <button id="daily">Today's puzzle</button>
-    <span class="stats"><span id="timer">0:00</span> · <span id="mistakes">0</span> mistakes</span>
+    <section class="win soft side">
+      <div class="win-bar"><span class="title">best_times.txt · <span id="hsLevel">medium</span></span><span class="ctl"><i></i><i></i><i></i></span></div>
+      <div class="win-body" id="hs"><p class="muted">Loading…</p></div>
+    </section>
+
+    <p class="muted small" style="margin-top:14px">Fill every row, column and 3×3 box with 1–9. Click a cell, then a number, or use the keyboard:
+      arrows to move, 1–9 to fill, <b>N</b> for notes, Backspace to erase. Every puzzle is generated in your browser and has exactly one solution.
+      <a id="share" href="#">Copy a link to this puzzle</a>.</p>
   </div>
-
-  <div id="board" role="grid" aria-label="Sudoku board"></div>
-
-  <div id="pad"></div>
-  <div class="tools">
-    <button id="notes" title="Pencil marks (N)">✏️ Notes</button>
-    <button id="erase" title="Erase (Backspace)">⌫ Erase</button>
-    <button id="undo" title="Undo (Ctrl+Z)">↶ Undo</button>
-    <button id="hint" title="Fill one cell">💡 Hint</button>
-  </div>
-  <p class="msg" id="msg"></p>
-
-  <p class="help">
-    Fill every row, column and 3×3 box with the digits 1–9. Click a cell, then a number —
-    or use your keyboard: arrows to move, 1–9 to fill, <b>N</b> for notes, Backspace to erase.
-    Every puzzle is generated in your browser and has exactly one solution.
-    <a id="share" href="#">Copy a link to this puzzle</a>.
-  </p>
 </main>
 
-<dialog id="win">
-  <h2>🎉 Solved!</h2>
-  <p id="winText"></p>
-  <button id="again">Play another</button>
+<dialog id="win" class="win">
+  <div class="win-bar"><span class="title"><i class="bl"></i>solved.txt</span><span class="ctl"><i></i><i></i><i></i></span></div>
+  <div class="win-body">
+    <h2>Solved!</h2>
+    <p id="winText"></p>
+    <div id="offer"></div>
+    <p style="margin-top:14px"><button class="btn alt" id="again">Play another</button></p>
+  </div>
 </dialog>
 
+<script src="../assets/sakura.js"></script>
+<script src="../assets/scores.js"></script>
 <script>
 "use strict";
 // ---------- seeded random (so a link can share the exact same puzzle) ----------
@@ -186,13 +160,14 @@ function generate(level, seed) {
 const $ = id => document.getElementById(id);
 const boardEl = $("board"), padEl = $("pad");
 let S = null;            // { puzzle, solution, board, notes, level, seed, label }
-let sel = -1, notesMode = false, history = [], mistakes = 0, started = 0, timerId = null, done = false;
+let sel = -1, notesMode = false, history = [], mistakes = 0, started = 0, timerId = null, done = false, hints = 0;
 
 function newGame(game) {
   S = game; S.board = S.puzzle.slice(); S.notes = Array.from({ length: 81 }, () => new Set());
-  sel = S.puzzle.findIndex(v => !v); history = []; mistakes = 0; done = false;
+  sel = S.puzzle.findIndex(v => !v); history = []; mistakes = 0; done = false; hints = 0;
   started = Date.now(); clearInterval(timerId); timerId = setInterval(tick, 1000); tick();
   $("level").value = S.level; $("msg").textContent = S.label;
+  $("hsLevel").textContent = S.level; Scores.table($("hs"), "sudoku", S.level);
   render();
 }
 function tick() {
@@ -202,7 +177,7 @@ function tick() {
 function randomGame(level) {
   const seed = Math.floor(Math.random() * 1e9);
   history_replace(level, seed);
-  newGame({ ...generate(level, seed), level, seed, label: `New ${level} puzzle — good luck!` });
+  newGame({ ...generate(level, seed), level, seed, label: `New ${level} puzzle. Good luck!` });
 }
 function history_replace(level, seed) {
   const u = new URL(location.href); u.searchParams.set("level", level); u.searchParams.set("seed", seed);
@@ -268,7 +243,7 @@ function enter(d) {
     S.notes[sel].has(d) ? S.notes[sel].delete(d) : S.notes[sel].add(d);
   } else {
     S.board[sel] = d; S.notes[sel].clear();
-    if (d && d !== S.solution[sel]) { mistakes++; $("msg").textContent = "Not quite — that number clashes with the answer."; }
+    if (d && d !== S.solution[sel]) { mistakes++; $("msg").textContent = "Not quite: that number clashes with the answer."; }
     else if (d) { $("msg").textContent = ""; for (const p of PEERS[sel]) S.notes[p].delete(d); }
   }
   render(); checkWin();
@@ -283,18 +258,21 @@ function hint() {
   if (!empty.length) return;
   const i = sel >= 0 && empty.includes(sel) ? sel : empty[Math.floor(Math.random() * empty.length)];
   history.push({ i, v: S.board[i], n: new Set(S.notes[i]) });
-  S.board[i] = S.solution[i]; S.notes[i].clear(); sel = i;
+  S.board[i] = S.solution[i]; S.notes[i].clear(); sel = i; hints++;
   $("msg").textContent = "Here's one. You've got this!"; render(); checkWin();
 }
 function checkWin() {
   if (S.board.every((v, i) => v === S.solution[i])) {
     done = true; clearInterval(timerId);
     $("winText").textContent = `${S.level[0].toUpperCase() + S.level.slice(1)} puzzle in ${$("timer").textContent} with ${mistakes} mistake${mistakes === 1 ? "" : "s"}.`;
+    const secs = (Date.now() - started) / 1000;
+    Scores.offer($("offer"), { game: "sudoku", level: S.level, seconds: secs, eligible: hints === 0,
+      reason: "Hints were used, so this one doesn't count as a best time.", detail: { mistakes, seed: S.seed } });
     confetti(); $("win").showModal();
   }
 }
 function confetti() {
-  const colors = ["#b0619b", "#2d6cdf", "#f2b134", "#2f9e6e", "#e05d5d", "#8c6bd6"];
+  const colors = ["#f6a9c4", "#e0558b", "#ffe3ee", "#c9b4f4", "#fcc8db", "#9fd9b7"];
   for (let k = 0; k < 90; k++) {
     const c = document.createElement("div"); c.className = "confetti";
     c.style.left = Math.random() * 100 + "vw"; c.style.background = colors[k % colors.length];
@@ -314,7 +292,7 @@ $("hint").onclick = hint;
 $("again").onclick = () => { $("win").close(); randomGame(S.level); };
 $("share").onclick = async e => {
   e.preventDefault();
-  try { await navigator.clipboard.writeText(location.href); $("msg").textContent = "Link copied — send it to a friend!"; }
+  try { await navigator.clipboard.writeText(location.href); $("msg").textContent = "Link copied. Send it to a friend!"; }
   catch { $("msg").textContent = location.href; }
 };
 document.addEventListener("keydown", e => {

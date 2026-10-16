@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="cherry blossom">
+  <title>cherry blossom</title>
+  <defs>
+    <radialGradient id="p" cx="50%" cy="85%" r="80%">
+      <stop offset="0" stop-color="#e86a98"/>
+      <stop offset=".55" stop-color="#f6a9c4"/>
+      <stop offset="1" stop-color="#ffe0ec"/>
+    </radialGradient>
+  </defs>
+  <g transform="translate(50 50)">
+    <!-- one notched petal, rotated five times -->
+    <g id="petal">
+      <path d="M0 -6 C -14 -14 -18 -32 -9 -42 L -3 -37 L 0 -44 L 3 -37 L 9 -42 C 18 -32 14 -14 0 -6 Z"
+            fill="url(#p)" stroke="#d6457a" stroke-width="1.6" stroke-linejoin="round"/>
+    </g>
+    <use href="#petal" transform="rotate(72)"/>
+    <use href="#petal" transform="rotate(144)"/>
+    <use href="#petal" transform="rotate(216)"/>
+    <use href="#petal" transform="rotate(288)"/>
+    <circle r="7" fill="#fff4f8" stroke="#d6457a" stroke-width="1.6"/>
+    <g stroke="#b8336a" stroke-width="1.4" stroke-linecap="round">
+      <line x1="0" y1="0" x2="0" y2="-12"/><line x1="0" y1="0" x2="11" y2="-4"/><line x1="0" y1="0" x2="7" y2="10"/>
+      <line x1="0" y1="0" x2="-7" y2="10"/><line x1="0" y1="0" x2="-11" y2="-4"/>
+    </g>
+    <g fill="#7b5ea7"><circle cx="0" cy="-12" r="2"/><circle cx="11" cy="-4" r="2"/><circle cx="7" cy="10" r="2"/><circle cx="-7" cy="10" r="2"/><circle cx="-11" cy="-4" r="2"/></g>
+  </g>
+</svg>

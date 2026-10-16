@@ -1,0 +1,144 @@
+/* Sakura OS — the shared theme for every page of the site.
+   Retro desktop windows (title bars, bevelled buttons, a grid desktop) with a modern, quiet layout.
+   Palette: blossom pinks, lavender, leaf greens, plum purple and a red accent. */
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen&family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --pink-50:#fff4f8; --pink-100:#ffe3ee; --pink-200:#fcc8db; --pink-300:#f6a9c4; --pink-500:#e0558b; --pink-700:#b8336a;
+  --lav-100:#efe8fd; --lav-200:#ddd0fa; --lav-400:#b39ce8; --plum:#6d4fa3; --plum-700:#4f3680;
+  --leaf-100:#e3f5ea; --leaf-300:#9fd9b7; --leaf-600:#2e9e6b; --leaf-800:#1f6b49;
+  --red:#d03a55; --gold:#f2c46d;
+
+  --bg:#fdf4f9; --desk-a:#fbe4f0; --desk-b:#e9e2fb; --grid-line:rgba(109,79,163,.08);
+  --panel:#ffffff; --surface:#fff8fb; --ink:#2b1f38; --muted:#6c5d7c; --line:#e6d6ee; --grid:#f0e6f3;
+  --accent:var(--pink-500); --accent-ink:#ffffff; --link:var(--pink-700);
+  --bar-a:#f6a9c4; --bar-b:#c9b4f4; --bar-ink:#2b1f38;
+  --shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 12px 32px -14px rgba(109,79,163,.35), 4px 4px 0 rgba(109,79,163,.14);
+  --radius:12px;
+  --font:"Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Helvetica, Arial, sans-serif;
+  --pixel:"Silkscreen", "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#191320; --desk-a:#24182c; --desk-b:#1c1830; --grid-line:rgba(201,180,244,.06);
+    --panel:#231b2b; --surface:#2a2133; --ink:#f7ecf8; --muted:#c0aecd; --line:#3d3049; --grid:#33283e;
+    --accent:#ec6a9c; --link:#f6a9c4;
+    --bar-a:#8e3d68; --bar-b:#5a4596; --bar-ink:#fff4f8;
+    --shadow:0 12px 32px -14px rgba(0,0,0,.6), 4px 4px 0 rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#191320; --desk-a:#24182c; --desk-b:#1c1830; --grid-line:rgba(201,180,244,.06);
+  --panel:#231b2b; --surface:#2a2133; --ink:#f7ecf8; --muted:#c0aecd; --line:#3d3049; --grid:#33283e;
+  --accent:#ec6a9c; --link:#f6a9c4; --bar-a:#8e3d68; --bar-b:#5a4596; --bar-ink:#fff4f8;
+  --shadow:0 12px 32px -14px rgba(0,0,0,.6), 4px 4px 0 rgba(0,0,0,.35);
+}
+
+* { box-sizing:border-box; }
+html { -webkit-font-smoothing:antialiased; }
+body.sakura {
+  margin:0; color:var(--ink); font:16px/1.55 var(--font);
+  background-color:var(--bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(135deg, var(--desk-a), var(--desk-b));
+  background-size:28px 28px, 28px 28px, 100% 100%;
+  background-attachment:fixed;
+  min-height:100vh;
+}
+body.sakura a { color:var(--link); text-underline-offset:3px; }
+.wrap { max-width:1120px; margin:0 auto; padding:20px 16px 56px; }
+
+/* ---------- menu bar (Apple-style top bar with retro font) ---------- */
+.menubar { position:sticky; top:0; z-index:20; display:flex; align-items:center; gap:18px; padding:8px 16px;
+  background:color-mix(in srgb, var(--panel) 78%, transparent); backdrop-filter:saturate(1.6) blur(14px); -webkit-backdrop-filter:saturate(1.6) blur(14px);
+  border-bottom:1px solid var(--line); font-size:.88rem; }
+.menubar .brand { display:flex; align-items:center; gap:8px; font-family:var(--pixel); font-size:.85rem; color:var(--ink); text-decoration:none; letter-spacing:.02em; }
+.menubar nav { display:flex; gap:4px; flex-wrap:wrap; }
+.menubar nav a { color:var(--ink); text-decoration:none; padding:4px 10px; border-radius:8px; }
+.menubar nav a:hover, .menubar nav a[aria-current="page"] { background:var(--pink-100); color:var(--pink-700); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .menubar nav a:hover, :root:not([data-theme="light"]) .menubar nav a[aria-current="page"] { background:var(--surface); color:var(--pink-300); } }
+.menubar .spacer { flex:1; }
+.menubar .clock { font-family:var(--pixel); font-size:.75rem; color:var(--muted); white-space:nowrap; }
+@media (max-width:720px) { .menubar { flex-wrap:wrap; gap:6px 12px; } .menubar .clock { display:none; } }
+
+/* ---------- blossom icon ---------- */
+.blossom { width:1.1em; height:1.1em; vertical-align:-.18em; display:inline-block; flex:none; }
+.blossom.lg { width:2.2em; height:2.2em; }
+
+/* ---------- windows ---------- */
+.win { background:var(--panel); border:1.5px solid var(--ink); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; min-width:0; }
+.win-bar { display:flex; align-items:center; gap:10px; padding:6px 10px; min-height:32px;
+  background:linear-gradient(90deg, var(--bar-a), var(--bar-b)); color:var(--bar-ink); border-bottom:1.5px solid var(--ink); }
+.win-bar .title { font-family:var(--pixel); font-size:.78rem; letter-spacing:.03em; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:8px; }
+.win-bar .ctl { display:flex; gap:5px; }
+.win-bar .ctl i { width:13px; height:13px; border:1.5px solid var(--ink); border-radius:3px; display:block; }
+.win-bar .ctl i:nth-child(1) { background:var(--leaf-300); }
+.win-bar .ctl i:nth-child(2) { background:var(--gold); }
+.win-bar .ctl i:nth-child(3) { background:var(--pink-300); }
+.win-body { padding:16px 18px; }
+.win.soft { border-color:var(--line); }
+.win.soft .win-bar { border-bottom-color:var(--line); }
+
+/* ---------- buttons ---------- */
+.btn { --b:var(--accent); display:inline-flex; align-items:center; gap:8px; font:600 .92rem/1 var(--font); padding:10px 16px; border-radius:10px;
+  background:var(--b); color:var(--accent-ink); text-decoration:none; border:1.5px solid var(--ink); box-shadow:3px 3px 0 var(--ink);
+  cursor:pointer; transition:transform .12s ease, box-shadow .12s ease; }
+.btn:hover { transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--ink); }
+.btn:active { transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink); }
+.btn.alt { --b:var(--panel); color:var(--ink); }
+.btn.lav { --b:var(--lav-200); color:#2b1f38; }
+.btn.leaf { --b:var(--leaf-300); color:#1b3a2b; }
+.btn:focus-visible, .chipbtn:focus-visible, input:focus-visible, select:focus-visible { outline:3px solid var(--lav-400); outline-offset:2px; }
+
+.chipbtn { font:500 .85rem var(--font); border:1.5px solid var(--line); background:var(--panel); color:var(--ink); border-radius:999px; padding:5px 13px; cursor:pointer; }
+.chipbtn.on, .chipbtn[aria-pressed="true"] { background:var(--pink-100); border-color:var(--pink-500); color:var(--pink-700); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .chipbtn.on { background:var(--surface); color:var(--pink-300); } }
+.tag { display:inline-block; font-size:.74rem; border-radius:6px; padding:2px 8px; background:var(--lav-100); color:var(--plum-700); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag { background:var(--surface); color:var(--lav-200); } }
+
+body.sakura input, body.sakura select { font:inherit; padding:8px 11px; border-radius:9px; border:1.5px solid var(--line); background:var(--panel); color:var(--ink); }
+
+/* ---------- headings ---------- */
+.pixel { font-family:var(--pixel); letter-spacing:.02em; }
+body.sakura h1 { font-size:clamp(1.8rem,4.6vw,2.8rem); line-height:1.1; letter-spacing:-.02em; margin:0; }
+.kicker { font-family:var(--pixel); font-size:.78rem; color:var(--pink-700); letter-spacing:.06em; text-transform:uppercase; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .kicker { color:var(--pink-300); } }
+.lede { color:var(--muted); font-size:1.08rem; max-width:62ch; }
+
+/* ---------- falling petals ---------- */
+.petals { position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
+.petals span { position:absolute; top:-30px; width:14px; height:12px; background:radial-gradient(circle at 30% 30%, #ffe3ee, #f6a9c4 60%, #e0558b);
+  border-radius:12px 1px 12px 1px; opacity:.75; animation:fall linear infinite; }
+@keyframes fall {
+  0% { transform:translate3d(0,-20px,0) rotate(0deg); }
+  50% { transform:translate3d(40px,50vh,0) rotate(160deg); }
+  100% { transform:translate3d(-20px,105vh,0) rotate(340deg); }
+}
+@media (prefers-reduced-motion: reduce) { .petals { display:none; } .btn, .card { transition:none; } }
+
+.footer { margin-top:36px; color:var(--muted); font-size:.85rem; text-align:center; display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap; }
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+
+/* ---------- games & high scores ---------- */
+.muted { color:var(--muted); } .small { font-size:.82rem; }
+table.scores { width:100%; border-collapse:collapse; font-size:.9rem; font-variant-numeric:tabular-nums; }
+table.scores th, table.scores td { padding:6px 8px; text-align:right; border-bottom:1px dashed var(--line); }
+table.scores th { font-family:var(--pixel); font-size:.68rem; color:var(--muted); font-weight:400; }
+table.scores .l { text-align:left; }
+table.scores tbody tr:nth-child(1) td:first-child { color:var(--pink-700); font-weight:700; }
+table.scores tr.me td { background:var(--pink-100); }
+.scoreform { display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end; justify-content:center; }
+.scoreform label { display:flex; flex-direction:column; gap:4px; font-size:.8rem; color:var(--muted); text-align:left; }
+dialog.win { padding:0; max-width:min(440px, 92vw); color:var(--ink); }
+dialog.win::backdrop { background:rgba(43,31,56,.45); backdrop-filter:blur(3px); }
+dialog.win .win-body { text-align:center; }
+dialog.win h2 { margin:4px 0 6px; font-size:1.5rem; }
+.game { max-width:620px; margin:22px auto 0; }
+.gamebar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:12px; }
+.gamebar .lcd { margin-left:auto; font-family:var(--pixel); font-size:.85rem; background:#2b1f38; color:#9fd9b7; padding:6px 10px; border-radius:8px; letter-spacing:.06em; }
+.side { margin-top:16px; }
+body.sakura a.btn { color:var(--accent-ink); text-decoration:none; }
+body.sakura a.btn.alt { color:var(--ink); }
+body.sakura a.btn.lav, body.sakura a.btn.leaf { color:#2b1f38; }

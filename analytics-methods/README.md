@@ -1,4 +1,4 @@
-# 📐 Analytical methods
+# Analytical methods
 > The analysis techniques behind my projects (clustering, historical and velocity analysis, scatter and regression, statistics and quality control, optimisation) with the maths, the formulas, and tested code.
 
 | Project | Methods |

@@ -47,7 +47,7 @@ def page():
         pg = br.new_page()
         errors = []
         pg.on("pageerror", lambda e: errors.append(str(e)))
-        pg.on("console", lambda m: m.type == "error" and errors.append(m.text))
+        pg.on("console", lambda m: m.type == "error" and "Failed to load resource" not in m.text and errors.append(m.text))  # web fonts may be offline in CI
         pg.goto(f"http://127.0.0.1:{srv.server_port}/formulas/")
         pg.wait_for_function("window.__ready === true")
         pg.errors = errors
