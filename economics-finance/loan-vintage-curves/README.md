@@ -49,7 +49,7 @@ earns credibility more slowly.
 | naive (no further defaults) | 89.1% | 72.2% | 53.4% | 37.6% | 15.8% | 5.1% | 1.0% |
 | credibility 80% band coverage | 69% | 71% | 73% | 75% | 88% | 96% | 96% |
 
-Honest reading: the credibility blend wins up to MOB 12, where it halves chain-ladder error at MOB 3. From MOB 18 on,
+Reading the results: the credibility blend wins up to MOB 12, where it halves chain-ladder error at MOB 3. From MOB 18 on,
 chain ladder is as good or slightly better, because by then the vintage's own data says almost everything. The band
 is too narrow early (69–75% coverage against an 80% target) and too wide late.
 

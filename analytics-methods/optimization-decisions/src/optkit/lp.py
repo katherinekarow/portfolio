@@ -24,7 +24,7 @@ TOL = 1e-9
 class LPResult:
     status: str                      # "optimal", "infeasible" or "unbounded"
     x: np.ndarray | None = None      # decision variables
-    objective: float | None = None   # in the user's sense (max or min)
+    objective: float | None = None   # in the problem's own sense (max or min)
     shadow_ub: np.ndarray | None = None   # d(objective)/d(b_ub)
     shadow_eq: np.ndarray | None = None   # d(objective)/d(b_eq)
     slack_ub: np.ndarray | None = None
@@ -160,7 +160,7 @@ def simplex(c, A_ub=None, b_ub=None, A_eq=None, b_eq=None, maximize=False) -> LP
     y[keep_rows] = y_k
     y_min = y * sign                          # d(min objective)/d(original b)
     ysign = -1.0 if maximize else 1.0
-    shadow = ysign * y_min                     # in the user's sense
+    shadow = ysign * y_min                     # in the problem's own sense
     red_min = cost - Ak.T @ y_k               # >= 0 at a minimum
     reduced = ysign * red_min[:n]
 
@@ -177,7 +177,7 @@ def simplex(c, A_ub=None, b_ub=None, A_eq=None, b_eq=None, maximize=False) -> LP
         orig_b = np.concatenate([b_ub, b_eq])[i]
         rhs_range[i] = (orig_b + lo, orig_b + hi)
 
-    # Objective-coefficient ranging (in min form, then mapped to the user's sense).
+    # Objective-coefficient ranging (in min form, then mapped back to the problem's own sense).
     nonbasic = [j for j in range(n_real) if j not in basis]
     cost_range = np.zeros((n, 2))
     for j in range(n):
