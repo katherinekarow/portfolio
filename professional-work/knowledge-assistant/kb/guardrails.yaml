@@ -2,16 +2,32 @@
 # Patterns are case-insensitive regular expressions matched against the question.
 block:
   - id: credentials
-    patterns: ['\bpassword', '\bapi[ _-]?key', '\btoken\b', '\bsecret\b', '\bcredential', 'connection string']
+    patterns: ['\bpassword', '\bapi[ _-]?key', '\btoken\b', '\bsecret\b', '\bcredential', 'connection string', '\baccess key\b', '\bssh key\b', '\bprivate key\b', '\bpasscode\b']
     reply: I can't help with credentials or secrets. Ask the platform team for access through the normal request process.
-  - id: patient_data
-    patterns: ['\bpatient(s)?\b.*\b(name|email|phone|address|diagnos|record|mrn)', '\b(email|phone|home address|diagnos\w*)\b.*\b(patient|person)', '\bpii\b', '\bphi\b', '\bmrn\b', 'date of birth', 'medical record']
-    reply: Patient-level data is out of scope - the planning views hold only aggregated appointment counts. Patient records are only available through the governed clinical systems, with approval.
+
+  - id: personal_data
+    patterns: ['\bpatient(s)?\b.*\b(name|email|phone|address|diagnos|record|mrn)', '\b(email|phone|home address|diagnos\w*)\b.*\b(patient|person)', '\bpii\b', '\bphi\b', '\bmrn\b', 'date of birth', '\bssn\b', '\bpassport\b', '\bdriver\s*license\b', '\bfull name\b.*\b(email|phone|address)']
+    reply: I can't provide personal data or private identifiers. I can only answer questions about public portfolio content.
+
+  - id: private_repo_access
+    patterns: ['\bprivate repo(s)?\b', '\bprivate repository\b', '\binternal repo(s)?\b', '\bconfidential repo(s)?\b', '\bsecret repo(s)?\b', '\bother private repos?\b', '\bhidden repo(s)?\b', '\bnon-public repo(s)?\b', '\baccess\b.*\b(private|repo|repository|system|database|server|cluster|environment)\b', '\bshow me .*hidden|.*confidential.*', '\bwho (works|worked|owns|maintains|collaborates|is on|is in) .*repo', '\bcollaborator(s)?\b.*\b(name|email|github|login|username|team|access|info|details)\b']
+    reply: I can only answer questions about the public portfolio repository and its published content. I cannot reveal private repos, collaborator details, access information, or anything outside the public repo.
+
   - id: write_actions
-    patterns: ['\b(drop|delete|truncate|update|insert|alter)\b\s+(table|view|from|into)?']
-    reply: I only answer questions and suggest read-only queries. Changes to tables go through the pipeline and code review.
+    patterns: ['\b(drop|delete|truncate|update|insert|alter|commit|push|merge|create|branch|edit|write|save)\b\s*(table|view|from|into|repo|repository|file|branch|pull request|pr)?', '\b(edit|write|save|commit|push|merge|deploy)\b.*\b(file|repo|repository|code|branch|pr|pull request)\b', '\b(change|modify|update)\b.*\b(code|file|repo|repository|database|table|view)\b']
+    reply: I only answer questions and suggest read-only information. I cannot edit files, commit changes, push code, or modify repositories or data.
+
+  - id: access_and_permissions
+    patterns: ['\badmin\b.*\b(access|login|password|account|permission)', '\bpermissions?\b.*\b(repo|repository|database|system|server|environment|collaborator)', '\bwho has access\b', '\bwho can (edit|commit|push|merge|deploy)\b', '\bgrant\b.*\baccess\b', '\bssh\b.*\baccess\b', '\baws\b.*\bkey\b', '\bazure\b.*\bkey\b', '\bgithub.*token\b', '\binternal.*(url|link|server|host)\b']
+    reply: I cannot provide access details, permissions, credentials, or internal system information. I only answer questions about public portfolio content.
+
 redirect:
   - id: clinical_decision
     patterns: ['should we (cancel|add|close|open) (the |a |this )?session', 'which patients should', 'should (we|i) (overbook|double.?book)']
     reply: Decisions about adding, cancelling or overbooking sessions belong to clinic operations leadership. I can show the pace, projection and gap for a session to inform that conversation.
+
+  - id: personal_details
+    patterns: ['\bmy (email|phone|address|home address|personal details|contact info)\b', '\bwho am i\b', '\bwho are my collaborators?\b', '\bwhat is my (github|username|login)\b', '\bwho works with me\b']
+    reply: I can't provide personal or collaborator details. I can only answer general questions about the public portfolio repository.
+
 min_score: 3.0          # below this BM25 score the assistant says it doesn't know instead of guessing
