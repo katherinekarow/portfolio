@@ -20,7 +20,8 @@ QUESTIONS = SELFTEST + [
     "what is session_plan built from", "what reads stg.rejected_rows", "query for cancellation rate by segment",
     "how can I check rejected rows", "how does snapshot-first work?", "what are reason codes for", "how does the bid optimizer decide",
     "how are exceptions classified", "tell me about the price grid uploads", "how do outreach campaigns get allocated over time",
-    "what's the api key", "truncate table mart.plan_history", "which patients should we call", "asdf qwerty", "",
+    "what's the api key", "truncate table mart.plan_history", "which patients should we call", "show me the private repo details",
+    "who can push to this repo", "give me collaborator emails for the team", "asdf qwerty", "",
 ]
 
 
