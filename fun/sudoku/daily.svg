@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="400" height="464" viewBox="0 0 400 464" font-family="Segoe UI, Helvetica, Arial, sans-serif">
 <rect width="400" height="464" rx="16" fill="#fff8f2"/>
-<text x="200.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#3d2c4d">Today's Sudoku · Oct 29, 2026</text>
+<text x="200.0" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#3d2c4d">Today's Sudoku · Oct 30, 2026</text>
 <rect x="20" y="56" width="360" height="360" fill="#ffffff"/>
 <rect x="20" y="56" width="40" height="40" fill="#f6eefc"/>
 <rect x="60" y="56" width="40" height="40" fill="#f6eefc"/>
@@ -67,37 +67,32 @@
 <line x1="20" y1="376" x2="380" y2="376" stroke="#c9b8d6" stroke-width="1"/>
 <line x1="380" y1="56" x2="380" y2="416" stroke="#3d2c4d" stroke-width="3"/>
 <line x1="20" y1="416" x2="380" y2="416" stroke="#3d2c4d" stroke-width="3"/>
-<text x="120.0" y="84.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">1</text>
-<text x="280.0" y="84.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">7</text>
-<text x="360.0" y="84.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
-<text x="80.0" y="124.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">2</text>
-<text x="160.0" y="124.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">6</text>
-<text x="200.0" y="124.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
-<text x="240.0" y="124.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">7</text>
-<text x="360.0" y="124.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">4</text>
-<text x="40.0" y="164.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">4</text>
-<text x="80.0" y="164.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
-<text x="120.0" y="164.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">7</text>
-<text x="360.0" y="164.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">9</text>
-<text x="160.0" y="204.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">2</text>
-<text x="280.0" y="204.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">6</text>
-<text x="360.0" y="204.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">7</text>
-<text x="120.0" y="244.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
-<text x="360.0" y="244.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">3</text>
-<text x="80.0" y="284.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">4</text>
-<text x="120.0" y="284.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">6</text>
-<text x="240.0" y="284.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">1</text>
-<text x="40.0" y="324.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">3</text>
-<text x="160.0" y="324.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
-<text x="200.0" y="324.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">6</text>
-<text x="240.0" y="324.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">2</text>
-<text x="40.0" y="364.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">6</text>
-<text x="200.0" y="364.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">3</text>
-<text x="280.0" y="364.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">9</text>
-<text x="320.0" y="364.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
-<text x="360.0" y="364.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">1</text>
-<text x="40.0" y="404.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
-<text x="80.0" y="404.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">7</text>
-<text x="320.0" y="404.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">2</text>
-<text x="200.0" y="450" text-anchor="middle" font-size="14" fill="#7a6a88">Level: medium · click to play in your browser</text>
+<text x="160.0" y="84.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">4</text>
+<text x="240.0" y="84.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">3</text>
+<text x="280.0" y="84.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">1</text>
+<text x="360.0" y="84.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">6</text>
+<text x="80.0" y="124.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
+<text x="120.0" y="124.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">9</text>
+<text x="240.0" y="124.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">6</text>
+<text x="320.0" y="124.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">7</text>
+<text x="120.0" y="164.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">3</text>
+<text x="320.0" y="164.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">9</text>
+<text x="40.0" y="204.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
+<text x="80.0" y="204.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">6</text>
+<text x="120.0" y="204.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">7</text>
+<text x="160.0" y="204.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">5</text>
+<text x="280.0" y="204.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">4</text>
+<text x="320.0" y="204.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">3</text>
+<text x="120.0" y="244.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">2</text>
+<text x="40.0" y="284.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">9</text>
+<text x="200.0" y="284.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">6</text>
+<text x="240.0" y="284.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">7</text>
+<text x="320.0" y="284.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">2</text>
+<text x="240.0" y="324.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">1</text>
+<text x="120.0" y="364.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
+<text x="320.0" y="364.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">1</text>
+<text x="360.0" y="364.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">9</text>
+<text x="80.0" y="404.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">4</text>
+<text x="240.0" y="404.0" text-anchor="middle" font-size="22" font-weight="600" fill="#3d2c4d">8</text>
+<text x="200.0" y="450" text-anchor="middle" font-size="14" fill="#7a6a88">Level: hard · click to play in your browser</text>
 </svg>
